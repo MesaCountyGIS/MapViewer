@@ -1,0 +1,23 @@
+// ┌────────┐
+// │ Search │
+// └────────┘
+
+$search-height:                      $esri-btn-height !default;
+$search-line-height-computed:        $search-height - $padding-base-vertical*2 !default;
+$search-line-height:                 $search-line-height-computed/$font-size-base !default;
+
+//** Search Input box
+$search-input-width:                 200px !default;
+//** The loading and close icons in the search box
+$search-input-icon-width:            24px !default;
+$search-divider-bg:                  $divider-bg !default;
+//** Menu: search suggestions and sources dropdown menus
+$search-menu-max-height:             300px !default;
+$search-menu-header-height:          25px !default;
+//** Menu headers that display source names
+$search-menu-header-color:           $Calcite_Gray_100 !default;
+$search-menu-header-bg:              $Calcite_Gray_550 !default;
+//** Show more result
+$search-more-result-name-font-size:  13px !default;
+
+

@@ -1,0 +1,104 @@
+@Facebook32-x: 0;
+@Facebook32-y: 0;
+@Facebook32-width: 32px;
+@Facebook32-height: 32px;
+@Facebook32: @Facebook32-x, @Facebook32-y, @Facebook32-width, @Facebook32-height;
+@GitHub-x: 0;
+@GitHub-y: -42px;
+@GitHub-width: 20px;
+@GitHub-height: 20px;
+@GitHub: @GitHub-x, @GitHub-y, @GitHub-width, @GitHub-height;
+@GooglePlus32-x: 0;
+@GooglePlus32-y: -72px;
+@GooglePlus32-width: 32px;
+@GooglePlus32-height: 32px;
+@GooglePlus32: @GooglePlus32-x, @GooglePlus32-y, @GooglePlus32-width, @GooglePlus32-height;
+@MC_GIS_LOGO_2008_transparent_small-x: 0;
+@MC_GIS_LOGO_2008_transparent_small-y: -114px;
+@MC_GIS_LOGO_2008_transparent_small-width: 185px;
+@MC_GIS_LOGO_2008_transparent_small-height: 40px;
+@MC_GIS_LOGO_2008_transparent_small: @MC_GIS_LOGO_2008_transparent_small-x, @MC_GIS_LOGO_2008_transparent_small-y, @MC_GIS_LOGO_2008_transparent_small-width, @MC_GIS_LOGO_2008_transparent_small-height;
+@MC_icon-close-x: 0;
+@MC_icon-close-y: -164px;
+@MC_icon-close-width: 16px;
+@MC_icon-close-height: 16px;
+@MC_icon-close: @MC_icon-close-x, @MC_icon-close-y, @MC_icon-close-width, @MC_icon-close-height;
+@Pinterest32-x: 0;
+@Pinterest32-y: -190px;
+@Pinterest32-width: 32px;
+@Pinterest32-height: 32px;
+@Pinterest32: @Pinterest32-x, @Pinterest32-y, @Pinterest32-width, @Pinterest32-height;
+@SmallMinusSign-x: 0;
+@SmallMinusSign-y: -232px;
+@SmallMinusSign-width: 9px;
+@SmallMinusSign-height: 9px;
+@SmallMinusSign: @SmallMinusSign-x, @SmallMinusSign-y, @SmallMinusSign-width, @SmallMinusSign-height;
+@Twitter32-x: 0;
+@Twitter32-y: -251px;
+@Twitter32-width: 32px;
+@Twitter32-height: 32px;
+@Twitter32: @Twitter32-x, @Twitter32-y, @Twitter32-width, @Twitter32-height;
+@YouTube32-x: 0;
+@YouTube32-y: -293px;
+@YouTube32-width: 32px;
+@YouTube32-height: 32px;
+@YouTube32: @YouTube32-x, @YouTube32-y, @YouTube32-width, @YouTube32-height;
+@contact_20_LR-x: 0;
+@contact_20_LR-y: -335px;
+@contact_20_LR-width: 20px;
+@contact_20_LR-height: 20px;
+@contact_20_LR: @contact_20_LR-x, @contact_20_LR-y, @contact_20_LR-width, @contact_20_LR-height;
+@i_draw_line-x: 0;
+@i_draw_line-y: -365px;
+@i_draw_line-width: 40px;
+@i_draw_line-height: 40px;
+@i_draw_line: @i_draw_line-x, @i_draw_line-y, @i_draw_line-width, @i_draw_line-height;
+@i_draw_point_LR-x: 0;
+@i_draw_point_LR-y: -415px;
+@i_draw_point_LR-width: 40px;
+@i_draw_point_LR-height: 40px;
+@i_draw_point_LR: @i_draw_point_LR-x, @i_draw_point_LR-y, @i_draw_point_LR-width, @i_draw_point_LR-height;
+@i_draw_poly-x: 0;
+@i_draw_poly-y: -465px;
+@i_draw_poly-width: 40px;
+@i_draw_poly-height: 40px;
+@i_draw_poly: @i_draw_poly-x, @i_draw_poly-y, @i_draw_poly-width, @i_draw_poly-height;
+@location25-x: 0;
+@location25-y: -515px;
+@location25-width: 25px;
+@location25-height: 25px;
+@location25: @location25-x, @location25-y, @location25-width, @location25-height;
+@measure_text-x: 0;
+@measure_text-y: -550px;
+@measure_text-width: 35px;
+@measure_text-height: 35px;
+@measure_text: @measure_text-x, @measure_text-y, @measure_text-width, @measure_text-height;
+@r12_5-x: 0;
+@r12_5-y: -595px;
+@r12_5-width: 125px;
+@r12_5-height: 186px;
+@r12_5: @r12_5-x, @r12_5-y, @r12_5-width, @r12_5-height;
+@share_20_LR-x: 0;
+@share_20_LR-y: -791px;
+@share_20_LR-width: 20px;
+@share_20_LR-height: 20px;
+@share_20_LR: @share_20_LR-x, @share_20_LR-y, @share_20_LR-width, @share_20_LR-height;
+
+.sprite-image() {
+    background-image: url('./../images/mobilesprite.png');
+}
+.sprite-position(@sprite) {
+    background-position: extract(@sprite, 1) extract(@sprite, 2);
+}
+.sprite-width(@sprite) {
+    width: extract(@sprite, 3);
+}
+.sprite-height(@sprite) {
+    height: extract(@sprite, 4);
+}
+.sprite(@sprite) {
+    .sprite-image();
+    .sprite-position(@sprite);
+    .sprite-width(@sprite);
+    .sprite-height(@sprite);
+}

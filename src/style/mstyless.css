@@ -1,0 +1,116 @@
+html,
+body {
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  position: fixed;
+  -ms-touch-action: none;
+  touch-action: none;
+}
+#map {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  position: relative;
+}
+#map_zoom_slider {
+  top: 3em;
+}
+#logoAnchor {
+  display: none;
+}
+.mblBackground {
+  background: white;
+}
+.mblHeading {
+  white-space: normal;
+}
+.mblHeadingSpanTitle {
+  margin-right: 10em;
+}
+.hideview {
+  visibility: hidden;
+}
+#locateButton {
+  background: transparent url('../images/mobilesprite.png') 0 -515px;
+  width: 25px;
+  height: 25px;
+  border-style: none;
+  position: fixed;
+  right: 1em;
+  top: 0.8em;
+  z-index: 5;
+}
+#searchPane {
+  height: auto !important;
+  min-height: 15em;
+  margin-top: 1em;
+  border: none !important;
+}
+#searchForm {
+  position: relative;
+}
+#searchSelect {
+  margin-left: 1em;
+  height: 1.5em;
+  width: 20em;
+  float: left;
+  clear: left;
+}
+#searchSelect_label {
+  margin-left: 1em;
+  float: left;
+}
+#contextView ul {
+  list-style-type: none;
+}
+.dijitValidationIcon,
+.dijitValidationInner {
+  display: none;
+}
+#mainfish {
+  display: none;
+  background: white;
+  list-style-type: none;
+  top: 0;
+  font-size: 0.75em;
+  width: 21.1em;
+  height: 16em;
+  float: left;
+  clear: left;
+  overflow: auto;
+  margin-top: -0.1em;
+  margin-left: 1em;
+  padding-left: 0;
+  border: 1px inset gray;
+  color: black;
+}
+#mainfish li:hover {
+  cursor: pointer;
+  background-color: #ECF1EF;
+}
+.countylogo {
+  float: left;
+  margin-right: 0.5em;
+  background-image: url('images/sprites.png');
+  background-position: 0 -256px;
+  background-repeat: no-repeat;
+  width: 189px;
+  height: 47px;
+  margin-left: -1em;
+  margin-top: -2em;
+  border: none;
+}
+#logoAnchor {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+@media only screen and (max-width: 360px) {
+  #logoAnchor {
+    display: none;
+  }
+}

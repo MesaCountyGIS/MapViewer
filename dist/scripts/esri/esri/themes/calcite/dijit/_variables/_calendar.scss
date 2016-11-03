@@ -1,0 +1,24 @@
+// ┌────────────────┐
+// │    Calendar    │
+// └────────────────┘
+
+$calendar-border:               $dropdown-border !default;
+$calendar-fallback-border:      $dropdown-fallback-border !default;
+$calendar-bg:                   $dropdown-bg !default;
+
+$calendar-date-label-width:     24px !default;
+$calendar-date-label-height:    24px !default;
+
+//** Dates in previous & next months
+$calendar-date-pre-next-color:  $Calcite_Gray_350 !default;
+
+//** Current date
+$calendar-date-current-border:  $brand-primary !default;
+
+//** Selected date
+$calendar-date-active-color:    $component-active-color !default;
+$calendar-date-active-bg:       $component-active-bg !default;
+
+//** Years panel
+$calendar-years-panel-bg:       $Calcite_Gray_100 !default;
+$calendar-years-panel-border:   $Calcite_Gray_200 !default;

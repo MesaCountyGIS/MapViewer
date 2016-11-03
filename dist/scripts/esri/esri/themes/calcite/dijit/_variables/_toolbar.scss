@@ -1,0 +1,18 @@
+// ┌──────────────┐
+// │    Toolbar   │
+// └──────────────┘
+
+$toolbar-bg:                              $Calcite_Gray_100 !default;
+$toolbar-border:                          $Calcite_Gray_350 !default;
+
+//** Dijit button nodes
+$toolbar-btn-height-computed:             30px !default;
+$toolbar-btn-bg:                          transparent !default;
+$toolbar-btn-padding-vertical:            3px !default;
+$toolbar-btn-padding-horizontal:          3px !default;
+
+//** Dijit text inputs
+$toolbar-input-height-computed:           24px !default;
+
+//** Separator color
+$toolbar-separator-bg:                    $Calcite_Gray_350 !default;

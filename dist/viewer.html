@@ -1,0 +1,249 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, user-scalable=no, maximum-scale=1,
+       initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="translucent-black">
+  <title>Mesa County GIS Viewer</title>
+
+  <link rel="stylesheet" href="scripts/esri/esri/css/esri.css">
+  <link rel="stylesheet" href="style/style.min.css">
+
+    <!--[if IE]>
+<link rel="stylesheet" type="text/css" href="style/ie.css">
+<![endif]-->
+    <!--[if lt IE 10]>
+<link rel="stylesheet" type="text/css" href="style/ltie10.css">
+<![endif]-->
+    <!--[if IE 8]>
+      <link rel="stylesheet" type="text/css" href="style/ie8.css">
+<![endif]-->
+    <!--[if lt IE 8]>
+      <link rel="stylesheet" type="text/css" href="style/ie7.css">
+<![endif]-->
+
+    <!--[if lt IE 9]>
+   <script>
+      document.createElement('header');
+      document.createElement('nav');
+      document.createElement('figure');
+      document.createElement('aside');
+   </script>
+<![endif]-->
+
+</head>
+
+<body id='body'>
+    <div id='toolsView'></div>
+    <header id="toolbar">
+        <nav id="headerButtonGroup">
+            <div id="DTtoolstrip">
+                <button class="DTbasemap" id="DTbasemap" title="Turn on Imagery"></button>
+                <button id="DTLegend" title="Display Legend"></button>
+                <button id="DTmeasure" title="Draw and Measure"></button>
+                <button id="DTqueryatts" title="Query Tools"></button>
+                <button id="DTbookmarks" title="Bookmarks"></button>
+                <button id="DTprint" title="Export the current map to a printable format"></button>
+                <button id="help" title="Get more information"></button>
+            </div>
+
+            <div id='toolSelect'>Tools</div>
+
+            <div id="searchSelect">
+                <ul id="mainfish" class="sf-menu">
+                    <li id="layerSelect" data-value="select">Select Map<span></span>
+                        <ul class="submenu">
+                            <li class="click" id="eassessor" data-value="eassessor"><a>eAssessor (Parcel Info)</a></li>
+                            <li title="Zip codes and Census blocks" class="click" data-value="demograph"><a>Demographics</a></li>
+                            <li class="click" data-value="districts"><a>Districts and City Limits</a></li>
+                            <li class="click" data-value="engdocs"><a>Engineering Tech Docs</a></li>
+                            <li class="click" data-value="enterprise"><a>Enterprize Zones</a></li>
+                            <li class="click" data-value="epom"><a target="_blank" href="http://emap.mesacounty.us/MapSearch/Default.aspx?Value=EPOM">EPOM</a></li>
+                            <li class="click" data-value="flood"><a>Flood (FEMA)</a></li>
+                            <li class="click" data-value="futureland"><a>Future Land Use</a></li>
+                            <li title="Historical and in-progress land development projects" class="click" data-value="landdev"><a>Land Development Projects</a></li>
+                            <li class="click" data-value="law"><a>Law Enforcement Boundaries</a></li>
+                            <li class="click" data-value="mosquito"><a>Mosquito</a></li>
+                            <!-- <li class="click" data-value="weeds"><a>Noxious Weeds</a></li> -->
+                            <li class="click" data-value="persigo"><a>Persigo Agreement</a></li>
+                            <li class="click" data-value="political"><a>Political Boundaries</a></li>
+                            <li class="click" data-opt="0" data-value="propsales"><a>Property Sales</a></li>
+                            <li class="click" data-value="schools"><a>Schools</a></li>
+                            <li class="click" data-value="septic"><a>Septic Systems</a></li>
+                            <!-- <li class="click" data-value="soils"><a>Soils</a></li> -->
+                            <li class="click" data-value="stormwater"><a>Stormwater Urbanized Area</a></li>
+                            <li class="click" data-value="survey"><a>Survey Plats, ROW and GPS</a></li>
+                            <li class="click" data-value="topo"><a>Topography</a></li>
+                            <li class="click" data-value="towers"><a>Towers</a></li>
+                            <li class="click" data-value="camera"><a>Traffic Cameras</a></li>
+                            <li class="click" data-value="trails"><a>Trails</a></li>
+                            <li class="click" data-value="trans"><a>Transportation</a></li>
+                            <li class="click" data-value="vacant"><a>Vacant Parcel Inventory</a></li>
+                            <li class="click" data-value="zoning"><a>Zoning</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="autocompleteSearch">
+                <ul id="combobox" class="sf-menu">
+                    <li id="searchLI" data-value="select">Search By...<span></span>
+                        <ul class="submen">
+                            <li data-value="address"><a>Address</a></li>
+                            <li data-value="intersection"><a>Road Intersection</a></li>
+                            <li data-value="account"><a>Account Number</a></li>
+                            <li data-value="parcelNo"><a>Parcel Number</a></li>
+                            <li data-value="subdivision"><a>Subdivision</a></li>
+                            <li data-value="PLSS"><a title="Search by Township, Range and Section">Township/Range</a></li>
+                            <li data-value="place"><a>Place Name</a></li>
+                            <li data-value="Latitude/Longitude"><a>Latitude/Longitude</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+
+            <button id="locate" data-state='off'></button>
+            <a id="sharebutton" title="Click to open share options">Share</a>
+            <div id="socialShare" style="display:none;">
+                <span title="Share via email" id="shareMap" class="shareClass"></span>
+                <a title="Share on Twitter" id=twittershare class="shareClass" href="https://twitter.com/home?status=Check%20out%20the%20Mesa%20County%20GIS%20web%20viewer%20-%20http://emap.mesacounty.us%20(via%20@MCGIS)" target="_blank"></a>
+                <a title="Share on Facebook" id="facebookshare" class="shareClass" href="https://www.facebook.com/sharer/sharer.php?u=http://emap.mesacounty.us&amp;t=Check%20out%20the%20Mesa%20County%20GIS%20web%20viewer%20-%20" target="_blank"></a>
+                <a title="Share on Google Plus" id="googleshare" class="shareClass" href="https://plus.google.com/share?url=http://emap.mesacounty.us" target="_blank"></a>
+            </div>
+        </nav>
+    </header>
+
+    <div id="coordinateBlock">
+        <figure id="logoAnchor">
+            <a title="Click for Mesa County GIS Home Page" class="countylogo" href="http://gis.mesacounty.us"></a>
+        </figure>
+        <br>
+        <span title="NAD83, UTM Zone 12, Unit Meter" class="coordinateStyle" id="screenCoordinatesUTM"></span>
+    </div>
+
+    <span class="noLoad" id="pdfLinks"><a title="Opens PDF in a new window" target="_blank" id="loadTrigger" href='http://emap.mesacounty.us/viewerdocs/loadlimits/loadlegend.pdf'>Click for Load Limit information</a> <a title="Opens PDF in a new window" target="_blank" href='http://emap.mesacounty.us/viewerdocs/loadlimits/escortlegend.pdf'>Click for Road Escort information</a></span>
+    <span title="Example Weight Limit Sign For 8T/12T/16T Loads" class="noLoad" id="limitSign"></span>
+    <aside id="scaleBar"></aside>
+
+    <div id="map">
+        <noscript>
+            <div id="JSmessage">
+                <style>
+                    #loading,
+                    #headerButtonGroup {
+                        display: none;
+                    }
+
+                    #JSmessage {
+                        height: 300px;
+                        width: 350px;
+                        margin: 2em auto;
+                        text-align: center;
+                    }
+                </style>
+                <strong style="font-size: 1.2em;">The Mesa County Map Viewer requires JavaScript.</strong>
+                <br>
+                <br> It appears that you do not have <a target="_blank" href="http://www.enable-javascript.com/">Javascript enabled</a>. Click below to visit our web site and view our static maps and atlases.
+                <br>
+                <br>
+                <a title="Mesa County Road Atlas of 2011" href="http://gis.mesacounty.us/">Mesa County GIS</a>
+                <br>
+            </div>
+        </noscript>
+
+        <figure id="loading">
+            Loading Map...
+        </figure>
+
+        <div id="toolPanel">toolName</div>
+
+        <div class="collapsedPanel" id="rightPanel">
+            <div id="hidePanel">Layers</div>
+            <div id="noControl" class="noControl">
+                <ul>
+                    <li>
+                        <span class="plusSign plus"></span>
+                        <input type="checkbox" class="baselyrs expand" checked /><span>Base Layers</span>
+                        <ul class="lyrexpand" style="margin-left: 1.1em;">
+                            <li>
+                                <input class="baselyrs bgcbx" type="checkbox" checked /><span>background</span></li>
+                            <li>
+                                <input class="baselyrs lbsgcbx" type="checkbox" checked /><span>Labels</span></li>
+                            <li>
+                                <input class="baselyrs pclcbx" type="checkbox" checked /><span>Parcels</span></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="searchFieldDialog"></div>
+        <div id="bookmarkDialog2"></div>
+        <div id='printDialog2'></div>
+        <div class="query moveableDialog" id="measureDialog2" title="Draw/Measure2"></div>
+        <div id='imagelist2'></div>
+        <div class="query moveableDialog displayNo" id="legendDialog" title="Legend">
+            <header class="dialogHeader">
+                <div>Legend</div>
+                <span title="Close" class='closer dialogCloser'></span>
+            </header>
+            <div id="legendDiv"></div>
+        </div>
+        <div id="helpMenu2"></div>
+        <div id="problemForm2"></div>
+        <div id="shareForm2"></div>
+        <div id='queryDialog2'></div>
+        <div id="popup"></div>
+    </div>
+
+    <!-- end #map -->
+
+    <script>
+        var dojoConfig = {
+            // async: true,
+
+            packages: [
+            //     {
+            //         "name": "mesa",
+            //         "location": location.pathname.replace(/\/[^/]+$/, "") + "/scripts/esri//mesa/"
+            // },
+            {
+                "name": "libs",
+                "location": location.pathname.replace(/\/[^/]+$/, "") + "/scripts/libs/"
+        }
+    ]
+        };
+    </script>
+
+    <!-- <script src="http://js.arcgis.com/3.16/"></script> -->
+<!-- <script src="scripts/esri/dojo/dojo.js" data-dojo-config="async: true"></script> -->
+<script src="scripts/esri/dojo/dojo.js"></script>
+
+
+    <script src="scripts/app.min.js"></script>
+
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-49367500-1', 'mesacounty.us');
+        ga('send', 'pageview');
+    </script>
+</body>
+
+</html>

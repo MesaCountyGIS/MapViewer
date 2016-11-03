@@ -1,0 +1,112 @@
+#layerSelect .aDiv
+{
+    position:relative !important;
+    float:right !important;
+    right:0.5em !important;
+    top:-1em !important;
+}
+
+#layerSelect > span
+{
+    margin-top:-0.5em !important;
+}
+
+.submenu LI:hover
+{
+    display:inline-block;
+    background-color:#C9C5BC;
+}
+
+#searchLI .aDiv
+{
+    position:relative !important;
+    float:right !important;
+    right:0.5em !important;
+    top:-0.9em !important;
+}
+
+#searchLI > ul
+{
+    top:0.2em !important;
+    width:13.85em !important;
+}
+
+#searchLI ul li:hover, .submenu li:hover
+{
+    display:inline-block;
+    background-color:#C9C5BC;
+}
+
+#searchLI > span
+    {
+        margin-top:-0.5em !important;
+    }
+
+#historicalImagery > SPAN {
+    margin: -0.5em .25em 0 0 !important;
+}
+
+#coordzoom
+{
+    display:none;
+}
+
+#bufferLI
+{
+    margin:0 !important;
+}
+
+#surveySelect, #demographicsSelect, #districtsSelect, #engdocsSelect,
+#landdevSelect, #politicalSelect, #schoolsSelect, #topoSelect, #floodSelect, #noControl
+{
+width:17.5em !important;
+}
+
+#hidePanel{
+writing-mode:tb-rl !important;
+}
+
+.expandedPanel #hidePanel {
+    background:none !important;
+    padding: .1em 0 0 0 !important;
+    margin: .5em 0 .5em .5em;
+    float: left;
+}
+
+.moveable
+{
+    margin-top:0 !important;
+}
+
+
+#DTLegend, #DTmeasure, #DTqueryatts, #DTbookmarks, #DTprint, #help
+{
+margin-left:0.3em !important;
+}
+
+#measureButtonBlock {
+    padding:0 !important;
+    width: 16em;
+}
+#clearMeasure {
+    margin-bottom: 0 !important;
+    width: 45%;
+}
+
+#loqClearButton
+{
+    margin-right:1em;
+}
+
+.submitQueryLI BUTTON {
+    padding: 10px 10px !important;
+    margin-left:0.5em;
+}
+
+#clearWhere
+{
+    margin-left:0.5em !important;
+}
+
+
+

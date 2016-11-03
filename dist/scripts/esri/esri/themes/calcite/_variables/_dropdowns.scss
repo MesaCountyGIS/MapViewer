@@ -1,0 +1,20 @@
+// ┌───────────┐
+// │ Dropdowns │
+// └───────────┘
+
+//** Background for the dropdown menu.
+$dropdown-bg:                    $Calcite_Gray_050 !default;
+//** Dropdown menu `border-color`.
+$dropdown-border:                rgba(0,0,0,.15) !default;
+//** Dropdown menu `border-color` **for IE8**.
+$dropdown-fallback-border:       $Calcite_Gray_350 !default;
+//** Divider color for between dropdown items.
+$dropdown-divider-bg:            $divider-bg !default;
+
+//** Dropdown link text color.
+$dropdown-link-color:            $Calcite_Gray_650 !default;
+//** Hover color for dropdown links.
+$dropdown-link-hover-color:      darken($Calcite_Gray_650, 5%) !default;
+
+//** Disabled dropdown menu item background color.
+$dropdown-link-disabled-color:   $gray-light !default;

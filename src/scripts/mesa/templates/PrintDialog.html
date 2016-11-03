@@ -1,0 +1,43 @@
+<div data-dojo-attach-point="domNode">
+    <div data-dojo-attach-point="printHeader" id='printHeader' class="dialogHeader">
+        <div>${widgetTitle}</div>
+        <span title="Close" class='closer dialogCloser' data-dojo-attach-point="closePrint"></span>
+    </div>
+    <div class='centered'>
+        <p>Print Size and Format:</p>
+        <div id="printDropdowns" data-dojo-attach-point="printDropdowns">
+            <select id='printLayout' data-dojo-attach-point='printLayout' name="printLayout">
+                <option data-val="L1117" value="11 x 17 Landscape">11 x 17 Landscape</option>
+                <option data-val="P1117" value="11 x 17 Portrait">11 x 17 Portrait</option>
+                <option data-val="L811" value="8 x 11 Landscape">8 x 11 Landscape</option>
+                <option data-val="P811" value="8 x 11 Portrait">8 x 11 Portrait</option>
+                <option data-val="L814" value="8 x 14 Landscape">8 x 14 Landscape</option>
+                <option data-val="P814" value="8 x 14 Portrait">8 x 14 Portrait</option>
+                <option data-val="map" value="MAP_ONLY">MAP_ONLY</option>
+            </select>
+
+            <select id='printFormat' name="printFormat" data-dojo-attach-point='printFormat'>
+                <option data-val="pdf" value="PDF">PDF</option>
+                <option data-val="png32" value="PNG32">PNG32</option>
+                <option data-val="png8" value="PNG8">PNG8</option>
+                <option data-val="jpg" value="JPG">JPG</option>
+                <option data-val="gif" value="GIF">GIF</option>
+                <option data-val="eps" value="EPS">EPS</option>
+                <option data-val="svg" value="SVG">SVG</option>
+                <option data-val="svgz" value="SVGZ">SVGZ</option>
+            </select>
+            <br>
+            <input id="cbxLayout" data-dojo-attach-point="cbxLayout" type="checkbox" /> Include Theme Legend
+        </div>
+        <p id="titleP" data-dojo-attach-point="titleP">
+            Title:
+            <input id="mapTitle" data-dojo-attach-point="focusNode" placeholder="${!mapTitle}" />
+        </p>
+    </div>
+    <div id='printNavButtons' data-dojo-attach-point="printNavButtons">
+        <button id="buttonToPrint" data-dojo-attach-point="buttonToPrint" data-dojo-attach-event="onclick:exportClick">Export</button>
+        <button id="closePrinter" data-dojo-attach-point="closePrinter" data-dojo-attach-event="onclick:closeClick">Close</button>
+    </div>
+
+    <!-- <div id="progressbar" class='spinner loading' data-dojo-attach-point="progressbar"><span>Exporting...</span></div> -->
+</div>

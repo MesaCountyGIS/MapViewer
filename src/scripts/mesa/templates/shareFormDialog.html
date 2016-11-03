@@ -1,0 +1,28 @@
+<div id='shareForm2' data-dojo-attach-point="domNode" title="Share the current map extent via email">
+            <div data-dojo-attach-point="shareHeader" class="dialogHeader">
+                <div>Share map extent</div>
+                <span title="Close" data-dojo-attach-point='closer' class='closer dialogCloser'></span>
+            </div>
+            <form data-dojo-attach-point="frm2" id="frm2">
+                <fieldset>
+                    <legend style="display: none;"></legend>
+                    <p data-dojo-attach-point="validateTips" class="validateTips">All form fields are required.</p>
+                    <ul>
+                        <li>
+                            <label for="shareName">From Name: </label>
+                            <input data-dojo-attach-point="shareName" title="Enter your name" type="text" placeholder="Your Name" name="shareName" id="shareN" class="text" required="required" />
+                        </li>
+                        <li>
+                            <label for="fromEmail">From Email: </label>
+                            <input data-dojo-attach-point="fromEmail" title="Enter your email address" type="text" placeholder="Your Email Address" name="fromEmail" id="fromE" class="text" required="required" />
+                        </li>
+                        <li>
+                            <label for="shareEmail">To Email: </label>
+                            <input data-dojo-attach-point="shareEmail" title="Enter a valid email address" type="email" placeholder="Recipient Email" name="shareEmail" id="shareE" class="text" required="required" />
+                        </li>
+                    </ul>
+                </fieldset>
+            </form>
+            <button data-dojo-attach-point="shareSend" data-dojo-attach-event="onclick:sendClick" id="shareSend">Share</button>
+            <button data-dojo-attach-point="cancelShare" data-dojo-attach-event="onclick:closeClick" id="cancelShare">Cancel</button>
+</div>

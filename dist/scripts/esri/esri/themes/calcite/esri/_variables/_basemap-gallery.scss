@@ -1,0 +1,16 @@
+// ┌───────────────────┐
+// │  Basemap Gallery  │
+// └───────────────────┘
+
+//** The width of the basemap node
+$basemapgallery-item-width:        100px !default;
+//** The height of the basemap thumbnail
+$basemapgallery-item-height:       65px !default;
+$basemapgallery-item-padding:      $padding-xs-horizontal !default;
+//** The spacing between basemap nodes
+$basemapgallery-item-spacing:      $padding-small-horizontal !default;
+//** Selected bachground color
+$basemapgallery-item-selected-bg:  $Calcite_Highlight_Blue_200 !default;
+
+//** Basemap label text
+$basemapgallery-label-height:      2.5em !default;

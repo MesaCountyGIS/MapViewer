@@ -1,0 +1,6 @@
+{
+    "name":"libs",
+    "version":"1.0",
+    "description":"Libs holds third party libraries used in the viewer",
+    "dojoBuild": "libs.profile.js"
+}

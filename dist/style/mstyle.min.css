@@ -1,0 +1,304 @@
+body,
+html {
+  font-family: Verdana,Geneva,Arial,Helvetica,sans-serif;
+  margin: 0;
+  overflow: hidden;
+  position: fixed;
+  -ms-touch-action: none;
+  touch-action: none;
+}
+
+#map,
+body,
+html {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+}
+
+#map {
+  position: relative;
+}
+
+#map_zoom_slider {
+  top: 3em;
+}
+
+#logoAnchor {
+  display: none;
+}
+
+.mblBackground {
+  background: #fff;
+}
+
+.mblHeading {
+  white-space: normal;
+}
+
+.mblHeadingSpanTitle {
+  margin-right: 10em;
+}
+
+.hideview {
+  visibility: hidden;
+}
+
+#locateButton {
+  background: transparent url("../images/mobilesprite.png") 0 -515px;
+  width: 25px;
+  height: 25px;
+  border-style: none;
+  position: fixed;
+  right: 1em;
+  top: .8em;
+  z-index: 1;
+}
+
+#searchPane {
+  height: auto!important;
+  min-height: 15em;
+  margin-top: 1em;
+  border: none!important;
+}
+
+#searchForm {
+  position: relative;
+}
+
+#searchSelect {
+  height: 1.5em;
+  width: 20em;
+  clear: left;
+}
+
+#searchSelect,
+#searchSelect_label {
+  margin-left: 1em;
+  float: left;
+}
+
+#contextView ul {
+  list-style-type: none;
+}
+
+#mainfish,
+.dijitValidationIcon,
+.dijitValidationInner {
+  display: none;
+}
+
+#mainfish {
+  background: #fff;
+  list-style-type: none;
+  top: 0;
+  font-size: .75em;
+  width: 21.1em;
+  height: 16em;
+  float: left;
+  clear: left;
+  overflow: auto;
+  margin-top: -.1em;
+  margin-left: 1em;
+  padding-left: 0;
+  border: 1px inset gray;
+  color: #000;
+}
+
+#mainfish li:hover {
+  cursor: pointer;
+  background-color: #ecf1ef;
+}
+
+.countylogo {
+  float: left;
+  margin-right: .5em;
+  background-image: url("images/sprites.png");
+  background-position: 0 -256px;
+  background-repeat: no-repeat;
+  width: 189px;
+  height: 47px;
+  margin-left: -1em;
+  margin-top: -2em;
+  border: none;
+}
+
+#logoAnchor {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+@media only screen and (max-width:360px) {
+  #logoAnchor {
+    display: none;
+  }
+}
+.spinner:before {
+  margin-top: .2em!important;
+}
+#layerSelect .aDiv {
+  position: relative!important;
+  float: right!important;
+  right: .5em!important;
+  top: -1em!important;
+}
+
+#layerSelect>span {
+  margin-top: -.5em!important;
+}
+
+.submenu LI:hover {
+  display: inline-block;
+  background-color: #c9c5bc;
+}
+
+#searchLI .aDiv {
+  position: relative!important;
+  float: right!important;
+  right: .5em!important;
+  top: -.9em!important;
+}
+
+#searchLI>ul {
+  top: .2em!important;
+  width: 13.85em!important;
+}
+
+#searchLI ul li:hover,
+.submenu li:hover {
+  display: inline-block;
+  background-color: #c9c5bc;
+}
+
+#searchLI>span {
+  margin-top: -.5em!important;
+}
+
+#historicalImagery>SPAN {
+  margin: -.5em .25em 0 0!important;
+}
+
+#coordzoom {
+  display: none;
+}
+
+#bufferLI {
+  margin: 0!important;
+}
+
+#demographicsSelect,
+#districtsSelect,
+#engdocsSelect,
+#floodSelect,
+#landdevSelect,
+#noControl,
+#politicalSelect,
+#schoolsSelect,
+#surveySelect,
+#topoSelect {
+  width: 17.5em!important;
+}
+
+#hidePanel {
+  writing-mode: tb-rl!important;
+}
+
+.expandedPanel #hidePanel {
+  background: none!important;
+  padding: .1em 0 0!important;
+  margin: .5em 0 .5em .5em;
+  float: left;
+}
+
+.moveable {
+  margin-top: 0!important;
+}
+
+#DTbookmarks,
+#DTLegend,
+#DTmeasure,
+#DTprint,
+#DTqueryatts,
+#help {
+  margin-left: .3em!important;
+}
+
+#measureButtonBlock {
+  padding: 0!important;
+  width: 16em;
+}
+
+#clearMeasure {
+  margin-bottom: 0!important;
+  width: 45%;
+}
+
+#loqClearButton {
+  margin-right: 1em;
+}
+
+.submitQueryLI BUTTON {
+  padding: 10px!important;
+  margin-left: .5em;
+}
+
+#clearWhere {
+  margin-left: .5em!important;
+}
+#layerSelect .aDiv {
+  position: relative!important;
+  float: right!important;
+  right: .5em!important;
+  top: -1em!important;
+}
+
+#layerSelect>UL {
+  left: -.25em!important;
+}
+
+.submenu LI:hover {
+  display: inline-block;
+  background-color: #c9c5bc;
+}
+
+#searchLI .aDiv {
+  position: relative!important;
+  float: right!important;
+  right: .5em!important;
+  top: -.9em!important;
+}
+
+#searchLI ul li:hover,
+.submenu li:hover {
+  display: inline-block;
+  background-color: #c9c5bc;
+}
+
+#coordzoom {
+  display: none;
+}
+
+#bufferLI {
+  margin: 0!important;
+}
+
+#demographicsSelect,
+#districtsSelect,
+#engdocsSelect,
+#floodSelect,
+#landdevSelect,
+#noControl,
+#politicalSelect,
+#schoolsSelect,
+#surveySelect,
+#topoSelect {
+  width: 17.5em!important;
+}
+
+#hidePanel {
+  writing-mode: tb-rl!important;
+}
+.loading {
+  background-image: url("images/loading.gif")!important;
+}
