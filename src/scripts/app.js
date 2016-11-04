@@ -1,130 +1,128 @@
-//Global namespaces for handling non-local variables
-var aG = aG || {}; //Global application object
-var lmG = lmG || {}; //Global Layer Management object
-lmG.legendLayers = [];
-require([
-    "esri/config",
-    "dojo/text!./scripts/_config/config.json",
-    "mesa/toolsWidget" //fix bug requiring toolsWidget to be loaded
-], function(
-    esriConfig,
-    JSONconfig) {
+init(); // initialize the map viewer
 
-    /* The JSON configuration file is located in the scripts/_config directory.
+function init() {
+    //Global namespaces for handling non-local variables
+    aG = {}; //Global application object
+    lmG = {}; //Global Layer Management object
+    lmG.legendLayers = [];
+    require([
+        "esri/config", "dojo/text!./scripts/_config/config.json", "mesa/toolsWidget" //fix bug requiring toolsWidget to be loaded
+    ], function(esriConfig, JSONconfig) {
+
+        /* The JSON configuration file is located in the scripts/_config directory.
     It contains urls for geometryService, print service and proxy. It also
     contains the imageServer url and a list of image service names and ids used
     to build the imagery layers for the app. */
-    JSONconfig = JSON.parse(JSONconfig);
+        JSONconfig = JSON.parse(JSONconfig);
 
-    // Check if the site is being requested from a mobile or desktop device. then
-    // set the map's popup accordingly.
-    aG.popup = checkForMobile() === 1? setPopup("mobile"): setPopup("static");
+        // Check if the site is being requested from a mobile or desktop device. then
+        // set the map's popup accordingly.
+        aG.popup = checkForMobile() === 1
+            ? setPopup("mobile")
+            : setPopup("static");
 
-    // Set esriConfig variables
-    esriConfig.defaults.io.proxyUrl = JSONconfig.proxyURL;
-    esriConfig.defaults.io.alwaysUseProxy = false;
-    esriConfig.defaults.geometryService = createGeometryService(JSONconfig.geometryService);
+        // Set esriConfig variables
+        esriConfig.defaults.io.proxyUrl = JSONconfig.proxyURL;
+        esriConfig.defaults.io.alwaysUseProxy = false;
+        esriConfig.defaults.geometryService = createGeometryService(JSONconfig.geometryService);
 
-    document.dojoClick = false;
-    // Set the spatial reference to 102206 for UTM zone 12
-    var utm12 = setSpatialRef(102206);
-    // See the setInitialExtent function for actual extent bounds
-    var initExtent = setInitialExtent(utm12);
-    // Create an ESRI map component
-    aG.map = createMap(initExtent);
-    // Initialize the popup for when parcels are clicked on
-    aG.pTemp = createPopupTemplate();
-    // Create 3 layers to be initially added to the map
-    lmG.pLay = createFeatureLayer("http://mcmap2.mesacounty.us/arcgis/rest/services/maps/ParcelOnly4Query/MapServer/0");
-    lmG.roadLabels = createTiledMapServiceLayer("http://mcmap2.mesacounty.us/arcgis/rest/services/maps/parcel_road_labels/MapServer", "roadLabels");
-    lmG.vectorBasemap = createTiledMapServiceLayer("http://mcmap2.mesacounty.us/arcgis/rest/services/maps/vector_basemap/MapServer", "vectorBasemap");
-    // Set a reference to the initial basemap. This is passed to the
-    // basemapWidget module where it can be changed.
-    var initialBasemap = lmG.vectorBasemap;
+        document.dojoClick = false;
+        // Set the spatial reference to 102206 for UTM zone 12
+        var utm12 = setSpatialRef(102206);
+        // See the setInitialExtent function for actual extent bounds
+        var initExtent = setInitialExtent(utm12);
+        // Create an ESRI map component
+        aG.map = createMap(initExtent);
+        // Initialize the popup for when parcels are clicked on
+        aG.pTemp = createPopupTemplate();
+        // Create 3 layers to be initially added to the map
+        lmG.pLay = createFeatureLayer("http://mcmap2.mesacounty.us/arcgis/rest/services/maps/ParcelOnly4Query/MapServer/0");
+        lmG.roadLabels = createTiledMapServiceLayer("http://mcmap2.mesacounty.us/arcgis/rest/services/maps/parcel_road_labels/MapServer", "roadLabels");
+        lmG.vectorBasemap = createTiledMapServiceLayer("http://mcmap2.mesacounty.us/arcgis/rest/services/maps/vector_basemap/MapServer", "vectorBasemap");
+        // Set a reference to the initial basemap. This is passed to the
+        // basemapWidget module where it can be changed.
+        var initialBasemap = lmG.vectorBasemap;
 
+        // Add the initial basemap, labels and parcel layer to the map
+        aG.map.addLayers([lmG.vectorBasemap, lmG.roadLabels, lmG.pLay]);
 
-
-
-    // Add the initial basemap, labels and parcel layer to the map
-    aG.map.addLayers([lmG.vectorBasemap, lmG.roadLabels, lmG.pLay]);
-
-    aG.map.on("load", function() {
-        /* Once the map is loaded, initialize the following map components,
+        aG.map.on("load", function() {
+            /* Once the map is loaded, initialize the following map components,
         check the url for parameters, register event handlers for the map,
         stop the loading icon from displaying and disable keyboard navigation
         for the ESRI api map. */
-        screenCoordinates();
-        createScalebar();
-        createContextMenu(JSONconfig.geometryService);
-        createLegend(aG.popup.domNode.id);
-        createHomeButton();
-        getURLMapType();
-        EventHandlers();
-        document.getElementById("loading").style.display = "none";
-        aG.map.disableKeyboardNavigation();
-    });
-
-    function EventHandlers() {
-        require([
-            "dojo/on", "dojo/query", "dojo/dom", "dojo/touch"
-        ], function(on, query, dom, touch) {
-            window.addEventListener("orientationchange", orientationChanged, false);
-            on(dom.byId("toolSelect"), "click", function() {
-                runToolsView(JSONconfig.geometryService, JSONconfig.printURL);
-            });
-            on(dom.byId("help"), touch.release, function(e) {
-                showHelp(e, JSONconfig.printURL)
-            });
-            on(dom.byId("shareMap"), touch.release, showShareForm);
-            on(query("#DTLegend, #legendDialog > .dialogHeader > .dialogCloser"), touch.release, function() {
-                toggleDialog("legendDialog");
-            });
-            on(query("#DTprint"), touch.release, function() {
-                showPrinter(JSONconfig.printURL)
-            });
-            on(query("#DTbookmarks"), touch.release, showBookmarks);
-            on(query("#DTqueryatts"), touch.release, function() {
-                showQuery(JSONconfig.geometryService);
-            });
-            on(query("#DTmeasure"), touch.release, function() {
-                showMeasure(JSONconfig.geometryService)
-            });
-            on(query("#DTbasemap,#IPbasemap"), touch.release, function() {
-                showBasemap(JSONconfig.imagesList, initialBasemap);
-            });
-            on(query(".shareClass, #sharebutton"), touch.release, showShare);
-            on(query('#layerSelect ul li'), touch.release, themeClick);
-            on(query('.plus'), touch.release, clickPlus);
-            on(query('.baselyrs'), "click", baseLayersSwitch);
-            // on(query(".collapsedPanel"), touch.release, animatePanel);
-            on(dom.byId("hidePanel"), "click", animatePanel);
-            on(dom.byId("locate"), touch.release, showLocator);
-            on(query(".submen li, .submenu li"), touch.release, function() {
-                var classname = "." + this.parentNode.className;
-                query(classname)[0].style.display = "none";
-            });
-            on(query("#combobox, #mainfish"), "mouseenter, mouseleave, touchstart", function(e) {
-                var display = e.type === "mouseleave"
-                    ? "none"
-                    : "block";
-                var classname = "." + query("#" + this.id + " ul")[0].className;
-                query(classname)[0].style.display = display;
-            });
-
-            on(query('#searchLI ul li'), touch.release, function(e) {
-                e.stopPropagation();
-                var type = this.getAttribute('data-value');
-                dom.byId("searchLI").childNodes[0].nodeValue = this.childNodes[0].innerHTML;
-                require(["dijit/registry"], function(registry) {
-                    if (registry.byId("searchFieldDialog"))
-                        (registry.byId("searchFieldDialog").destroyRecursive());
-                    searchBy(type, undefined, "desktop");
-                }); //End require
-            });
+            screenCoordinates();
+            createScalebar();
+            createContextMenu(JSONconfig.geometryService);
+            createLegend(aG.popup.domNode.id);
+            createHomeButton();
+            getURLMapType();
+            setEventHandlers(JSONconfig);
+            document.getElementById("loading").style.display = "none";
+            aG.map.disableKeyboardNavigation();
         });
-    }
+    }); //end require
+} //end of init function
 
-}); //end require
+function setEventHandlers(JSONconfig) {
+    require([
+        "dojo/on", "dojo/query", "dojo/dom", "dojo/touch"
+    ], function(on, query, dom, touch) {
+        window.addEventListener("orientationchange", orientationChanged, false);
+        on(dom.byId("toolSelect"), "click", function() {
+            runToolsView(JSONconfig.geometryService, JSONconfig.printURL);
+        });
+        on(dom.byId("help"), touch.release, function(e) {
+            showHelp(e, JSONconfig.printURL)
+        });
+        on(dom.byId("shareMap"), touch.release, showShareForm);
+        on(query("#DTLegend, #legendDialog > .dialogHeader > .dialogCloser"), touch.release, function() {
+            toggleDialog("legendDialog");
+        });
+        on(query("#DTprint"), touch.release, function() {
+            showPrinter(JSONconfig.printURL)
+        });
+        on(query("#DTbookmarks"), touch.release, showBookmarks);
+        on(query("#DTqueryatts"), touch.release, function() {
+            showQuery(JSONconfig.geometryService);
+        });
+        on(query("#DTmeasure"), touch.release, function() {
+            showMeasure(JSONconfig.geometryService)
+        });
+        on(query("#DTbasemap,#IPbasemap"), touch.release, function() {
+            showBasemap(JSONconfig.imagesList, initialBasemap);
+        });
+        on(query(".shareClass, #sharebutton"), touch.release, showShare);
+        on(query('#layerSelect ul li'), touch.release, themeClick);
+        on(query('.plus'), touch.release, clickPlus);
+        on(query('.baselyrs'), "click", baseLayersSwitch);
+        // on(query(".collapsedPanel"), touch.release, animatePanel);
+        on(dom.byId("hidePanel"), "click", animatePanel);
+        on(dom.byId("locate"), touch.release, showLocator);
+        on(query(".submen li, .submenu li"), touch.release, function() {
+            var classname = "." + this.parentNode.className;
+            query(classname)[0].style.display = "none";
+        });
+        on(query("#combobox, #mainfish"), "mouseenter, mouseleave, touchstart", function(e) {
+            var display = e.type === "mouseleave"
+                ? "none"
+                : "block";
+            var classname = "." + query("#" + this.id + " ul")[0].className;
+            query(classname)[0].style.display = display;
+        });
+
+        on(query('#searchLI ul li'), touch.release, function(e) {
+            e.stopPropagation();
+            var type = this.getAttribute('data-value');
+            dom.byId("searchLI").childNodes[0].nodeValue = this.childNodes[0].innerHTML;
+            require(["dijit/registry"], function(registry) {
+                if (registry.byId("searchFieldDialog"))
+                    (registry.byId("searchFieldDialog").destroyRecursive());
+                searchBy(type, undefined, "desktop");
+            }); //End require
+        });
+    });
+}
 
 function createTiledMapServiceLayer(url, id) {
     var tile;
