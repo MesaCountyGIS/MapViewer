@@ -969,9 +969,11 @@ define([
                 };
 
                 if (checkboxids) {
+                    // if boxes are checked through url parameters
                     changeThemeWidget.autoCheckBoxes(checkboxids);
                 }
                 on(query("." + layer + "cbx"), "change", function(e) {
+                    //if boxes are checked manually
                     changeThemeWidget.changeBox();
                     changeThemeWidget.manualCheckBoxes(e.currentTarget.id);
                 });
@@ -1074,8 +1076,12 @@ define([
                     query(".noLoad").forEach(function(node) {
                         domStyle.set(node, "display", "block");
                     });
-                } else if (query("input.transcbx")[1].checked === true) {
+                } else if (query("input.transcbx")[0].checked !== true &&
+                    lmG.loadLabels !== undefined){
                     map.removeLayer(lmG.loadLabels);
+                }
+
+                if (query("input.transcbx")[1].checked === true) {
                     if (!(document.cookie.indexOf("ohvDisclaimer") >= -1) || (window.localStorage.getItem("ohvDisclaimer") !== "Accepted OHV Disclaimer")) {
                         var dial = new ConfirmDialog({
                             title: "Disclaimer",
