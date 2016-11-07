@@ -54,7 +54,7 @@ function init() {
             createLegend(aG.map, aG.popup.domNode.id);
             createHomeButton(aG.map);
             setEventHandlers(JSONconfig, aG.map, lmG.pLay, initialBasemap,
-            aG.popup, aG.pTemp);
+            aG.popup, aG.pTemp, lmG.roadLabels);
             document.getElementById("loading").style.display = "none";
             aG.map.disableKeyboardNavigation();
             /*watches for variables in the url then runs urlMapType
@@ -69,7 +69,7 @@ function init() {
 } //end of init function
 
 function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
-                            popupObject, popupTemplateObject) {
+    lmG.roadLabels, popupObject, popupTemplateObject) {
     require([
         "dojo/on", "dojo/query", "dojo/dom", "dojo/touch"
     ], function(on, query, dom, touch) {
@@ -111,7 +111,9 @@ function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
             themeClick(e, map, popupObject, popupTemplateObject);
         });
         on(query('.plus'), touch.release, clickPlus);
-        on(query('.baselyrs'), "click", baseLayersSwitch);
+        on(query('.baselyrs'), "click", function(e){
+            baseLayersSwitch(e, parcelLayerObject, initialBasemap,lmG.roadLabels)
+        });
         // on(query(".collapsedPanel"), touch.release, animatePanel);
         on(dom.byId("hidePanel"), "click", animatePanel);
         on(dom.byId("locate"), touch.release, showLocator);
@@ -656,29 +658,23 @@ function extentZoom(extentObject) {
 }
 
 //Turns on and off the base layers
-function baseLayersSwitch(e) {
+function baseLayersSwitch(e, ParcelLayerObject, basemapObject, roadLabelObject) {
     require([
         "dojo/query", "dojo/dom-attr"
     ], function(query, domAttr) {
-        var target = e.target
-            ? e.target
-            : e.srcElement;
+        var target = e.target? e.target: e.srcElement;
         var thisClassName = domAttr.get(target, "class");
         thisClassName = 'input.' + thisClassName.split(" ").pop();
         var baselayers = query(".expand")[0];
-
         var box = query(thisClassName);
-        for (i = 0; i < box.length; i++) {
-            box[i].checked = target.checked
-                ? true
-                : false;
-        }
-
         var layers = {
-            'input.pclcbx': lmG.pLay,
-            'input.lbsgcbx': lmG.roadLabels,
-            'input.bgcbx': lmG.vectorBasemap
+            'input.pclcbx': ParcelLayerObject,
+            'input.lbsgcbx': basemapObject,
+            'input.bgcbx': roadLabelObject
         };
+        for (i = 0; i < box.length; i++) {
+            box[i].checked = target.checked? true: false;
+        }
         if (baselayers.checked) {
             for (var x in layers) {
                 if (query(x)[0].checked) {
@@ -697,7 +693,7 @@ function baseLayersSwitch(e) {
 
 function clickPlus(e) {
     /* Toggle expansion of the baselayers check boxes on the "Layers" tab
-    //on the right side of the map. */
+    on the right side of the map. */
     require([
         "dojo/query",
         "dojo/dom-attr",
