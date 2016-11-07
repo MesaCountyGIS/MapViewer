@@ -53,9 +53,9 @@ function init() {
             for the ESRI api map. */
             // screenCoordinates();
             createScalebar(aG.map);
-            createContextMenu(JSONconfig.geometryService);
-            createLegend(aG.popup.domNode.id);
-            createHomeButton();
+            createContextMenu(aG.map, JSONconfig.geometryService);
+            createLegend(aG.map, aG.popup.domNode.id);
+            createHomeButton(aG.map);
             getURLMapType();
             setEventHandlers(JSONconfig);
             document.getElementById("loading").style.display = "none";
@@ -382,15 +382,15 @@ function makeBoxesMoveable() {
     });
 }
 
-function createHomeButton() {
+function createHomeButton(map) {
     require(["mesa/homeButton"], function(homeButton) {
-        homeButton({mapRef: aG.map});
+        homeButton({mapRef: map});
     });
 }
 
-function createContextMenu(geometryServiceConfig) {
+function createContextMenu(map, geometryServiceConfig) {
     require(["mesa/contextMenuWidget"], function(contextMenuWidget) {
-        contextMenuWidget({mapRef: aG.map, geometryServiceURL: geometryServiceConfig.geometryService, trsURL: "http://mcmap2.mesacounty.us/arcgis/rest/services/maps/eSurveyor/MapServer/26"});
+        contextMenuWidget({mapRef: map, geometryServiceURL: geometryServiceConfig.geometryService, trsURL: "http://mcmap2.mesacounty.us/arcgis/rest/services/maps/eSurveyor/MapServer/26"});
     });
 }
 
@@ -409,7 +409,7 @@ function createScalebar(map) {
     }); //end require
 }
 
-function createLegend(device) {
+function createLegend(map, device) {
     lmG.legendLayers.push({
         layer: lmG.vectorBasemap,
         title: 'Basemap Layers',
@@ -437,7 +437,7 @@ function createLegend(device) {
 
     require(["esri/dijit/Legend"], function(Legend) {
         lmG.legend = new Legend({
-            map: aG.map,
+            map: map,
             layerInfos: lmG.legendLayers
         }, "legendDiv");
         lmG.legend.startup();
