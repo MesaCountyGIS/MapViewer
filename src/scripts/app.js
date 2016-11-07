@@ -104,7 +104,9 @@ function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
         on(query("#DTbasemap,#IPbasemap"), touch.release, function() {
             showBasemap(map, JSONconfig.imagesList, initialBasemap);
         });
-        on(query(".shareClass, #sharebutton"), touch.release, showShare);
+        on(query(".shareClass, #sharebutton"), touch.release, function(){
+            showShare("socialShare");
+        });
         on(query('#layerSelect ul li'), touch.release, function(e){
             themeClick(e, map, popupObject, popupTemplateObject);
         });
@@ -290,25 +292,10 @@ function orientationChanged() {
     });
 }
 
-// function closeDialog(dialogId){
-//     require(["dojo/dom", "dojo/dom-class"], function (dom, domClass) {
-//         dom.byId(dialogId).style.display = "none";
-//         domClass.add(dom.byId(dialogId), "displayNo");
-//     });
-// }
-//
-// function openDialog(dialogId){
-//     require(["dojo/dom", "dojo/dom-class"], function (dom, domClass) {
-//         dom.byId("legendDialog").style.display = "block";
-//         domClass.remove(dom.byId(dialogId), "displayNo");
-//     });
-// }
-
-function showShare() {
-    require(["dojo/dom"], function(dom) {
-        dom.byId("socialShare").style.display = dom.byId("socialShare").style.display === "block"
+function showShare(id) {
+    //Toggle the social sharing tools UI
+        document.getElementById(id).style.display = document.getElementById(id).style.display === "block"
             ? "none": "block";
-    });
 }
 
 function makeBoxesMoveable() {
@@ -513,15 +500,15 @@ function showBasemap(map, imageConfig, initialBasemap) {
     ], function(registry) {
         if (!(registry.byId("imagelist2"))) { //remove the 2 after user caches have been updated
             createImageList(imageConfig);
-            var imageTool = new basemapWidget({
+            lmG.imageTool = new basemapWidget({
                 mapRef: map,
                 device: "desktop",
                 initialBasemap: initialBasemap
             }, "imagelist2");
-            imageTool.startup();
-            imageTool.basemapChanger();
+            lmG.imageTool.startup();
+            lmG.imageTool.basemapChanger();
         } else if ((registry.byId("imagelist2"))) {
-            imageTool.basemapChanger();
+            lmG.imageTool.basemapChanger();
         }
     });
 }
@@ -709,6 +696,8 @@ function baseLayersSwitch(e) {
 }
 
 function clickPlus(e) {
+    /* Toggle expansion of the baselayers check boxes on the "Layers" tab
+    //on the right side of the map. */
     require([
         "dojo/query",
         "dojo/dom-attr",
@@ -718,20 +707,22 @@ function clickPlus(e) {
         "dojo/NodeList-manipulate"
     ], function(query, domAttr, domStyle, domClass) {
         var cls = domAttr.get(e.target, "class");
-
         cls = cls.split(" ")[1];
-
-        "minus" !== cls
-            ? (query(".plus").forEach(function(node) {
+        if("minus" !== cls){
+            query(".plus").forEach(function(node) {
                 domClass.replace(node, "minus", "plus");
-            }), query(".lyrexpand").children("li").forEach(function(node) {
+            });
+            query(".lyrexpand").children("li").forEach(function(node) {
                 domStyle.set(node, "display", "block");
-            }))
-            : (query(".plusSign").forEach(function(node) {
+            });
+        }else{
+            query(".plusSign").forEach(function(node) {
                 domClass.replace(node, "plus", "minus");
-            }), query(".lyrexpand").children("li").forEach(function(node) {
+            });
+            query(".lyrexpand").children("li").forEach(function(node) {
                 domStyle.set(node, "display", "none");
-            }));
+            });
+        }
     });
 }
 
