@@ -51,7 +51,7 @@ function init() {
             check the url for parameters, register event handlers for the map,
             stop the loading icon from displaying and disable keyboard navigation
             for the ESRI api map. */
-            screenCoordinates();
+            // screenCoordinates();
             createScalebar();
             createContextMenu(JSONconfig.geometryService);
             createLegend(aG.popup.domNode.id);
@@ -69,6 +69,7 @@ function setEventHandlers(JSONconfig) {
         "dojo/on", "dojo/query", "dojo/dom", "dojo/touch"
     ], function(on, query, dom, touch) {
         window.addEventListener("orientationchange", orientationChanged, false);
+        aG.map.on("mouse-move", showCoords);
         on(dom.byId("toolSelect"), "click", function() {
             runToolsView(JSONconfig.geometryService, JSONconfig.printURL);
         });
@@ -699,12 +700,8 @@ function searchBy(type, option, device, turnOff) {
 } //end searchBy function
 
 ////----------------Begin screen coordinate display code---------------------------------------------//
-
-function screenCoordinates() {
-    aG.map.on("mouse-move", showCoords);
-    function showCoords(evt) {
-        document.getElementById("screenCoordinatesUTM").innerHTML = ("X=" + evt.mapPoint.x.toFixed(1) + "  " + "Y=" + evt.mapPoint.y.toFixed(1));
-    }
+function showCoords(evt) {
+    document.getElementById("screenCoordinatesUTM").innerHTML = ("X=" + evt.mapPoint.x.toFixed(1) + "  " + "Y=" + evt.mapPoint.y.toFixed(1));
 }
 ////----------------End screen coordinate display code---------------------------------------------//
 
