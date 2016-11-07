@@ -52,7 +52,7 @@ function init() {
             stop the loading icon from displaying and disable keyboard navigation
             for the ESRI api map. */
             // screenCoordinates();
-            createScalebar();
+            createScalebar(aG.map);
             createContextMenu(JSONconfig.geometryService);
             createLegend(aG.popup.domNode.id);
             createHomeButton();
@@ -403,9 +403,9 @@ function createImageList(imageConfig) {
     }); // end require
 }
 
-function createScalebar() {
+function createScalebar(map) {
     require(["esri/dijit/Scalebar"], function(Scalebar) {
-        var scalebar = new Scalebar({map: aG.map, attachTo: "bottom-right", scalebarUnit: "dual"});
+        var scalebar = new Scalebar({map: map, attachTo: "bottom-right", scalebarUnit: "dual"});
     }); //end require
 }
 
