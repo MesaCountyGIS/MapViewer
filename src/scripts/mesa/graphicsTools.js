@@ -63,7 +63,6 @@ createJSONPolygon: function(coords, selector, style, lineColor, polyColor) {
                 // "style": style
             }
         }
-        console.log("string JSON is: ", JSON.stringify(PolyPost))
     return PolyPost;
 },
 

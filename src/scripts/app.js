@@ -51,15 +51,20 @@ function init() {
             check the url for parameters, register event handlers for the map,
             stop the loading icon from displaying and disable keyboard navigation
             for the ESRI api map. */
-            // screenCoordinates();
             createScalebar(aG.map);
             createContextMenu(aG.map, JSONconfig.geometryService);
             createLegend(aG.map, aG.popup.domNode.id);
             createHomeButton(aG.map);
-            getURLMapType();
             setEventHandlers(JSONconfig);
             document.getElementById("loading").style.display = "none";
             aG.map.disableKeyboardNavigation();
+            /*watches for variables in the url then runs urlMapType
+            if it finds one*/
+            if ((location.href).indexOf("?") > -1) {
+                urlMapType(location.href, aG.map);
+            } else {
+                return undefined;
+            }
         });
     }); //end require
 } //end of init function
@@ -788,20 +793,7 @@ function clickPlus(e) {
     });
 }
 
-//Hack to fix the timing of the urlMapType function call.
-function getURLMapType() {
-    /*watches for a get request in the url then runs urlMapType
-    if it finds one*/
-    var url = location.href;
-    if ((url).indexOf("?") > -1) {
-        setTimeout(function(){
-            urlMapType(url)}, 500);
-    } else {
-        return undefined;
-    }
-}
-
-function urlMapType(url) {
+function urlMapType(url, map) {
     /*urlMapType (and its main sub-function parseParameters) is used to parse
     GET requests to the viewer api.
     The api allows control of the map by setting the map theme,
@@ -830,8 +822,8 @@ function urlMapType(url) {
                 var title = queryObject.maptype
                     ? createTitle(queryObject.maptype)
                     : 'Select Map';
-                function createTitle(map) {
-                    return query("#layerSelect ul li[data-value='" + map + "']").children('a').innerHTML()
+                function createTitle(map_type) {
+                    return query("#layerSelect ul li[data-value='" + map_type + "']").children('a').innerHTML()
                 }
                 var layerid = queryObject.layerid
                     ? queryObject.layerid
@@ -874,7 +866,7 @@ function urlMapType(url) {
                     ? (searchBy("parcelNo", parcelNumber))
                     : null;
                 extent !== ''
-                    ? aG.map.setExtent(extentZoom(extent))
+                    ? map.setExtent(extentZoom(extent))
                     : null;
             }
 
@@ -891,14 +883,14 @@ function urlMapType(url) {
                 require([
                     "esri/tasks/QueryTask", "esri/tasks/query", "esri/graphic", "mesa/graphicsTools"
                 ], function(QueryTask, Query, Graphic, graphicsTools) {
-                    var graphicTool = new graphicsTools({geometryServiceURL: esriConfig.defaults.geometryService, mapRef: aG.map});
+                    var graphicTool = new graphicsTools({geometryServiceURL: esriConfig.defaults.geometryService, mapRef: map});
                     dQueryTask = new QueryTask("http://mcmap2.mesacounty.us/arcgis/rest/services/maps/" + service + "/MapServer/" + layerid);
                     dQuery = new Query();
                     dQuery.returnGeometry = true;
                     dQuery.outFields = [""];
                     dQuery.where = field + " = '" + value + "'";
                     dQueryTask.execute(dQuery, function(result) {
-                        aG.map.setExtent((aG.map.graphics.add(new Graphic(graphicTool.createJSONPolygon(result.features[0].geometry.rings)))).geometry.getExtent().expand(1.5));
+                        map.setExtent((map.graphics.add(new Graphic(graphicTool.createJSONPolygon(result.features[0].geometry.rings)))).geometry.getExtent().expand(1.5));
                     });
                 });
             }
@@ -914,7 +906,7 @@ function urlMapType(url) {
                     layerTitle: urlParams[1],
                     option: urlParams[2],
                     pVal: urlParams[3],
-                    mapRef: aG.map,
+                    mapRef: map,
                     infoWindowRef: aG.popup,
                     infoTemplateRef: aG.pTemp,
                     checkboxid: urlParams[4]
