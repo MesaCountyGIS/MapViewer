@@ -53,7 +53,8 @@ function init() {
             createContextMenu(aG.map, JSONconfig.geometryService);
             createLegend(aG.map, aG.popup.domNode.id);
             createHomeButton(aG.map);
-            setEventHandlers(JSONconfig, aG.map, lmG.pLay, initialBasemap);
+            setEventHandlers(JSONconfig, aG.map, lmG.pLay, initialBasemap,
+            aG.popup, aG.pTemp);
             document.getElementById("loading").style.display = "none";
             aG.map.disableKeyboardNavigation();
             /*watches for variables in the url then runs urlMapType
@@ -67,7 +68,8 @@ function init() {
     }); //end require
 } //end of init function
 
-function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap) {
+function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
+                            popupObject, popupTemplateObject) {
     require([
         "dojo/on", "dojo/query", "dojo/dom", "dojo/touch"
     ], function(on, query, dom, touch) {
@@ -103,7 +105,9 @@ function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap) {
             showBasemap(map, JSONconfig.imagesList, initialBasemap);
         });
         on(query(".shareClass, #sharebutton"), touch.release, showShare);
-        on(query('#layerSelect ul li'), touch.release, themeClick);
+        on(query('#layerSelect ul li'), touch.release, function(e){
+            themeClick(e, map, popupObject, popupTemplateObject);
+        });
         on(query('.plus'), touch.release, clickPlus);
         on(query('.baselyrs'), "click", baseLayersSwitch);
         // on(query(".collapsedPanel"), touch.release, animatePanel);
@@ -866,15 +870,14 @@ function getTemplate(newLayerName) {
     });
 }
 
-function themeClick(e) {
+function themeClick(e, map, popupObject, popupTemplateObject) {
     e.stopPropagation();
     var newLayer = this.attributes['data-value'].nodeValue;
     getTemplate(newLayer);
     if (newLayer !== 'epom' && newLayer.length > 0) {
         var layerTitle = this.getElementsByTagName('a')[0].innerHTML;
         var option = this.attributes['data-opt']
-            ? this.attributes['data-opt'].nodeValue
-            : null;
+            ? this.attributes['data-opt'].nodeValue: null;
         setTimeout(function() {
             require(["mesa/changeTheme"], function(changeTheme) {
                 new changeTheme({
@@ -882,9 +885,9 @@ function themeClick(e) {
                     layerTitle: layerTitle,
                     option: option,
                     pVal: null,
-                    mapRef: aG.map,
-                    infoWindowRef: aG.popup,
-                    infoTemplateRef: aG.pTemp
+                    mapRef: map,
+                    infoWindowRef: popupObject,
+                    infoTemplateRef: popupTemplateObject
                 }).then(animatePanel(e));
             });
         }, 200);
