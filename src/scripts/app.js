@@ -17,9 +17,7 @@ function init() {
 
         // Check if the site is being requested from a mobile or desktop device. then
         // set the map's popup accordingly.
-        aG.popup = checkForMobile() === 1
-            ? setPopup("mobile")
-            : setPopup("static");
+        aG.popup = checkForMobile() === 1? setPopup("mobile"): setPopup("static");
 
         // Set esriConfig variables
         esriConfig.defaults.io.proxyUrl = JSONconfig.proxyURL;
@@ -55,7 +53,7 @@ function init() {
             createContextMenu(aG.map, JSONconfig.geometryService);
             createLegend(aG.map, aG.popup.domNode.id);
             createHomeButton(aG.map);
-            setEventHandlers(JSONconfig);
+            setEventHandlers(JSONconfig, aG.map, lmG.pLay, initialBasemap);
             document.getElementById("loading").style.display = "none";
             aG.map.disableKeyboardNavigation();
             /*watches for variables in the url then runs urlMapType
@@ -69,34 +67,40 @@ function init() {
     }); //end require
 } //end of init function
 
-function setEventHandlers(JSONconfig) {
+function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap) {
     require([
         "dojo/on", "dojo/query", "dojo/dom", "dojo/touch"
     ], function(on, query, dom, touch) {
         window.addEventListener("orientationchange", orientationChanged, false);
-        aG.map.on("mouse-move", showCoords);
+        map.on("mouse-move", function(e){
+            showCoords(e, "screenCoordinatesUTM");
+        });
         on(dom.byId("toolSelect"), "click", function() {
-            runToolsView(JSONconfig.geometryService, JSONconfig.printURL);
+            runToolsView(JSONconfig.geometryService, JSONconfig.printURL, map);
         });
         on(dom.byId("help"), touch.release, function(e) {
-            showHelp(e, JSONconfig.printURL)
+            showHelp(e, JSONconfig.printURL);
         });
-        on(dom.byId("shareMap"), touch.release, showShareForm);
+        on(dom.byId("shareMap"), touch.release, function(){
+            showShareForm(map)
+        });
         on(query("#DTLegend, #legendDialog > .dialogHeader > .dialogCloser"), touch.release, function() {
             toggleDialog("legendDialog");
         });
         on(query("#DTprint"), touch.release, function() {
-            showPrinter(JSONconfig.printURL)
+            showPrinter(map, JSONconfig.printURL)
         });
-        on(query("#DTbookmarks"), touch.release, showBookmarks);
+        on(query("#DTbookmarks"), touch.release, function(){
+            showBookmarks(map);
+        });
         on(query("#DTqueryatts"), touch.release, function() {
-            showQuery(JSONconfig.geometryService);
+            showQuery(map, JSONconfig.geometryService);
         });
         on(query("#DTmeasure"), touch.release, function() {
-            showMeasure(JSONconfig.geometryService)
+            showMeasure(map, parcelLayerObject, JSONconfig.geometryService)
         });
         on(query("#DTbasemap,#IPbasemap"), touch.release, function() {
-            showBasemap(JSONconfig.imagesList, initialBasemap);
+            showBasemap(map, JSONconfig.imagesList, initialBasemap);
         });
         on(query(".shareClass, #sharebutton"), touch.release, showShare);
         on(query('#layerSelect ul li'), touch.release, themeClick);
@@ -257,7 +261,7 @@ function checkForMobile() {
     return isMobile;
 };
 
-function runToolsView(geometryService, printURL) {
+function runToolsView(geometryService, printURL, map) {
     require([
         "dijit/registry", "mesa/toolsWidget"
     ], function(registry, toolsWidget) {
@@ -265,7 +269,7 @@ function runToolsView(geometryService, printURL) {
             var tools = new toolsWidget({
                 geometryServiceURL: geometryService,
                 printURL: printURL,
-                mapRef: aG.map
+                mapRef: map
             }, "toolsView");
             tools.startup();
             query("#map_zoom_slider, #hidePanel, #rightPanel, .collapsedPanel").style("display", "none");
@@ -302,69 +306,6 @@ function showShare() {
             ? "none": "block";
     });
 }
-
-// function EventHandlers(JSONconfig) {
-//     require([
-//         "dojo/on", "dojo/query", "dojo/dom", "dojo/touch"
-//     ], function(on, query, dom, touch) {
-//         window.addEventListener("orientationchange", orientationChanged, false);
-//         on(dom.byId("toolSelect"), "click", function() {
-//             runToolsView(JSONconfig.geometryService, JSONconfig.printURL);
-//         });
-//         on(dom.byId("help"), touch.release, function(e) {
-//             showHelp(e, JSONconfig.printURL)
-//         });
-//         on(dom.byId("shareMap"), touch.release, showShareForm);
-//         on(query("#DTLegend"), touch.release, function() {
-//             toggleDialog("legendDialog");
-//         });
-//         on(query("#DTprint"), touch.release, function() {
-//             showPrinter(JSONconfig.printURL)
-//         });
-//         on(query("#DTbookmarks"), touch.release, showBookmarks);
-//         on(query("#DTqueryatts"), touch.release, function() {
-//             showQuery(JSONconfig.geometryService);
-//         });
-//         on(query("#DTmeasure"), touch.release, function() {
-//             showMeasure(JSONconfig.geometryService)
-//         });
-//         on(query("#DTbasemap,#IPbasemap"), touch.release, function() {
-//             showBasemap(JSONconfig.imagesList);
-//         });
-//         on(query("#legendDialog > .dialogHeader > .dialogCloser"), "click", function() {
-//             closeDialog("legendDialog");
-//         });
-//         on(query(".shareClass, #sharebutton"), touch.release, showShare);
-//         on(query('#layerSelect ul li'), touch.release, themeClick);
-//         on(query('.plus'), touch.release, clickPlus);
-//         on(query('.baselyrs'), "click", baseLayersSwitch);
-//         on(query(".collapsedPanel"), touch.release, animatePanel);
-//         on(dom.byId("hidePanel"), "click", animatePanel);
-//         on(dom.byId("locate"), touch.release, showLocator);
-//         on(query(".submen li, .submenu li"), touch.release, function() {
-//             var classname = "." + this.parentNode.className;
-//             query(classname)[0].style.display = "none";
-//         });
-//         on(query("#combobox, #mainfish"), "mouseenter, mouseleave, touchstart", function(e) {
-//             var display = e.type === "mouseleave"
-//                 ? "none"
-//                 : "block";
-//             var classname = "." + query("#" + this.id + " ul")[0].className;
-//             query(classname)[0].style.display = display;
-//         });
-//
-//         on(query('#searchLI ul li'), touch.release, function(e) {
-//             e.stopPropagation();
-//             var type = this.getAttribute('data-value');
-//             dom.byId("searchLI").childNodes[0].nodeValue = this.childNodes[0].innerHTML;
-//             require(["dijit/registry"], function(registry) {
-//                 if (registry.byId("searchFieldDialog"))
-//                     (registry.byId("searchFieldDialog").destroyRecursive());
-//                 searchBy(type, undefined, "desktop");
-//             }); //End require
-//         });
-//     });
-// }
 
 function makeBoxesMoveable() {
     //Make dialog boxes moveable
@@ -469,7 +410,7 @@ function toggleDialog(dialogId) { //fires on click of #DTLegend and #IPLegend - 
 }
 
 //update showPrinter to remove old code after users have replaced code in their cache
-function showPrinter(printURL) {
+function showPrinter(map, printURL) {
     require([
         "mesa/printWidget",
         "dojo/dom-construct",
@@ -481,27 +422,26 @@ function showPrinter(printURL) {
         if (!(registry.byId("printDialog2"))) {
             var printer = new printWidget({
                 printUrl: printURL,
-                mapRef: aG.map,
+                mapRef: map,
                 device: "desktop"
             }, "printDialog2"); //remove the 2 after user caches have been updated
             printer.startup();
         }
         domStyle.set(dom.byId("printDialog2"), { //remove the 2
             display: domStyle.get(dom.byId("printDialog2"), "display") === "block"
-                ? "none"
-                : "block" //remove the 2
+                ? "none": "block" //remove the 2
         });
     });
 }
 
-function showBookmarks() {
+function showBookmarks(map) {
     require([
         "dijit/registry", "mesa/bookmarkWidget", "dojo/dom"
     ], function(registry, bookmarkWidget, dom) {
 
         if (!(registry.byId("bookmarkDialog2"))) { //remove the 2 after user caches have been updated
             var bookmarks = new bookmarkWidget({
-                mapRef: aG.map
+                mapRef: map
             }, "bookmarkDialog2");
             bookmarks.startup();
         }
@@ -535,21 +475,20 @@ function showHelp(e, printURL) {
         if (dom.byId("helpMenu2")) { //delete
             domStyle.set(dom.byId("helpMenu2"), { //remove the 2
                 display: domStyle.get(dom.byId("helpMenu2"), "display") === "block"
-                    ? "none"
-                    : "block" //remove the 2
+                    ? "none": "block" //remove the 2
             });
         }
     });
 }
 
-function showQuery(geometryServiceURL) {
+function showQuery(map, geometryServiceURL) {
     require([
         "dojo/dom", "dijit/registry", "mesa/queryWidget"
     ], function(dom, registry, queryWidget) {
         if (dom.byId("queryDialog2") && !(registry.byId("queryDialog2"))) { //remove the 2 after user caches have been updated
             var queryTool = new queryWidget({
                 device: "desktop",
-                mapRef: aG.map,
+                mapRef: map,
                 geometryServiceURL: geometryServiceURL,
                 exportURL: "scripts/php/toCSV.php",
                 csvOutputLocation: "scripts/php/"
@@ -564,54 +503,53 @@ function showQuery(geometryServiceURL) {
     });
 }
 
-function showBasemap(imageConfig, initialBasemap) {
+function showBasemap(map, imageConfig, initialBasemap) {
     require([
         "dijit/registry", "mesa/basemapWidget"
     ], function(registry) {
         if (!(registry.byId("imagelist2"))) { //remove the 2 after user caches have been updated
             createImageList(imageConfig);
-            lmG.imageTool = new basemapWidget({
-                mapRef: aG.map,
+            var imageTool = new basemapWidget({
+                mapRef: map,
                 device: "desktop",
                 initialBasemap: initialBasemap
             }, "imagelist2");
-            lmG.imageTool.startup();
-            lmG.imageTool.basemapChanger();
+            imageTool.startup();
+            imageTool.basemapChanger();
         } else if ((registry.byId("imagelist2"))) {
-            lmG.imageTool.basemapChanger();
+            imageTool.basemapChanger();
         }
     });
 }
 
-function showShareForm() {
+function showShareForm(map) {
     require([
         "mesa/shareFormWidget", "dijit/registry", "dojo/dom"
     ], function(shareFormWidget, registry, dom) {
         if (!(registry.byId("shareForm2"))) { //remove the 2 after user caches have been updated
             var shareForm = new shareFormWidget({
                 emailServiceUrl: "scripts/php/ShareMail.php",
-                mapRef: aG.map
+                mapRef: map
             }, "shareForm2");
             shareForm.startup();
         }
         if (dom.byId("shareForm2")) { //delete
             dom.byId("shareForm2").style.display = dom.byId("shareForm2").style.display === "block"
-                ? "none"
-                : "block";
+                ? "none": "block";
         }
     });
 }
 
-function showMeasure(geometryService) {
+function showMeasure(map, parcelLayer, geometryService) {
     require([
         "mesa/measureWidget", "dojo/dom", "dojo/on", "dijit/registry"
     ], function(measureWidget, dom, on, registry) {
         if (dom.byId("measureDialog2") && !(registry.byId("measureDialog2"))) { //remove the 2 after user caches have been updated
             var measure = new measureWidget({
-                mapRef: aG.map,
+                mapRef: map,
                 gsvc: geometryService,
                 device: "desktop",
-                parcelLayer: lmG.pLay
+                parcelLayer: parcelLayer
             }, "measureDialog2"); //remove the 2 after user caches have been updated
             measure.startup();
         }
@@ -705,8 +643,8 @@ function searchBy(type, option, device, turnOff) {
 } //end searchBy function
 
 ////----------------Begin screen coordinate display code---------------------------------------------//
-function showCoords(evt) {
-    document.getElementById("screenCoordinatesUTM").innerHTML = ("X=" + evt.mapPoint.x.toFixed(1) + "  " + "Y=" + evt.mapPoint.y.toFixed(1));
+function showCoords(evt, id) {
+    document.getElementById(id).innerHTML = ("X=" + evt.mapPoint.x.toFixed(1) + "  " + "Y=" + evt.mapPoint.y.toFixed(1));
 }
 ////----------------End screen coordinate display code---------------------------------------------//
 
