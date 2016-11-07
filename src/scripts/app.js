@@ -10,9 +10,9 @@ function init() {
     ], function(esriConfig, JSONconfig) {
 
         /* The JSON configuration file is located in the scripts/_config directory.
-    It contains urls for geometryService, print service and proxy. It also
-    contains the imageServer url and a list of image service names and ids used
-    to build the imagery layers for the app. */
+        It contains urls for geometryService, print service and proxy. It also
+        contains the imageServer url and a list of image service names and ids used
+        to build the imagery layers for the app. */
         JSONconfig = JSON.parse(JSONconfig);
 
         // Check if the site is being requested from a mobile or desktop device. then
@@ -48,9 +48,9 @@ function init() {
 
         aG.map.on("load", function() {
             /* Once the map is loaded, initialize the following map components,
-        check the url for parameters, register event handlers for the map,
-        stop the loading icon from displaying and disable keyboard navigation
-        for the ESRI api map. */
+            check the url for parameters, register event handlers for the map,
+            stop the loading icon from displaying and disable keyboard navigation
+            for the ESRI api map. */
             screenCoordinates();
             createScalebar();
             createContextMenu(JSONconfig.geometryService);

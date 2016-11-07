@@ -92,13 +92,16 @@ define([
         _printResult: function(result){
             var dev = navigator.userAgent;
             var ios = dev.toLowerCase().match(/(iphone|ipod|ipad)/);
-            // if (ios) {
-            //     var node = domConstruct.create("a");
-            //     node.attr("href", result.url);
-            // } else {
-                window.open(result.url, "_blank");
-                printWidget.set("spinner", "hide");
-            // }
+            var printableMap = window.open(result.url, "_blank");
+            if(!printableMap || printableMap.closed
+                 || typeof printableMap.closed=='undefined'
+                 || printableMap === null
+                 || typeof(printableMap) === undefined)
+                {
+                     alert('Please disable your pop-up blocker and export map again.');
+                }
+
+            printWidget.set("spinner", "hide");
         },
 
         _printError: function (error) {
