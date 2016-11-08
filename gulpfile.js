@@ -65,6 +65,7 @@ gulp.task('minmods', function(){
     are handled by the copyScripts task below. */
  return gulp.src(['./src/scripts/mesa/autocomplete.js'])
          .pipe(addsrc.append([
+             './src/scripts/mesa/base.js',
                 './src/scripts/mesa/basemapWidget.js',
                 './src/scripts/mesa/bookmarkWidget.js',
                 './src/scripts/mesa/changeTheme.js',
