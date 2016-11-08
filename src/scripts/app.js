@@ -51,7 +51,7 @@ function init() {
             for the ESRI api map. */
             createScalebar(aG.map);
             createContextMenu(aG.map, JSONconfig.geometryService);
-            createLegend(aG.map, aG.popup.domNode.id);
+            base.createLegend(aG.map, aG.popup.domNode.id);
             createHomeButton(aG.map);
             setEventHandlers(JSONconfig, aG.map, lmG.pLay, initialBasemap,
             aG.popup, aG.pTemp, lmG.roadLabels, base);

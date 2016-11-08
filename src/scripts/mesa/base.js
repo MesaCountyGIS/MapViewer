@@ -14,6 +14,7 @@ define([
 "dojo/on",
 "esri/dijit/PopupMobile",
 "esri/dijit/Popup",
+"esri/dijit/Legend"
 "dojo/has",
 "dojo/sniff",
 "dijit/registry",
@@ -23,9 +24,7 @@ define([
 "mesa/homeButton",
 "mesa/contextMenuWidget",
 "esri/dijit/Scalebar",
-"esri/dijit/Legend",
 "esri/urlUtils",
-"esri/dijit/Legend",
 "dojo/_base/array",
 "dojo/dom-class",
 "dojo/dom-construct",
@@ -61,6 +60,7 @@ define([
     on,
     PopupMobile,
     Popup,
+    Legend,
     has,
     sniff,
     registry,
@@ -70,9 +70,7 @@ define([
     homeButton,
     contextMenuWidget,
     Scalebar,
-    Legend,
     urlUtils,
-    Legend,
     array,
     domClass,
     domConstruct,
@@ -270,17 +268,16 @@ createLegend: function(map, device) {
         ]
     });
 
-    require(["esri/dijit/Legend"], function(Legend) {
-        lmG.legend = new Legend({
-            map: map,
-            layerInfos: lmG.legendLayers
-        }, "legendDiv");
-        lmG.legend.startup();
-    });
+    lmG.legend = new Legend({
+        map: map,
+        layerInfos: lmG.legendLayers
+    }, "legendDiv");
+    lmG.legend.startup();
 
     if (device === 'popup') {
-        toggleDialog("legendDialog");
-        makeBoxesMoveable();
+        console.log(this)
+        this.toggleDialog("legendDialog");
+        this.makeBoxesMoveable();
     }
 },
 
