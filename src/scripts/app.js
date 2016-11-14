@@ -1,4 +1,3 @@
-
 init(); // initialize the map viewer
 
 function init() {
@@ -7,8 +6,9 @@ function init() {
     lmG = {}; //Global Layer Management object
     lmG.legendLayers = [];
     require([
-        "esri/config", "mesa/base", "dojo/text!./scripts/_config/config.json" //fix bug requiring toolsWidget to be loaded
-    ], function(esriConfig, base, JSONconfig) {
+        "esri/config", "dojo/text!./scripts/_config/config.json", "mesa/toolsWidget" //fix bug requiring toolsWidget to be loaded
+    ], function(esriConfig, JSONconfig) {
+
         /* The JSON configuration file is located in the scripts/_config directory.
         It contains urls for geometryService, print service and proxy. It also
         contains the imageServer url and a list of image service names and ids used
@@ -54,20 +54,22 @@ function init() {
             createLegend(aG.map, aG.popup.domNode.id);
             createHomeButton(aG.map);
             setEventHandlers(JSONconfig, aG.map, lmG.pLay, initialBasemap,
-            lmG.roadLabels, aG.popup, aG.pTemp);
+            aG.popup, aG.pTemp, lmG.roadLabels);
             document.getElementById("loading").style.display = "none";
             aG.map.disableKeyboardNavigation();
             /*watches for variables in the url then runs urlMapType
             if it finds one*/
             if ((location.href).indexOf("?") > -1) {
-                urlMapType(location.href, aG.map, aG.popup, aG.pTemp);
+                urlMapType(location.href, aG.map);
+            } else {
+                return undefined;
             }
         });
     }); //end require
 } //end of init function
 
 function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
-    roadLabelsObject, popupObject, popupTemplateObject) {
+    lmG.roadLabels, popupObject, popupTemplateObject) {
     require([
         "dojo/on", "dojo/query", "dojo/dom", "dojo/touch"
     ], function(on, query, dom, touch) {
@@ -106,23 +108,23 @@ function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
             showShare("socialShare");
         });
         on(query('#layerSelect ul li'), touch.release, function(e){
-            themeClick(e, this, map, popupObject, popupTemplateObject);
+            themeClick(e, map, popupObject, popupTemplateObject);
         });
         on(query('.plus'), touch.release, clickPlus);
         on(query('.baselyrs'), "click", function(e){
-            baseLayersSwitch(e, parcelLayerObject, initialBasemap, roadLabelsObject)
+            baseLayersSwitch(e, parcelLayerObject, initialBasemap,lmG.roadLabels)
         });
         // on(query(".collapsedPanel"), touch.release, animatePanel);
         on(dom.byId("hidePanel"), "click", animatePanel);
-        on(dom.byId("locate"), touch.release, function(){
-            showLocator(map, JSONconfig.geometryService)
-        });
+        on(dom.byId("locate"), touch.release, showLocator);
         on(query(".submen li, .submenu li"), touch.release, function() {
             var classname = "." + this.parentNode.className;
             query(classname)[0].style.display = "none";
         });
         on(query("#combobox, #mainfish"), "mouseenter, mouseleave, touchstart", function(e) {
-            var display = e.type === "mouseleave"? "none": "block";
+            var display = e.type === "mouseleave"
+                ? "none"
+                : "block";
             var classname = "." + query("#" + this.id + " ul")[0].className;
             query(classname)[0].style.display = display;
         });
@@ -134,11 +136,11 @@ function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
             require(["dijit/registry"], function(registry) {
                 if (registry.byId("searchFieldDialog"))
                     (registry.byId("searchFieldDialog").destroyRecursive());
-                searchBy(map, type, undefined, "desktop");
+                searchBy(type, undefined, "desktop");
             }); //End require
         });
     });
-} // End setEventHandlers function
+}
 
 function createTiledMapServiceLayer(url, id) {
     var tile;
@@ -553,16 +555,16 @@ function showMeasure(map, parcelLayer, geometryService) {
     });
 }
 
-function showLocator(map, geometryService) {
+function showLocator() {
     require([
         "mesa/locatorWidget", "dojo/dom", "dojo/on", "dijit/registry"
     ], function(locatorWidget, dom, on, registry) {
-        var locate = new locatorWidget({mapRef: map, gsvc: geometryService, device: "desktop"});
+        var locate = new locatorWidget({mapRef: aG.map, gsvc: JSONconfig.geometryService, device: "desktop"});
         locate.startup();
     });
 }
 
-function searchBy(map, type, option, device, turnOff) {
+function searchBy(type, option, device, turnOff) {
     var thisFunctionParam = "noPoint";
     var thisTargetGeometry = "polygon";
     var thisOutFields = "LOCATION";
@@ -617,7 +619,7 @@ function searchBy(map, type, option, device, turnOff) {
 
         new searchCompleteWidget({
             device: device,
-            mapRef: map,
+            mapRef: aG.map,
             type: thisType,
             service: thisService,
             where: thisOutFields + " LIKE",
@@ -720,7 +722,7 @@ function clickPlus(e) {
     });
 }
 
-function urlMapType(url, map, infowindow, popupTemplate) {
+function urlMapType(url, map) {
     /*urlMapType (and its main sub-function parseParameters) is used to parse
     GET requests to the viewer api.
     The api allows control of the map by setting the map theme,
@@ -781,16 +783,16 @@ function urlMapType(url, map, infowindow, popupTemplate) {
                     : '';
                 var params = [maptype, title, layerid, value, checkboxid];
                 coordinates !== ''
-                    ? searchBy(map, "Latitude/Longitude", coordinates)
+                    ? searchBy("Latitude/Longitude", coordinates)
                     : null;
                 field !== ''
                     ? runQuery(layerid, field, value)
                     : null;
                 accountNumber !== ''
-                    ? (searchBy(map, "account", accountNumber))
+                    ? (searchBy("account", accountNumber))
                     : null;
                 parcelNumber !== ''
-                    ? (searchBy(map, "parcelNo", parcelNumber))
+                    ? (searchBy("parcelNo", parcelNumber))
                     : null;
                 extent !== ''
                     ? map.setExtent(extentZoom(extent))
@@ -799,7 +801,8 @@ function urlMapType(url, map, infowindow, popupTemplate) {
 
             function maptypeFound(type) {
                 getTemplate(type);
-                animatePanel("open");
+                animatePanel("open")
+                // setTimeout(function(){animatePanel("open")}, 400);
                 //After loading the theme, return the theme title so it can
                 //be displayed on the map.
                 return type;
@@ -822,22 +825,22 @@ function urlMapType(url, map, infowindow, popupTemplate) {
             }
             return params;
         }
+
         if (urlParams[1] !== 'Select Map') {
             require([
                 "mesa/changeTheme", "dojo/dom"
             ], function(changeTheme, dom) {
-                setTimeout(function() {
                 new changeTheme({
                     newLayer: urlParams[0],
                     layerTitle: urlParams[1],
                     option: urlParams[2],
                     pVal: urlParams[3],
                     mapRef: map,
-                    infoWindowRef: infowindow,
-                    infoTemplateRef: popupTemplate,
+                    infoWindowRef: aG.popup,
+                    infoTemplateRef: aG.pTemp,
                     checkboxid: urlParams[4]
                 });
-}, 200);
+
             });
         } else {
             return
@@ -854,14 +857,14 @@ function getTemplate(newLayerName) {
     });
 }
 
-function themeClick(e, node, map, popupObject, popupTemplateObject) {
+function themeClick(e, map, popupObject, popupTemplateObject) {
     e.stopPropagation();
-    var newLayer = node.attributes['data-value'].nodeValue;
+    var newLayer = this.attributes['data-value'].nodeValue;
     getTemplate(newLayer);
     if (newLayer !== 'epom' && newLayer.length > 0) {
-        var layerTitle = node.getElementsByTagName('a')[0].innerHTML;
-        var option = node.attributes['data-opt']
-            ? node.attributes['data-opt'].nodeValue: null;
+        var layerTitle = this.getElementsByTagName('a')[0].innerHTML;
+        var option = this.attributes['data-opt']
+            ? this.attributes['data-opt'].nodeValue: null;
         setTimeout(function() {
             require(["mesa/changeTheme"], function(changeTheme) {
                 new changeTheme({
