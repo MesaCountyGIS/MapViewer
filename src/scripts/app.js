@@ -801,7 +801,7 @@ function urlMapType(url, map) {
 
             function maptypeFound(type) {
                 getTemplate(type);
-                animatePanel("open")
+                // animatePanel("open")
                 // setTimeout(function(){animatePanel("open")}, 400);
                 //After loading the theme, return the theme title so it can
                 //be displayed on the map.
@@ -839,7 +839,8 @@ function urlMapType(url, map) {
                     infoWindowRef: aG.popup,
                     infoTemplateRef: aG.pTemp,
                     checkboxid: urlParams[4]
-                });
+                })
+                .then(animatePanel("open"));
 
             });
         } else {
@@ -892,6 +893,7 @@ function animatePanel(e) {
             dom.byId("hidePanel").innerHTML = "hide";
             dom.byId("noControl").style.display = "block";
             domClass.replace(dom.byId("rightPanel"), "expandedPanel", "collapsedPanel");
+            domClass.add("noControl", "someControl");
         } else {
             var parentcls = domAttr.get(e.target.parentNode, "class");
             if (query(".select").every(function(node) {
