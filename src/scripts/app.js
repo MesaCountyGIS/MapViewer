@@ -108,7 +108,7 @@ function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
             showShare("socialShare");
         });
         on(query('#layerSelect ul li'), touch.release, function(e){
-            themeClick(e, map, popupObject, popupTemplateObject);
+            themeClick(e, this, map, popupObject, popupTemplateObject);
         });
         on(query('.plus'), touch.release, clickPlus);
         on(query('.baselyrs'), "click", function(e){
@@ -857,14 +857,14 @@ function getTemplate(newLayerName) {
     });
 }
 
-function themeClick(e, map, popupObject, popupTemplateObject) {
+function themeClick(e, self, map, popupObject, popupTemplateObject) {
     e.stopPropagation();
-    var newLayer = this.attributes['data-value'].nodeValue;
+    var newLayer = self.attributes['data-value'].nodeValue;
     getTemplate(newLayer);
     if (newLayer !== 'epom' && newLayer.length > 0) {
-        var layerTitle = this.getElementsByTagName('a')[0].innerHTML;
-        var option = this.attributes['data-opt']
-            ? this.attributes['data-opt'].nodeValue: null;
+        var layerTitle = self.getElementsByTagName('a')[0].innerHTML;
+        var option = self.attributes['data-opt']
+            ? self.attributes['data-opt'].nodeValue: null;
         setTimeout(function() {
             require(["mesa/changeTheme"], function(changeTheme) {
                 new changeTheme({

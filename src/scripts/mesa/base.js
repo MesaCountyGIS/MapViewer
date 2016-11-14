@@ -14,7 +14,7 @@ define([
 "dojo/on",
 "esri/dijit/PopupMobile",
 "esri/dijit/Popup",
-"esri/dijit/Legend"
+"esri/dijit/Legend",
 "dojo/has",
 "dojo/sniff",
 "dijit/registry",

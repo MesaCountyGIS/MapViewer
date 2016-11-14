@@ -29,7 +29,6 @@ define([
                 pVal = changeThemeWidget.pVal;
                 checkboxids = changeThemeWidget.checkboxid;
                 control = dom.byId(layer + "Select") ? (layer + "Select") : "noControl";
-                                console.log('changethemecontrol', control)
                 layerConstructor = {
                     "mapFolder": 'http://mcmap2.mesacounty.us/arcgis/rest/services/maps/',
                     "serverType": '/MapServer',
