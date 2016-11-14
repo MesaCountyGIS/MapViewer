@@ -54,7 +54,7 @@ function init() {
             createLegend(aG.map, aG.popup.domNode.id);
             createHomeButton(aG.map);
             setEventHandlers(JSONconfig, aG.map, lmG.pLay, initialBasemap,
-            aG.popup, aG.pTemp, lmG.roadLabels);
+            lmG.roadLabels, aG.popup, aG.pTemp);
             document.getElementById("loading").style.display = "none";
             aG.map.disableKeyboardNavigation();
             /*watches for variables in the url then runs urlMapType
@@ -69,7 +69,7 @@ function init() {
 } //end of init function
 
 function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
-    lmG.roadLabels, popupObject, popupTemplateObject) {
+    roadLabels, popupObject, popupTemplateObject) {
     require([
         "dojo/on", "dojo/query", "dojo/dom", "dojo/touch"
     ], function(on, query, dom, touch) {
@@ -112,7 +112,7 @@ function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
         });
         on(query('.plus'), touch.release, clickPlus);
         on(query('.baselyrs'), "click", function(e){
-            baseLayersSwitch(e, parcelLayerObject, initialBasemap,lmG.roadLabels)
+            baseLayersSwitch(e, parcelLayerObject, initialBasemap, roadLabels)
         });
         // on(query(".collapsedPanel"), touch.release, animatePanel);
         on(dom.byId("hidePanel"), "click", animatePanel);
