@@ -968,9 +968,7 @@ define([
                     }
                 };
 
-                changeThemeWidget.resetMap();
-                changeThemeWidget.addFunction(layer, themeLayers[layer].popupFunc, themeLayers[layer].service, themeLayers);
-                changeThemeWidget.loadTheme(themeLayers); //call loadTheme for the first time
+
                 if (checkboxids) {
                     // if boxes are checked through url parameters
                     changeThemeWidget.autoCheckBoxes(checkboxids);
@@ -980,6 +978,9 @@ define([
                     changeThemeWidget.changeBox();
                     changeThemeWidget.manualCheckBoxes(e.currentTarget.id);
                 });
+                changeThemeWidget.resetMap();
+                changeThemeWidget.addFunction(layer, themeLayers[layer].popupFunc, themeLayers[layer].service, themeLayers);
+                changeThemeWidget.loadTheme(themeLayers); //call loadTheme for the first time
             },
 
             then: function() {
@@ -987,6 +988,7 @@ define([
             },
 
             autoCheckBoxes: function(boxes) {
+                console.log('auto', boxes)
                 for (var i = 0; i < boxes.length; i++) {
                     checkBox(boxes[i]);
                 }
@@ -998,6 +1000,7 @@ define([
             },
 
             manualCheckBoxes: function(box) {
+                console.log('manual', box)
                 dom.byId(box).checked = dom.byId(box).checked ? true : false;
             },
 

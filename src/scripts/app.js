@@ -801,7 +801,7 @@ function urlMapType(url, map) {
 
             function maptypeFound(type) {
                 getTemplate(type);
-                // animatePanel("open")
+                animatePanel("open");
                 // setTimeout(function(){animatePanel("open")}, 400);
                 //After loading the theme, return the theme title so it can
                 //be displayed on the map.
@@ -839,8 +839,7 @@ function urlMapType(url, map) {
                     infoWindowRef: aG.popup,
                     infoTemplateRef: aG.pTemp,
                     checkboxid: urlParams[4]
-                })
-                .then(animatePanel("open"));
+                });
 
             });
         } else {
