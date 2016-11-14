@@ -29,6 +29,7 @@ define([
                 pVal = changeThemeWidget.pVal;
                 checkboxids = changeThemeWidget.checkboxid;
                 control = dom.byId(layer + "Select") ? (layer + "Select") : "noControl";
+                                console.log('changethemecontrol', control)
                 layerConstructor = {
                     "mapFolder": 'http://mcmap2.mesacounty.us/arcgis/rest/services/maps/',
                     "serverType": '/MapServer',
@@ -968,6 +969,9 @@ define([
                     }
                 };
 
+                changeThemeWidget.resetMap();
+                changeThemeWidget.addFunction(layer, themeLayers[layer].popupFunc, themeLayers[layer].service, themeLayers);
+                changeThemeWidget.loadTheme(themeLayers); //call loadTheme for the first time
                 if (checkboxids) {
                     // if boxes are checked through url parameters
                     changeThemeWidget.autoCheckBoxes(checkboxids);
@@ -977,9 +981,6 @@ define([
                     changeThemeWidget.changeBox();
                     changeThemeWidget.manualCheckBoxes(e.currentTarget.id);
                 });
-                changeThemeWidget.resetMap();
-                changeThemeWidget.addFunction(layer, themeLayers[layer].popupFunc, themeLayers[layer].service, themeLayers);
-                changeThemeWidget.loadTheme(themeLayers); //call loadTheme for the first time
             },
 
             then: function() {

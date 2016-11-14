@@ -17,26 +17,26 @@ function init() {
 
         // Check if the site is being requested from a mobile or desktop device. then
         // set the map's popup accordingly.
-        aG.popup = base.checkForMobile() === 1? base.setPopup("mobile"): base.setPopup("static");
+        aG.popup = checkForMobile() === 1? setPopup("mobile"): setPopup("static");
 
         // Set esriConfig variables
         esriConfig.defaults.io.proxyUrl = JSONconfig.proxyURL;
         esriConfig.defaults.io.alwaysUseProxy = false;
-        esriConfig.defaults.geometryService = base.createGeometryService(JSONconfig.geometryService);
+        esriConfig.defaults.geometryService = createGeometryService(JSONconfig.geometryService);
 
         document.dojoClick = false;
         // Set the spatial reference to 102206 for UTM zone 12
-        var utm12 = base.setSpatialRef(102206);
+        var utm12 = setSpatialRef(102206);
         // See the setInitialExtent function for actual extent bounds
-        var initExtent = base.setInitialExtent(utm12);
+        var initExtent = setInitialExtent(utm12);
         // Create an ESRI map component
-        aG.map = base.createMap(initExtent);
+        aG.map = createMap(initExtent);
         // Initialize the popup for when parcels are clicked on
-        aG.pTemp = base.createPopupTemplate();
+        aG.pTemp = createPopupTemplate();
         // Create 3 layers to be initially added to the map
-        lmG.pLay = base.createFeatureLayer("http://mcmap2.mesacounty.us/arcgis/rest/services/maps/ParcelOnly4Query/MapServer/0");
-        lmG.roadLabels = base.createTiledMapServiceLayer("http://mcmap2.mesacounty.us/arcgis/rest/services/maps/parcel_road_labels/MapServer", "roadLabels");
-        lmG.vectorBasemap = base.createTiledMapServiceLayer("http://mcmap2.mesacounty.us/arcgis/rest/services/maps/vector_basemap/MapServer", "vectorBasemap");
+        lmG.pLay = createFeatureLayer("http://mcmap2.mesacounty.us/arcgis/rest/services/maps/ParcelOnly4Query/MapServer/0");
+        lmG.roadLabels = createTiledMapServiceLayer("http://mcmap2.mesacounty.us/arcgis/rest/services/maps/parcel_road_labels/MapServer", "roadLabels");
+        lmG.vectorBasemap = createTiledMapServiceLayer("http://mcmap2.mesacounty.us/arcgis/rest/services/maps/vector_basemap/MapServer", "vectorBasemap");
         // Set a reference to the initial basemap. This is passed to the
         // basemapWidget module where it can be changed.
         var initialBasemap = lmG.vectorBasemap;
@@ -54,31 +54,29 @@ function init() {
             createLegend(aG.map, aG.popup.domNode.id);
             createHomeButton(aG.map);
             setEventHandlers(JSONconfig, aG.map, lmG.pLay, initialBasemap,
-            aG.popup, aG.pTemp, lmG.roadLabels, base);
+            lmG.roadLabels, aG.popup, aG.pTemp);
             document.getElementById("loading").style.display = "none";
             aG.map.disableKeyboardNavigation();
             /*watches for variables in the url then runs urlMapType
             if it finds one*/
             if ((location.href).indexOf("?") > -1) {
-                urlMapType(location.href, aG.map);
-            } else {
-                return undefined;
+                urlMapType(location.href, aG.map, aG.popup, aG.pTemp);
             }
         });
     }); //end require
 } //end of init function
 
 function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
-    roadLabelsObject, popupObject, popupTemplateObject, base) {
+    roadLabelsObject, popupObject, popupTemplateObject) {
     require([
         "dojo/on", "dojo/query", "dojo/dom", "dojo/touch"
     ], function(on, query, dom, touch) {
-        window.addEventListener("orientationchange", base.orientationChanged, false);
+        window.addEventListener("orientationchange", orientationChanged, false);
         map.on("mouse-move", function(e){
             showCoords(e, "screenCoordinatesUTM");
         });
         on(dom.byId("toolSelect"), "click", function() {
-            base.runToolsView(JSONconfig.geometryService, JSONconfig.printURL, map);
+            runToolsView(JSONconfig.geometryService, JSONconfig.printURL, map);
         });
         on(dom.byId("help"), touch.release, function(e) {
             showHelp(e, JSONconfig.printURL);
@@ -105,10 +103,10 @@ function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
             showBasemap(map, JSONconfig.imagesList, initialBasemap);
         });
         on(query(".shareClass, #sharebutton"), touch.release, function(){
-            base.showShare("socialShare");
+            showShare("socialShare");
         });
         on(query('#layerSelect ul li'), touch.release, function(e){
-            themeClick(e, map, popupObject, popupTemplateObject);
+            themeClick(e, this, map, popupObject, popupTemplateObject);
         });
         on(query('.plus'), touch.release, clickPlus);
         on(query('.baselyrs'), "click", function(e){
@@ -142,163 +140,163 @@ function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
     });
 } // End setEventHandlers function
 
-// function createTiledMapServiceLayer(url, id) {
-//     var tile;
-//     require(["esri/layers/ArcGISTiledMapServiceLayer"], function(ArcGISTiledMapServiceLayer) {
-//         tile = new ArcGISTiledMapServiceLayer(url, {id: id});
-//     });
-//     return tile;
-// }
+function createTiledMapServiceLayer(url, id) {
+    var tile;
+    require(["esri/layers/ArcGISTiledMapServiceLayer"], function(ArcGISTiledMapServiceLayer) {
+        tile = new ArcGISTiledMapServiceLayer(url, {id: id});
+    });
+    return tile;
+}
 
-// function createFeatureLayer(url) {
-//     var service;
-//     require(["esri/layers/FeatureLayer"], function(FeatureLayer) {
-//         service = new FeatureLayer(url, {
-//             mode: FeatureLayer.MODE_ONDEMAND,
-//             infoTemplate: aG.pTemp,
-//             outFields: [
-//                 "LOCATION",
-//                 "ACCOUNTNO",
-//                 "OWNER",
-//                 "JTOWNER",
-//                 "SDATE",
-//                 "PARCEL_NUM",
-//                 "ZONING",
-//                 "Acres",
-//                 "JURISDICTION"
-//             ]
-//         });
-//     });
-//     return service;
-// }
+function createFeatureLayer(url) {
+    var service;
+    require(["esri/layers/FeatureLayer"], function(FeatureLayer) {
+        service = new FeatureLayer(url, {
+            mode: FeatureLayer.MODE_ONDEMAND,
+            infoTemplate: aG.pTemp,
+            outFields: [
+                "LOCATION",
+                "ACCOUNTNO",
+                "OWNER",
+                "JTOWNER",
+                "SDATE",
+                "PARCEL_NUM",
+                "ZONING",
+                "Acres",
+                "JURISDICTION"
+            ]
+        });
+    });
+    return service;
+}
 
-// function createGeometryService(serviceURL) {
-//     var service;
-//     require(["esri/tasks/GeometryService"], function(GeometryService) {
-//         service = new GeometryService(serviceURL);
-//     });
-//     return service;
-// }
+function createGeometryService(serviceURL) {
+    var service;
+    require(["esri/tasks/GeometryService"], function(GeometryService) {
+        service = new GeometryService(serviceURL);
+    });
+    return service;
+}
 
-// function createPopupTemplate() {
-//     var temp;
-//     require(["esri/dijit/PopupTemplate"], function(PopupTemplate) {
-//         temp = new PopupTemplate({
-//             fieldInfos: [
-//                 {
-//                     fieldName: "Acres",
-//                     visible: true,
-//                     format: {
-//                         places: 2
-//                     }
-//                 }
-//             ],
-//             title: "<b>Parcel Information:</b>",
-//             description: "<b>Account number:</b>  <a href='http://emap.mesacounty.us/assessor_lookup/Assessor_Parcel_Report.aspx?Account={ACCOUNTNO}'" + "target='_blank'>{ACCOUNTNO}</a><br><b>Parcel Number:</b> {PARCEL_NUM}<br><b>Owner:</b>  {OWNER}<br><b>Joint Owner:</b>  {JTOWNER}<br><b>Address:</b>" + "{LOCATION}<br><b>Sale Date:</b>" + " {SDATE}<br>" + "<b>Zoning:</b> {ZONING}<br><b>Approximate Acres:</b> {Acres}<br><b>Jurisdiction: </b>{JURISDICTION}<br>" + "<div id='mapButtons'>" +
-//             //"<a title='Click to view parcel in Google Maps' class='maplink' target='_blank' href='http://maps.google.com/maps?t=h&q=http://emap.mesacounty.us/kmls?acct={ACCOUNTNO}'>Google Maps</a>" +
-//             "<a title='Click to view parcel in Google Earth' class='maplink' target='_blank' href='http://emap.mesacounty.us/kmls?acct={ACCOUNTNO}'>Google Earth</a>" + "<a title='Click to view parcel in Bing Maps' class='maplink' target='_blank' href='http://www.bing.com/maps/?mapurl=http://emap.mesacounty.us/kmls?acct={ACCOUNTNO}'>Bing Maps</a></div><br>"
-//         });
-//     });
-//     return temp;
-// }
+function createPopupTemplate() {
+    var temp;
+    require(["esri/dijit/PopupTemplate"], function(PopupTemplate) {
+        temp = new PopupTemplate({
+            fieldInfos: [
+                {
+                    fieldName: "Acres",
+                    visible: true,
+                    format: {
+                        places: 2
+                    }
+                }
+            ],
+            title: "<b>Parcel Information:</b>",
+            description: "<b>Account number:</b>  <a href='http://emap.mesacounty.us/assessor_lookup/Assessor_Parcel_Report.aspx?Account={ACCOUNTNO}'" + "target='_blank'>{ACCOUNTNO}</a><br><b>Parcel Number:</b> {PARCEL_NUM}<br><b>Owner:</b>  {OWNER}<br><b>Joint Owner:</b>  {JTOWNER}<br><b>Address:</b>" + "{LOCATION}<br><b>Sale Date:</b>" + " {SDATE}<br>" + "<b>Zoning:</b> {ZONING}<br><b>Approximate Acres:</b> {Acres}<br><b>Jurisdiction: </b>{JURISDICTION}<br>" + "<div id='mapButtons'>" +
+            //"<a title='Click to view parcel in Google Maps' class='maplink' target='_blank' href='http://maps.google.com/maps?t=h&q=http://emap.mesacounty.us/kmls?acct={ACCOUNTNO}'>Google Maps</a>" +
+            "<a title='Click to view parcel in Google Earth' class='maplink' target='_blank' href='http://emap.mesacounty.us/kmls?acct={ACCOUNTNO}'>Google Earth</a>" + "<a title='Click to view parcel in Bing Maps' class='maplink' target='_blank' href='http://www.bing.com/maps/?mapurl=http://emap.mesacounty.us/kmls?acct={ACCOUNTNO}'>Bing Maps</a></div><br>"
+        });
+    });
+    return temp;
+}
 
-// function createMap(initExtent) {
-//     var map;
-//     require(["esri/map"], function(Map) {
-//         map = new Map("map", {
-//             extent: initExtent,
-//             logo: false,
-//             infoWindow: aG.popup
-//         });
-//     });
-//     return map;
-// }
+function createMap(initExtent) {
+    var map;
+    require(["esri/map"], function(Map) {
+        map = new Map("map", {
+            extent: initExtent,
+            logo: false,
+            infoWindow: aG.popup
+        });
+    });
+    return map;
+}
 
-// function setInitialExtent(spatialRef) {
-//     var ext;
-//     require(["esri/geometry/Extent"], function(Extent) {
-//         ext = new Extent({"xmin": 685960, "ymin": 4316261, "xmax": 738288, "ymax": 4342506, "spatialReference": spatialRef});
-//     });
-//     return ext;
-// }
+function setInitialExtent(spatialRef) {
+    var ext;
+    require(["esri/geometry/Extent"], function(Extent) {
+        ext = new Extent({"xmin": 685960, "ymin": 4316261, "xmax": 738288, "ymax": 4342506, "spatialReference": spatialRef});
+    });
+    return ext;
+}
 
-// function setSpatialRef(wkid) {
-//     var ref;
-//     require(["esri/SpatialReference"], function(SpatialReference) {
-//         ref = new SpatialReference({wkid: wkid});
-//     });
-//     return ref;
-// }
+function setSpatialRef(wkid) {
+    var ref;
+    require(["esri/SpatialReference"], function(SpatialReference) {
+        ref = new SpatialReference({wkid: wkid});
+    });
+    return ref;
+}
 
-// function setPopup(type) {
-//     /* Set the popup type depending on whether the requesting device is
-//     mobile or desktop*/
-//     var pop;
-//     if (type === "mobile") {
-//         require(["dojo/dom", "esri/dijit/PopupMobile"], function(dom, PopupMobile) {
-//             pop = PopupMobile(null, dom.byId('popup'));
-//         }); //end require
-//     } else {
-//         require(["esri/dijit/Popup"], function(Popup) {
-//             pop = Popup({
-//                 titleInBody: false
-//             }, document.getElementById('popup'));
-//         }); //end else require
-//     }
-//     return pop;
-// }
+function setPopup(type) {
+    /* Set the popup type depending on whether the requesting device is
+    mobile or desktop*/
+    var pop;
+    if (type === "mobile") {
+        require(["dojo/dom", "esri/dijit/PopupMobile"], function(dom, PopupMobile) {
+            pop = PopupMobile(null, dom.byId('popup'));
+        }); //end require
+    } else {
+        require(["esri/dijit/Popup"], function(Popup) {
+            pop = Popup({
+                titleInBody: false
+            }, document.getElementById('popup'));
+        }); //end else require
+    }
+    return pop;
+}
 
-// function checkForMobile() {
-//     var isMobile;
-//     require([
-//         "dojo/has", "dojo/sniff"
-//     ], function(has, sniff) {
-//         has.add("mobile", function(global, document, anElement) {
-//             if (has("ie")) {
-//                 require(["libs/matchMedia"], function() {
-//                     return window.matchMedia("only screen and (max-width: 1024px)").matches && has("touch")
-//                         ? true: false;
-//                 });
-//             } else {
-//                 return window.matchMedia("only screen and (max-width: 1024px)").matches && has("touch")
-//                     ? true: false;
-//             }
-//         });
-//         isMobile = has('mobile')? 1: 0;
-//     }); //end require
-//     return isMobile;
-// };
+function checkForMobile() {
+    var isMobile;
+    require([
+        "dojo/has", "dojo/sniff"
+    ], function(has, sniff) {
+        has.add("mobile", function(global, document, anElement) {
+            if (has("ie")) {
+                require(["libs/matchMedia"], function() {
+                    return window.matchMedia("only screen and (max-width: 1024px)").matches && has("touch")
+                        ? true: false;
+                });
+            } else {
+                return window.matchMedia("only screen and (max-width: 1024px)").matches && has("touch")
+                    ? true: false;
+            }
+        });
+        isMobile = has('mobile')? 1: 0;
+    }); //end require
+    return isMobile;
+};
 
-// function runToolsView(geometryService, printURL, map) {
-//     require([
-//         "dijit/registry", "mesa/toolsWidget"
-//     ], function(registry, toolsWidget) {
-//         if (!(registry.byId("toolsView"))) {
-//             var tools = new toolsWidget({
-//                 geometryServiceURL: geometryService,
-//                 printURL: printURL,
-//                 mapRef: map
-//             }, "toolsView");
-//             tools.startup();
-//             query("#map_zoom_slider, #hidePanel, #rightPanel, .collapsedPanel").style("display", "none");
-//         } else {
-//             registry.byId("toolsView").domNode.style.display = "block";
-//             query("#map_zoom_slider, #hidePanel, #rightPanel, .collapsedPanel").style("display", "none");
-//         }
-//     }); //end require
-// }
+function runToolsView(geometryService, printURL, map) {
+    require([
+        "dijit/registry", "mesa/toolsWidget"
+    ], function(registry, toolsWidget) {
+        if (!(registry.byId("toolsView"))) {
+            var tools = new toolsWidget({
+                geometryServiceURL: geometryService,
+                printURL: printURL,
+                mapRef: map
+            }, "toolsView");
+            tools.startup();
+            query("#map_zoom_slider, #hidePanel, #rightPanel, .collapsedPanel").style("display", "none");
+        } else {
+            registry.byId("toolsView").domNode.style.display = "block";
+            query("#map_zoom_slider, #hidePanel, #rightPanel, .collapsedPanel").style("display", "none");
+        }
+    }); //end require
+}
 
-// function orientationChanged() {
-//     require(["dojo/query"], function(query) {
-//         query(".expandedPanel")[0].style.display = "none";
-//     });
-// }
+function orientationChanged() {
+    require(["dojo/query"], function(query) {
+        query(".expandedPanel")[0].style.display = "none";
+    });
+}
 
-// function showShare(id) {
-//     //Toggle the social sharing tools UI
-//         document.getElementById(id).style.display = document.getElementById(id).style.display === "block"
-//             ? "none": "block";
-// }
+function showShare(id) {
+    //Toggle the social sharing tools UI
+        document.getElementById(id).style.display = document.getElementById(id).style.display === "block"
+            ? "none": "block";
+}
 
 function makeBoxesMoveable() {
     //Make dialog boxes moveable
@@ -722,7 +720,7 @@ function clickPlus(e) {
     });
 }
 
-function urlMapType(url, map) {
+function urlMapType(url, map, infowindow, popupTemplate) {
     /*urlMapType (and its main sub-function parseParameters) is used to parse
     GET requests to the viewer api.
     The api allows control of the map by setting the map theme,
@@ -801,8 +799,7 @@ function urlMapType(url, map) {
 
             function maptypeFound(type) {
                 getTemplate(type);
-                animatePanel("open")
-                // setTimeout(function(){animatePanel("open")}, 400);
+                animatePanel("open");
                 //After loading the theme, return the theme title so it can
                 //be displayed on the map.
                 return type;
@@ -825,22 +822,22 @@ function urlMapType(url, map) {
             }
             return params;
         }
-
         if (urlParams[1] !== 'Select Map') {
             require([
                 "mesa/changeTheme", "dojo/dom"
             ], function(changeTheme, dom) {
+                setTimeout(function() {
                 new changeTheme({
                     newLayer: urlParams[0],
                     layerTitle: urlParams[1],
                     option: urlParams[2],
                     pVal: urlParams[3],
                     mapRef: map,
-                    infoWindowRef: aG.popup,
-                    infoTemplateRef: aG.pTemp,
+                    infoWindowRef: infowindow,
+                    infoTemplateRef: popupTemplate,
                     checkboxid: urlParams[4]
                 });
-
+}, 200);
             });
         } else {
             return
@@ -857,14 +854,14 @@ function getTemplate(newLayerName) {
     });
 }
 
-function themeClick(e, map, popupObject, popupTemplateObject) {
+function themeClick(e, node, map, popupObject, popupTemplateObject) {
     e.stopPropagation();
-    var newLayer = this.attributes['data-value'].nodeValue;
+    var newLayer = node.attributes['data-value'].nodeValue;
     getTemplate(newLayer);
     if (newLayer !== 'epom' && newLayer.length > 0) {
-        var layerTitle = this.getElementsByTagName('a')[0].innerHTML;
-        var option = this.attributes['data-opt']
-            ? this.attributes['data-opt'].nodeValue: null;
+        var layerTitle = node.getElementsByTagName('a')[0].innerHTML;
+        var option = node.attributes['data-opt']
+            ? node.attributes['data-opt'].nodeValue: null;
         setTimeout(function() {
             require(["mesa/changeTheme"], function(changeTheme) {
                 new changeTheme({
