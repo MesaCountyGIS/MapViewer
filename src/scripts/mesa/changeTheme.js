@@ -988,7 +988,6 @@ define([
             },
 
             autoCheckBoxes: function(boxes) {
-                console.log('auto', boxes)
                 for (var i = 0; i < boxes.length; i++) {
                     checkBox(boxes[i]);
                 }
@@ -1000,7 +999,6 @@ define([
             },
 
             manualCheckBoxes: function(box) {
-                console.log('manual', box)
                 dom.byId(box).checked = dom.byId(box).checked ? true : false;
             },
 

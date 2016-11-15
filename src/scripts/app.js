@@ -84,13 +84,13 @@ function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
             showHelp(e, JSONconfig.printURL);
         });
         on(dom.byId("shareMap"), touch.release, function(){
-            showShareForm(map)
+            showShareForm(map);
         });
         on(query("#DTLegend, #legendDialog > .dialogHeader > .dialogCloser"), touch.release, function() {
             toggleDialog("legendDialog");
         });
         on(query("#DTprint"), touch.release, function() {
-            showPrinter(map, JSONconfig.printURL)
+            showPrinter(map, JSONconfig.printURL);
         });
         on(query("#DTbookmarks"), touch.release, function(){
             showBookmarks(map);
@@ -99,7 +99,7 @@ function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
             showQuery(map, JSONconfig.geometryService);
         });
         on(query("#DTmeasure"), touch.release, function() {
-            showMeasure(map, parcelLayerObject, JSONconfig.geometryService)
+            showMeasure(map, parcelLayerObject, JSONconfig.geometryService);
         });
         on(query("#DTbasemap,#IPbasemap"), touch.release, function() {
             showBasemap(map, JSONconfig.imagesList, initialBasemap);
@@ -112,7 +112,7 @@ function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
         });
         on(query('.plus'), touch.release, clickPlus);
         on(query('.baselyrs'), "click", function(e){
-            baseLayersSwitch(e, parcelLayerObject, initialBasemap, roadLabels)
+            baseLayersSwitch(e, parcelLayerObject, initialBasemap, roadLabels);
         });
         // on(query(".collapsedPanel"), touch.release, animatePanel);
         on(dom.byId("hidePanel"), "click", animatePanel);
@@ -267,7 +267,7 @@ function checkForMobile() {
         isMobile = has('mobile')? 1: 0;
     }); //end require
     return isMobile;
-};
+}
 
 function runToolsView(geometryService, printURL, map) {
     require([
@@ -394,7 +394,7 @@ function toggleDialog(dialogId) { //fires on click of #DTLegend and #IPLegend - 
     ], function(dom, domClass) {
         if (domClass.contains(dom.byId("legendDialog"), "displayNo")) {
             dom.byId("legendDialog").style.display = "block";
-            (domClass.remove(dom.byId("legendDialog"), "displayNo"))
+            (domClass.remove(dom.byId("legendDialog"), "displayNo"));
         } else {
             dom.byId("legendDialog").style.display = "none";
             (domClass.add(dom.byId("legendDialog"), "displayNo"));
@@ -654,6 +654,7 @@ function extentZoom(extentObject) {
             ymaxi = parseInt(ext[3]);
         viewExtent = new Extent({"xmin": xmini, "ymin": ymini, "xmax": xmaxi, "ymax": ymaxi, "spatialReference": utm12});
     });
+    console.log(viewExtent)
     return viewExtent;
 }
 
@@ -746,57 +747,58 @@ function urlMapType(url, map) {
                 //and open the theme's layer panel.
                 var maptype = queryObject.maptype
                     ? maptypeFound(queryObject.maptype.toLowerCase())
-                    : '';
+                    : undefined;
 
                 var title = queryObject.maptype
-                    ? createTitle(queryObject.maptype)
+                    ? createTitle(maptype)
                     : 'Select Map';
                 function createTitle(map_type) {
                     return query("#layerSelect ul li[data-value='" + map_type + "']").children('a').innerHTML()
                 }
                 var layerid = queryObject.layerid
                     ? queryObject.layerid
-                    : '';
+                    : undefined;
                 var checkboxid = queryObject.cbxid
                     ? (queryObject.cbxid).toLowerCase().split(",")
-                    : '';
+                    : undefined;
                 var field = queryObject.field
                     ? String(queryObject.field).toUpperCase()
-                    : '';
+                    : undefined;
                 var value = queryObject.value
                     ? queryObject.value
-                    : '';
+                    : undefined;
                 var service = queryObject.service
                     ? queryObject.service
-                    : '';
+                    : undefined;
                 var coordinates = queryObject.latlon
                     ? queryObject.latlon
-                    : '';
+                    : undefined;
                 var accountNumber = queryObject.ACCOUNTNO
                     ? queryObject.ACCOUNTNO.toUpperCase()
-                    : '';
+                    : undefined;
                 var parcelNumber = queryObject.PARCEL_NUM
                     ? queryObject.PARCEL_NUM.replace(/-/g, "")
-                    : '';
+                    : undefined;
                 var extent = queryObject.EXTENT
                     ? queryObject.EXTENT.toUpperCase()
-                    : '';
+                    : undefined;
                 var params = [maptype, title, layerid, value, checkboxid];
-                coordinates !== ''
-                    ? searchBy("Latitude/Longitude", coordinates)
-                    : null;
-                field !== ''
-                    ? runQuery(layerid, field, value)
-                    : null;
-                accountNumber !== ''
-                    ? (searchBy("account", accountNumber))
-                    : null;
-                parcelNumber !== ''
-                    ? (searchBy("parcelNo", parcelNumber))
-                    : null;
-                extent !== ''
-                    ? map.setExtent(extentZoom(extent))
-                    : null;
+
+                if(coordinates !== undefined){
+                    searchBy("Latitude/Longitude", coordinates);
+                }
+                if(field !== undefined){
+                    runQuery(layerid, field, value);
+                }
+                if(accountNumber !== undefined){
+                    searchBy("account", accountNumber);
+                }
+                if(parcelNumber !== undefined){
+                    searchBy("parcelNo", parcelNumber);
+                }
+                if(extent !== undefined){
+                    map.setExtent(extentZoom(extent));
+                }
             }
 
             function maptypeFound(type) {
