@@ -50,11 +50,6 @@ define([
                 measure.startup();
         },
 
-        'Test enableCheck function': function() {
-            console.log("EnableCheck() should return 'inline'. During the test it returned: ", measure.enableCheck())
-            assert.deepEqual(measure.enableCheck(), "inline", 'The return of enableCheck() should equal the string "inline".');
-        },
-
         'Test _createAreaText function': function() {
             console.log("_createAreaText() should return 'Area: 4800.339 acres'. During the test it returned: ", measure._createAreaText(res, outPolyArea))
             assert.deepEqual(measure._createAreaText(res, outPolyArea), 'Area: 4800.339 acres', 'The return of _createAreaText() should equal the string "Area: 4800.339 acres".');
@@ -71,8 +66,8 @@ define([
         },
 
         'Test enableCheck function': function() {
-            console.log("enableCheck() should return 'Perimeter: 60981.025 feet'. During the test it returned: ", measure._createPerimText(res, outPolyLength))
-            assert.deepEqual(measure._createPerimText(res, outPolyLength), 'Perimeter: 60981.025 feet', 'The return of _createPerimText() should equal the string "Perimeter: 60981.025 feet".');
+            console.log("enableCheck() should return 'inline' if it receives true as a parameter. During the test it returned: ", measure.enableCheck(true))
+            assert.deepEqual(measure.enableCheck(true), 'inline', 'The return of enableCheck(true) should equal inline.');
         }
 
 

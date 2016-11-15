@@ -92,8 +92,7 @@ define([
                 // domStyle.set(dom.byId("measureToMap"), 'display', "block");
                 // domStyle.set(dom.byId("measureToTools"), 'display', "block");
             }
-
-            measureWidget.enableCheck();
+            measureWidget.enableCheck(dom.byId("measureYes").checked);
 
 
             //dojo.keys.copyKey maps to CTRL on windows and Cmd on Mac.
@@ -107,6 +106,10 @@ define([
 
             on(measureWidget.measureCloser, touch.release, function(){
                 measureWidget.closeClick();
+            });
+
+            on(dom.byId("measureYes"), "change", function(){
+                measureWidget.enableCheck(dom.byId("measureYes").checked);
             });
 
             on(dom.byId("uomPointBox"), "change", function () {
@@ -219,18 +222,18 @@ define([
             ]
         },
 
-        enableCheck: function () {
-            if (dom.byId("measureYes").checked) {
+        enableCheck: function (isChecked) {
+            if (isChecked === true) {
                 query(".showBlock").forEach(function (x) {
                     x.style.display = "inline";
-                })
+                });
+                return 'inline';
             } else {
                 query(".showBlock").forEach(function (x) {
                     x.style.display = "none";
-                })
+                });
+                return 'none';
             }
-            console.log('measure', query(".showBlock")[0].style.display)
-            return query(".showBlock")[0].style.display;
         },
 
         clearClick: function () {
