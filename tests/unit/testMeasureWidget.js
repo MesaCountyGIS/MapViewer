@@ -68,6 +68,11 @@ define([
         'Test _outputArea function': function() {
             console.log("_outputArea() should return ['4800.339 acres", "60981.025 feet']. During the test it returned: ", measure._outputArea(res, outPolyArea, outPolyLength))
             assert.deepEqual(measure._outputArea(res, outPolyArea, outPolyLength), ["4800.339 acres", "60981.025 feet"], 'The return of _outputArea() should equal the array ["4800.339 acres", "60981.025 feet"].');
+        },
+
+        'Test enableCheck function': function() {
+            console.log("enableCheck() should return 'Perimeter: 60981.025 feet'. During the test it returned: ", measure._createPerimText(res, outPolyLength))
+            assert.deepEqual(measure._createPerimText(res, outPolyLength), 'Perimeter: 60981.025 feet', 'The return of _createPerimText() should equal the string "Perimeter: 60981.025 feet".');
         }
 
 

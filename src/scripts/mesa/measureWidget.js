@@ -229,6 +229,7 @@ define([
                     x.style.display = "none";
                 })
             }
+            console.log('measure', query(".showBlock")[0].style.display)
             return query(".showBlock")[0].style.display;
         },
 

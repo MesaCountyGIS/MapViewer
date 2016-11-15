@@ -109,10 +109,10 @@ define({
 	suites: [
 		// 'tests/unit/testPrintWidget'
 		// 'tests/unit/testCoordinateCleaner',
-		'tests/unit/testCheckForMobile'
+		// 'tests/unit/testCheckForMobile'
 		// 'tests/unit/testGraphicTools'
 		// 'tests/unit/testBasemapWidget',
-		// 'tests/unit/testMeasureWidget'
+		'tests/unit/testMeasureWidget'
 	],
 
 
