@@ -616,7 +616,6 @@ function searchBy(type, option, device, turnOff) {
             default:
                 alert("This tool has not been implemented");
         }
-
         new searchCompleteWidget({
             device: device,
             mapRef: aG.map,
@@ -627,9 +626,7 @@ function searchBy(type, option, device, turnOff) {
             targetGeom: thisTargetGeometry,
             functionParam: thisFunctionParam,
             geometryServiceURL: esriConfig.defaults.geometryService,
-            option: option !== undefined
-                ? option
-                : undefined,
+            option: option !== undefined? option: undefined,
             turnOff: turnOff
         }, "searchFieldDialog").startup();
     }); //End require
@@ -654,7 +651,6 @@ function extentZoom(extentObject) {
             ymaxi = parseInt(ext[3]);
         viewExtent = new Extent({"xmin": xmini, "ymin": ymini, "xmax": xmaxi, "ymax": ymaxi, "spatialReference": utm12});
     });
-    console.log(viewExtent)
     return viewExtent;
 }
 

@@ -13,7 +13,7 @@ TextSymbol, Font, Color, GeometryService, SimpleMarkerSymbol, coordinateCleaner
         postCreate: function(){
             graphicsWidget = this;
             map = graphicsWidget.mapRef;
-            gsvc = new GeometryService(graphicsWidget.geometryServiceURL);
+            gsvc = graphicsWidget.geometryServiceURL;
             utm12 = new SpatialReference({wkid: map.extent.spatialReference.wkid});
         },
 
