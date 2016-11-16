@@ -4,35 +4,29 @@ define([
     'dojo/dom-construct',
     'dojo/_base/window',
     'esri/map',
-    'esri/SpatialReference',
-    'esri/layers/FeatureLayer',
-    'esri/toolbars/edit',
-    'mesa/measureWidget'
+    "esri/geometry/Extent",
+    "esri/layers/ArcGISTiledMapServiceLayer",
+    'mesa/basemapWidget'
 
-], function(registerSuite, assert, domConstruct, win, Map, SpatialReference, FeatureLayer, Edit, measureWidget) {
-    var measure, map, res, outPolyArea, outPolyLength;
+], function(registerSuite, assert, domConstruct, win, Map, Extent, ArcGISTiledMapServiceLayer, basemapWidget) {
+    var initBasemap, map, evt;
+    lmG={};
     registerSuite({
-        name: 'Measure Widget Test',
+        name: 'Basemap Widget Test',
 
         setup: function(){
             domConstruct.place('<div id="map" style="width:300px;height:200px;"></div>', win.body(), 'only');
-            domConstruct.place('<div id="measure" style="width:300px;"></div>', win.body(), 'last');
-            domConstruct.place('<input id="measureYes" type="checkbox" checked />', "measure", 'last');
+            domConstruct.place('<div id="vector" style="width:300px;"></div>', win.body(), 'last');
+            domConstruct.place('<div id="imagelist2" style="width:300px;"></div>', win.body(), 'last');
+            domConstruct.place('<div id="historicalImagery" data-value="A2015" style="width:300px;"></div>', win.body(), 'last');
+            domConstruct.place('<button id="DTbasemap" title="Turn on Default Basemap"></button>', win.body(), 'last');
+            domConstruct.place('<button id="MBasemap" title="Turn on Default Basemap"></button>', win.body(), 'last');
+            domConstruct.place('<li id="historicalImagery"></li>', win.body(), 'last');
+            domConstruct.place('<li id="li" data-value="A2015"><a>2015 Countywide</a></li>', win.body(), 'last');
 
-            pLay = new FeatureLayer("http://mcmap2.mesacounty.us/arcgis/rest/services/maps/ParcelOnly4Query/MapServer/0", {
-                mode: FeatureLayer.MODE_ONDEMAND,
-                outFields: ["LOCATION", "ACCOUNTNO", "OWNER", "JTOWNER", "SDATE", "PARCEL_NUM", "ZONING", "Acres", "JURISDICTION"]
-            });
+            evt = document.getElementById("li");
 
-            res = {
-                "result": {
-                    "areas":[4800.338916370976],
-                    "lengths":[60981.02493438346]
-                }
-            };
-
-            outPolyArea = "acres";
-            outPolyLength = "feet";
+            console.log('evt this 0', evt)
 
             map = Map("map", {
                 basemap: "topo",
@@ -41,34 +35,48 @@ define([
                 sliderStyle: "small"
             });
 
-                measure = measureWidget({
-                    gsvc: "http://mcmap2.mesacounty.us/arcgis/rest/services/Utilities/Geometry/GeometryServer",
-                    mapRef: map,
-                    device:"desktop",
-                    parcelLayer: pLay
-                }, "measure");
-                measure.startup();
+            var url0 = "http://mcmap2.mesacounty.us/arcgis/rest/services/maps/vector_basemap/MapServer";
+            lmG.vectorBasemap = ArcGISTiledMapServiceLayer(
+                url0,{
+                    id:"vectorBasemap"
+                });
+
+            var url = "http://mcmap2.mesacounty.us/arcgis/rest/services/maps/vector_basemap/MapServer";
+            initBasemap = ArcGISTiledMapServiceLayer(
+                url,{
+                    id:"vector"
+                });
+
+            var url2 = "http://mcmap2.mesacounty.us/arcgis/rest/services/Mosaic_Datasets/MesaCounty_2015/ImageServer";
+            lmG.A2015 = ArcGISTiledMapServiceLayer(
+                url2,{
+                    id:"A2015"
+                });
+
+            map.addLayers([initBasemap, lmG.A2015]);
+
+            basemap = basemapWidget({
+                mapRef: map,
+                device:"desktop",
+                initialBasemap: initBasemap
+            }, "imagelist2");
+            basemap.startup();
         },
 
-        // 'Test enableCheck function': function() {
-        //     console.log("EnableCheck() should return 'inline'. During the test it returned: ", measure.enableCheck())
-        //     assert.deepEqual(measure.enableCheck(), "inline", 'The return of enableCheck() should equal the string "inline".');
-        // },
+        'Test loadYear function': function() {
+            console.log("loadyear() should return an array with the single value 'A2015'. During the test it returned: ", basemap.loadYear('A2015'))
+            assert.deepEqual(basemap.loadYear('A2015'), 'A2015', 'The return of enableCheck() should equal the string "A2015".');
+        },
 
-        // 'Test _createAreaText function': function() {
-        //     console.log("_createAreaText() should return 'Area: 4800.339 acres'. During the test it returned: ", measure._createAreaText(res, outPolyArea))
-        //     assert.deepEqual(measure._createAreaText(res, outPolyArea), 'Area: 4800.339 acres', 'The return of _createAreaText() should equal the string "Area: 4800.339 acres".');
-        // },
-        //
-        // 'Test _createPerimText function': function() {
-        //     console.log("_createPerimText() should return 'Perimeter: 60981.025 feet'. During the test it returned: ", measure._createPerimText(res, outPolyLength))
-        //     assert.deepEqual(measure._createPerimText(res, outPolyLength), 'Perimeter: 60981.025 feet', 'The return of _createPerimText() should equal the string "Perimeter: 60981.025 feet".');
-        // },
-        //
-        // 'Test _outputArea function': function() {
-        //     console.log("_outputArea() should return ['4800.339 acres", "60981.025 feet']. During the test it returned: ", measure._outputArea(res, outPolyArea, outPolyLength))
-        //     assert.deepEqual(measure._outputArea(res, outPolyArea, outPolyLength), ["4800.339 acres", "60981.025 feet"], 'The return of _outputArea() should equal the array ["4800.339 acres", "60981.025 feet"].');
-        // }
+        'Test basemapChanger function': function() {
+            console.log("basemapChanger() should return 'A2015'. During the test it returned: ", basemap.basemapChanger())
+            assert.deepEqual(basemap.basemapChanger(), 'A2015', 'The return of basemapChanger() should equal the string "A2015".');
+        },
+
+        'Test historicalImageryDropdown function': function() {
+            console.log("historicalImageryDropdown(evt) should return 'A2015'. During the test it returned: ", basemap.historicalImageryDropdown.call(evt))
+            assert.deepEqual(basemap.historicalImageryDropdown.call(evt), 'A2015', 'The return of historicalImageryDropdown() should equal the string "A2015".');
+        }
 
 
 

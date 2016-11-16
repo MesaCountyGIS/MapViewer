@@ -59,6 +59,7 @@ define([
 
         postCreate: function () {
             this.inherited(arguments);
+            console.log(this)
             domConstruct.place(this.domNode, this.srcNodeRef.id, "before");
             //add a property where you can add a number of classes to the widget on startup
             domClass.add(this.domNode, "query");
@@ -258,6 +259,7 @@ define([
         },
 
         setPoly: function (x) {
+            console.log("x", x)
             measureWidget._resetButtonBlock(x.target, ['polySeg', x.target.getAttribute("data-set")], "#polyResult, #uomPolyBox, #uomText");
             tb.activate(Draw[(x.target.id).slice(4).toUpperCase()]);
             if (dom.byId("polyResult").style.display === "inline" && dom.byId("uomPolyBox").style.display === "inline" && dom.byId("uomText").style.display === "inline") {
