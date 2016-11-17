@@ -5,7 +5,7 @@
         declare, _WidgetBase, Menu, MenuItem, MenuSeparator, Point, domConstruct, GeometryService, SpatialReference
     ) {
 
-        var contextMenuWidget, map, trsURL;
+        var contextMenuWidget, map, trsURL, gsvc, wgs84;
             return declare("contextMenuWidget", [_WidgetBase], {
 
                 mapRef: null,
@@ -17,10 +17,11 @@
                     contextMenuWidget = this;
                     map = contextMenuWidget.mapRef;
                     trsURL = contextMenuWidget.trsURL;
-        var gsvc = new GeometryService(contextMenuWidget.geometryServiceURL);
-        var wgs84 = new SpatialReference({
-            wkid: 4326
-        });
+                    gsvc = new GeometryService(contextMenuWidget.geometryServiceURL);
+                    wgs84 = new SpatialReference({
+                        wkid: 4326
+                    });
+
         ctxMenuForMap = new Menu({
             style: "background-color:#EEEEEE;font-size:0.8em;width:140px;height:auto;",
             onOpen: function (box) {

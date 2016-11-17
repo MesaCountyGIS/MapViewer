@@ -329,7 +329,7 @@ function createHomeButton(map) {
 
 function createContextMenu(map, geometryServiceConfig) {
     require(["mesa/contextMenuWidget"], function(contextMenuWidget) {
-        contextMenuWidget({mapRef: map, geometryServiceURL: geometryServiceConfig.geometryService, trsURL: "http://mcmap2.mesacounty.us/arcgis/rest/services/maps/eSurveyor/MapServer/26"});
+        contextMenuWidget({mapRef: map, geometryServiceURL: geometryServiceConfig, trsURL: "http://mcmap2.mesacounty.us/arcgis/rest/services/maps/eSurveyor/MapServer/26"});
     });
 }
 

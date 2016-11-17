@@ -27,7 +27,6 @@ define([
         postCreate: function() {
             this.inherited(arguments);
             thisWidget = this;
-            console.log('thisWidget', thisWidget)
             currentBasemap.push(thisWidget.initialBasemap);
             map = thisWidget.mapRef;
             domConstruct.place(this.domNode, this.domNode.id, "before");
