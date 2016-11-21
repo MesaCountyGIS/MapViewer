@@ -29,37 +29,37 @@ var problemWidget;
         },
 
         sendClick: function () {
-        var bValid = true;
-        var name = this.problemName;
-        var emailP = this.email;
-        var message = this.message;
-        var tips = this.validateTips;
-        tips.className = "validateTips";
-        bValid = bValid && problemWidget.checkLength(name, 1, "Please enter a name", tips);
-        bValid = bValid && problemWidget.checkRegexp(emailP, /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i, "Use email format name@mail.com", tips);
-        bValid = bValid && problemWidget.checkLength(message, 5, "Please enter a message", tips);
-        if (bValid === true) {
-            name = name.value;
-            message = message.value;
-            email = emailP.value;
-            xhr.post({
-                url: this.emailServiceUrl,
-                content: {
-                    name: name,
-                    email: email,
-                    message: message
-                },
-                load: function (r) {
-                    if (r === "Message sent!") {
-                        confirm("You have successfully submitted your problem report.");
-                        problemWidget.domNode.style.display = "none";
+            var bValid = true;
+            var name = this.problemName;
+            var emailP = this.email;
+            var message = this.message;
+            var tips = this.validateTips;
+            tips.className = "validateTips";
+            bValid = bValid && problemWidget.checkLength(name, 1, "Please enter a name", tips);
+            bValid = bValid && problemWidget.checkRegexp(emailP, /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i, "Use email format name@mail.com", tips);
+            bValid = bValid && problemWidget.checkLength(message, 5, "Please enter a message", tips);
+            if (bValid === true) {
+                name = name.value;
+                message = message.value;
+                email = emailP.value;
+                xhr.post({
+                    url: this.emailServiceUrl,
+                    content: {
+                        name: name,
+                        email: email,
+                        message: message
+                    },
+                    load: function (r) {
+                        if (r === "Message sent!") {
+                            confirm("You have successfully submitted your problem report.");
+                            problemWidget.domNode.style.display = "none";
+                        }
+                    },
+                    error: function (error) {
+                        confirm("Error sending report!")
                     }
-                },
-                error: function (error) {
-                    confirm("Error sending report!")
-                }
-            })
-        }
+                })
+            }
     },
 
     checkLength: function(text, chars, message, errObject) {
