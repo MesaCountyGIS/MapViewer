@@ -4,7 +4,7 @@ function init() {
     //Global namespaces for handling non-local variables
     aG = {}; //Global application object
     lmG = {}; //Global Layer Management object
-    lmG.legendLayers = [];
+    // lmG.legendLayers = [];
     require([
         "esri/config", "dojo/text!./scripts/_config/config.json", "mesa/toolsWidget" //fix bug requiring toolsWidget to be loaded
     ], function(esriConfig, JSONconfig) {
@@ -51,10 +51,12 @@ function init() {
             for the ESRI api map. */
             createScalebar(aG.map);
             createContextMenu(aG.map, JSONconfig.geometryService);
-            createLegend(aG.map, aG.popup.domNode.id);
+            // createLegend(aG.map, aG.popup.domNode.id);
+            var legend = createLegend(aG.map, initialBasemap, aG.popup.domNode.id);
+            console.log('legendObject is: ', legend)
             createHomeButton(aG.map);
             setEventHandlers(JSONconfig, aG.map, lmG.pLay, initialBasemap,
-            lmG.roadLabels, aG.popup, aG.pTemp);
+            lmG.roadLabels, aG.popup, aG.pTemp, legend);
             document.getElementById("loading").style.display = "none";
             aG.map.disableKeyboardNavigation();
             /*watches for variables in the url then runs urlMapType
@@ -69,7 +71,7 @@ function init() {
 } //end of init function
 
 function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
-    roadLabels, popupObject, popupTemplateObject) {
+    roadLabels, popupObject, popupTemplateObject, legendWidget) {
     require([
         "dojo/on", "dojo/query", "dojo/dom", "dojo/touch"
     ], function(on, query, dom, touch) {
@@ -86,8 +88,12 @@ function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
         on(dom.byId("shareMap"), touch.release, function(){
             showShareForm(map);
         });
-        on(query("#DTLegend, #legendDialog > .dialogHeader > .dialogCloser"), touch.release, function() {
-            toggleDialog("legendDialog");
+        // on(query("#DTLegend, #legendDialog > .dialogHeader > .dialogCloser"), touch.release, function() {
+        //     toggleDialog("legendDialog");
+        // });
+
+        on(query("#DTLegend"), touch.release, function() {
+            legendWidget.toggleDialog();
         });
         on(query("#DTprint"), touch.release, function() {
             showPrinter(map, JSONconfig.printURL);
@@ -348,59 +354,67 @@ function createScalebar(map) {
     }); //end require
 }
 
-function createLegend(map, device) {
-    lmG.legendLayers.push({
-        layer: lmG.vectorBasemap,
-        title: 'Basemap Layers',
-        hideLayers: [
-            7,
-            12,
-            17,
-            22,
-            23,
-            24,
-            25,
-            26,
-            27,
-            28,
-            32,
-            35,
-            36,
-            37,
-            38,
-            39,
-            50,
-            51
-        ]
-    });
-
-    require(["esri/dijit/Legend"], function(Legend) {
-        lmG.legend = new Legend({
-            map: map,
-            layerInfos: lmG.legendLayers
-        }, "legendDiv");
-        lmG.legend.startup();
-    });
-
-    if (device === 'popup') {
-        toggleDialog("legendDialog");
-        makeBoxesMoveable();
-    }
+function createLegend(map, initialBasemap, popup){
+    require(["mesa/legendWidget"], function(legendWidget) {
+        var timmy = new legendWidget({mapRef: map, defaultBasemap: initialBasemap, popupRef: popup},
+        'legendDialog');
+        // timmy.createLegend();
+    }); //end require
 }
 
-function toggleDialog(dialogId) { //fires on click of #DTLegend and #IPLegend - toggles the legend
-    require([
-        "dojo/dom", "dojo/dom-class"
-    ], function(dom, domClass) {
-        if (domClass.contains(dom.byId("legendDialog"), "displayNo")) {
-            dom.byId("legendDialog").style.display = "block";
-            (domClass.remove(dom.byId("legendDialog"), "displayNo"));
-        } else {
-            dom.byId("legendDialog").style.display = "none";
-            (domClass.add(dom.byId("legendDialog"), "displayNo"));
-        }
-    });
-}
+// function createLegend(map, device) {
+//     lmG.legendLayers.push({
+//         layer: lmG.vectorBasemap,
+//         title: 'Basemap Layers',
+//         hideLayers: [
+//             7,
+//             12,
+//             17,
+//             22,
+//             23,
+//             24,
+//             25,
+//             26,
+//             27,
+//             28,
+//             32,
+//             35,
+//             36,
+//             37,
+//             38,
+//             39,
+//             50,
+//             51
+//         ]
+//     });
+//
+//     require(["esri/dijit/Legend"], function(Legend) {
+//         lmG.legend = new Legend({
+//             map: map,
+//             layerInfos: lmG.legendLayers
+//         }, "legendDiv");
+//         lmG.legend.startup();
+//     });
+//
+//     if (device === 'popup') {
+//         toggleDialog("legendDialog");
+//         makeBoxesMoveable();
+//     }
+// }
+
+// function toggleDialog(dialogId) { //fires on click of #DTLegend and #IPLegend - toggles the legend
+//     require([
+//         "dojo/dom", "dojo/dom-class"
+//     ], function(dom, domClass) {
+//         if (domClass.contains(dom.byId("legendDialog"), "displayNo")) {
+//             dom.byId("legendDialog").style.display = "block";
+//             (domClass.remove(dom.byId("legendDialog"), "displayNo"));
+//         } else {
+//             dom.byId("legendDialog").style.display = "none";
+//             (domClass.add(dom.byId("legendDialog"), "displayNo"));
+//         }
+//     });
+// }
 
 //update showPrinter to remove old code after users have replaced code in their cache
 function showPrinter(map, printURL) {

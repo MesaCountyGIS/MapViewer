@@ -1153,29 +1153,29 @@ define([
                     } //end main if
                 } //end for loop
 
-                function pushLayers(layertitle, layerlist, x) {
-                    lmG.legendLayers.length = 0;
-                    push('Basemap Layers', lmG.vectorBasemap, [7, 12, 17, 22, 23, 24, 25, 26, 27, 28, 32, 35, 36, 37, 38, 39, 50, 51]);
-
-                    if (x === 0 && !(layerlist === 0)) {
-                        for (i = 0; i < layerlist.length; i++) {
-                            push(layertitle, Layers[(layerlist[i])].layerName, Layers[(layerlist[i])].lyrs ? Layers[(layerlist[i])].lyrs : []);
-                        }
-
-                    } else if (layerlist === 0 && !(x === 0)) {
-                        push(layertitle, Layers[x].layerName, Layers[x].lyrs ? Layers[x].lyrs : []);
-                    }
-
-                    function push(title, layerName, hidelayers) {
-                        lmG.legendLayers.push({
-                            layer: layerName,
-                            title: title,
-                            hideLayers: hidelayers
-                        });
-                        lmG.legend.refresh(lmG.legendLayers);
-                    }
-                    lmG.legend.refresh(lmG.legendLayers);
-                }
+                // function pushLayers(layertitle, layerlist, x) {
+                //     lmG.legendLayers.length = 0;
+                //     push('Basemap Layers', lmG.vectorBasemap, [7, 12, 17, 22, 23, 24, 25, 26, 27, 28, 32, 35, 36, 37, 38, 39, 50, 51]);
+                //
+                //     if (x === 0 && !(layerlist === 0)) {
+                //         for (i = 0; i < layerlist.length; i++) {
+                //             push(layertitle, Layers[(layerlist[i])].layerName, Layers[(layerlist[i])].lyrs ? Layers[(layerlist[i])].lyrs : []);
+                //         }
+                //
+                //     } else if (layerlist === 0 && !(x === 0)) {
+                //         push(layertitle, Layers[x].layerName, Layers[x].lyrs ? Layers[x].lyrs : []);
+                //     }
+                //
+                //     function push(title, layerName, hidelayers) {
+                //         lmG.legendLayers.push({
+                //             layer: layerName,
+                //             title: title,
+                //             hideLayers: hidelayers
+                //         });
+                //         lmG.legend.refresh(lmG.legendLayers);
+                //     }
+                //     lmG.legend.refresh(lmG.legendLayers);
+                // }
 
                 function addLayers(layerlist, x) {
                     if (!(layerlist === 0)) {
