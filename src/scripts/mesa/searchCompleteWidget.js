@@ -34,7 +34,6 @@ define([
             map = thisWidget.mapRef;
             option = thisWidget.option;
             this.loc.value = "";
-console.log('here')
             graphicTool = new graphicsTools({
                 geometryServiceURL: thisWidget.geometryServiceURL,
                 mapRef: map,

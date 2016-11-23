@@ -17,6 +17,7 @@ define([
             infoWindowRef: null,
             infoTemplateRef: null,
             checkboxid: null,
+            mapLegend: null,
 
             postCreate: function() {
                 changeThemeWidget = this;
@@ -28,6 +29,7 @@ define([
                 option = changeThemeWidget.option;
                 pVal = changeThemeWidget.pVal;
                 checkboxids = changeThemeWidget.checkboxid;
+                legend = changeThemeWidget.mapLegend;
                 control = dom.byId(layer + "Select") ? (layer + "Select") : "noControl";
                 layerConstructor = {
                     "mapFolder": 'http://mcmap2.mesacounty.us/arcgis/rest/services/maps/',
@@ -1153,29 +1155,29 @@ define([
                     } //end main if
                 } //end for loop
 
-                // function pushLayers(layertitle, layerlist, x) {
-                //     lmG.legendLayers.length = 0;
-                //     push('Basemap Layers', lmG.vectorBasemap, [7, 12, 17, 22, 23, 24, 25, 26, 27, 28, 32, 35, 36, 37, 38, 39, 50, 51]);
-                //
-                //     if (x === 0 && !(layerlist === 0)) {
-                //         for (i = 0; i < layerlist.length; i++) {
-                //             push(layertitle, Layers[(layerlist[i])].layerName, Layers[(layerlist[i])].lyrs ? Layers[(layerlist[i])].lyrs : []);
-                //         }
-                //
-                //     } else if (layerlist === 0 && !(x === 0)) {
-                //         push(layertitle, Layers[x].layerName, Layers[x].lyrs ? Layers[x].lyrs : []);
-                //     }
-                //
-                //     function push(title, layerName, hidelayers) {
-                //         lmG.legendLayers.push({
-                //             layer: layerName,
-                //             title: title,
-                //             hideLayers: hidelayers
-                //         });
-                //         lmG.legend.refresh(lmG.legendLayers);
-                //     }
-                //     lmG.legend.refresh(lmG.legendLayers);
-                // }
+                function pushLayers(layertitle, layerlist, x) {
+                    var mapLegendLayers = [];
+                    push('Basemap Layers', lmG.vectorBasemap, [7, 12, 17, 22, 23, 24, 25, 26, 27, 28, 32, 35, 36, 37, 38, 39, 50, 51]);
+
+                    if (x === 0 && !(layerlist === 0)) {
+                        for (i = 0; i < layerlist.length; i++) {
+                            push(layertitle, Layers[(layerlist[i])].layerName, Layers[(layerlist[i])].lyrs ? Layers[(layerlist[i])].lyrs : []);
+                        }
+
+                    } else if (layerlist === 0 && !(x === 0)) {
+                        push(layertitle, Layers[x].layerName, Layers[x].lyrs ? Layers[x].lyrs : []);
+                    }
+
+                    function push(title, layerName, hidelayers) {
+                        mapLegendLayers.push({
+                            layer: layerName,
+                            title: title,
+                            hideLayers: hidelayers
+                        });
+                        legend.refresh(mapLegendLayers);
+                    }
+                    legend.refresh(mapLegendLayers);
+                }
 
                 function addLayers(layerlist, x) {
                     if (!(layerlist === 0)) {
