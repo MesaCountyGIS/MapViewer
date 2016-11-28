@@ -51,15 +51,13 @@ function init() {
             createContextMenu(aG.map, JSONconfig.geometryService);
 
             var legend = createLegend(aG.map, aG.popup.domNode.id);
-            // createLegend(aG.map, initialBasemap, aG.popup.domNode.id, leg);
-            // function leg(x){
-            //     on(document.getElementById("DTLegend"), 'click', function() {
-            //         x.toggleDialog();
-            //     });
-            // }
+
+            // var legend = createLegend(aG.map, initialBasemap, aG.popup.domNode.id,
+            //     document.getElementById('DTLegend'));
+
             createHomeButton(aG.map);
             setEventHandlers(JSONconfig, aG.map, lmG.pLay, initialBasemap,
-            lmG.roadLabels, aG.popup, aG.pTemp, legend);
+                lmG.roadLabels, aG.popup, aG.pTemp, legend);
             document.getElementById("loading").style.display = "none";
             aG.map.disableKeyboardNavigation();
             /*watches for variables in the url then runs urlMapType
@@ -94,10 +92,6 @@ function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
         on(query("#DTLegend, #legendDialog > .dialogHeader > .dialogCloser"), touch.release, function() {
             toggleDialog("legendDialog");
         });
-
-        // on(query("#DTLegend"), touch.release, function() {
-        //     legendWidget.toggleDialog();
-        // });
         on(query("#DTprint"), touch.release, function() {
             showPrinter(map, JSONconfig.printURL);
         });
@@ -131,9 +125,7 @@ function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
             query(classname)[0].style.display = "none";
         });
         on(query("#combobox, #mainfish"), "mouseenter, mouseleave, touchstart", function(e) {
-            var display = e.type === "mouseleave"
-                ? "none"
-                : "block";
+            var display = e.type === "mouseleave"? "none": "block";
             var classname = "." + query("#" + this.id + " ul")[0].className;
             query(classname)[0].style.display = display;
         });
@@ -357,15 +349,26 @@ function createScalebar(map) {
     }); //end require
 }
 
-// function createLegend(map, initialBasemap, popup, callback){
+// function createLegend(map, initialBasemap, popup, button){
+//     var leg, legendLayers = [];
+//     require(["mesa/legendWidget", "esri/dijit/Legend"], function(legendWidget, Legend) {
+//         leg = new Legend({
+//                 map: map
+//             }, "legendDiv");
 //
-//     var leg;
-//     require(["mesa/legendWidget"], function(legendWidget) {
-//         leg = new legendWidget({mapRef: map, defaultBasemap: initialBasemap, popupRef: popup},
-//         'legendDialog');
-//         // callback(mapLegend)
+//         new legendWidget({
+//             mapRef: map,
+//             defaultBasemap: initialBasemap,
+//             popupRef: popup,
+//             attachControl: button,
+//             legendObject: leg
+//         },'legendDialog');
+//
 //     }); //end require
-//     console.log('leg in function', leg)
+//     setTimeout(function(){console.log('foo', leg)}, 500)
+//     // setTimeout(function(){
+//     //     return leg;
+//     // }, 500)
 // }
 
 function createLegend(map, device) {
@@ -374,24 +377,7 @@ function createLegend(map, device) {
         layer: lmG.vectorBasemap,
         title: 'Basemap Layers',
         hideLayers: [
-            7,
-            12,
-            17,
-            22,
-            23,
-            24,
-            25,
-            26,
-            27,
-            28,
-            32,
-            35,
-            36,
-            37,
-            38,
-            39,
-            50,
-            51
+            7,12,17,22,23,24,25,26,27,28,32,35,36,37,38,39,50,51
         ]
     });
 

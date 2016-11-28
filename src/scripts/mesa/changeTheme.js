@@ -1,11 +1,13 @@
 define([
     "dojo/dom-construct", "dojo/query", "dojo/dom-attr", "dojo/on", "dojo/dom", "esri/geometry/Extent", "esri/SpatialReference", "dojo/dom-style", "dojo/_base/array",
     "dijit/ConfirmDialog", "dojo/cookie", "esri/tasks/IdentifyTask", "esri/tasks/IdentifyParameters", "mesa/IdentifyTemplates", "esri/layers/ArcGISDynamicMapServiceLayer",
+    "mesa/legendWidget", "dijit/registry",
     "dojo/_base/declare", "dijit/_WidgetBase", "dojo/NodeList-dom", "dojo/domReady!"
 ], function(domConstruct, query, domAttr, on, dom, Extent, SpatialReference, domStyle, array,
     ConfirmDialog, cookie, IdentifyTask, IdentifyParameters, IdentifyTemplates, ArcGISDynamicMapServiceLayer,
+    legendWidget,registry,
     declare, _WidgetBase) {
-    var layer, layerTitle, option, pVal, control, changeThemeWidget, layerConstructor, themeLayers, map, checkboxClick, infoWindow, infoTemplate, checkboxids;
+    var layer, layerTitle, option, pVal, control, changeThemeWidget, layerConstructor, themeLayers, map, checkboxClick, infoWindow, infoTemplate, checkboxids, Legend;
 
     return declare("changeTheme", [_WidgetBase], {
 
@@ -28,8 +30,8 @@ define([
                 layerTitle = changeThemeWidget.layerTitle;
                 option = changeThemeWidget.option;
                 pVal = changeThemeWidget.pVal;
+                Legend = changeThemeWidget.mapLegend;
                 checkboxids = changeThemeWidget.checkboxid;
-                legend = changeThemeWidget.mapLegend;
                 control = dom.byId(layer + "Select") ? (layer + "Select") : "noControl";
                 layerConstructor = {
                     "mapFolder": 'http://mcmap2.mesacounty.us/arcgis/rest/services/maps/',
@@ -975,6 +977,7 @@ define([
                     // if boxes are checked through url parameters
                     changeThemeWidget.autoCheckBoxes(checkboxids);
                 }
+
                 on(query("." + layer + "cbx"), "change", function(e) {
                     //if boxes are checked manually
                     changeThemeWidget.changeBox();
@@ -1174,9 +1177,9 @@ define([
                             title: title,
                             hideLayers: hidelayers
                         });
-                        legend.refresh(mapLegendLayers);
+                        Legend.refresh(mapLegendLayers);
                     }
-                    legend.refresh(mapLegendLayers);
+                    Legend.refresh(mapLegendLayers);
                 }
 
                 function addLayers(layerlist, x) {

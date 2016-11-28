@@ -258,7 +258,6 @@ define([
         },
 
         setPoly: function (x) {
-            console.log("x", x)
             measureWidget._resetButtonBlock(x.target, ['polySeg', x.target.getAttribute("data-set")], "#polyResult, #uomPolyBox, #uomText");
             tb.activate(Draw[(x.target.id).slice(4).toUpperCase()]);
             if (dom.byId("polyResult").style.display === "inline" && dom.byId("uomPolyBox").style.display === "inline" && dom.byId("uomText").style.display === "inline") {
