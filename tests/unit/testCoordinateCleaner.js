@@ -41,11 +41,40 @@ define([
             'with an invalid value is an HTML error message');
         },
 
-        'Test _processCoordinates function with valid degree/minute values': function() {
+        'Test _processCoordinates function with valid degree values': function() {
             assert.deepEqual(coordinateCleaner._processCoordinates("39", "108"),
             ["39", "108"],
             'Valid coordinates passed to _processCoordinates should return an array with those same coordinates.');
+        },
+
+        'Test _processCoordinates function with valid degree/minute values': function() {
+            assert.deepEqual(coordinateCleaner._processCoordinates("39 25", "108 55"),
+            ['39.4166667', '108.9166667'],
+            'Valid degree/minute coordinates passed to _processCoordinates should return an array ' +
+            'with appropriate decimal degree coordinates and 7 decimal places.');
+        },
+
+        'Test _processCoordinates function with valid degree/decimal minute values': function() {
+            assert.deepEqual(coordinateCleaner._processCoordinates("39 25.55", "108 55.35"),
+            ['39.4258333', '108.9225000'],
+            'Valid degree/decimal minute coordinates passed to _processCoordinates should return an array ' +
+            'with appropriate decimal degree coordinates and 7 decimal places.');
+        },
+
+        'Test _processCoordinates function with valid degree/minute/second values': function() {
+            assert.deepEqual(coordinateCleaner._processCoordinates("39 25 10", "108 55 10"),
+            ['39.4194444', '108.9194444'],
+            'Valid degree/minute/second coordinates passed to _processCoordinates should return an array ' +
+            'with appropriate decimal degree coordinates and 7 decimal places.');
+        },
+
+        'Test _processCoordinates function with valid degree/minute/decimal second values': function() {
+            assert.deepEqual(coordinateCleaner._processCoordinates("39 25 10.555", "108 55 10.333"),
+            ['39.4195986', '108.9195369'],
+            'Valid degree/minute/decimal second coordinates passed to _processCoordinates should return an array ' +
+            'with appropriate decimal degree coordinates and 7 decimal places.');
         }
+
 
 
 
