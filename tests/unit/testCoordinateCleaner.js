@@ -41,11 +41,10 @@ define([
             'with an invalid value is an HTML error message');
         },
 
-        'Test _processCoordinates function with an invalid degree/minute value': function() {
+        'Test _processCoordinates function with valid degree/minute values': function() {
             assert.deepEqual(coordinateCleaner._processCoordinates("39", "108"),
             ["39", "108"],
-            'The return value of a latitude and longitude value in degrees/minutes ' +
-            'with an invalid value is an HTML error message');
+            'Valid coordinates passed to _processCoordinates should return an array with those same coordinates.');
         }
 
 
