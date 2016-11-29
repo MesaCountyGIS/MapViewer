@@ -39,6 +39,13 @@ define([
                 " <br><br><b>Lon: 108</b> <b>25</b> ",
             'The return value of a latitude and longitude value in degrees/minutes ' +
             'with an invalid value is an HTML error message');
+        },
+
+        'Test _processCoordinates function with an invalid degree/minute value': function() {
+            assert.deepEqual(coordinateCleaner._processCoordinates("39", "108"),
+            ["39", "108"],
+            'The return value of a latitude and longitude value in degrees/minutes ' +
+            'with an invalid value is an HTML error message');
         }
 
 
