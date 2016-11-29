@@ -17,7 +17,13 @@ define([
 
         'Test coordinate function with a callback function': function() {
             assert.deepEqual(coordinateCleaner.cleanCoordinates("39,108", callback), callback("39","108"), 'The return value is an array');
+        },
+
+        'Test compareMS function': function() {
+            assert.deepEqual(coordinateCleaner._compareMS("39 25", "108 25"), 0, 'The return value of a latitude and longitude value in degrees/minutes is number 0');
         }
+
+
 
     });
     function callback(x, y){

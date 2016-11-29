@@ -87,6 +87,8 @@ define(["dijit/ConfirmDialog"], function (Dialog) {
                  return ([cors[0],cors[1]]);
                 }
             }
-        }
+        },
+        _compareMS: compareMS,
+        _processCoordinates: processCoordinates
     };
 });
