@@ -515,11 +515,8 @@ function showBasemap(map, imageConfig, initialBasemap) {
                 device: "desktop",
                 initialBasemap: initialBasemap
             }, "imagelist2");
-            lmG.imageTool.startup();
-            lmG.imageTool.basemapChanger();
-        } else if ((registry.byId("imagelist2"))) {
-            lmG.imageTool.basemapChanger();
         }
+        lmG.imageTool.basemapChanger();
     });
 }
 

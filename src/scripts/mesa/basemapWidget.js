@@ -62,22 +62,22 @@ define([
             var newLayer = dom.byId("historicalImagery").attributes['data-value'].nodeValue;
             if (i.style.display !== 'block') {
                 thisWidget.loadYear(newLayer);
-                change("block", "Default Basemap", ["DTimagery", "DTbasemap", "Mimagery", "Mbasemap"]);
+                thisWidget._change(i, "block", "Default Basemap", ["DTimagery", "DTbasemap", "Mimagery", "Mbasemap"]);
             }else{
                 thisWidget.loadYear('vector');
-                change("none", "Imagery", ["DTbasemap", "DTimagery", "Mbasemap", "Mimagery"]);
-            }
-
-            function change(display, message, addRemove){
-                i.style.display = display;
-                domAttr.set(dom.byId("DTbasemap"), 'title', "Turn on " + message);
-                if(thisWidget.device === "desktop"){
-                    domClass.replace(dom.byId("DTbasemap"), addRemove[0], addRemove[1]);
-                }else{
-                    domClass.replace(dom.byId("MBasemap"), addRemove[2], addRemove[3]);
-                }
+                thisWidget._change(i, "none", "Imagery", ["DTbasemap", "DTimagery", "Mbasemap", "Mimagery"]);
             }
             return newLayer;
+        },
+
+        _change: function(i, display, message, addRemove){
+            i.style.display = display;
+            domAttr.set(dom.byId("DTbasemap"), 'title', "Turn on " + message);
+            if(thisWidget.device === "desktop"){
+                domClass.replace(dom.byId("DTbasemap"), addRemove[0], addRemove[1]);
+            }else{
+                domClass.replace(dom.byId("MBasemap"), addRemove[2], addRemove[3]);
+            }
         },
 
         loadYear: function(newBasemap) {
@@ -119,7 +119,7 @@ define([
                     map.reorderLayer(imageYear, 0);
                 }
             }
-            return currentBasemap[0].id;
+            return imageYear.id;
         }
 
     }); //end declare
