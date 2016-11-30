@@ -291,9 +291,9 @@ function runToolsView(geometryService, printURL, map) {
 
 function orientationChanged() {
     require(["dojo/query"], function(query) {
-        if(query(".expandedPanel")[0]){
-        query(".expandedPanel")[0].style.display = "none";
-    }
+        if (query(".expandedPanel")[0]) {
+            query(".expandedPanel")[0].style.display = "none";
+        }
     });
 }
 
