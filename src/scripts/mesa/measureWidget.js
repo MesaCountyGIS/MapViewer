@@ -265,6 +265,10 @@ define([
             }
             toolType = (x.target.id).slice(4);
             meas.del = on(tb, "draw-end", measureWidget._addAreaPoly);
+            // if(device === "mobile"){
+            //     this.domNode.style.display = "none";
+            //     query("#map_zoom_slider, #toolPanel, #hidePanel, .collapsedPanel").style("display", "block");
+            // }
             device === "mobile"? (this.domNode.style.display = "none", query("#map_zoom_slider, #toolPanel, #hidePanel, .collapsedPanel").style("display", "block")): void(0);
         },
 
