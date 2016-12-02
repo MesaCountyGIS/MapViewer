@@ -901,7 +901,6 @@ a.maplink:hover {
 }
 
 #bufferLI #bufferSelection {
-  display: none;
   margin-bottom: 1.1em;
 }
 
@@ -2314,6 +2313,7 @@ input {
 
   #toolSelect {
     display: block!important;
+    margin-top: .5em!important;
   }
 
   #IPtoolstrip {
@@ -2614,10 +2614,6 @@ input {
     transform: rotate(90deg);
   }
 
-  #toolSelect {
-    margin-top: .5em!important;
-  }
-
   #searchFieldDialog {
     font-size: .8em;
     width: 100%;
@@ -2637,10 +2633,6 @@ input {
   #searchFieldDialog+div {
     width: 12em;
     margin: 0 auto;
-  }
-
-  #searchFieldDialog #resultUL {
-    margin-left: 26.3em;
   }
 
   #loc {
@@ -2676,6 +2668,7 @@ input {
   #bookmarkDialog2,
   #helpMenu,
   #helpMenu2,
+  #legendDialog,
   #measureDialog,
   #measureDialog2,
   #printDialog,
@@ -2701,11 +2694,8 @@ input {
     width: 12em;
   }
 
-  #map_zoom_slider {
-    z-index: 0!important;
-  }
-
   #historicalImagery,
+  #map_zoom_slider,
   #toolPanel {
     display: none;
   }
@@ -2751,7 +2741,7 @@ input {
 
   #locate {
     float: right;
-    margin: 0 .5em 0 0;
+    margin: .2em .5em 0 0;
   }
 
   .esriMobileNavigationBar,
@@ -2760,7 +2750,7 @@ input {
   }
 
   #toolSelect {
-    margin-top: .55em!important;
+    margin-top: .75em!important;
   }
 
   #loading {
