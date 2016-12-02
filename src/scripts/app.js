@@ -42,6 +42,7 @@ function init() {
 
         // Add the initial basemap, labels and parcel layer to the map
         aG.map.addLayers([lmG.vectorBasemap, lmG.roadLabels, lmG.pLay]);
+
         aG.map.on("load", function() {
             /* Once the map is loaded, initialize the following map components,
             check the url for parameters, register event handlers for the map,
@@ -119,7 +120,9 @@ function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
         });
         // on(query(".collapsedPanel"), touch.release, animatePanel);
         on(dom.byId("hidePanel"), "click", animatePanel);
-        on(dom.byId("locate"), touch.release, showLocator);
+        on(dom.byId("locate"), touch.release, function(){
+            showLocator(JSONconfig.geometryService)
+        });
         on(query(".submen li, .submenu li"), touch.release, function() {
             var classname = "." + this.parentNode.className;
             query(classname)[0].style.display = "none";
@@ -562,11 +565,11 @@ function showMeasure(map, parcelLayer, geometryService) {
     });
 }
 
-function showLocator() {
+function showLocator(geometryServiceURL) {
     require([
         "mesa/locatorWidget", "dojo/dom", "dojo/on", "dijit/registry"
     ], function(locatorWidget, dom, on, registry) {
-        var locate = new locatorWidget({mapRef: aG.map, gsvc: JSONconfig.geometryService, device: "desktop"});
+        var locate = new locatorWidget({mapRef: aG.map, gsvc: geometryServiceURL, device: "desktop"});
         locate.startup();
     });
 }
