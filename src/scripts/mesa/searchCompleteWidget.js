@@ -10,7 +10,7 @@ define([
     return declare("searchCompleteWidget", [_WidgetBase, _TemplatedMixin], {
 
         templateString: template,
-        device: "desktop",
+        device: "esriPopup",
         mapRef: undefined,
         type: undefined,
         service: undefined,
@@ -41,7 +41,7 @@ define([
             map.disableKeyboardNavigation();
             if(this.functionParam !== "gcs"){
                 this.loc.focus();
-            if (thisWidget.device === "desktop") {
+            if (thisWidget.device === "esriPopup") {
                 new move.parentConstrainedMoveable(this.domNode, {
                     handle: this.searchHeader,
                     area: "margin",

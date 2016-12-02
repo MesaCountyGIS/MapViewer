@@ -42,7 +42,6 @@ function init() {
 
         // Add the initial basemap, labels and parcel layer to the map
         aG.map.addLayers([lmG.vectorBasemap, lmG.roadLabels, lmG.pLay]);
-
         aG.map.on("load", function() {
             /* Once the map is loaded, initialize the following map components,
             check the url for parameters, register event handlers for the map,
@@ -51,7 +50,7 @@ function init() {
             createScalebar(aG.map);
             createContextMenu(aG.map, JSONconfig.geometryService);
 
-            var legend = createLegend(aG.map, aG.popup.domNode.id);
+            var legend = createLegend(aG.map, aG.popup.domNode.className);
 
             // var legend = createLegend(aG.map, initialBasemap, aG.popup.domNode.id,
             //     document.getElementById('DTLegend'));
@@ -393,8 +392,7 @@ function createLegend(map, device) {
         }, "legendDiv");
         leg.startup();
     });
-
-    if (device === 'popup') {
+    if (device === 'esriPopup') {
         toggleDialog("legendDialog");
         makeBoxesMoveable();
     }
