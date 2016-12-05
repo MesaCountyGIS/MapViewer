@@ -850,8 +850,9 @@ div .titleButton .arrow:hover {
     background: transparent @spriteurl @location25-x @location25-y;
     width: 25px;
     height: 25px;
-    float: left;
-    margin-left: 1em;
+    float: right;
+    margin-right: 1em;
+    margin-top:0.1em;
     border-style: none;
 }
 
@@ -2083,19 +2084,30 @@ input:-moz-placeholder {
 
 /*End Drop down menu styling*/
 
-#toolSelect {
-    display: none;
-    font-size: 0.7em;
-    float: left;
-    margin: 0.7em 0 0 0.5em;
-    border-radius: 3px;
-    padding: 5px 8px;
-    background: #D3CFC8;
-    color: #000;
-    z-index:1000;
-    &:hover {
-        cursor: pointer;
-    }
+#menuSelect{
+  font-size: 0.7em;
+  float: left;
+  margin: 0.4em 1em 0 1em;
+
+  z-index:1000;
+  &:hover {
+      cursor: pointer;
+  }
+}
+
+// #toolSelect {
+//     display: none;
+//     font-size: 0.7em;
+//     float: left;
+//     margin: 0.7em 0 0 0.5em;
+//     border-radius: 3px;
+//     padding: 5px 8px;
+//     background: #D3CFC8;
+//     color: #000;
+//     z-index:1000;
+//     &:hover {
+//         cursor: pointer;
+//     }
     //    & > ul {
     //        width: 5em;
     //        height: auto;
@@ -2110,7 +2122,7 @@ input:-moz-placeholder {
     //        float: right;
     //        margin: 0.5em 0.25em 0 0;
     //    }
-}
+// }
 
 #locLabel {
     float: left;
@@ -2934,296 +2946,302 @@ input {
 
 @import './mobile-tablet-horizontal.less';
 
-@media only screen and (max-width: 640px) and (orientation: landscape) {
-    #toolPanel{
-        top: 60% !important;
-        font-size: .7em;
-    }
-}
-
-@media only screen and (max-width: 640px) {
-    #layerSelect {
-        width: 17em !important;
-        & > ul {
-            max-height: 85vh !important;
-            overflow-y: auto;
-            width: 17.5em;
-        }
-    }
-    #mainfish {
-        float: left;
-        margin-left: 0.5em !important;
-    }
-    #measureDialog,#measureDialog2,
-    #queryDialog,
-    #queryDialog2,
-    #legendDialog,
-    #bookmarkDialog, #bookmarkDialog2,
-    #printDialog, #printDialog2,
-    #helpMenu, #helpMenu2
-    {
-        font-size: 0.8em;
-        display: none;
-        width: 100%;
-        height:100%;
-        top:0;
-        // & + div {
-        //     width: 12em;
-        // }
-    }
-
-    #legendDialog {
-        // background:blue;
-        width: 100% !important;
-        height:100% !important;
-        // position:absolute !important;
-        top: 0  !important;
-        left: 0 !important;
-        opacity:1;
-        & + div {
-            width: 12em;
-        }
-    }
-
-    #map_zoom_slider{
-        // z-index: 0 !important;
-        display:none;
-    }
-
-    // #legendDialog {
-    //     height: 22em;
-    //     width: 14.5em;
-    //     position: absolute;
-    //     left: 5.5em;
-    //     /* top: 7em; */
-    //     z-index: 40;
-    // }
-
-    #historicalImagery {display:none;}
-
-    #toolPanel{
-        display: none;
-        text-align:center;
-        right: -3em!important;
-        top: 55%;
-        max-width: 100px;
-        height: 20px;
-        z-index: 1;
-        // padding: 0.5em 1em 0 2em;
-        // padding: 0.25em 1em 0.25 1em;
-        font-size: .6em;
-    }
-
-    .dialogHeader {
-        width: 100%;
-        margin-left: -0.7em !important;
-        background-color:white;
-        border-radius: 0;
-        -moz-border-radius: 0;
-        -webkit-border-radius: 0;
-        border:none;
-    }
-    .dialogHeader div {
-        left: 40%;
-    }
-    .query {
-        top: 0 !important;
-        left: 0 !important;
-        right: 0 !important;
-        bottom: 0 !important;
-        width: 100% !important;
-        // z-index: 10;
-        opacity: 1;
-    }
-
-    #resultSpan{
-        font-size: 1em;
-        padding-top:0.5em;
-        margin:3em;
-    }
-//    #coordinateBlock,
-//    .esriScalebar,
-//    #socialShare,
-//    //    #searchSelect,
-//    #autocompleteSearch,
-//    #sharebutton
-////    #hidePanel,
-////    #rightPanel
-//    {
-//        display: none;
-//    }
-
-    #locate {
-        float: right;
-        margin: 0.2em 0.5em 0 0;
-    }
-.esriMobilePopupInfoView, .esriMobileNavigationBar {
-    z-index: 1000;
-}
-
-    #toolSelect {
-    margin-top:0.75em !important;
-    }
-
-    #loading{
-        left:25%;
-    }
-
-    #searchFieldDialog {
-        #resultUL{
-            // background-color: white;
-            margin-left: 5em !important;
-            // margin-top: 0.5em;
-            // width:14.7em;
-            // .borderRadius(2px);
-            // & :hover{
-            //     cursor:pointer;
-            //     background-color:#EDECE9;
-            // }
-            // & :focus{
-            //     background-color:#EDECE9;
-            // }
-            // li{
-            //     .borderRadius;
-            //     padding:0.3em;
-            //     outline:none;
-            // }
-        }
-    }
-
-    #loc {
-        margin-left: 20% !important;
-        height: 1.5em !important;
-    }
-
-    .searchBox {
-        & .searchheader {
-            background-color: white;
-            border: none;
-        }
-    }
-
-    #progressbar {
-        top:70%;
-        left:25%;
-        z-index:100000;
-    }
-
-    #tabSpan{
-        // position:absolute;
-        // margin-left:2em;
-    }
-
-    .queryHeader {
-        font-size: 1.1em;
-        font-weight: bold;
-        background-color: #9C9586;
-        width: 100%;
-        height: 35px;
-        margin: -0.5em -0.5em 0.5em -1em;
-        padding:0 0.5em;
-        // padding:0;
-
-        // border: 0.5px solid gray;
-        border-bottom:1px solid gray;
-        .borderRadius(0);
-        & > div{
-         float:right;
-         margin-right:1em;
-        }
-        & a{
-            margin-top:0.9em;
-            float:left;
-            font-size:0.7em;
-            cursor:pointer;
-            border: 1px solid black;
-            border-bottom:none;
-            border-top-left-radius: 1em;
-            border-top-right-radius: 1em;
-            background-color: #D3CFC8;
-            padding:0.3em;
-        }
-        & a:first-child{
-            margin-left:0.5em;
-        }
-    }
-
-    .returnToMap{
-        float:right;
-        // display:none;
-        // position:relative;
-        background:#D3CFC8;
-        font-size: 0.8em;
-        padding:7px 0;
-        width:4em;
-        text-align:center;
-        margin-top:0.4em;
-        border-radius:3px;
-    }
-
-    .returnToTools{
-        float:left;
-        font-size: 0.8em;
-    }
-
-    .left-button{
-        float:left !important;
-        display:inline-block;
-        position:relative;
-        background:#D3CFC8;
-        padding:7px 0;
-        width:4em;
-        text-align:center;
-        margin-top:0.4em;
-        margin-left:1em;
-        // border-radius:3px;
-        border-bottom-right-radius:3px;
-        border-top-right-radius:3px;
-    }
-
-    .left-button:after{
-        content: '';
-        display: block;
-        position: absolute;
-        right: 99%;
-        top: 50%;
-        margin-top: -13px;
-        width: 0;
-        height: 0;
-        border-top: 14px solid transparent;
-        border-right: 8px solid #D3CFC8;
-        border-bottom: 13px solid transparent;
-        border-left: 13px solid transparent;
-    }
-
-    .left-button:hover, .left-button:after:hover{
-        cursor:pointer;
-    }
-
-    #clearGraphic{
-     margin-left:2em;
-    }
-
-    #frm2, #frm2 {
-        margin: 0 1em 0.5em 0;
-    }
-
-    problemForm2{
-        width:98%;
-    }
-
-    button.closeHelp{
-        margin-top:-0.25em;
-    }
-
-
-}
-
-@media only screen and (max-width: 640px) and (orientation : landscape) {
-    .collapsedPanel{
-        top:25%;
-    }
-    .expandedPanel{
-        top:26%;
-    }
-}
+// @media only screen and (max-width: 640px) and (orientation: landscape) {
+//     #toolPanel{
+//         top: 60% !important;
+//         font-size: .7em;
+//     }
+// }
+//
+// @media only screen and (max-width: 640px) {
+//   .stacked-toggle {
+//       display: flex;
+//       flex-direction: column;
+//   }
+//
+//   .stacked-toggle:visited {
+//       color:#000000;
+//   }
+//
+//   .stacked-toggle span{
+//     width:2em;
+//     height:5px;
+//     border-bottom: 4px solid black;
+//   }
+//
+//     #layerSelect {
+//         width: 17em !important;
+//         & > ul {
+//             max-height: 85vh !important;
+//             overflow-y: auto;
+//             width: 17.5em;
+//         }
+//     }
+//     #mainfish {
+//         float: left;
+//         margin-left: 0.5em !important;
+//     }
+//     #measureDialog,#measureDialog2,
+//     #queryDialog,
+//     #queryDialog2,
+//     // #legendDialog,
+//     #bookmarkDialog, #bookmarkDialog2,
+//     #printDialog, #printDialog2,
+//     #helpMenu, #helpMenu2
+//     {
+//         font-size: 0.8em;
+//         display: none;
+//         width: 100%;
+//         height:100%;
+//         top:0;
+//         // & + div {
+//         //     width: 12em;
+//         // }
+//     }
+//
+//     #legendDialog {
+//         // background:blue;
+//         width: 100% !important;
+//         height:100% !important;
+//         // position:absolute !important;
+//         top: 0  !important;
+//         left: 0 !important;
+//         opacity:1;
+//         & + div {
+//             width: 12em;
+//         }
+//     }
+//
+//     #map_zoom_slider{
+//         // z-index: 0 !important;
+//         display:none;
+//     }
+//
+//     #historicalImagery {display:none;}
+//
+//     #toolPanel{
+//         display: none;
+//         text-align:center;
+//         right: -3em!important;
+//         top: 55%;
+//         max-width: 100px;
+//         height: 20px;
+//         z-index: 1;
+//         // padding: 0.5em 1em 0 2em;
+//         // padding: 0.25em 1em 0.25 1em;
+//         font-size: .6em;
+//     }
+//
+//     .dialogHeader {
+//         width: 100%;
+//         margin-left: -0.7em !important;
+//         background-color:white;
+//         border-radius: 0;
+//         -moz-border-radius: 0;
+//         -webkit-border-radius: 0;
+//         border:none;
+//     }
+//     .dialogHeader div {
+//         left: 40%;
+//     }
+//     .query {
+//         top: 0 !important;
+//         left: 0 !important;
+//         right: 0 !important;
+//         bottom: 0 !important;
+//         width: 100% !important;
+//         // z-index: 10;
+//         opacity: 1;
+//     }
+//
+//     #resultSpan{
+//         font-size: 1em;
+//         padding-top:0.5em;
+//         margin:3em;
+//     }
+// //    #coordinateBlock,
+// //    .esriScalebar,
+// //    #socialShare,
+// //    //    #searchSelect,
+// //    #autocompleteSearch,
+// //    #sharebutton
+// ////    #hidePanel,
+// ////    #rightPanel
+// //    {
+// //        display: none;
+// //    }
+//
+//     #locate {
+//         float: right;
+//         margin: 0.2em 0.5em 0 0;
+//     }
+// .esriMobilePopupInfoView, .esriMobileNavigationBar {
+//     z-index: 1000;
+// }
+//
+//     #toolSelect {
+//     margin-top:0.75em !important;
+//     }
+//
+//     #loading{
+//         left:25%;
+//     }
+//
+//     #searchFieldDialog {
+//         #resultUL{
+//             // background-color: white;
+//             margin-left: 5em !important;
+//             // margin-top: 0.5em;
+//             // width:14.7em;
+//             // .borderRadius(2px);
+//             // & :hover{
+//             //     cursor:pointer;
+//             //     background-color:#EDECE9;
+//             // }
+//             // & :focus{
+//             //     background-color:#EDECE9;
+//             // }
+//             // li{
+//             //     .borderRadius;
+//             //     padding:0.3em;
+//             //     outline:none;
+//             // }
+//         }
+//     }
+//
+//     #loc {
+//         margin-left: 20% !important;
+//         height: 1.5em !important;
+//     }
+//
+//     .searchBox {
+//         & .searchheader {
+//             background-color: white;
+//             border: none;
+//         }
+//     }
+//
+//     #progressbar {
+//         top:70%;
+//         left:25%;
+//         z-index:100000;
+//     }
+//
+//     #tabSpan{
+//         // position:absolute;
+//         // margin-left:2em;
+//     }
+//
+//     .queryHeader {
+//         font-size: 1.1em;
+//         font-weight: bold;
+//         background-color: #9C9586;
+//         width: 100%;
+//         height: 35px;
+//         margin: -0.5em -0.5em 0.5em -1em;
+//         padding:0 0.5em;
+//         // padding:0;
+//
+//         // border: 0.5px solid gray;
+//         border-bottom:1px solid gray;
+//         .borderRadius(0);
+//         & > div{
+//          float:right;
+//          margin-right:1em;
+//         }
+//         & a{
+//             margin-top:0.9em;
+//             float:left;
+//             font-size:0.7em;
+//             cursor:pointer;
+//             border: 1px solid black;
+//             border-bottom:none;
+//             border-top-left-radius: 1em;
+//             border-top-right-radius: 1em;
+//             background-color: #D3CFC8;
+//             padding:0.3em;
+//         }
+//         & a:first-child{
+//             margin-left:0.5em;
+//         }
+//     }
+//
+//     .returnToMap{
+//         float:right;
+//         // display:none;
+//         // position:relative;
+//         background:#D3CFC8;
+//         font-size: 0.8em;
+//         padding:7px 0;
+//         width:4em;
+//         text-align:center;
+//         margin-top:0.4em;
+//         border-radius:3px;
+//     }
+//
+//     .returnToTools{
+//         float:left;
+//         font-size: 0.8em;
+//     }
+//
+//     .left-button{
+//         float:left !important;
+//         display:inline-block;
+//         position:relative;
+//         background:#D3CFC8;
+//         padding:7px 0;
+//         width:4em;
+//         text-align:center;
+//         margin-top:0.4em;
+//         margin-left:1em;
+//         // border-radius:3px;
+//         border-bottom-right-radius:3px;
+//         border-top-right-radius:3px;
+//     }
+//
+//     .left-button:after{
+//         content: '';
+//         display: block;
+//         position: absolute;
+//         right: 99%;
+//         top: 50%;
+//         margin-top: -13px;
+//         width: 0;
+//         height: 0;
+//         border-top: 14px solid transparent;
+//         border-right: 8px solid #D3CFC8;
+//         border-bottom: 13px solid transparent;
+//         border-left: 13px solid transparent;
+//     }
+//
+//     .left-button:hover, .left-button:after:hover{
+//         cursor:pointer;
+//     }
+//
+//     #clearGraphic{
+//      margin-left:2em;
+//     }
+//
+//     #frm2, #frm2 {
+//         margin: 0 1em 0.5em 0;
+//     }
+//
+//     problemForm2{
+//         width:98%;
+//     }
+//
+//     button.closeHelp{
+//         margin-top:-0.25em;
+//     }
+//
+//
+// }
+//
+// @media only screen and (max-width: 640px) and (orientation : landscape) {
+//     .collapsedPanel{
+//         top:25%;
+//     }
+//     .expandedPanel{
+//         top:26%;
+//     }
+// }
