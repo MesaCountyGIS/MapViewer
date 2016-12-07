@@ -5,7 +5,7 @@ function init() {
     aG = {}; //Global application object
     lmG = {}; //Global Layer Management object
     require([
-        "esri/config", "dojo/on", "dojo/text!./scripts/_config/config.json", "mesa/toolsWidget" //fix bug requiring toolsWidget to be loaded
+        "esri/config", "dojo/on", "dojo/text!./scripts/_config/config.json", "mesa/toolsWidget2" //fix bug requiring toolsWidget to be loaded
     ], function(esriConfig, on, JSONconfig) {
 
         /* The JSON configuration file is located in the scripts/_config directory.
@@ -76,13 +76,14 @@ function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
     require([
         "dojo/on", "dojo/query", "dojo/dom", "dojo/touch"
     ], function(on, query, dom, touch) {
+        console.log("setHandlers", query('.themeMenu'))
         window.addEventListener("orientationchange", orientationChanged, false);
         map.on("mouse-move", function(e){
             showCoords(e, "screenCoordinatesUTM");
         });
-        on(dom.byId("menuSelect"), "click", function() {
-            runToolsView(JSONconfig.geometryService, JSONconfig.printURL, map);
-        });
+        // on(dom.byId("menuSelect"), "click", function() {
+        //     runToolsView(JSONconfig.geometryService, JSONconfig.printURL, map);
+        // });
         on(dom.byId("help"), touch.release, function(e) {
             showHelp(e, JSONconfig.printURL);
         });
@@ -274,19 +275,20 @@ function checkForMobile() {
 
 function runToolsView(geometryService, printURL, map) {
     require([
-        "dijit/registry", "mesa/toolsWidget"
+        "dijit/registry", "mesa/toolsWidget2"
     ], function(registry, toolsWidget) {
-        if (!(registry.byId("toolsView"))) {
+        if (!(registry.byId("toolsView2"))) {
             var tools = new toolsWidget({
                 geometryServiceURL: geometryService,
                 printURL: printURL,
                 mapRef: map
-            }, "toolsView");
-            tools.startup();
-            query("#map_zoom_slider, #hidePanel, #rightPanel, .collapsedPanel").style("display", "none");
+            }, "toolsView2");
         } else {
-            registry.byId("toolsView").domNode.style.display = "block";
-            query("#map_zoom_slider, #hidePanel, #rightPanel, .collapsedPanel").style("display", "none");
+            if(registry.byId("toolsView2").domNode.style.display === "block"){
+                registry.byId("toolsView2").domNode.style.display = "none";
+            }else{
+            registry.byId("toolsView2").domNode.style.display = "block";
+        }
         }
     }); //end require
 }
