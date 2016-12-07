@@ -69,6 +69,7 @@ gulp.task('minmods', function(){
                 './src/scripts/mesa/basemapWidget.js',
                 './src/scripts/mesa/bookmarkWidget.js',
                 './src/scripts/mesa/changeTheme.js',
+                './src/scripts/mesa/themeTools.js',
                 './src/scripts/mesa/contextMenuWidget.js',
                 './src/scripts/mesa/coordinateCleaner.js',
                 './src/scripts/mesa/exportcsv.js',

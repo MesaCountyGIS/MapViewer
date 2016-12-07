@@ -74,8 +74,9 @@ function init() {
 function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
     roadLabels, popupObject, popupTemplateObject, legendObject) {
     require([
-        "dojo/on", "dojo/query", "dojo/dom", "dojo/touch"
-    ], function(on, query, dom, touch) {
+        "dojo/on", "dojo/query", "dojo/dom", "dojo/touch", "mesa/themeTools"
+    ], function(on, query, dom, touch, themeTools) {
+
         window.addEventListener("orientationchange", orientationChanged, false);
         map.on("mouse-move", function(e){
             showCoords(e, "screenCoordinatesUTM");
@@ -111,14 +112,16 @@ function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
             showShare("socialShare");
         });
         on(query('#layerSelect ul li'), touch.release, function(e){
-            themeClick(e, this, map, popupObject, popupTemplateObject, legendObject);
+            themeTools.themeClick(e, this, map, popupObject, popupTemplateObject, legendObject);
         });
         on(query('.plus'), touch.release, clickPlus);
         on(query('.baselyrs'), "click", function(e){
             baseLayersSwitch(e, parcelLayerObject, initialBasemap, roadLabels);
         });
         // on(query(".collapsedPanel"), touch.release, animatePanel);
-        on(dom.byId("hidePanel"), "click", animatePanel);
+        on(dom.byId("hidePanel"), "click", function(){
+            themeTools.animatePanel
+        });
         on(dom.byId("locate"), touch.release, function(){
             showLocator(JSONconfig.geometryService)
         });
@@ -806,8 +809,10 @@ function urlMapType(url, map, legend) {
             }
 
             function maptypeFound(type) {
-                getTemplate(type);
-                animatePanel("open");
+                require(["mesa/themeTools"], function(themeTools){
+                themeTools.getTemplate(type);
+                themeTools.animatePanel("open");
+            });
                 // setTimeout(function(){animatePanel("open")}, 400);
                 //After loading the theme, return the theme title so it can
                 //be displayed on the map.
@@ -855,73 +860,73 @@ function urlMapType(url, map, legend) {
     }); //end require
 }
 
-function getTemplate(newLayerName) {
-    var templateName = "dojo/text!./scripts/esri/mesa/templates/" + newLayerName + "Select.html";
-    document.getElementById(newLayerName + "Select") || require([
-        templateName, "dojo/dom-construct", "dojo/dom-attr", "dojo/dom"
-    ], function(template, domConstruct, domAttr, dom) {
-        domConstruct.place(template, "noControl", "before");
-    });
-}
-
-function themeClick(e, self, map, popupObject, popupTemplateObject, legend) {
-    e.stopPropagation();
-    var newLayer = self.attributes['data-value'].nodeValue;
-    getTemplate(newLayer);
-    if (newLayer !== 'epom' && newLayer.length > 0) {
-        var layerTitle = self.getElementsByTagName('a')[0].innerHTML;
-        var option = self.attributes['data-opt']
-            ? self.attributes['data-opt'].nodeValue: null;
-        setTimeout(function() {
-            require(["mesa/changeTheme"], function(changeTheme) {
-                new changeTheme({
-                    newLayer: newLayer,
-                    layerTitle: layerTitle,
-                    option: option,
-                    pVal: null,
-                    mapRef: map,
-                    infoWindowRef: popupObject,
-                    infoTemplateRef: popupTemplateObject,
-                    mapLegend: legend
-                }).then(animatePanel(e));
-            });
-        }, 200);
-    }
-}
-
-function animatePanel(e) {
-    /*AnimatePanel opens and closes the right side panel that displays a theme's
-    layers. The layers have check boxes next to them to toggle the layer on and
-    off.*/
-    require([
-        "dojo/dom", "dojo/query", "dojo/dom-attr", "dojo/dom-class", "dojo/dom-style"
-    ], function(dom, query, domAttr, domClass, domStyle) {
-        if (e === "open") {
-            dom.byId("hidePanel").innerHTML = "hide";
-            dom.byId("noControl").style.display = "block";
-            domClass.replace(dom.byId("rightPanel"), "expandedPanel", "collapsedPanel");
-            domClass.add("noControl", "someControl");
-        } else {
-            var parentcls = domAttr.get(e.target.parentNode, "class");
-            if (query(".select").every(function(node) {
-                return domStyle.get(node, "display") === "none";
-            })) {
-                domClass.remove("noControl", "someControl");
-            } else {
-                domClass.add("noControl", "someControl");
-            }
-            if (e.type === "click" && parentcls === "collapsedPanel") {
-                dom.byId("hidePanel").innerHTML = "hide";
-                domClass.replace(dom.byId("rightPanel"), "expandedPanel", "collapsedPanel");
-            } else if (e.type === "click" && parentcls === "expandedPanel") {
-                dom.byId("hidePanel").innerHTML = "Layers";
-                domClass.replace(dom.byId("rightPanel"), "collapsedPanel", "expandedPanel");
-            } else if (e.target.nodeName === "A" || e.target.nodeName === "LI") {
-                dom.byId("hidePanel").innerHTML = "hide";
-                domClass.replace(dom.byId("rightPanel"), "expandedPanel", "collapsedPanel");
-            } else {
-                return
-            }
-        }
-    });
-}
+// function getTemplate(newLayerName) {
+//     var templateName = "dojo/text!./scripts/esri/mesa/templates/" + newLayerName + "Select.html";
+//     document.getElementById(newLayerName + "Select") || require([
+//         templateName, "dojo/dom-construct", "dojo/dom-attr", "dojo/dom"
+//     ], function(template, domConstruct, domAttr, dom) {
+//         domConstruct.place(template, "noControl", "before");
+//     });
+// }
+//
+// function themeClick(e, self, map, popupObject, popupTemplateObject, legend) {
+//     e.stopPropagation();
+//     var newLayer = self.attributes['data-value'].nodeValue;
+//     getTemplate(newLayer);
+//     if (newLayer !== 'epom' && newLayer.length > 0) {
+//         var layerTitle = self.getElementsByTagName('a')[0].innerHTML;
+//         var option = self.attributes['data-opt']
+//             ? self.attributes['data-opt'].nodeValue: null;
+//         setTimeout(function() {
+//             require(["mesa/changeTheme"], function(changeTheme) {
+//                 new changeTheme({
+//                     newLayer: newLayer,
+//                     layerTitle: layerTitle,
+//                     option: option,
+//                     pVal: null,
+//                     mapRef: map,
+//                     infoWindowRef: popupObject,
+//                     infoTemplateRef: popupTemplateObject,
+//                     mapLegend: legend
+//                 }).then(animatePanel(e));
+//             });
+//         }, 200);
+//     }
+// }
+//
+// function animatePanel(e) {
+//     /*AnimatePanel opens and closes the right side panel that displays a theme's
+//     layers. The layers have check boxes next to them to toggle the layer on and
+//     off.*/
+//     require([
+//         "dojo/dom", "dojo/query", "dojo/dom-attr", "dojo/dom-class", "dojo/dom-style"
+//     ], function(dom, query, domAttr, domClass, domStyle) {
+//         if (e === "open") {
+//             dom.byId("hidePanel").innerHTML = "hide";
+//             dom.byId("noControl").style.display = "block";
+//             domClass.replace(dom.byId("rightPanel"), "expandedPanel", "collapsedPanel");
+//             domClass.add("noControl", "someControl");
+//         } else {
+//             var parentcls = domAttr.get(e.target.parentNode, "class");
+//             if (query(".select").every(function(node) {
+//                 return domStyle.get(node, "display") === "none";
+//             })) {
+//                 domClass.remove("noControl", "someControl");
+//             } else {
+//                 domClass.add("noControl", "someControl");
+//             }
+//             if (e.type === "click" && parentcls === "collapsedPanel") {
+//                 dom.byId("hidePanel").innerHTML = "hide";
+//                 domClass.replace(dom.byId("rightPanel"), "expandedPanel", "collapsedPanel");
+//             } else if (e.type === "click" && parentcls === "expandedPanel") {
+//                 dom.byId("hidePanel").innerHTML = "Layers";
+//                 domClass.replace(dom.byId("rightPanel"), "collapsedPanel", "expandedPanel");
+//             } else if (e.target.nodeName === "A" || e.target.nodeName === "LI") {
+//                 dom.byId("hidePanel").innerHTML = "hide";
+//                 domClass.replace(dom.byId("rightPanel"), "expandedPanel", "collapsedPanel");
+//             } else {
+//                 return
+//             }
+//         }
+//     });
+// }
