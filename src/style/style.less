@@ -114,14 +114,13 @@ div .titleButton .arrow:hover {
     padding: 0.5em 0;
     background-color: #A59F91;
     font-weight: bold;
-
 }
 
 
 /*----------Utility Styles----------------------*/
 
 #toolsView {
-      position:absolute;
+    //    position:absolute;
     display: none;
     width: 100%;
     height: 100%;
@@ -1419,7 +1418,7 @@ input:-moz-placeholder {
     bottom: 5px;
     width: 20%;
     color: black;
-    z-index: 1;
+    z-index: 10000;
 }
 
 #screenCoordinatesUTM {
@@ -1489,6 +1488,20 @@ input:-moz-placeholder {
 
 /*-----------------------Desktop tool strip styles---------------------------------------*/
 
+//#DTtoolstrip {
+//    /*display:none; when toolsButton is displayed in ipad*/
+//
+//    margin-left: 1em;
+//    width: auto;
+//    float: left;
+//    button {
+//        padding-bottom: 1em;
+//        min-height: 40px;
+//        height: auto;
+//        min-width: 40px;
+//        width: auto;
+//    }
+//}
 #DTtoolstrip {
     margin-left: 1em;
     //    margin-top: -0.25em;
@@ -2399,6 +2412,10 @@ input {
 
 /*--Only display the toolsButton if we are being accessed by an ipad or tablet*/
 
+.toolsButton {
+    margin: 2em 0 0 1em;
+}
+
 .dijitButtonNode {
     border-radius: 4px;
     padding: 0.5em;
@@ -2442,43 +2459,789 @@ input {
     }
 }
 
-/*left slideout menu*/
 
-.toolsButton {
-    margin: 0 0 2em 2em;
-}
+/*Media Query to target iPads in portrait orientation
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait)*/
 
-#backMenu{
-  margin: 0 4.5em 0 0.5em;
-}
 
-.mesaTools{
-  position: absolute;
-  top: 3.5em;
-  left: 0;
-  background: white;
-  min-width: 320px;
-  height: 100%;
-  padding: 1em 0 0 0;
-  z-index: 2;
-  & ul li{
-      margin: 0 auto .5em auto;
-      background-color: #ffe284;
-      padding: .2em;
-      width: 10em;
-      border-radius: 3px;
-    }
-}
+/*@media (max-device-width : 1024px) and (orientation : portrait)*/
 
-#staticDropdown{
-  display:none;
-}
+// @media only screen and (max-device-width: 1024px) and (orientation: portrait) {
+//     #loc {
+//         margin: 0.2em 0 1em 1em;
+//         height: 0.8em;
+//         clear: left;
+//     }
+//     #locLabel {
+//         float: left;
+//         font-size: 0.7em;
+//         margin: 0 0.5em 0 1em;
+//     }
+//     #GCSblock, #GCSblock2 {
+//         clear: left;
+//     }
+//     #snapmessage {
+//         display: none;
+//     }
+//     .alertmessageIP {
+//         font-size: 1em !important;
+//     }
+//     .ui-button,
+//     .ui-button-text .ui-button {
+//         font-size: 15px !important;
+//     }
+//     .esriScalebar {
+//         top: 85%;
+//         left: 80%;
+//         color: black;
+//     }
+//     #printNavButtons {
+//         margin: 0;
+//         width: 100%;
+//     }
+//     #printDropdowns {
+//         margin-left: 0;
+//         width: 100%;
+//         font-size: 0.8em;
+//     }
+//     #DTtoolstrip {
+//         /*display:none; when toolsButton is displayed in ipad*/
+//         display: none;
+//     }
+//     //    #toolSelect {
+//     //        font-size: 0.8em;
+//     //        text-align: center;
+//     //    }
+//     #IPtoolstrip {
+//         display: block;
+//         float: left;
+//         margin-left: 1em;
+//         width: 5em;
+//     }
+//     #openTools {
+//         display: inline-block;
+//         width: 4em;
+//         height: 1em;
+//         margin-top: 0.4em;
+//         float: left;
+//         & > li ul {
+//             display: none;
+//             z-index: 50;
+//         }
+//     }
+//     #screenCoordinatesUTM {
+//         display: none;
+//     }
+//     #head3 {
+//         margin-left: -1em !important;
+//     }
+//     #help {
+//         display: none;
+//     }
+//     #locate {
+//         display: inline;
+//     }
+//     #clear-storage {
+//         margin-left: 0;
+//     }
+// }
+//
+//
+// /*@media (min-width: 768px) and (max-width: 1024px) and (orientation : landscape)*/
+//
+// @media only screen and (max-width: 1024px) and (orientation: landscape) {
+//     #locate {
+//         display: inline;
+//     }
+//     #loc {
+//         margin: -0.15em 0 1em 1em;
+//         height: 0.8em;
+//     }
+//     #snapmessage {
+//         display: none;
+//     }
+//     .alertmessageIP {
+//         font-size: 1em !important;
+//     }
+//     .ui-button,
+//     .ui-button-text .ui-button {
+//         font-size: 15px !important;
+//     }
+//     .esriScalebar {
+//         top: 85%;
+//         left: 80%;
+//         color: black;
+//     }
+//     #printNavButtons {
+//         margin: 0;
+//         width: 100%;
+//     }
+//     #printDropdowns {
+//         margin-left: 0;
+//         width: 100%;
+//         font-size: 0.8em;
+//     }
+//     #DTtoolstrip {
+//         /*display:none; when toolsButton is displayed in ipad*/
+//         display: none;
+//     }
+//     //    #toolSelect {
+//     //        font-size: 0.8em;
+//     //        text-align: center;
+//     //    }
+//     #IPtoolstrip {
+//         display: block;
+//         float: left;
+//         margin-left: 1em;
+//         width: 5em;
+//     }
+//     #openTools {
+//         height: 1.2em;
+//         margin-top: 0.25em;
+//         width: 4em;
+//         & > li ul {
+//             display: none;
+//         }
+//     }
+//     #map_zoom_slider {
+//         // display: none;
+//     }
+//     #screenCoordinatesUTM {
+//         display: none;
+//     }
+//     #head3 {
+//         margin-left: -1em !important;
+//     }
+//     #help {
+//         display: none;
+//     }
+//     #locate {
+//         display: inline;
+//     }
+//     #clear-storage {
+//         margin-left: 0;
+//     }
+// }
 
-#map_zoom_slider{
-  z-index:0 !important;
-}
 
-.layersMenu{
-  display:none;
-}
+/*query for tablets smaller than 1024*/
+
+// @media only screen and (max-width: 1023px) {
+//
+//     #snapmessage {
+//         display: none;
+//     }
+//     .alertmessageIP {
+//         font-size: 1em !important;
+//     }
+//     .ui-button,
+//     .ui-button-text .ui-button {
+//         font-size: 15px !important;
+//     }
+//     .esriScalebar {
+//         top: 85%;
+//         left: 80%;
+//         color: black;
+//     }
+//     #printNavButtons {
+//         margin: 0;
+//         width: 100%;
+//     }
+//     #printDropdowns {
+//         margin-left: 0;
+//         width: 100%;
+//         font-size: 0.8em;
+//     }
+//     #DTtoolstrip {
+//         /*display:none; when toolsButton is displayed in ipad*/
+//         display: none;
+//     }
+//     #toolSelect {
+//         font-size: 0.8em;
+//         text-align: center;
+//     }
+//     #toolSelect {
+//         display: block !important;
+//     }
+//     #IPtoolstrip {
+//         display: block;
+//         float: left;
+//         margin-left: 1em;
+//         /*width: 5em;*/
+//     }
+//     #openTools {
+//         height: 16px;
+//         margin-top: 0.4em;
+//         width: 4em;
+//         & > li ul {
+//             display: none;
+//         }
+//     }
+//     #screenCoordinatesUTM {
+//         display: none;
+//     }
+//     #head3 {
+//         margin-left: -1em !important;
+//     }
+//     #help {
+//         display: none;
+//     }
+//     #locate {
+//         display: inline;
+//     }
+//     #clear-storage {
+//         margin-left: 0;
+//     }
+//     #qFields {
+//         max-width: 19.7em;
+//         max-height: 50px;
+//         min-width: 19.7em;
+//         min-height: 50px;
+//     }
+//     #displayButtons {
+//         display: block;
+//         width: 9.5em;
+//         margin-top: 0.5em;
+//         &:hover {
+//             cursor: pointer;
+//         }
+//     }
+//     #clearSelected {
+//         display: inline;
+//     }
+//
+//     #MSearch{ //mobile tool images
+//         .toolstripbuttons(@Magnify-x,
+//     @Magnify-y,
+//     @Magnify-width,
+//     @Magnify-height,
+//     1px,6.5px, 50px, 35px);
+// }
+//
+// #MBasemap {
+//     // .toolstripbuttons(@Imagery_text-x,
+//     // @Imagery_text-y,
+//     // @Imagery_text-width,
+//     // @Imagery_text-height,
+//     // 1px, 9px, 45px, 30px);
+// }
+//
+// .Mimagery {
+//     .toolstripbuttons(@i_layers_text-x,
+//     @i_layers_text-y,
+//     @i_layers_text-width,
+//     @i_layers_text-height,
+//     1px, 9px, 45px, 30px);
+// }
+//
+// .Mbasemap {
+//     .toolstripbuttons(@Imagery_text-x,
+//     @Imagery_text-y,
+//     @Imagery_text-width,
+//     @Imagery_text-height,
+//     0px, 9px, 45px, 30px);
+// }
+//
+// #MLegend {
+//     .toolstripbuttons(@legend_text-x,
+//     @legend_text-y,
+//     @legend_text-width,
+//     @legend_text-height,
+//     0,
+//     6px,
+//     45px,
+//     30px);
+// }
+//
+//
+// #MMeasure {
+//     .toolstripbuttons(@measure_text-x,
+//     @measure_text-y,
+//     @measure_text-width,
+//     @measure_text-height, 0, 8px, 45px, 30px);
+// }
+//
+// #MQueryatts {
+//     .toolstripbuttons(@tab_queryattribute_text-x,
+//     @tab_queryattribute_text-y,
+//     @tab_queryattribute_text-width,
+//     @tab_queryattribute_text-height,
+//     0,
+//     8px, 45px, 30px);
+// }
+//
+// #MBookmarks {
+//     .toolstripbuttons(@i_bookmark_text2-x,
+//     @i_bookmark_text2-y,
+//     @i_bookmark_text2-width,
+//     @i_bookmark_text2-height,
+//     1px,
+//     8px, 45px, 30px);
+// }
+//
+// #MPrint {
+//     .toolstripbuttons(@i_print_text-x,
+//     @i_print_text-y,
+//     @i_print_text-width,
+//     @i_print_text-height,
+//     1px,
+//     8px, 45px, 30px);
+// }
+//
+// #MHelp {
+//     .toolstripbuttons(@i_help_text-x,
+//     @i_help_text-y,
+//     @i_help_text-width,
+//     @i_help_text-height,
+//     1px,8px, 45px, 30px);
+// }
+//
+// #MShare {
+//     .toolstripbuttons(@share32-x,
+//     @share32-y,
+//     @share32-width,
+//     @share32-height,
+//     1px,8px, 45px, 30px);
+// }
+//
+//
+// .mesaToolsContent .mesaToolsRS{
+//     width:auto;
+//     height:auto;
+//     max-height:90%;
+//     max-width:100%;
+//
+// }
+// /*  For responsive images as background */
+//
+// .mesaToolsBG{
+//     background-position:center center;
+//     background-repeat:no-repeat;
+//     background-size:cover; /* you change this to "contain" if you don't want the images to be cropped */
+//     color:#fff;
+// }
+//
+//
+// /*mesa Tools css*/
+//
+// .mesaTools{
+//     overflow:auto;
+//     width:100vw;
+//     height:100vh;
+//     margin:0 auto;
+// }
+// .mesaToolsSquare {
+//     float:left;
+//     position: relative;
+//     width: 30%;
+//     padding-bottom : 30%; /* = width for a 1:1 aspect ratio */
+//     margin:1.66%;
+//     overflow:hidden;
+// }
+//
+// .mesaToolsContent {
+//     position:absolute;
+//     height:80%; /* = 100% - 2*10% padding */
+//     width:90%; /* = 100% - 2*5% padding */
+//     padding: 10% 5%;
+// }
+// .mesaToolsTable{
+//     display:table;
+//     height:100%;
+//     width:100%;
+// }
+// .mesaTools-table-cell{
+//     display:table-cell;
+//     vertical-align:middle;
+//     height:100%;
+//     width:100%;
+// }
+//
+//     #coordinateBlock,
+//     .esriScalebar,
+//     #socialShare,
+//     #autocompleteSearch,
+//     #sharebutton
+//     {
+//         display: none;
+//     }
+//
+//     #toolPanel{
+//         display: none;
+//         position:absolute;
+//         background:white;
+//         text-align:center;
+//         right: -3em!important;
+//         top: 60%;
+//         max-width: 100px;
+//         height: 20px;
+//         z-index: 1;
+//         border-bottom-right-radius: 5px;
+//         border-bottom-left-radius: 5px;
+//
+//         -webkit-border-bottom-right-radius: 5px;
+//         -webkit-border-bottom-left-radius: 5px;
+//
+//         -moz-border-bottom-right-radius: 5px;
+//         -moz-border-bottom-left-radius: 5px;
+//
+//         border-right: 1px solid gray;
+//         border-left: 1px solid gray;
+//         border-bottom: 1px solid gray;
+//         cursor: pointer;
+//         padding: 0.5em 1em 0 1.6em;
+//         font-size: .7em;
+//         -webkit-transform: rotate(90deg);
+//         transform: rotate(90deg);
+//     }
+//
+//     #toolSelect {
+//     margin-top:0.5em !important
+//     }
+//
+//     #searchFieldDialog {
+//         font-size: 0.8em;
+//         display: none;
+//         width: 100%;
+//         min-height:100vh;
+//         top:0;
+//         left:0;
+//         z-index:1000000;
+//         .closer{
+//             background-color:white;
+//             border:none;
+//             margin-top: 0.3em;
+//         }
+//         & + div {
+//             width: 12em;
+//             margin:0 auto;
+//         }
+//         display: none;
+//         #resultUL{
+//             // background-color: white;
+//             margin-left: 26.3em;
+//             // margin-top: 0.5em;
+//             // width:14.7em;
+//             // .borderRadius(2px);
+//             // & :hover{
+//             //     cursor:pointer;
+//             //     background-color:#EDECE9;
+//             // }
+//             // & :focus{
+//             //     background-color:#EDECE9;
+//             // }
+//             // li{
+//             //     .borderRadius;
+//             //     padding:0.3em;
+//             //     outline:none;
+//             // }
+//         }
+//     }
+//     #loc {
+//         margin-left: 40%!important;
+//         height: 1.5em!important;
+//     }
+//
+// }
+
 @import './mobile-tablet-horizontal.less';
+
+// @media only screen and (max-width: 640px) and (orientation: landscape) {
+//     #toolPanel{
+//         top: 60% !important;
+//         font-size: .7em;
+//     }
+// }
+//
+// @media only screen and (max-width: 640px) {
+//   .stacked-toggle {
+//       display: flex;
+//       flex-direction: column;
+//   }
+//
+//   .stacked-toggle:visited {
+//       color:#000000;
+//   }
+//
+//   .stacked-toggle span{
+//     width:2em;
+//     height:5px;
+//     border-bottom: 4px solid black;
+//   }
+//
+//     #layerSelect {
+//         width: 17em !important;
+//         & > ul {
+//             max-height: 85vh !important;
+//             overflow-y: auto;
+//             width: 17.5em;
+//         }
+//     }
+//     #mainfish {
+//         float: left;
+//         margin-left: 0.5em !important;
+//     }
+//     #measureDialog,#measureDialog2,
+//     #queryDialog,
+//     #queryDialog2,
+//     // #legendDialog,
+//     #bookmarkDialog, #bookmarkDialog2,
+//     #printDialog, #printDialog2,
+//     #helpMenu, #helpMenu2
+//     {
+//         font-size: 0.8em;
+//         display: none;
+//         width: 100%;
+//         height:100%;
+//         top:0;
+//         // & + div {
+//         //     width: 12em;
+//         // }
+//     }
+//
+//     #legendDialog {
+//         // background:blue;
+//         width: 100% !important;
+//         height:100% !important;
+//         // position:absolute !important;
+//         top: 0  !important;
+//         left: 0 !important;
+//         opacity:1;
+//         & + div {
+//             width: 12em;
+//         }
+//     }
+//
+//     #map_zoom_slider{
+//         // z-index: 0 !important;
+//         display:none;
+//     }
+//
+//     #historicalImagery {display:none;}
+//
+//     #toolPanel{
+//         display: none;
+//         text-align:center;
+//         right: -3em!important;
+//         top: 55%;
+//         max-width: 100px;
+//         height: 20px;
+//         z-index: 1;
+//         // padding: 0.5em 1em 0 2em;
+//         // padding: 0.25em 1em 0.25 1em;
+//         font-size: .6em;
+//     }
+//
+//     .dialogHeader {
+//         width: 100%;
+//         margin-left: -0.7em !important;
+//         background-color:white;
+//         border-radius: 0;
+//         -moz-border-radius: 0;
+//         -webkit-border-radius: 0;
+//         border:none;
+//     }
+//     .dialogHeader div {
+//         left: 40%;
+//     }
+//     .query {
+//         top: 0 !important;
+//         left: 0 !important;
+//         right: 0 !important;
+//         bottom: 0 !important;
+//         width: 100% !important;
+//         // z-index: 10;
+//         opacity: 1;
+//     }
+//
+//     #resultSpan{
+//         font-size: 1em;
+//         padding-top:0.5em;
+//         margin:3em;
+//     }
+// //    #coordinateBlock,
+// //    .esriScalebar,
+// //    #socialShare,
+// //    //    #searchSelect,
+// //    #autocompleteSearch,
+// //    #sharebutton
+// ////    #hidePanel,
+// ////    #rightPanel
+// //    {
+// //        display: none;
+// //    }
+//
+//     #locate {
+//         float: right;
+//         margin: 0.2em 0.5em 0 0;
+//     }
+// .esriMobilePopupInfoView, .esriMobileNavigationBar {
+//     z-index: 1000;
+// }
+//
+//     #toolSelect {
+//     margin-top:0.75em !important;
+//     }
+//
+//     #loading{
+//         left:25%;
+//     }
+//
+//     #searchFieldDialog {
+//         #resultUL{
+//             // background-color: white;
+//             margin-left: 5em !important;
+//             // margin-top: 0.5em;
+//             // width:14.7em;
+//             // .borderRadius(2px);
+//             // & :hover{
+//             //     cursor:pointer;
+//             //     background-color:#EDECE9;
+//             // }
+//             // & :focus{
+//             //     background-color:#EDECE9;
+//             // }
+//             // li{
+//             //     .borderRadius;
+//             //     padding:0.3em;
+//             //     outline:none;
+//             // }
+//         }
+//     }
+//
+//     #loc {
+//         margin-left: 20% !important;
+//         height: 1.5em !important;
+//     }
+//
+//     .searchBox {
+//         & .searchheader {
+//             background-color: white;
+//             border: none;
+//         }
+//     }
+//
+//     #progressbar {
+//         top:70%;
+//         left:25%;
+//         z-index:100000;
+//     }
+//
+//     #tabSpan{
+//         // position:absolute;
+//         // margin-left:2em;
+//     }
+//
+//     .queryHeader {
+//         font-size: 1.1em;
+//         font-weight: bold;
+//         background-color: #9C9586;
+//         width: 100%;
+//         height: 35px;
+//         margin: -0.5em -0.5em 0.5em -1em;
+//         padding:0 0.5em;
+//         // padding:0;
+//
+//         // border: 0.5px solid gray;
+//         border-bottom:1px solid gray;
+//         .borderRadius(0);
+//         & > div{
+//          float:right;
+//          margin-right:1em;
+//         }
+//         & a{
+//             margin-top:0.9em;
+//             float:left;
+//             font-size:0.7em;
+//             cursor:pointer;
+//             border: 1px solid black;
+//             border-bottom:none;
+//             border-top-left-radius: 1em;
+//             border-top-right-radius: 1em;
+//             background-color: #D3CFC8;
+//             padding:0.3em;
+//         }
+//         & a:first-child{
+//             margin-left:0.5em;
+//         }
+//     }
+//
+//     .returnToMap{
+//         float:right;
+//         // display:none;
+//         // position:relative;
+//         background:#D3CFC8;
+//         font-size: 0.8em;
+//         padding:7px 0;
+//         width:4em;
+//         text-align:center;
+//         margin-top:0.4em;
+//         border-radius:3px;
+//     }
+//
+//     .returnToTools{
+//         float:left;
+//         font-size: 0.8em;
+//     }
+//
+//     .left-button{
+//         float:left !important;
+//         display:inline-block;
+//         position:relative;
+//         background:#D3CFC8;
+//         padding:7px 0;
+//         width:4em;
+//         text-align:center;
+//         margin-top:0.4em;
+//         margin-left:1em;
+//         // border-radius:3px;
+//         border-bottom-right-radius:3px;
+//         border-top-right-radius:3px;
+//     }
+//
+//     .left-button:after{
+//         content: '';
+//         display: block;
+//         position: absolute;
+//         right: 99%;
+//         top: 50%;
+//         margin-top: -13px;
+//         width: 0;
+//         height: 0;
+//         border-top: 14px solid transparent;
+//         border-right: 8px solid #D3CFC8;
+//         border-bottom: 13px solid transparent;
+//         border-left: 13px solid transparent;
+//     }
+//
+//     .left-button:hover, .left-button:after:hover{
+//         cursor:pointer;
+//     }
+//
+//     #clearGraphic{
+//      margin-left:2em;
+//     }
+//
+//     #frm2, #frm2 {
+//         margin: 0 1em 0.5em 0;
+//     }
+//
+//     problemForm2{
+//         width:98%;
+//     }
+//
+//     button.closeHelp{
+//         margin-top:-0.25em;
+//     }
+//
+//
+// }
+//
+// @media only screen and (max-width: 640px) and (orientation : landscape) {
+//     .collapsedPanel{
+//         top:25%;
+//     }
+//     .expandedPanel{
+//         top:26%;
+//     }
+// }
