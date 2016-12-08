@@ -35,8 +35,6 @@ basemapWidget) {
             '</ul></div>';
             domConstruct.place(searchList, query(".mesaTools")[0], "before");
 
-            console.log("setHandlers3", query('.themeMenu'))
-
             on(query('#mobileSearch ul li'), "click", function (e) {
                 e.stopPropagation();
                 var type = this.getAttribute('data-value');
@@ -56,12 +54,23 @@ basemapWidget) {
                 toPage = domAttr.has(e.target, 'data-to')?
                     domAttr.get(e.target, 'data-to'): undefined;
                 if(toPage !== undefined){
+                    // dom.byId('backMenu').style.display = 'block';
                     domClass.add(query(".mainSideMenu")[0], "displayNo");
                     domClass.remove(query("." + toPage)[0], "displayNo");
                     domAttr.set('backMenu', 'data-to', 'mainSideMenu');
                     domAttr.set('backMenu', 'data-from', toPage);
                 }
             });
+
+
+            on(query('.themeMenu'), touch.release, function(e){
+                var spanList = e.target.parentNode.parentNode.getElementsByTagName('span');
+                var thisSpan = e.target.parentNode.getElementsByTagName('span')[0];
+                for (i = 0; i < spanList.length; i++){
+                    spanList[i].innerHTML = '';
+                };
+                thisSpan.innerHTML = "&#10004;";
+            })
 
             on(dom.byId('backMenu'), touch.release, function(e){
                 var backToPage = domAttr.get(e.target, 'data-to');
