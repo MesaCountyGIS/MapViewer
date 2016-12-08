@@ -1,10 +1,10 @@
 define([
      "dojo/_base/declare", "dojo/dom-construct", "dojo/dom", "dojo/dom-class", "dojo/dom-attr", "dojo/dnd/move", "dojo/query", "dojo/dom-style",
-    "esri/tasks/PrintTask", "esri/tasks/PrintParameters", "esri/tasks/PrintTemplate", "esri/dijit/Print", "dojo/on", "dojo/touch",
+    "esri/tasks/PrintTask", "esri/tasks/PrintParameters", "esri/tasks/PrintTemplate", "esri/dijit/Print", "dojo/on", "dojo/touch", "mesa/themeTools",
      "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dojo/text!./templates/toolsView2.html", "mesa/measureWidget",
     "mesa/printWidget", "mesa/queryWidget", "mesa/bookmarkWidget", "mesa/helpWidget", "mesa/shareFormWidget", "dijit/registry", "mesa/basemapWidget"
 ], function (declare, domConstruct, dom, domClass, domAttr, move, query, domStyle,
-    PrintTask, PrintParameters, PrintTemplate, Print, on, touch, _WidgetBase, _TemplatedMixin, template,
+    PrintTask, PrintParameters, PrintTemplate, Print, on, touch, themeTools, _WidgetBase, _TemplatedMixin, template,
     measureWidget, printWidget, queryWidget, bookmarkWidget, helpWidget, shareFormWidget, registry,
 basemapWidget) {
         var map, toolsWidget;
@@ -16,29 +16,36 @@ basemapWidget) {
         geometryServiceURL: null,
         printURL: null,
         mapRef: null,
+        popupRef: null,
+        popupTemplateRef: null,
+        legendRef: null,
 
         postCreate: function () {
             domConstruct.place(this.domNode, this.srcNodeRef.id, "before");
             toolsWidget = this;
             map = toolsWidget.mapRef;
             gsvc = toolsWidget.geometryServiceURL;
-            toolsWidget.domNode.style.display = "block";
-            var searchList = '<div id="mobileSearch"><ul><b>Search By<br><br></b>' +
-                '<li data-value="address"><a>Address</a></li>' +
-                '<li data-value="intersection"><a>Road Intersection</a></li>' +
-                '<li data-value="account"><a>Account Number</a></li>' +
-                '<li data-value="parcelNo"><a>Parcel Number</a></li>' +
-                '<li data-value="subdivision"><a>Subdivision</a></li>' +
-                '<li data-value="PLSS"><a title="Search by Township, Range and Section">Township/Range</a></li>' +
-                '<li data-value="place"><a>Place Name</a></li>' +
-                '<li data-value="Latitude/Longitude"><a>Latitude/Longitude</a></li>' +
-            '</ul></div>';
-            domConstruct.place(searchList, query(".mesaTools")[0], "before");
+            popupObject = toolsWidget.popupRef;
+            popupTemplateObject = toolsWidget.popupTemplateRef;
+            legendObject = toolsWidget.legendRef;
+
+            // toolsWidget.domNode.style.display = "block";
+            // var searchList = '<div id="mobileSearch"><ul><b>Search By<br><br></b>' +
+            //     '<li data-value="address"><a>Address</a></li>' +
+            //     '<li data-value="intersection"><a>Road Intersection</a></li>' +
+            //     '<li data-value="account"><a>Account Number</a></li>' +
+            //     '<li data-value="parcelNo"><a>Parcel Number</a></li>' +
+            //     '<li data-value="subdivision"><a>Subdivision</a></li>' +
+            //     '<li data-value="PLSS"><a title="Search by Township, Range and Section">Township/Range</a></li>' +
+            //     '<li data-value="place"><a>Place Name</a></li>' +
+            //     '<li data-value="Latitude/Longitude"><a>Latitude/Longitude</a></li>' +
+            // '</ul></div>';
+            // domConstruct.place(searchList, query(".mesaTools")[0], "before");
 
             on(query('#mobileSearch ul li'), "click", openSearchDialog);
             on(dom.byId("toolPanel"), touch.release, displayTool);
-            on(query(".mainSideMenu")[0], touch.release, dispatchMainMenuClick);
-            on(query('.themeMenu li'), "click", setThemeMenuCheckmark);
+            on(query(".mainSideMenu li"), "click", dispatchMainMenuClick);
+            on(query('.themeMenu li'), "click", dispatchThemeMenuClick);
             on(dom.byId('backMenu'), touch.release, setBackButtonTarget);
 
             function openSearchDialog(e){
@@ -57,10 +64,10 @@ basemapWidget) {
             }
 
             function dispatchMainMenuClick(e){
+                e.stopPropagation();
                 toPage = domAttr.has(e.target, 'data-to')?
                     domAttr.get(e.target, 'data-to'): undefined;
                 if(toPage !== undefined){
-                    // dom.byId('backMenu').style.display = 'block';
                     domClass.add(query(".mainSideMenu")[0], "displayNo");
                     domClass.remove(query("." + toPage)[0], "displayNo");
                     domAttr.set('backMenu', 'data-to', 'mainSideMenu');
@@ -68,15 +75,21 @@ basemapWidget) {
                 }
             }
 
-            function setThemeMenuCheckmark(e){
+            function dispatchThemeMenuClick(e) {
                 var spanList = this.parentNode.getElementsByTagName('span');
-                console.log(spanList)
                 var thisSpan = this.getElementsByTagName('span')[0];
-                console.log(thisSpan)
-                for (i = 0; i < spanList.length; i++){
-                    spanList[i].innerHTML = '';
-                };
-                thisSpan.innerHTML = "&#10004;";
+                var layer = domAttr.get(this, 'data-value');
+
+                themeTools.themeClick(e, this, map, popupObject, popupTemplateObject, legendObject);
+                registry.byId("toolsView2").domNode.style.display = "none";
+
+                //Place check mark next to currently active theme
+                (function () {
+                    for (i = 0; i < spanList.length; i++) {
+                        spanList[i].innerHTML = '';
+                    };
+                    thisSpan.innerHTML = "&#10004;";
+                })();
             }
 
             function setBackButtonTarget(e){

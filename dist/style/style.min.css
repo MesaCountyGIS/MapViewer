@@ -2296,6 +2296,15 @@ input {
   border-radius: 3px;
 }
 
+.themeMenu {
+  height: 70%;
+  overflow: auto;
+}
+
+.themeMenu li {
+  width: 16em!important;
+}
+
 #staticDropdown {
   display: none;
 }

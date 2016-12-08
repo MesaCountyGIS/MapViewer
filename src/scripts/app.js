@@ -41,7 +41,7 @@ function init() {
         var initialBasemap = lmG.vectorBasemap;
 
         // Add the initial basemap, labels and parcel layer to the map
-        aG.map.addLayers([lmG.vectorBasemap, lmG.roadLabels, lmG.pLay]);
+        aG.map.addLayers([lmG.vectorBasemap, lmG.pLay, lmG.roadLabels]);
         aG.map.on("load", function() {
             /* Once the map is loaded, initialize the following map components,
             check the url for parameters, register event handlers for the map,
@@ -76,13 +76,13 @@ function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
     require([
         "dojo/on", "dojo/query", "dojo/dom", "dojo/touch", "mesa/themeTools"
     ], function(on, query, dom, touch, themeTools) {
-        console.log("setHandlers", query('.themeMenu'))
         window.addEventListener("orientationchange", orientationChanged, false);
         map.on("mouse-move", function(e){
             showCoords(e, "screenCoordinatesUTM");
         });
         on(dom.byId("menuSelect"), "click", function() {
-            runToolsView(JSONconfig.geometryService, JSONconfig.printURL, map);
+            runToolsView(JSONconfig.geometryService, JSONconfig.printURL, map,
+                popupObject, popupTemplateObject, legendObject);
         });
         on(dom.byId("help"), touch.release, function(e) {
             showHelp(e, JSONconfig.printURL);
@@ -273,7 +273,8 @@ function checkForMobile() {
     return isMobile;
 }
 
-function runToolsView(geometryService, printURL, map) {
+function runToolsView(geometryService, printURL, map,
+    popupObject, popupTemplateObject, legendObject) {
     require([
         "dijit/registry", "mesa/toolsWidget2"
     ], function(registry, toolsWidget) {
@@ -281,7 +282,10 @@ function runToolsView(geometryService, printURL, map) {
             var tools = new toolsWidget({
                 geometryServiceURL: geometryService,
                 printURL: printURL,
-                mapRef: map
+                mapRef: map,
+                popupRef: popupObject,
+                popupTemplateRef: popupTemplateObject,
+                legendRef: legendObject
             }, "toolsView2");
         } else {
             if(registry.byId("toolsView2").domNode.style.display === "block"){
@@ -858,74 +862,3 @@ function urlMapType(url, map, legend) {
         }
     }); //end require
 }
-
-// function getTemplate(newLayerName) {
-//     var templateName = "dojo/text!./scripts/esri/mesa/templates/" + newLayerName + "Select.html";
-//     document.getElementById(newLayerName + "Select") || require([
-//         templateName, "dojo/dom-construct", "dojo/dom-attr", "dojo/dom"
-//     ], function(template, domConstruct, domAttr, dom) {
-//         domConstruct.place(template, "noControl", "before");
-//     });
-// }
-//
-// function themeClick(e, self, map, popupObject, popupTemplateObject, legend) {
-//     e.stopPropagation();
-//     var newLayer = self.attributes['data-value'].nodeValue;
-//     getTemplate(newLayer);
-//     if (newLayer !== 'epom' && newLayer.length > 0) {
-//         var layerTitle = self.getElementsByTagName('a')[0].innerHTML;
-//         var option = self.attributes['data-opt']
-//             ? self.attributes['data-opt'].nodeValue: null;
-//         setTimeout(function() {
-//             require(["mesa/changeTheme"], function(changeTheme) {
-//                 new changeTheme({
-//                     newLayer: newLayer,
-//                     layerTitle: layerTitle,
-//                     option: option,
-//                     pVal: null,
-//                     mapRef: map,
-//                     infoWindowRef: popupObject,
-//                     infoTemplateRef: popupTemplateObject,
-//                     mapLegend: legend
-//                 }).then(animatePanel(e));
-//             });
-//         }, 200);
-//     }
-// }
-//
-// function animatePanel(e) {
-//     /*AnimatePanel opens and closes the right side panel that displays a theme's
-//     layers. The layers have check boxes next to them to toggle the layer on and
-//     off.*/
-//     require([
-//         "dojo/dom", "dojo/query", "dojo/dom-attr", "dojo/dom-class", "dojo/dom-style"
-//     ], function(dom, query, domAttr, domClass, domStyle) {
-//         if (e === "open") {
-//             dom.byId("hidePanel").innerHTML = "hide";
-//             dom.byId("noControl").style.display = "block";
-//             domClass.replace(dom.byId("rightPanel"), "expandedPanel", "collapsedPanel");
-//             domClass.add("noControl", "someControl");
-//         } else {
-//             var parentcls = domAttr.get(e.target.parentNode, "class");
-//             if (query(".select").every(function(node) {
-//                 return domStyle.get(node, "display") === "none";
-//             })) {
-//                 domClass.remove("noControl", "someControl");
-//             } else {
-//                 domClass.add("noControl", "someControl");
-//             }
-//             if (e.type === "click" && parentcls === "collapsedPanel") {
-//                 dom.byId("hidePanel").innerHTML = "hide";
-//                 domClass.replace(dom.byId("rightPanel"), "expandedPanel", "collapsedPanel");
-//             } else if (e.type === "click" && parentcls === "expandedPanel") {
-//                 dom.byId("hidePanel").innerHTML = "Layers";
-//                 domClass.replace(dom.byId("rightPanel"), "collapsedPanel", "expandedPanel");
-//             } else if (e.target.nodeName === "A" || e.target.nodeName === "LI") {
-//                 dom.byId("hidePanel").innerHTML = "hide";
-//                 domClass.replace(dom.byId("rightPanel"), "expandedPanel", "collapsedPanel");
-//             } else {
-//                 return
-//             }
-//         }
-//     });
-// }
