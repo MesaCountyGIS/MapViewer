@@ -58,6 +58,7 @@ div .titleButton .arrow:hover {
 }
 
 #toolsView {
+  position: absolute;
   display: none;
   width: 100%;
   height: 100%;
@@ -1316,7 +1317,7 @@ input:-moz-placeholder {
   bottom: 5px;
   width: 20%;
   color: #000;
-  z-index: 10000;
+  z-index: 1;
 }
 
 #screenCoordinatesUTM {
@@ -2220,10 +2221,6 @@ input {
   opacity: .8;
 }
 
-.toolsButton {
-  margin: 2em 0 0 1em;
-}
-
 .dijitButtonNode {
   border-radius: 4px;
   padding: .5em;
@@ -2272,8 +2269,55 @@ input {
   cursor: pointer;
 }
 
+.toolsButton {
+  margin: 0 0 2em 2em;
+}
+
+#backMenu {
+  margin: 0 4.5em 0 .5em;
+}
+
+.mesaTools {
+  position: absolute;
+  top: 3.5em;
+  left: 0;
+  background: #fff;
+  min-width: 320px;
+  height: 100%;
+  padding: 1em 0 0;
+  z-index: 2;
+}
+
+.mesaTools ul li {
+  margin: 0 auto .5em;
+  background-color: #ffe284;
+  padding: .2em;
+  width: 10em;
+  border-radius: 3px;
+}
+
+#staticDropdown {
+  display: none;
+}
+
+#map_zoom_slider {
+  z-index: 0!important;
+}
+
+.layersMenu {
+  display: none;
+}
+
 @media only screen and (max-width:1024px) {
-  #snapmessage {
+  #autocompleteSearch,
+  #coordinateBlock,
+  #layerSelect,
+  #map_zoom_slider,
+  #rightPanel,
+  #sharebutton,
+  #snapmessage,
+  #socialShare,
+  .esriScalebar {
     display: none;
   }
 
@@ -2397,210 +2441,12 @@ input {
     background-color: #dad7d0;
   }
 
-  .Mimagery {
-    background: #e1ded9 url("../images/sprite.png") no-repeat 4px -1303px;
-    border-style: none;
-    width: 45px;
-    height: 30px;
-    padding-bottom: 1em;
-    border-radius: 3px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-  }
-
-  .Mimagery:hover {
-    cursor: pointer;
-    background-color: #dad7d0;
-  }
-
-  .Mbasemap {
-    background: #e1ded9 url("../images/sprite.png") no-repeat 4.5px -108px;
-    border-style: none;
-    width: 45px;
-    height: 30px;
-    padding-bottom: 1em;
-    border-radius: 3px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-  }
-
-  .Mbasemap:hover {
-    cursor: pointer;
-    background-color: #dad7d0;
-  }
-
-  #MLegend {
-    background: #e1ded9 url("../images/sprite.png") no-repeat 7.5px -1549px;
-    border-style: none;
-    width: 45px;
-    height: 30px;
-    padding-bottom: 1em;
-    border-radius: 3px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-  }
-
-  #MLegend:hover {
-    cursor: pointer;
-    background-color: #dad7d0;
-  }
-
-  #MMeasure {
-    background: #e1ded9 url("../images/sprite.png") no-repeat 5px -1626.5px;
-    border-style: none;
-    width: 45px;
-    height: 30px;
-    padding-bottom: 1em;
-    border-radius: 3px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-  }
-
-  #MMeasure:hover {
-    cursor: pointer;
-    background-color: #dad7d0;
-  }
-
-  #MQueryatts {
-    background: #e1ded9 url("../images/sprite.png") no-repeat 6.5px -2244.5px;
-    border-style: none;
-    width: 45px;
-    height: 30px;
-    padding-bottom: 1em;
-    border-radius: 3px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-  }
-
-  #MQueryatts:hover {
-    cursor: pointer;
-    background-color: #dad7d0;
-  }
-
-  #MBookmarks {
-    background: #e1ded9 url("../images/sprite.png") no-repeat 1.5px -756.5px;
-    border-style: none;
-    width: 45px;
-    height: 30px;
-    padding-bottom: 1em;
-    border-radius: 3px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-  }
-
-  #MBookmarks:hover {
-    cursor: pointer;
-    background-color: #dad7d0;
-  }
-
-  #MPrint {
-    background: #e1ded9 url("../images/sprite.png") no-repeat 8.5px -1449.5px;
-    border-style: none;
-    width: 45px;
-    height: 30px;
-    padding-bottom: 1em;
-    border-radius: 3px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-  }
-
-  #MPrint:hover {
-    cursor: pointer;
-    background-color: #dad7d0;
-  }
-
-  #MHelp {
-    background: #e1ded9 url("../images/sprite.png") no-repeat 8.5px -1255.5px;
-    border-style: none;
-    width: 45px;
-    height: 30px;
-    padding-bottom: 1em;
-    border-radius: 3px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-  }
-
-  #MHelp:hover {
-    cursor: pointer;
-    background-color: #dad7d0;
-  }
-
-  #MShare {
-    background: #e1ded9 url("../images/sprite.png") no-repeat 7.5px -2123px;
-    border-style: none;
-    width: 45px;
-    height: 30px;
-    padding-bottom: 1em;
-    border-radius: 3px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-  }
-
-  #MShare:hover {
-    cursor: pointer;
-    background-color: #dad7d0;
-  }
-
-  .mesaToolsContent .mesaToolsRS {
-    width: auto;
-    height: auto;
-    max-height: 90%;
-    max-width: 100%;
-  }
-
-  .mesaToolsBG {
-    background-position: 50%;
-    background-repeat: no-repeat;
-    background-size: cover;
-    color: #fff;
-  }
-
-  .mesaTools {
-    overflow: auto;
-    width: 100vw;
-    height: 100vh;
-    margin: 0 auto;
-  }
-
-  .mesaToolsSquare {
-    float: left;
-    position: relative;
-    width: 30%;
-    padding-bottom: 30%;
-    margin: 1.66%;
-    overflow: hidden;
-  }
-
-  .mesaToolsContent {
-    position: absolute;
-    height: 80%;
-    width: 90%;
-    padding: 10% 5%;
-  }
-
-  .mesaToolsTable {
-    display: table;
-    height: 100%;
-    width: 100%;
-  }
-
-  .mesaTools-table-cell {
-    display: table-cell;
-    vertical-align: middle;
-    height: 100%;
-    width: 100%;
-  }
-
-  #autocompleteSearch,
-  #coordinateBlock,
-  #sharebutton,
-  #socialShare,
-  #toolPanel,
-  .esriScalebar {
-    display: none;
+  #staticDropdown {
+    display: block;
   }
 
   #toolPanel {
+    display: none;
     position: absolute;
     background: #fff;
     text-align: center;
