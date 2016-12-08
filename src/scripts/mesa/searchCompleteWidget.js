@@ -21,6 +21,7 @@ define([
         geometryServiceURL: undefined,
         option: undefined,
         turnOff: undefined,
+        callback: undefined,
         resultsShown:10,
         minInputLength: 2,
 
@@ -121,6 +122,7 @@ define([
             thisWidget.turnOff !== undefined? dom.byId(thisWidget.turnOff).style.display = "none": void(0);
             graphicTool.zoom(coordinates);
             dom.byId("searchLI").childNodes[0].nodeValue = ("Search By...");
+            thisWidget.callback();
         },
 
         _runScript: function(){
@@ -158,6 +160,7 @@ define([
             (thisWidget.setExtent(target.getAttribute("data-rings")),
             map.setExtent((map.graphics.add(new Graphic(graphicTool.createJSONPolygon(target.getAttribute("data-rings"))))).geometry.getExtent().expand(1.5)))
             map.enableKeyboardNavigation();
+            thisWidget.callback();
         },
 
         setExtent: function(target){

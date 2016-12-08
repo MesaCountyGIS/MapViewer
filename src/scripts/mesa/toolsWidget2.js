@@ -97,13 +97,25 @@ define([
             }
 
             function dispatchSearchMenuClick(e) {
-                //Do something to show toolsWidget
-                //then update the back button
+                e.stopPropagation();
+                var type = this.getAttribute('data-value');
+                //hide the search menu
+                domClass.add(query(".searchMenu")[0], "displayNo");
+                //display the search tool
+                // domClass.remove(dom.byId("searchFieldDialog"), "displayNo");
+                //The searchLI list item is still populated on a small screen
+                //in case the screen is just minimized and gets maximized
+                dom.byId("searchLI").childNodes[0].nodeValue = this.childNodes[0].innerHTML;
+                if (registry.byId("searchFieldDialog"))
+                    (registry.byId("searchFieldDialog").destroyRecursive());
+                searchTools.searchBy(type, undefined, "desktop", undefined, function(){
+                    domClass.remove(query(".searchMenu")[0], "displayNo");
+                    toolsWidget.domNode.style.display = "none";
+                });
 
             }
 
             function setBackButtonTarget(e){
-                console.log('higgy', e.target)
                 var backToPage = domAttr.get(e.target, 'data-to');
                 var fromPage = domAttr.get(e.target, 'data-from');
                 domClass.add(query("." + fromPage)[0], "displayNo");

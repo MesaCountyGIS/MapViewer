@@ -1,8 +1,9 @@
 define([
-    "mesa/searchCompleteWidget"
-], function (searchCompleteWidget) {
+    "mesa/searchCompleteWidget", "dijit/registry"
+], function (searchCompleteWidget, registry) {
 
-    function _searchBy(type, option, device, turnOff) {
+    function _searchBy(type, option, device, turnOff, afterClickFunction) {
+        console.log('offit', turnOff)
         var thisFunctionParam = "noPoint";
         var thisTargetGeometry = "polygon";
         var thisOutFields = "LOCATION";
@@ -53,6 +54,7 @@ define([
             default:
                 alert("This tool has not been implemented");
         }
+        if (!(registry.byId("searchCompleteDialog"))) {
         new searchCompleteWidget({
             device: device,
             mapRef: aG.map,
@@ -64,8 +66,16 @@ define([
             functionParam: thisFunctionParam,
             geometryServiceURL: esriConfig.defaults.geometryService,
             option: option !== undefined? option: undefined,
-            turnOff: turnOff
+            turnOff: turnOff,
+            callback: afterClickFunction
         }, "searchFieldDialog").startup();
+    }else{
+        if(registry.byId("searchCompleteDialog").domNode.style.display === "block"){
+            registry.byId("searchCompleteDialog").domNode.style.display = "none";
+        }else{
+        registry.byId("searchCompleteDialog").domNode.style.display = "block";
+        }
+    }
     } //end searchBy function
 
 return {

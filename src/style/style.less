@@ -357,14 +357,17 @@ div .titleButton .arrow:hover {
 /*Search Widget*/
 
 #searchFieldDialog {
-    padding:0 !important;
-    display: none;
+  position:absolute;
+  left:1.5em;
+    // padding:0 !important;
+    // display: none;
     // visibility:hidden;
     #resultUL{
-        background-color: white;
+        background-color: white !important;
         margin-left: 1.1em;
         margin-top: 0.5em;
         width:14.7em;
+        z-index:20;
         // .borderRadius(2px);
         & :hover{
             cursor:pointer;
@@ -374,9 +377,11 @@ div .titleButton .arrow:hover {
             background-color:#EDECE9;
         }
         li{
+          background-color: white !important;
             .borderRadius;
             padding:0.3em;
             outline:none;
+            width:13em;
         }
     }
 }
@@ -386,30 +391,31 @@ div .titleButton .arrow:hover {
     left: 33%;
     width: 17em;
     height: 5em;
-    border: 1px solid black;
-    background-color: white;
-    z-index: 1;
-    .borderRadius;
+    // border: 1px solid black;
+    // background-color: white;
+    // z-index: 1;
+    // .borderRadius;
     & .searchheader {
-        background-color: #9C9586;
+        // background-color: #9C9586;
         width: 16.5em;
         height: 1.5em;
         margin: 0.25em auto;
-        border: 1px solid black;
-        .borderRadius;
-        & > span {
-            cursor: default;
-            font-size: 16px;
-        }
+        text-align:center;
+        // border: 1px solid black;
+        // .borderRadius;
+        // & > span {
+        //     cursor: default;
+        //     font-size: 16px;
+        // }
     }
 }
 
-#searchValue,
-#textValue {
-    position: absolute;
-    margin: 0.12em 0 0 1em;
-    width: auto;
-}
+// #searchValue,
+// #textValue {
+//     position: absolute;
+//     margin: 0.12em 0 0 1em;
+//     width: auto;
+// }
 
 #loc {
     // display: none;
@@ -418,9 +424,10 @@ div .titleButton .arrow:hover {
     width: 16em;
     font-size: 0.9em;
     // margin: 0 auto;
-    margin-left:1em;
+    margin-left:1.5em;
     top: 0.6em;
     .borderRadius(5px);
+    z-index:10;
 }
 
 #GCSblock {
@@ -2477,6 +2484,11 @@ input {
   & li{
     width:16em !important;
   }
+}
+
+.mainSideMenu{
+  height:70%;
+  overflow:auto;
 }
 
 #staticDropdown{
