@@ -81,9 +81,9 @@ function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
         map.on("mouse-move", function(e){
             showCoords(e, "screenCoordinatesUTM");
         });
-        // on(dom.byId("menuSelect"), "click", function() {
-        //     runToolsView(JSONconfig.geometryService, JSONconfig.printURL, map);
-        // });
+        on(dom.byId("menuSelect"), "click", function() {
+            runToolsView(JSONconfig.geometryService, JSONconfig.printURL, map);
+        });
         on(dom.byId("help"), touch.release, function(e) {
             showHelp(e, JSONconfig.printURL);
         });
