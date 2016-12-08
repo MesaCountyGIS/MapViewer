@@ -35,7 +35,13 @@ basemapWidget) {
             '</ul></div>';
             domConstruct.place(searchList, query(".mesaTools")[0], "before");
 
-            on(query('#mobileSearch ul li'), "click", function (e) {
+            on(query('#mobileSearch ul li'), "click", openSearchDialog);
+            on(dom.byId("toolPanel"), touch.release, displayTool);
+            on(query(".mainSideMenu")[0], touch.release, dispatchMainMenuClick);
+            on(query('.themeMenu li'), "click", setThemeMenuCheckmark);
+            on(dom.byId('backMenu'), touch.release, setBackButtonTarget);
+
+            function openSearchDialog(e){
                 e.stopPropagation();
                 var type = this.getAttribute('data-value');
                 dom.byId('mobileSearch').style.display = "none";
@@ -43,14 +49,14 @@ basemapWidget) {
                 dom.byId("mobileSearch").style.display = "none";
                 searchBy(type, undefined, "mobile", "toolsView");
                 toolsWidget.backToMap();
-            });
+            }
 
-            on(dom.byId("toolPanel"), touch.release, function(e){
+            function displayTool(e){
                 var name = (domAttr.get(e.target, "data-toolName"));
                 dom.byId(name).style.display = "block";
-            });
+            }
 
-            on(query(".mainSideMenu")[0], touch.release, function(e){
+            function dispatchMainMenuClick(e){
                 toPage = domAttr.has(e.target, 'data-to')?
                     domAttr.get(e.target, 'data-to'): undefined;
                 if(toPage !== undefined){
@@ -60,24 +66,25 @@ basemapWidget) {
                     domAttr.set('backMenu', 'data-to', 'mainSideMenu');
                     domAttr.set('backMenu', 'data-from', toPage);
                 }
-            });
+            }
 
-
-            on(query('.themeMenu'), touch.release, function(e){
-                var spanList = e.target.parentNode.parentNode.getElementsByTagName('span');
-                var thisSpan = e.target.parentNode.getElementsByTagName('span')[0];
+            function setThemeMenuCheckmark(e){
+                var spanList = this.parentNode.getElementsByTagName('span');
+                console.log(spanList)
+                var thisSpan = this.getElementsByTagName('span')[0];
+                console.log(thisSpan)
                 for (i = 0; i < spanList.length; i++){
                     spanList[i].innerHTML = '';
                 };
                 thisSpan.innerHTML = "&#10004;";
-            })
+            }
 
-            on(dom.byId('backMenu'), touch.release, function(e){
+            function setBackButtonTarget(e){
                 var backToPage = domAttr.get(e.target, 'data-to');
                 var fromPage = domAttr.get(e.target, 'data-from');
                 domClass.add(query("." + fromPage)[0], "displayNo");
                 domClass.remove(query("." + backToPage)[0], "displayNo");
-            })
+            }
 
 
         },
