@@ -1,12 +1,15 @@
 define([
-     "dojo/_base/declare", "dojo/dom-construct", "dojo/dom", "dojo/dom-class", "dojo/dom-attr", "dojo/dnd/move", "dojo/query", "dojo/dom-style",
-    "esri/tasks/PrintTask", "esri/tasks/PrintParameters", "esri/tasks/PrintTemplate", "esri/dijit/Print", "dojo/on", "dojo/touch", "mesa/themeTools",
-     "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dojo/text!./templates/toolsView2.html", "mesa/measureWidget",
-    "mesa/printWidget", "mesa/queryWidget", "mesa/bookmarkWidget", "mesa/helpWidget", "mesa/shareFormWidget", "dijit/registry", "mesa/basemapWidget"
+     "dojo/_base/declare", "dojo/dom-construct", "dojo/dom", "dojo/dom-class",
+     "dojo/dom-attr", "dojo/dnd/move", "dojo/query", "dojo/dom-style",
+    "esri/tasks/PrintTask", "esri/tasks/PrintParameters", "esri/tasks/PrintTemplate",
+    "esri/dijit/Print", "dojo/on", "dojo/touch", "mesa/themeTools", "mesa/searchTools",
+     "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dojo/text!./templates/toolsView2.html",
+     "mesa/measureWidget", "mesa/printWidget", "mesa/queryWidget", "mesa/bookmarkWidget",
+     "mesa/helpWidget", "mesa/shareFormWidget", "dijit/registry", "mesa/basemapWidget"
 ], function (declare, domConstruct, dom, domClass, domAttr, move, query, domStyle,
-    PrintTask, PrintParameters, PrintTemplate, Print, on, touch, themeTools, _WidgetBase, _TemplatedMixin, template,
-    measureWidget, printWidget, queryWidget, bookmarkWidget, helpWidget, shareFormWidget, registry,
-basemapWidget) {
+    PrintTask, PrintParameters, PrintTemplate, Print, on, touch, themeTools, searchTools,
+    _WidgetBase, _TemplatedMixin, template, measureWidget, printWidget, queryWidget,
+    bookmarkWidget, helpWidget, shareFormWidget, registry, basemapWidget) {
         var map, toolsWidget;
 
     return declare("toolsWidget2", [_WidgetBase, _TemplatedMixin], {
@@ -44,9 +47,10 @@ basemapWidget) {
 
             on(query('#mobileSearch ul li'), "click", openSearchDialog);
             on(dom.byId("toolPanel"), touch.release, displayTool);
-            on(query(".mainSideMenu li"), "click", dispatchMainMenuClick);
+            on(query(".mainSideMenu"), "click", dispatchMainMenuClick);
             on(query('.themeMenu li'), "click", dispatchThemeMenuClick);
-            on(dom.byId('backMenu'), touch.release, setBackButtonTarget);
+            on(query('.searchMenu li'), "click", dispatchSearchMenuClick);
+            on(dom.byId('backMenu'), touch.release, backButtonEvent);
 
             function openSearchDialog(e){
                 e.stopPropagation();
@@ -92,12 +96,28 @@ basemapWidget) {
                 })();
             }
 
+            function dispatchSearchMenuClick(e) {
+                //Do something to show toolsWidget
+                //then update the back button
+
+            }
+
             function setBackButtonTarget(e){
+                console.log('higgy', e.target)
                 var backToPage = domAttr.get(e.target, 'data-to');
                 var fromPage = domAttr.get(e.target, 'data-from');
                 domClass.add(query("." + fromPage)[0], "displayNo");
                 domClass.remove(query("." + backToPage)[0], "displayNo");
             }
+
+            function backButtonEvent(e){
+                console.log('higgy', e.target)
+                var backToPage = domAttr.get(e.target, 'data-to');
+                var fromPage = domAttr.get(e.target, 'data-from');
+                domClass.add(query("." + fromPage)[0], "displayNo");
+                domClass.remove(query("." + backToPage)[0], "displayNo");
+            }
+
 
 
         },

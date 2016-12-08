@@ -137,10 +137,10 @@ function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
             e.stopPropagation();
             var type = this.getAttribute('data-value');
             dom.byId("searchLI").childNodes[0].nodeValue = this.childNodes[0].innerHTML;
-            require(["dijit/registry"], function(registry) {
+            require(["dijit/registry", "mesa/searchTools"], function(registry, searchTools) {
                 if (registry.byId("searchFieldDialog"))
                     (registry.byId("searchFieldDialog").destroyRecursive());
-                searchBy(type, undefined, "desktop");
+                searchTools.searchBy(type, undefined, "desktop");
             }); //End require
         });
     });
@@ -578,73 +578,73 @@ function showLocator(geometryServiceURL) {
     });
 }
 
-function searchBy(type, option, device, turnOff) {
-    var thisFunctionParam = "noPoint";
-    var thisTargetGeometry = "polygon";
-    var thisOutFields = "LOCATION";
-    var thisService = "ParcelOnly4Query/MapServer/0/query";
-    var thisType = "Address";
-    require(["mesa/searchCompleteWidget"], function(searchCompleteWidget) {
-        switch (type) {
-            case "address":
-                thisTargetGeometry = "point";
-                thisService = "ParcePointQuery/MapServer/0/query";
-                break;
-            case "intersection":
-                thisFunctionParam = "Intersection";
-                thisTargetGeometry = "point";
-                thisOutFields = "Intersection";
-                thisService = "roads_and_intersections/MapServer/0/query";
-                thisType = "Intersection";
-                break;
-            case "account":
-                thisOutFields = "ACCOUNTNO";
-                thisType = "Account";
-                break;
-            case "parcelNo":
-                thisOutFields = "PARCELNUM";
-                thisType = "Parcel Number";
-                break;
-            case "subdivision":
-                thisOutFields = "SUBNAME";
-                thisService = "eSurveyor/MapServer/13/query";
-                thisType = "Subdivision";
-                break;
-            case "place":
-                thisFunctionParam = "FEATURE_NAME";
-                thisTargetGeometry = "point";
-                thisOutFields = "FEATURE_NAME";
-                thisService = "PlaceNames/MapServer/0/query";
-                thisType = "Place Name";
-                break;
-            case "PLSS":
-                thisOutFields = "TRSM";
-                thisService = "eSurveyor/MapServer/26/query";
-                thisType = "Township/Range";
-                break;
-            case "Latitude/Longitude":
-                thisFunctionParam = "gcs";
-                thisTargetGeometry = "point";
-                thisType = "Latitude/Longitude";
-                break;
-            default:
-                alert("This tool has not been implemented");
-        }
-        new searchCompleteWidget({
-            device: device,
-            mapRef: aG.map,
-            type: thisType,
-            service: thisService,
-            where: thisOutFields + " LIKE",
-            outFields: thisOutFields,
-            targetGeom: thisTargetGeometry,
-            functionParam: thisFunctionParam,
-            geometryServiceURL: esriConfig.defaults.geometryService,
-            option: option !== undefined? option: undefined,
-            turnOff: turnOff
-        }, "searchFieldDialog").startup();
-    }); //End require
-} //end searchBy function
+// function searchBy(type, option, device, turnOff) {
+//     var thisFunctionParam = "noPoint";
+//     var thisTargetGeometry = "polygon";
+//     var thisOutFields = "LOCATION";
+//     var thisService = "ParcelOnly4Query/MapServer/0/query";
+//     var thisType = "Address";
+//     require(["mesa/searchCompleteWidget"], function(searchCompleteWidget) {
+//         switch (type) {
+//             case "address":
+//                 thisTargetGeometry = "point";
+//                 thisService = "ParcePointQuery/MapServer/0/query";
+//                 break;
+//             case "intersection":
+//                 thisFunctionParam = "Intersection";
+//                 thisTargetGeometry = "point";
+//                 thisOutFields = "Intersection";
+//                 thisService = "roads_and_intersections/MapServer/0/query";
+//                 thisType = "Intersection";
+//                 break;
+//             case "account":
+//                 thisOutFields = "ACCOUNTNO";
+//                 thisType = "Account";
+//                 break;
+//             case "parcelNo":
+//                 thisOutFields = "PARCELNUM";
+//                 thisType = "Parcel Number";
+//                 break;
+//             case "subdivision":
+//                 thisOutFields = "SUBNAME";
+//                 thisService = "eSurveyor/MapServer/13/query";
+//                 thisType = "Subdivision";
+//                 break;
+//             case "place":
+//                 thisFunctionParam = "FEATURE_NAME";
+//                 thisTargetGeometry = "point";
+//                 thisOutFields = "FEATURE_NAME";
+//                 thisService = "PlaceNames/MapServer/0/query";
+//                 thisType = "Place Name";
+//                 break;
+//             case "PLSS":
+//                 thisOutFields = "TRSM";
+//                 thisService = "eSurveyor/MapServer/26/query";
+//                 thisType = "Township/Range";
+//                 break;
+//             case "Latitude/Longitude":
+//                 thisFunctionParam = "gcs";
+//                 thisTargetGeometry = "point";
+//                 thisType = "Latitude/Longitude";
+//                 break;
+//             default:
+//                 alert("This tool has not been implemented");
+//         }
+//         new searchCompleteWidget({
+//             device: device,
+//             mapRef: aG.map,
+//             type: thisType,
+//             service: thisService,
+//             where: thisOutFields + " LIKE",
+//             outFields: thisOutFields,
+//             targetGeom: thisTargetGeometry,
+//             functionParam: thisFunctionParam,
+//             geometryServiceURL: esriConfig.defaults.geometryService,
+//             option: option !== undefined? option: undefined,
+//             turnOff: turnOff
+//         }, "searchFieldDialog").startup();
+//     }); //End require
+// } //end searchBy function
 
 ////----------------Begin screen coordinate display code---------------------------------------------//
 function showCoords(evt, id) {
@@ -747,8 +747,9 @@ function urlMapType(url, map, legend) {
         "dojo/NodeList-traverse",
         "dojo/dom-attr",
         "dojo/_base/array",
-        "dojo/NodeList-manipulate"
-    ], function(urlUtils, query, domAttr, array) {
+        "dojo/NodeList-manipulate",
+        "mesa/searchTools"
+    ], function(urlUtils, query, domAttr, array, searchTools) {
         var urlParams = parseParameters(url);
         function parseParameters(url) {
             var queryObject = urlUtils.urlToObject(url).query;
@@ -795,16 +796,16 @@ function urlMapType(url, map, legend) {
                 var params = [maptype, title, layerid, value, checkboxid];
 
                 if(coordinates !== undefined){
-                    searchBy("Latitude/Longitude", coordinates);
+                    searchTools.searchBy("Latitude/Longitude", coordinates);
                 }
                 if(field !== undefined){
                     runQuery(layerid, field, value);
                 }
                 if(accountNumber !== undefined){
-                    searchBy("account", accountNumber);
+                    searchTools.searchBy("account", accountNumber);
                 }
                 if(parcelNumber !== undefined){
-                    searchBy("parcelNo", parcelNumber);
+                    searchTools.searchBy("parcelNo", parcelNumber);
                 }
                 if(extent !== undefined){
                     map.setExtent(extentZoom(extent));
