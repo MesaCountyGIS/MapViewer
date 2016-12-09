@@ -73,6 +73,7 @@ define([
                 var layer = domAttr.get(this, 'data-value');
 
                 themeTools.themeClick(e, this, map, popupObject, popupTemplateObject, legendObject);
+                //go to mainSideMenu
                 registry.byId("toolsView2").domNode.style.display = "none";
 
                 //Place check mark next to currently active theme
@@ -119,6 +120,8 @@ define([
                 var backToPage = domAttr.get(e.target, 'data-to');
                 var fromPage = domAttr.get(e.target, 'data-from');
 
+                //This is a terrible hack to get a single case of a back button
+                //to work. Replace soon.
                 if(fromPage === "searchBox" && domClass.contains(query(".searchMenu")[0], "displayNo") === false){
                     backToPage = "mainSideMenu";
                     fromPage = "searchMenu";

@@ -1907,10 +1907,6 @@ input:-moz-placeholder {
   background: transparent url("../images/sprite.png") 0 -336px;
 }
 
-.lyrexpand li {
-  display: none;
-}
-
 input {
   z-index: -1;
 }
@@ -2059,7 +2055,6 @@ input {
   font-size: .75em;
   z-index: 4;
   position: relative;
-  margin-left: 1.25em;
   margin-top: 1em;
   padding: 2em 1em 1em;
   border-radius: 8px;
@@ -2268,7 +2263,7 @@ input {
   min-width: 320px;
   height: 100%;
   padding: 1em 0 0;
-  z-index: 2;
+  z-index: 50;
 }
 
 .mesaTools ul li {
