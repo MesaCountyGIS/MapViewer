@@ -32,22 +32,9 @@ define([
             popupTemplateObject = toolsWidget.popupTemplateRef;
             legendObject = toolsWidget.legendRef;
 
-            // toolsWidget.domNode.style.display = "block";
-            // var searchList = '<div id="mobileSearch"><ul><b>Search By<br><br></b>' +
-            //     '<li data-value="address"><a>Address</a></li>' +
-            //     '<li data-value="intersection"><a>Road Intersection</a></li>' +
-            //     '<li data-value="account"><a>Account Number</a></li>' +
-            //     '<li data-value="parcelNo"><a>Parcel Number</a></li>' +
-            //     '<li data-value="subdivision"><a>Subdivision</a></li>' +
-            //     '<li data-value="PLSS"><a title="Search by Township, Range and Section">Township/Range</a></li>' +
-            //     '<li data-value="place"><a>Place Name</a></li>' +
-            //     '<li data-value="Latitude/Longitude"><a>Latitude/Longitude</a></li>' +
-            // '</ul></div>';
-            // domConstruct.place(searchList, query(".mesaTools")[0], "before");
-
             on(query('#mobileSearch ul li'), "click", openSearchDialog);
             on(dom.byId("toolPanel"), touch.release, displayTool);
-            on(query(".mainSideMenu"), "click", dispatchMainMenuClick);
+            on(query(".mainSideMenu li"), "click", dispatchMainMenuClick);
             on(query('.themeMenu li'), "click", dispatchThemeMenuClick);
             on(query('.searchMenu li'), "click", dispatchSearchMenuClick);
             on(dom.byId('backMenu'), touch.release, backButtonEvent);
@@ -69,8 +56,9 @@ define([
 
             function dispatchMainMenuClick(e){
                 e.stopPropagation();
-                toPage = domAttr.has(e.target, 'data-to')?
-                    domAttr.get(e.target, 'data-to'): undefined;
+                toPage = domAttr.has(this, 'data-to')?
+                    domAttr.get(this, 'data-to'): undefined;
+                    console.log(toPage)
                 if(toPage !== undefined){
                     domClass.add(query(".mainSideMenu")[0], "displayNo");
                     domClass.remove(query("." + toPage)[0], "displayNo");
@@ -95,9 +83,20 @@ define([
                     thisSpan.innerHTML = "&#10004;";
                 })();
             }
-
+            // var history = [
+            //     {
+            //         'from': 'mainSideMenu',
+            //         'to': 'searchMenu'
+            //     },
+            //     {
+            //         'from': 'mainSideMenu',
+            //         'to': 'searchMenu'
+            //     }
+            // ]
             function dispatchSearchMenuClick(e) {
                 e.stopPropagation();
+                domAttr.set('backMenu', 'data-to', "searchMenu");
+                domAttr.set('backMenu', 'data-from', "searchBox");
                 var type = this.getAttribute('data-value');
                 //hide the search menu
                 domClass.add(query(".searchMenu")[0], "displayNo");
@@ -106,29 +105,37 @@ define([
                 //The searchLI list item is still populated on a small screen
                 //in case the screen is just minimized and gets maximized
                 dom.byId("searchLI").childNodes[0].nodeValue = this.childNodes[0].innerHTML;
-                if (registry.byId("searchFieldDialog"))
+                if (registry.byId("searchFieldDialog")){
                     (registry.byId("searchFieldDialog").destroyRecursive());
+                }
                 searchTools.searchBy(type, undefined, "desktop", undefined, function(){
                     domClass.remove(query(".searchMenu")[0], "displayNo");
                     toolsWidget.domNode.style.display = "none";
                 });
-
-            }
-
-            function setBackButtonTarget(e){
-                var backToPage = domAttr.get(e.target, 'data-to');
-                var fromPage = domAttr.get(e.target, 'data-from');
-                domClass.add(query("." + fromPage)[0], "displayNo");
-                domClass.remove(query("." + backToPage)[0], "displayNo");
             }
 
             function backButtonEvent(e){
-                console.log('higgy', e.target)
+
                 var backToPage = domAttr.get(e.target, 'data-to');
                 var fromPage = domAttr.get(e.target, 'data-from');
+
+                if(fromPage === "searchBox" && domClass.contains(query(".searchMenu")[0], "displayNo") === false){
+                    backToPage = "mainSideMenu";
+                    fromPage = "searchMenu";
+                }
+
                 domClass.add(query("." + fromPage)[0], "displayNo");
                 domClass.remove(query("." + backToPage)[0], "displayNo");
             }
+
+            // function setBackButtonTarget(e){
+            //     var backToPage = domAttr.get(e.target, 'data-to');
+            //     var fromPage = domAttr.get(e.target, 'data-from');
+            //     domClass.add(query("." + fromPage)[0], "displayNo");
+            //     domClass.remove(query("." + backToPage)[0], "displayNo");
+            // }
+
+
 
 
 

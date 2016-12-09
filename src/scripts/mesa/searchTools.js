@@ -3,7 +3,6 @@ define([
 ], function (searchCompleteWidget, registry) {
 
     function _searchBy(type, option, device, turnOff, afterClickFunction) {
-        console.log('offit', turnOff)
         var thisFunctionParam = "noPoint";
         var thisTargetGeometry = "polygon";
         var thisOutFields = "LOCATION";

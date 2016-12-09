@@ -59,5 +59,21 @@
         <li data-value="Latitude/Longitude"><a>Latitude/Longitude</a></li>
     </ul>
 
-    <div data-from='searchMenu' id="searchFieldDialog"></div>
+    <div class="searchDialog" data-from='searchMenu' id="searchFieldDialog"></div>
+
+    <div data-from='mainSideMenu' class="layersMenu displayNo">
+        <div id="noControl" class="noControl">
+            <input type="checkbox" class="baselyrs expand" checked /><span>Base Layers</span>
+            <ul class="lyrexpand" style="margin-left: 1.1em;">
+                <li>
+                    <input class="baselyrs bgcbx" type="checkbox" checked /><span>background</span></li>
+                <li>
+                    <input class="baselyrs lbsgcbx" type="checkbox" checked /><span>Labels</span></li>
+                <li>
+                    <input class="baselyrs pclcbx" type="checkbox" checked /><span>Parcels</span></li>
+            </ul>
+        </div>
+    </div>
+
+
 </div>
