@@ -58,7 +58,6 @@ define([
                 e.stopPropagation();
                 toPage = domAttr.has(this, 'data-to')?
                     domAttr.get(this, 'data-to'): undefined;
-                    console.log(toPage)
                 if(toPage !== undefined){
                     domClass.add(query(".mainSideMenu")[0], "displayNo");
                     domClass.remove(query("." + toPage)[0], "displayNo");

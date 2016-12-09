@@ -2296,6 +2296,12 @@ input {
   z-index: 0!important;
 }
 
+.layersMenu ul li {
+  background-color: #fff;
+  width: 20em;
+  margin-left: 4em;
+}
+
 @media only screen and (max-width:1024px) {
   #autocompleteSearch,
   #coordinateBlock,
