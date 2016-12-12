@@ -5,8 +5,8 @@ function init() {
     aG = {}; //Global application object
     lmG = {}; //Global Layer Management object
     require([
-        "esri/config", "dojo/on", "dojo/text!./scripts/_config/config.json", "mesa/toolsWidget2" //fix bug requiring toolsWidget to be loaded
-    ], function(esriConfig, on, JSONconfig) {
+        "esri/config", "dojo/on", "dojo/dom-construct", "dojo/text!./scripts/_config/config.json", "esri/dijit/Legend", "mesa/toolsWidget2" //fix bug requiring toolsWidget to be loaded
+    ], function(esriConfig, on, domConstruct, JSONconfig, Legend) {
 
         /* The JSON configuration file is located in the scripts/_config directory.
         It contains urls for geometryService, print service and proxy. It also
@@ -50,13 +50,20 @@ function init() {
             createScalebar(aG.map);
             createContextMenu(aG.map, JSONconfig.geometryService);
 
-            var legend = createLegend(aG.map, aG.popup.domNode.className);
 
-            // var legend = createLegend(aG.map, initialBasemap, aG.popup.domNode.id,
-            //     document.getElementById('DTLegend'));
+            // var legend = createLegend(aG.map, aG.popup.domNode.className);
+            var node = domConstruct.toDom("<div data-to='mainSideMenu' class='displayNo legendMenu' id='legendDiv'></div>");
+            domConstruct.place(node, document.body, 'after')
+            var legend = new Legend({
+                map: aG.map,
+            }, node);
+
+            runToolsView(JSONconfig.geometryService, JSONconfig.printURL, aG.map,
+                aG.popup, aG.pTemp, legend);
+
 
             createHomeButton(aG.map);
-            setEventHandlers(JSONconfig, aG.map, lmG.pLay, initialBasemap,
+                setEventHandlers(JSONconfig, aG.map, lmG.pLay, initialBasemap,
                 lmG.roadLabels, aG.popup, aG.pTemp, legend);
             document.getElementById("loading").style.display = "none";
             aG.map.disableKeyboardNavigation();
@@ -80,9 +87,8 @@ function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
         map.on("mouse-move", function(e){
             showCoords(e, "screenCoordinatesUTM");
         });
-        on(dom.byId("menuSelect"), "click", function() {
-            runToolsView(JSONconfig.geometryService, JSONconfig.printURL, map,
-                popupObject, popupTemplateObject, legendObject);
+        on(dom.byId("menuSelect"), "click", function(legendObject) {
+            runToolsView();
         });
         on(dom.byId("help"), touch.release, function(e) {
             showHelp(e, JSONconfig.printURL);
@@ -90,9 +96,9 @@ function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
         on(dom.byId("shareMap"), touch.release, function(){
             showShareForm(map);
         });
-        on(query("#DTLegend, #legendDialog > .dialogHeader > .dialogCloser"), touch.release, function() {
-            toggleDialog("legendDialog");
-        });
+        // on(query("#DTLegend, #legendDialog > .dialogHeader > .dialogCloser"), touch.release, function() {
+        //     toggleDialog("legendDialog");
+        // });
         on(query("#DTprint"), touch.release, function() {
             showPrinter(map, JSONconfig.printURL);
         });
@@ -112,6 +118,7 @@ function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
             showShare("socialShare");
         });
         on(query('#layerSelect ul li'), touch.release, function(e){
+
             themeTools.themeClick(e, this, map, popupObject, popupTemplateObject, legendObject);
         });
         on(query('.plus'), touch.release, clickPlus);
@@ -274,7 +281,7 @@ function checkForMobile() {
 }
 
 function runToolsView(geometryService, printURL, map,
-    popupObject, popupTemplateObject, legendObject) {
+    popupObject, popupTemplateObject, legendObj) {
     require([
         "dijit/registry", "mesa/toolsWidget2"
     ], function(registry, toolsWidget) {
@@ -285,8 +292,9 @@ function runToolsView(geometryService, printURL, map,
                 mapRef: map,
                 popupRef: popupObject,
                 popupTemplateRef: popupTemplateObject,
-                legendRef: legendObject
+                legendRef: legendObj
             }, "toolsView2");
+            registry.byId("toolsView2").domNode.style.display = "none"
         } else {
             if(registry.byId("toolsView2").domNode.style.display === "block"){
                 registry.byId("toolsView2").domNode.style.display = "none";
@@ -381,29 +389,28 @@ function createScalebar(map) {
 //     // }, 500)
 // }
 
-function createLegend(map, device) {
-    var leg, legLayers = [];
-    legLayers.push({
-        layer: lmG.vectorBasemap,
-        title: 'Basemap Layers',
-        hideLayers: [
-            7,12,17,22,23,24,25,26,27,28,32,35,36,37,38,39,50,51
-        ]
-    });
-
-    require(["esri/dijit/Legend"], function(Legend) {
-        leg = new Legend({
-            map: map,
-            layerInfos: legLayers
-        }, "legendDiv");
-        leg.startup();
-    });
-    if (device === 'esriPopup') {
-        toggleDialog("legendDialog");
-        makeBoxesMoveable();
-    }
-    return leg;
-}
+// function createLegend(map, device) {
+//     var leg, legLayers = [];
+//     legLayers.push({
+//         layer: lmG.vectorBasemap,
+//         title: 'Basemap Layers',
+//         hideLayers: [
+//             7,12,17,22,23,24,25,26,27,28,32,35,36,37,38,39,50,51
+//         ]
+//     });
+//     require(["esri/dijit/Legend"], function(Legend) {
+//         leg = new Legend({
+//             map: map,
+//             layerInfos: legLayers
+//         }, "legendDiv");
+//         leg.startup();
+//     });
+//     if (device === 'esriPopup') {
+//         // toggleDialog("legendDialog");
+//         // makeBoxesMoveable();
+//     }
+//     return leg;
+// }
 
 function toggleDialog(dialogId) { //fires on click of #DTLegend and #IPLegend - toggles the legend
     require([

@@ -25,12 +25,24 @@ define([
 
         postCreate: function () {
             domConstruct.place(this.domNode, this.srcNodeRef.id, "before");
+            domConstruct.place(dom.byId("legendDiv"), dom.byId("leg"), "replace");
+
+
             toolsWidget = this;
             map = toolsWidget.mapRef;
             gsvc = toolsWidget.geometryServiceURL;
             popupObject = toolsWidget.popupRef;
             popupTemplateObject = toolsWidget.popupTemplateRef;
             legendObject = toolsWidget.legendRef;
+            var legLayers = [];
+            legLayers.push({
+                layer: lmG.vectorBasemap,
+                title: 'Basemap Layers',
+                hideLayers: [
+                    7,12,17,22,23,24,25,26,27,28,32,35,36,37,38,39,50,51
+                ]
+            });
+            legendObject.refresh(legLayers);
 
             on(query('#mobileSearch ul li'), "click", openSearchDialog);
             on(dom.byId("toolPanel"), touch.release, displayTool);
@@ -83,17 +95,29 @@ define([
                     thisSpan.innerHTML = "&#10004;";
                 })();
             }
-            // var history = [
-            //     {
-            //         'from': 'mainSideMenu',
-            //         'to': 'searchMenu'
-            //     },
-            //     {
-            //         'from': 'mainSideMenu',
-            //         'to': 'searchMenu'
-            //     }
-            // ]
+
             function dispatchSearchMenuClick(e) {
+                e.stopPropagation();
+                domAttr.set('backMenu', 'data-to', "searchMenu");
+                domAttr.set('backMenu', 'data-from', "searchBox");
+                var type = this.getAttribute('data-value');
+                //hide the search menu
+                domClass.add(query(".searchMenu")[0], "displayNo");
+                //display the search tool
+                // domClass.remove(dom.byId("searchFieldDialog"), "displayNo");
+                //The searchLI list item is still populated on a small screen
+                //in case the screen is just minimized and gets maximized
+                dom.byId("searchLI").childNodes[0].nodeValue = this.childNodes[0].innerHTML;
+                if (registry.byId("searchFieldDialog")){
+                    (registry.byId("searchFieldDialog").destroyRecursive());
+                }
+                searchTools.searchBy(type, undefined, "desktop", undefined, function(){
+                    domClass.remove(query(".searchMenu")[0], "displayNo");
+                    toolsWidget.domNode.style.display = "none";
+                });
+            }
+
+            function dispatchlegendMenuClick(e) {
                 e.stopPropagation();
                 domAttr.set('backMenu', 'data-to', "searchMenu");
                 domAttr.set('backMenu', 'data-from', "searchBox");

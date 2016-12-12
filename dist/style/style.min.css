@@ -594,9 +594,8 @@ div .titleButton .arrow:hover {
 
 #legendDiv {
   max-height: 20em;
-  max-width: 15em;
   overflow: auto;
-  margin-right: -.5em;
+  margin-left: 3em;
 }
 
 #helpMenu,
@@ -2294,6 +2293,11 @@ input {
 
 #map_zoom_slider {
   z-index: 0!important;
+}
+
+.layersMenu {
+  height: 60%;
+  overflow: auto;
 }
 
 .layersMenu ul li {
