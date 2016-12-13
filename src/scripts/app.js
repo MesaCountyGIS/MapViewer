@@ -50,21 +50,19 @@ function init() {
             createScalebar(aG.map);
             createContextMenu(aG.map, JSONconfig.geometryService);
 
-
-            // var legend = createLegend(aG.map, aG.popup.domNode.className);
+            /*Create a dom node to hold the legend. Create a new legend object,
+            then call runToolsView which will configure the legend*/
             var node = domConstruct.toDom("<div data-to='mainSideMenu' class='displayNo legendMenu' id='legendDiv'></div>");
             domConstruct.place(node, document.body, 'after')
             var legend = new Legend({
                 map: aG.map,
             }, node);
-
             runToolsView(JSONconfig.geometryService, JSONconfig.printURL, aG.map,
                 aG.popup, aG.pTemp, legend);
 
-
             createHomeButton(aG.map);
-                setEventHandlers(JSONconfig, aG.map, lmG.pLay, initialBasemap,
-                lmG.roadLabels, aG.popup, aG.pTemp, legend);
+            setEventHandlers(JSONconfig, aG.map, lmG.pLay, initialBasemap,
+            lmG.roadLabels, aG.popup, aG.pTemp, legend);
             document.getElementById("loading").style.display = "none";
             aG.map.disableKeyboardNavigation();
             /*watches for variables in the url then runs urlMapType
@@ -687,9 +685,10 @@ function baseLayersSwitch(e, ParcelLayerObject, basemapObject, roadLabelObject) 
         var box = query(thisClassName);
         var layers = {
             'input.pclcbx': ParcelLayerObject,
-            'input.lbsgcbx': basemapObject,
-            'input.bgcbx': roadLabelObject
+            'input.lbsgcbx': roadLabelObject,
+            'input.bgcbx': basemapObject
         };
+        console.log(target, thisClassName)
         for (i = 0; i < box.length; i++) {
             box[i].checked = target.checked? true: false;
         }
