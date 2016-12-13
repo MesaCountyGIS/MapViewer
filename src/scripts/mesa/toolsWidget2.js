@@ -71,6 +71,7 @@ define([
                 toPage = domAttr.has(this, 'data-to')?
                     domAttr.get(this, 'data-to'): undefined;
                 if(toPage !== undefined){
+                    domStyle.set('backMenu', "visibility", "visible");
                     domClass.add(query(".mainSideMenu")[0], "displayNo");
                     domClass.remove(query("." + toPage)[0], "displayNo");
                     domAttr.set('backMenu', 'data-to', 'mainSideMenu');
@@ -141,6 +142,8 @@ define([
             function backButtonEvent(e){
                 var backToPage = domAttr.get(e.target, 'data-to');
                 var fromPage = domAttr.get(e.target, 'data-from');
+                // var buttonVisibility = backToPage ===
+                console.log(backToPage)
 
                 //This is a terrible hack to get a single case of a back button
                 //to work. Replace soon.
@@ -148,9 +151,13 @@ define([
                     backToPage = "mainSideMenu";
                     fromPage = "searchMenu";
                 }
-console.log(fromPage)
+
                 domClass.add(query("." + fromPage)[0], "displayNo");
                 domClass.remove(query("." + backToPage)[0], "displayNo");
+
+                if(domClass.contains(query(".mainSideMenu")[0], "displayNo") === false){
+                    domStyle.set('backMenu', "visibility", "hidden");
+                }
             }
 
             // function setBackButtonTarget(e){
