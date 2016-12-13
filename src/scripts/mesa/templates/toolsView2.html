@@ -1,8 +1,8 @@
 <div class="${baseClass}" data-dojo-attach-point="domNode">
     <div style='margin-bottom:1em' data-dojo-type="dojox/mobile/Heading">
-      <span data-to='' style='font-size: 2em' id='backMenu' data-dojo-attach-point="backMenuButton" data-dojo-type="dojox.mobile.ToolBarButton">&#10094;</span>
-      <span id='backMap' data-dojo-attach-event="onclick:backToMap" data-dojo-attach-point="backButton" data-dojo-type="dojox.mobile.ToolBarButton" class="toolsButton">
-        <span style='margin-bottom:1em'>View Map</span> &#10095;</span>
+      <span data-to='' style='float:left;font-size: 1.5em' id='backMenu' data-dojo-attach-point="backMenuButton" data-dojo-type="dojox.mobile.ToolBarButton">&#10094; Back</span>
+      <span style='font-size: 1.5em' id='backMap' data-dojo-attach-event="onclick:backToMap" data-dojo-attach-point="backButton" data-dojo-type="dojox.mobile.ToolBarButton" class="toolsButton">
+        Map &#10095;</span>
     </div>
     <ul class='mainSideMenu'>
         <div id='staticDropdown'>
@@ -11,7 +11,7 @@
         </div>
         <li data-to="layersMenu">View Layers</li>
         <li data-to="legendMenu">Legend</li>
-        <li data-to="imageMenu">Toggle Basemap Image</li>
+        <li id='imageMenu' data-to="imageMenu">Toggle Basemap</li>
         <li data-to="measureMenu">Measure</li>
         <li data-to="queryMenu">Query</li>
         <li data-to="bookmarkMenu">Bookmarks</li>

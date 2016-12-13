@@ -746,7 +746,6 @@ define([
         },
 
         subList: function (evt, deferred, opt) {
-
             aG.map.graphics.clear();
             deferred.addCallback(function (response) {
                 var content = '';

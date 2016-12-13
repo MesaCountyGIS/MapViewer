@@ -139,7 +139,6 @@ define([
             }
 
             function backButtonEvent(e){
-
                 var backToPage = domAttr.get(e.target, 'data-to');
                 var fromPage = domAttr.get(e.target, 'data-from');
 
@@ -149,7 +148,7 @@ define([
                     backToPage = "mainSideMenu";
                     fromPage = "searchMenu";
                 }
-
+console.log(fromPage)
                 domClass.add(query("." + fromPage)[0], "displayNo");
                 domClass.remove(query("." + backToPage)[0], "displayNo");
             }
