@@ -43,20 +43,21 @@ define([
                 ]
             });
             legendObject.refresh(legLayers);
-
             on(query('#mobileSearch ul li'), "click", openSearchDialog);
             on(dom.byId("toolPanel"), touch.release, displayTool);
-            on(query(".mainSideMenu li"), "click", dispatchMainMenuClick);
+            on(query(".mainSideMenu li:not(#Imagery):not(#imageYears)"), "click", dispatchMainMenuClick);
             on(query('.themeMenu li'), "click", dispatchThemeMenuClick);
             on(query('.searchMenu li'), "click", dispatchSearchMenuClick);
+            on(dom.byId('Imagery'), "click", dispatchImageryToggle);
             on(dom.byId('backMenu'), touch.release, backButtonEvent);
 
             function openSearchDialog(e){
                 e.stopPropagation();
                 var type = this.getAttribute('data-value');
                 dom.byId('mobileSearch').style.display = "none";
-                registry.byId("searchFieldDialog")? registry.byId("searchFieldDialog").destroyRecursive(): void(0);
-                dom.byId("mobileSearch").style.display = "none";
+                if(registry.byId("searchFieldDialog")){
+                    registry.byId("searchFieldDialog").destroyRecursive();
+                }
                 searchBy(type, undefined, "mobile", "toolsView");
                 toolsWidget.backToMap();
             }
@@ -139,11 +140,36 @@ define([
                 });
             }
 
+            function dispatchImageryToggle(e) {
+                //toggle between imagery and basemap
+                if (!(registry.byId("imagelist2"))) { //remove the 2 after user caches have been updated
+                    createImageList(imageConfig);
+                    lmG.imageTool = new basemapWidget({
+                        mapRef: map,
+                        device: "desktop",
+                        initialBasemap: initialBasemap
+                    }, "imagelist2");
+                }
+                lmG.imageTool.basemapChanger();
+                //close menu
+                registry.byId("toolsView2").domNode.style.display = "none";
+                //display imageyear button on menu or remove it
+                if(domClass.contains('imageYears', 'displayNo')){
+                    domClass.remove('imageYears', "displayNo");
+                }else{
+                    domClass.add('imageYears', "displayNo");
+                }
+                //change button innerText to "Show Basemap" or "Show Imagery"
+                if(query('#Imagery').text() === "Show Imagery"){
+                    query('#Imagery').text("Show Basemap");
+                }else{
+                    query('#Imagery').text("Show Imagery");
+                }
+            }
+
             function backButtonEvent(e){
                 var backToPage = domAttr.get(e.target, 'data-to');
                 var fromPage = domAttr.get(e.target, 'data-from');
-                // var buttonVisibility = backToPage ===
-                console.log(backToPage)
 
                 //This is a terrible hack to get a single case of a back button
                 //to work. Replace soon.
@@ -185,6 +211,22 @@ define([
         _changeMenuState: function(){
 
         },
+
+        // showBasemap: function(map, imageConfig, initialBasemap) {
+        //     require([
+        //         "dijit/registry", "mesa/basemapWidget"
+        //     ], function(registry) {
+        //         if (!(registry.byId("imagelist2"))) { //remove the 2 after user caches have been updated
+        //             createImageList(imageConfig);
+        //             lmG.imageTool = new basemapWidget({
+        //                 mapRef: map,
+        //                 device: "desktop",
+        //                 initialBasemap: initialBasemap
+        //             }, "imagelist2");
+        //         }
+        //         lmG.imageTool.basemapChanger();
+        //     });
+        // },
 
         measureClick: function () {
             if (!(registry.byId("measureDialog2"))) { //remove the 2 after user caches have been updated

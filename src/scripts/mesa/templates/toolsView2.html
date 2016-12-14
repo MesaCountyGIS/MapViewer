@@ -11,7 +11,8 @@
         </div>
         <li data-to="layersMenu">View Layers</li>
         <li data-to="legendMenu">Legend</li>
-        <li id='imageMenu' data-to="imageMenu">Toggle Basemap</li>
+        <li id='Imagery' data-to="Imagery">Show Imagery</li>
+        <li class='displayNo' id='imageYears' data-to="imageYears">Image Years</li>
         <li data-to="measureMenu">Measure</li>
         <li data-to="queryMenu">Query</li>
         <li data-to="bookmarkMenu">Bookmarks</li>
@@ -60,10 +61,11 @@
     </ul>
 
     <div class="searchDialog" data-from='searchMenu' id="searchFieldDialog"></div>
+    <div id='imagelist2'></div>
+    <div class="imageMenu displayNo" data-from='mainSideMenu' id="imageDialog">Chinneraboo</div>
     <div id="leg"></div>
     <div data-from='mainSideMenu' class="layersMenu displayNo">
         <div id="noControl" class="noControl">
-            <!-- <input type="checkbox" class="baselyrs expand" checked /><span>Base Layers</span> -->
             <ul class="lyrexpand" style="margin-left: 1.1em;">
                 <li>
                     <input class="baselyrs bgcbx" type="checkbox" checked /><span>background</span></li>

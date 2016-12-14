@@ -111,6 +111,7 @@ function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
         });
         on(query("#DTbasemap,#IPbasemap"), touch.release, function() {
             showBasemap(map, JSONconfig.imagesList, initialBasemap);
+
         });
         on(query(".shareClass, #sharebutton"), touch.release, function(){
             showShare("socialShare");
@@ -518,21 +519,21 @@ function showQuery(map, geometryServiceURL) {
     });
 }
 
-function showBasemap(map, imageConfig, initialBasemap) {
-    require([
-        "dijit/registry", "mesa/basemapWidget"
-    ], function(registry) {
-        if (!(registry.byId("imagelist2"))) { //remove the 2 after user caches have been updated
-            createImageList(imageConfig);
-            lmG.imageTool = new basemapWidget({
-                mapRef: map,
-                device: "desktop",
-                initialBasemap: initialBasemap
-            }, "imagelist2");
-        }
-        lmG.imageTool.basemapChanger();
-    });
-}
+// function showBasemap(map, imageConfig, initialBasemap) {
+//     require([
+//         "dijit/registry", "mesa/basemapWidget"
+//     ], function(registry) {
+//         if (!(registry.byId("imagelist2"))) { //remove the 2 after user caches have been updated
+//             createImageList(imageConfig);
+//             lmG.imageTool = new basemapWidget({
+//                 mapRef: map,
+//                 device: "desktop",
+//                 initialBasemap: initialBasemap
+//             }, "imagelist2");
+//         }
+//         lmG.imageTool.basemapChanger();
+//     });
+// }
 
 function showShareForm(map) {
     require([
