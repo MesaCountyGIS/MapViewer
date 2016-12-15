@@ -148,7 +148,22 @@ define([
             }
 
             function dispatchImageChange(e) {
+                var spanList = this.parentNode.getElementsByTagName('span');
+                var thisSpan = this.getElementsByTagName('span')[0];
+                var layer = domAttr.get(this, 'data-value');
+
                 lmG.imageTool.basemapChanger(this);
+                //go to mainSideMenu
+                registry.byId("toolsView2").domNode.style.display = "none";
+
+
+                //Place check mark next to currently active theme
+                (function () {
+                    for (i = 0; i < spanList.length; i++) {
+                        spanList[i].innerHTML = '';
+                    };
+                    thisSpan.innerHTML = "&#10004;";
+                })();
                 // e.stopPropagation();
                 // domAttr.set('backMenu', 'data-to', "searchMenu");
                 // domAttr.set('backMenu', 'data-from', "searchBox");

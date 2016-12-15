@@ -1862,10 +1862,6 @@ input:-moz-placeholder {
   background: #e5e5e5;
 }
 
-.click a {
-  margin-left: .5em;
-}
-
 .aDiv {
   width: 13px;
   text-align: center;
@@ -2286,8 +2282,13 @@ input {
   width: 16em!important;
 }
 
+.imageYears li a,
+.themeMenu li a {
+  margin-left: .5em;
+}
+
 .mainSideMenu {
-  height: 70%;
+  height: 75%;
   overflow: auto;
 }
 
