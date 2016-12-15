@@ -28,7 +28,7 @@ function init() {
         // Set the spatial reference to 102206 for UTM zone 12
         var utm12 = setSpatialRef(102206);
         // See the setInitialExtent function for actual extent bounds
-        var initExtent = setInitialExtent(utm12);
+        var initExtent = setInitialExtent(utm12, device);
         // Create an ESRI map component
         aG.map = createMap(initExtent);
         // Initialize the popup for when parcels are clicked on
@@ -224,10 +224,14 @@ function createMap(initExtent) {
     return map;
 }
 
-function setInitialExtent(spatialRef) {
+function setInitialExtent(spatialRef, device) {
     var ext;
+    var xmin = device === 'mobile'? 697373: 685960;
+    var ymin = device === 'mobile'? 4322305: 4316261;
+    var xmax = device === 'mobile'? 726312: 738288;
+    var ymax = device === 'mobile'? 4335072: 4342506;
     require(["esri/geometry/Extent"], function(Extent) {
-        ext = new Extent({"xmin": 685960, "ymin": 4316261, "xmax": 738288, "ymax": 4342506, "spatialReference": spatialRef});
+        ext = new Extent({"xmin": xmin, "ymin": ymin, "xmax": xmax, "ymax": ymax, "spatialReference": spatialRef});
     });
     return ext;
 }
