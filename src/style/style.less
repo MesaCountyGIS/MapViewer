@@ -2055,6 +2055,8 @@ input:-moz-placeholder {
     margin: -0.5em 0 0 -0.25em;
     padding-top: 0.5em;
     width: 14.5em !important;
+    height:65%;
+    overflow: auto;
     li {
         a {
             text-decoration: none;
@@ -2482,13 +2484,15 @@ input {
     }
 }
 
-.themeMenu{
+.themeMenu,
+.imageYears{
   height:70%;
   overflow:auto;
   & li{
     width:16em !important;
   }
 }
+
 
 .mainSideMenu{
   height:70%;
@@ -2512,5 +2516,7 @@ input {
     margin-left:4em;
   }
 }
+
+
 
 @import './mobile-tablet-horizontal.less';

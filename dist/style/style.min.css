@@ -1849,6 +1849,8 @@ input:-moz-placeholder {
   margin: -.5em 0 0 -.25em;
   padding-top: .5em;
   width: 14.5em!important;
+  height: 65%;
+  overflow: auto;
 }
 
 .subyear li a {
@@ -2273,11 +2275,13 @@ input {
   border-radius: 3px;
 }
 
+.imageYears,
 .themeMenu {
   height: 70%;
   overflow: auto;
 }
 
+.imageYears li,
 .themeMenu li {
   width: 16em!important;
 }

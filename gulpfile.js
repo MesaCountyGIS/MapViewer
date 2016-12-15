@@ -67,6 +67,7 @@ gulp.task('minmods', function(){
          .pipe(addsrc.append([
              './src/scripts/mesa/base.js',
                 './src/scripts/mesa/basemapWidget.js',
+                './src/scripts/mesa/basemapWidget2.js',
                 './src/scripts/mesa/bookmarkWidget.js',
                 './src/scripts/mesa/changeTheme.js',
                 './src/scripts/mesa/themeTools.js',

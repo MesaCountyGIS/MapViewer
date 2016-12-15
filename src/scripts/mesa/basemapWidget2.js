@@ -3,7 +3,7 @@ define([
     "dojo/dnd/move",
     "dijit/_WidgetBase",
     "dijit/_TemplatedMixin",
-    // "dojo/text!./templates/basemapSelector.html",
+    "dojo/text!./templates/basemapSelector.html",
     "dojo/query",
     "dojo/dom",
     "dojo/dom-class",
@@ -16,12 +16,12 @@ define([
     "dojo/NodeList-traverse",
     "dojo/NodeList-manipulate"
 ], function(declare, move, _WidgetBase, _TemplatedMixin,
-    // template,
+    template,
     query, dom, domClass, domStyle, domConstruct, domAttr, on, touch, tap) {
 
     var thisWidget,currentBasemap = [];
     return declare("basemapWidget", [_WidgetBase, _TemplatedMixin], {
-        // templateString: template,
+        templateString: template,
         mapRef: undefined,
         device: undefined,
         initialBasemap: undefined,
@@ -31,50 +31,32 @@ define([
             thisWidget = this;
             currentBasemap.push(thisWidget.initialBasemap);
             map = thisWidget.mapRef;
-            // domConstruct.place(this.domNode, this.domNode.id, "before");
-
-            on(query('.subyear li'), "click", thisWidget.historicalImageryDropdown);
-            on(query(".subyear li"), "click", function() {
-                console.log('get', this)
-                // query(".subyear")[0].style.display = "none";
-                thisWidget.basemapChanger();
-            });
-            // on(dom.byId("basemapDialog"), touch.release, function() {
-            //     query(".subyear")[0].style.display = "block";
-            // });
-            // on(query(".subyear"), "mouseleave", function() {
-            //     query(".subyear")[0].style.display = "none";
-            // });
-            // on(query("basemapDialog"), "mouseleave", function() {
-            //     query(".subyear")[0].style.display = "none";
-            // });
         },
 
         //----Imagery basemap changing-----//
-        historicalImageryDropdown: function(e) {
-            if (e !== undefined){e.stopPropagation();}
-            var thisYear = this.attributes['data-value'].nodeValue;
-            if (thisYear.length > 0) {
-                // dom.byId("historicalImagery").childNodes[0].nodeValue = this.childNodes[0].innerHTML; //Set the dropdown view to show currently selected year
-                thisWidget.loadYear(thisYear);
-            }
-            return thisYear;
-        },
+        // historicalImageryDropdown: function(e) {
+        //     if (e !== undefined){e.stopPropagation();}
+        //     var thisYear = this.attributes['data-value'].nodeValue;
+        //     if (thisYear.length > 0) {
+        //         // dom.byId("historicalImagery").childNodes[0].nodeValue = this.childNodes[0].innerHTML; //Set the dropdown view to show currently selected year
+        //         thisWidget.loadYear(thisYear);
+        //     }
+        //     return thisYear;
+        // },
 
-        basemapChanger: function(e) {
-            console.log('criggytill', e.target, this)
-            var i = dom.byId("imagelist");
-            var newLayer = query('.subyear li')[0].attributes['data-value'].nodeValue;
-
-            if (i.style.display !== 'block') {
-                thisWidget.loadYear(newLayer);
+        basemapChanger: function(target) {
+            if(typeof(target) === 'string'){
+                this.loadYear(target);
+                return target;
             }else{
-                thisWidget.loadYear('vector');
+                var j = target.id
+                var newLayer = target.attributes['data-value'].nodeValue;
+                this.loadYear(newLayer);
+                if(this.device === "desktop"){
+                    this._change(j, "block", "Default Basemap", ["DTimagery", "DTbasemap", "Mimagery", "Mbasemap"]);
+                }
+                return newLayer;
             }
-            if(thisWidget.device === "desktop"){
-                thisWidget._change(i, "block", "Default Basemap", ["DTimagery", "DTbasemap", "Mimagery", "Mbasemap"]);
-            }
-            return newLayer;
         },
 
         _change: function(i, display, message, addRemove){
@@ -89,13 +71,13 @@ define([
 
         loadYear: function(newBasemap) {
             var imageYear;
-            if (!(newBasemap === 'vector')) {
-                dom.byId("historicalImagery").attributes['data-value'].nodeValue = newBasemap;
-            }
+            // if (!(newBasemap === 'vector')) {
+            //     dom.byId("historicalImagery").attributes['data-value'].nodeValue = newBasemap;
+            // }
             map.removeLayer(currentBasemap[0]);
             currentBasemap.length = 0;
             var historicalImagery = ({
-                "vector": lmG.vectorBasemap,
+                "vector": thisWidget.initialBasemap,
                 // "A2016": lmG.A2016,
                 "A2015": lmG.A2015,
                 "A2014": lmG.A2014,

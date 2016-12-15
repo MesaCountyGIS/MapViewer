@@ -2,14 +2,14 @@ define([
      "dojo/_base/declare", "dojo/dom-construct", "dojo/dom", "dojo/dom-class",
      "dojo/dom-attr", "dojo/dnd/move", "dojo/query", "dojo/dom-style",
     "esri/tasks/PrintTask", "esri/tasks/PrintParameters", "esri/tasks/PrintTemplate",
-    "esri/dijit/Print", "dojo/on", "dojo/touch", "mesa/themeTools", "mesa/searchTools",
+    "esri/dijit/Print", "dojo/on", "dojo/_base/lang", "dojo/touch", "mesa/themeTools", "mesa/searchTools",
      "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dojo/text!./templates/toolsView2.html",
      "mesa/measureWidget", "mesa/printWidget", "mesa/queryWidget", "mesa/bookmarkWidget",
-     "mesa/helpWidget", "mesa/shareFormWidget", "dijit/registry", "mesa/basemapWidget"
+     "mesa/helpWidget", "mesa/shareFormWidget", "dijit/registry", "mesa/basemapWidget2", "dojo/NodeList-traverse"
 ], function (declare, domConstruct, dom, domClass, domAttr, move, query, domStyle,
-    PrintTask, PrintParameters, PrintTemplate, Print, on, touch, themeTools, searchTools,
+    PrintTask, PrintParameters, PrintTemplate, Print, on, lang, touch, themeTools, searchTools,
     _WidgetBase, _TemplatedMixin, template, measureWidget, printWidget, queryWidget,
-    bookmarkWidget, helpWidget, shareFormWidget, registry, basemapWidget) {
+    bookmarkWidget, helpWidget, shareFormWidget, registry, basemapWidget2) {
         var map, toolsWidget;
 
     return declare("toolsWidget2", [_WidgetBase, _TemplatedMixin], {
@@ -18,7 +18,10 @@ define([
         baseClass: "mesaTools",
         geometryServiceURL: null,
         printURL: null,
+        imageList: null,
         mapRef: null,
+        basemap: null,
+        deviceUsed: null,
         popupRef: null,
         popupTemplateRef: null,
         legendRef: null,
@@ -34,6 +37,9 @@ define([
             popupObject = toolsWidget.popupRef;
             popupTemplateObject = toolsWidget.popupTemplateRef;
             legendObject = toolsWidget.legendRef;
+            Images = toolsWidget.imageList;
+            initialBasemap = toolsWidget.basemap;
+            device = toolsWidget.deviceUsed;
             var legLayers = [];
             legLayers.push({
                 layer: lmG.vectorBasemap,
@@ -45,10 +51,11 @@ define([
             legendObject.refresh(legLayers);
             on(query('#mobileSearch ul li'), "click", openSearchDialog);
             on(dom.byId("toolPanel"), touch.release, displayTool);
-            on(query(".mainSideMenu li:not(#Imagery):not(#imageYears)"), "click", dispatchMainMenuClick);
+            on(query(".mainSideMenu li:not(#Imagery)"), "click", dispatchMainMenuClick);
             on(query('.themeMenu li'), "click", dispatchThemeMenuClick);
             on(query('.searchMenu li'), "click", dispatchSearchMenuClick);
             on(dom.byId('Imagery'), "click", dispatchImageryToggle);
+            on(query('.imageYears li'), "click", dispatchImageChange);
             on(dom.byId('backMenu'), touch.release, backButtonEvent);
 
             function openSearchDialog(e){
@@ -140,17 +147,52 @@ define([
                 });
             }
 
+            function dispatchImageChange(e) {
+                lmG.imageTool.basemapChanger(this);
+                // e.stopPropagation();
+                // domAttr.set('backMenu', 'data-to', "searchMenu");
+                // domAttr.set('backMenu', 'data-from', "searchBox");
+                // var type = this.getAttribute('data-value');
+                // //hide the search menu
+                // domClass.add(query(".searchMenu")[0], "displayNo");
+                // //display the search tool
+                // // domClass.remove(dom.byId("searchFieldDialog"), "displayNo");
+                // //The searchLI list item is still populated on a small screen
+                // //in case the screen is just minimized and gets maximized
+                // dom.byId("searchLI").childNodes[0].nodeValue = this.childNodes[0].innerHTML;
+                // if (registry.byId("searchFieldDialog")){
+                //     (registry.byId("searchFieldDialog").destroyRecursive());
+                // }
+                // searchTools.searchBy(type, undefined, "desktop", undefined, function(){
+                //     domClass.remove(query(".searchMenu")[0], "displayNo");
+                //     toolsWidget.domNode.style.display = "none";
+                // });
+            }
+
             function dispatchImageryToggle(e) {
+                var defaultYear = domAttr.get(this, "data-value");
                 //toggle between imagery and basemap
-                if (!(registry.byId("imagelist2"))) { //remove the 2 after user caches have been updated
-                    createImageList(imageConfig);
-                    lmG.imageTool = new basemapWidget({
+                if (!(registry.byId("imagelist"))) {
+                    createImageList(Images);
+                    lmG.imageTool = new basemapWidget2({
                         mapRef: map,
-                        device: "desktop",
+                        device: device,
                         initialBasemap: initialBasemap
-                    }, "imagelist2");
+                    }, "imagelist");
+                    lmG.imageTool.basemapChanger(e.target);
+                }else{
+                    lmG.imageTool.basemapChanger(e.target);
                 }
-                lmG.imageTool.basemapChanger();
+
+                function createImageList(imageConfig) {
+                    //Add the selected imagery and theme layer to the map
+                    require(["esri/layers/ArcGISTiledMapServiceLayer"], function(ArcGISTiledMapServiceLayer) {
+                        for (var x in imageConfig.images) {
+                            lmG[imageConfig.images[x].imageId] = new ArcGISTiledMapServiceLayer(imageConfig.mapFolder + imageConfig.images[x].serviceName + imageConfig.serverType, {id: imageConfig.images[x].imageId});
+                        }
+                    }); // end require
+                }
+
                 //close menu
                 registry.byId("toolsView2").domNode.style.display = "none";
                 //display imageyear button on menu or remove it
@@ -163,6 +205,7 @@ define([
                 if(query('#Imagery').text() === "Show Imagery"){
                     query('#Imagery').text("Show Basemap");
                 }else{
+                    lmG.imageTool.basemapChanger('vector');
                     query('#Imagery').text("Show Imagery");
                 }
             }
@@ -329,18 +372,18 @@ define([
             this.backToMap();
         },
 
-        basemapClick: function () {
-                if (!(registry.byId("imagelist2"))) { //remove the 2 after user caches have been updated
-                        lmG.imageTool = new basemapWidget({
-                               device: "mobile"
-                        }, "imagelist2");
-                        lmG.imageTool.startup();
-                        lmG.imageTool.basemapChanger();
-                } else if((registry.byId("imagelist2"))){
-                    lmG.imageTool.basemapChanger();
-                }
-            this.backToMap();
-        },
+        // basemapClick: function () {
+        //         if (!(registry.byId("imagelist2"))) { //remove the 2 after user caches have been updated
+        //                 lmG.imageTool = new basemapWidget({
+        //                        device: "mobile"
+        //                 }, "imagelist2");
+        //                 lmG.imageTool.startup();
+        //                 lmG.imageTool.basemapChanger();
+        //         } else if((registry.byId("imagelist2"))){
+        //             lmG.imageTool.basemapChanger();
+        //         }
+        //     this.backToMap();
+        // },
 
         searchClick: function () {
             // dom.byId("mobileSearch").style.display = "block";

@@ -12,11 +12,12 @@ function init() {
         It contains urls for geometryService, print service and proxy. It also
         contains the imageServer url and a list of image service names and ids used
         to build the imagery layers for the app. */
-        JSONconfig = JSON.parse(JSONconfig);
+        var JSONconfig = JSON.parse(JSONconfig);
 
         // Check if the site is being requested from a mobile or desktop device. then
         // set the map's popup accordingly.
         aG.popup = checkForMobile() === 1? setPopup("mobile"): setPopup("static");
+        var device = aG.popup.domNode.className === 'esriPopupMobile'? 'mobile': 'desktop';
 
         // Set esriConfig variables
         esriConfig.defaults.io.proxyUrl = JSONconfig.proxyURL;
@@ -35,13 +36,12 @@ function init() {
         // Create 3 layers to be initially added to the map
         lmG.pLay = createFeatureLayer("http://mcmap2.mesacounty.us/arcgis/rest/services/maps/ParcelOnly4Query/MapServer/0");
         lmG.roadLabels = createTiledMapServiceLayer("http://mcmap2.mesacounty.us/arcgis/rest/services/maps/parcel_road_labels/MapServer", "roadLabels");
-        lmG.vectorBasemap = createTiledMapServiceLayer("http://mcmap2.mesacounty.us/arcgis/rest/services/maps/vector_basemap/MapServer", "vectorBasemap");
         // Set a reference to the initial basemap. This is passed to the
         // basemapWidget module where it can be changed.
-        var initialBasemap = lmG.vectorBasemap;
+        var initialBasemap = createTiledMapServiceLayer("http://mcmap2.mesacounty.us/arcgis/rest/services/maps/vector_basemap/MapServer", "vectorBasemap");
 
         // Add the initial basemap, labels and parcel layer to the map
-        aG.map.addLayers([lmG.vectorBasemap, lmG.pLay, lmG.roadLabels]);
+        aG.map.addLayers([initialBasemap, lmG.pLay, lmG.roadLabels]);
         aG.map.on("load", function() {
             /* Once the map is loaded, initialize the following map components,
             check the url for parameters, register event handlers for the map,
@@ -57,8 +57,8 @@ function init() {
             var legend = new Legend({
                 map: aG.map,
             }, node);
-            runToolsView(JSONconfig.geometryService, JSONconfig.printURL, aG.map,
-                aG.popup, aG.pTemp, legend);
+            runToolsView(JSONconfig, aG.map, device,
+                aG.popup, aG.pTemp, legend, initialBasemap);
 
             createHomeButton(aG.map);
             setEventHandlers(JSONconfig, aG.map, lmG.pLay, initialBasemap,
@@ -109,10 +109,10 @@ function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
         on(query("#DTmeasure"), touch.release, function() {
             showMeasure(map, parcelLayerObject, JSONconfig.geometryService);
         });
-        on(query("#DTbasemap,#IPbasemap"), touch.release, function() {
-            showBasemap(map, JSONconfig.imagesList, initialBasemap);
-
-        });
+        // on(query("#DTbasemap,#IPbasemap"), touch.release, function() {
+        //     showBasemap(map, JSONconfig.imagesList, initialBasemap);
+        //
+        // });
         on(query(".shareClass, #sharebutton"), touch.release, function(){
             showShare("socialShare");
         });
@@ -279,16 +279,19 @@ function checkForMobile() {
     return isMobile;
 }
 
-function runToolsView(geometryService, printURL, map,
-    popupObject, popupTemplateObject, legendObj) {
+function runToolsView(config, map, device,
+    popupObject, popupTemplateObject, legendObj, initialBasemap) {
     require([
         "dijit/registry", "mesa/toolsWidget2"
     ], function(registry, toolsWidget) {
         if (!(registry.byId("toolsView2"))) {
             var tools = new toolsWidget({
-                geometryServiceURL: geometryService,
-                printURL: printURL,
+                geometryServiceURL: config.geometryService,
+                printURL: config.printURL,
+                imageList: config.imagesList,
                 mapRef: map,
+                basemap: initialBasemap,
+                deviceUsed: device,
                 popupRef: popupObject,
                 popupTemplateRef: popupTemplateObject,
                 legendRef: legendObj
@@ -351,14 +354,14 @@ function createContextMenu(map, geometryServiceConfig) {
     });
 }
 
-function createImageList(imageConfig) {
-    //Add the selected imagery and theme layer to the map
-    require(["esri/layers/ArcGISTiledMapServiceLayer"], function(ArcGISTiledMapServiceLayer) {
-        for (var x in imageConfig.images) {
-            lmG[imageConfig.images[x].imageId] = new ArcGISTiledMapServiceLayer(imageConfig.mapFolder + imageConfig.images[x].serviceName + imageConfig.serverType, {id: imageConfig.images[x].imageId});
-        }
-    }); // end require
-}
+// function createImageList(imageConfig) {
+//     //Add the selected imagery and theme layer to the map
+//     require(["esri/layers/ArcGISTiledMapServiceLayer"], function(ArcGISTiledMapServiceLayer) {
+//         for (var x in imageConfig.images) {
+//             lmG[imageConfig.images[x].imageId] = new ArcGISTiledMapServiceLayer(imageConfig.mapFolder + imageConfig.images[x].serviceName + imageConfig.serverType, {id: imageConfig.images[x].imageId});
+//         }
+//     }); // end require
+// }
 
 function createScalebar(map) {
     require(["esri/dijit/Scalebar"], function(Scalebar) {
