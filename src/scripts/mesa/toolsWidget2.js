@@ -42,13 +42,15 @@ define([
             device = toolsWidget.deviceUsed;
             var legLayers = [];
             legLayers.push({
-                layer: lmG.vectorBasemap,
+                layer: initialBasemap,
                 title: 'Basemap Layers',
                 hideLayers: [
                     7,12,17,22,23,24,25,26,27,28,32,35,36,37,38,39,50,51
                 ]
             });
+            console.log(1, legendObject)
             legendObject.refresh(legLayers);
+            console.log(2, legendObject)
             on(query('#mobileSearch ul li'), "click", openSearchDialog);
             on(dom.byId("toolPanel"), touch.release, displayTool);
             on(query(".mainSideMenu li:not(#Imagery)"), "click", dispatchMainMenuClick);
@@ -91,11 +93,11 @@ define([
                 var spanList = this.parentNode.getElementsByTagName('span');
                 var thisSpan = this.getElementsByTagName('span')[0];
                 var layer = domAttr.get(this, 'data-value');
-
+console.log('themin1',legendObject)
                 themeTools.themeClick(e, this, map, popupObject, popupTemplateObject, legendObject);
                 //go to mainSideMenu
                 registry.byId("toolsView2").domNode.style.display = "none";
-
+                console.log('themin',legendObject)
                 //Place check mark next to currently active theme
                 (function () {
                     for (i = 0; i < spanList.length; i++) {
@@ -133,8 +135,6 @@ define([
                 var type = this.getAttribute('data-value');
                 //hide the search menu
                 domClass.add(query(".searchMenu")[0], "displayNo");
-                //display the search tool
-                // domClass.remove(dom.byId("searchFieldDialog"), "displayNo");
                 //The searchLI list item is still populated on a small screen
                 //in case the screen is just minimized and gets maximized
                 dom.byId("searchLI").childNodes[0].nodeValue = this.childNodes[0].innerHTML;
@@ -164,24 +164,6 @@ define([
                     };
                     thisSpan.innerHTML = "&#10004;";
                 })();
-                // e.stopPropagation();
-                // domAttr.set('backMenu', 'data-to', "searchMenu");
-                // domAttr.set('backMenu', 'data-from', "searchBox");
-                // var type = this.getAttribute('data-value');
-                // //hide the search menu
-                // domClass.add(query(".searchMenu")[0], "displayNo");
-                // //display the search tool
-                // // domClass.remove(dom.byId("searchFieldDialog"), "displayNo");
-                // //The searchLI list item is still populated on a small screen
-                // //in case the screen is just minimized and gets maximized
-                // dom.byId("searchLI").childNodes[0].nodeValue = this.childNodes[0].innerHTML;
-                // if (registry.byId("searchFieldDialog")){
-                //     (registry.byId("searchFieldDialog").destroyRecursive());
-                // }
-                // searchTools.searchBy(type, undefined, "desktop", undefined, function(){
-                //     domClass.remove(query(".searchMenu")[0], "displayNo");
-                //     toolsWidget.domNode.style.display = "none";
-                // });
             }
 
             function dispatchImageryToggle(e) {
@@ -243,18 +225,6 @@ define([
                     domStyle.set('backMenu', "visibility", "hidden");
                 }
             }
-
-            // function setBackButtonTarget(e){
-            //     var backToPage = domAttr.get(e.target, 'data-to');
-            //     var fromPage = domAttr.get(e.target, 'data-from');
-            //     domClass.add(query("." + fromPage)[0], "displayNo");
-            //     domClass.remove(query("." + backToPage)[0], "displayNo");
-            // }
-
-
-
-
-
         },
 
         startup: function () {
@@ -264,27 +234,7 @@ define([
         backToMap: function () {
             // query("#map_zoom_slider, #hidePanel, #rightPanel, .collapsedPanel").style("display", "block");
             toolsWidget.domNode.style.display = "none";
-        },
-
-        _changeMenuState: function(){
-
-        },
-
-        // showBasemap: function(map, imageConfig, initialBasemap) {
-        //     require([
-        //         "dijit/registry", "mesa/basemapWidget"
-        //     ], function(registry) {
-        //         if (!(registry.byId("imagelist2"))) { //remove the 2 after user caches have been updated
-        //             createImageList(imageConfig);
-        //             lmG.imageTool = new basemapWidget({
-        //                 mapRef: map,
-        //                 device: "desktop",
-        //                 initialBasemap: initialBasemap
-        //             }, "imagelist2");
-        //         }
-        //         lmG.imageTool.basemapChanger();
-        //     });
-        // },
+        },0
 
         measureClick: function () {
             if (!(registry.byId("measureDialog2"))) { //remove the 2 after user caches have been updated
@@ -387,24 +337,6 @@ define([
             this.backToMap();
         },
 
-        // basemapClick: function () {
-        //         if (!(registry.byId("imagelist2"))) { //remove the 2 after user caches have been updated
-        //                 lmG.imageTool = new basemapWidget({
-        //                        device: "mobile"
-        //                 }, "imagelist2");
-        //                 lmG.imageTool.startup();
-        //                 lmG.imageTool.basemapChanger();
-        //         } else if((registry.byId("imagelist2"))){
-        //             lmG.imageTool.basemapChanger();
-        //         }
-        //     this.backToMap();
-        // },
-
-        searchClick: function () {
-            // dom.byId("mobileSearch").style.display = "block";
-            // dom.byId("autocompleteSearch").style.display = "block";
-            // this.backToMap();
-        },
 
         onClose: function (){
             dom.byId("toolPanel").style.display = "none";

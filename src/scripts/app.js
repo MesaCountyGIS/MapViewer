@@ -53,7 +53,7 @@ function init() {
             /*Create a dom node to hold the legend. Create a new legend object,
             then call runToolsView which will configure the legend*/
             var node = domConstruct.toDom("<div data-to='mainSideMenu' class='displayNo legendMenu' id='legendDiv'></div>");
-            domConstruct.place(node, document.body, 'after')
+            domConstruct.place(node, document.getElementById('map'), 'before');
             var legend = new Legend({
                 map: aG.map,
             }, node);
@@ -288,6 +288,7 @@ function runToolsView(config, map, device,
     require([
         "dijit/registry", "mesa/toolsWidget2"
     ], function(registry, toolsWidget) {
+
         if (!(registry.byId("toolsView2"))) {
             var tools = new toolsWidget({
                 geometryServiceURL: config.geometryService,

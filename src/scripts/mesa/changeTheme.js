@@ -31,6 +31,7 @@ define([
                 option = changeThemeWidget.option;
                 pVal = changeThemeWidget.pVal;
                 Legend = changeThemeWidget.mapLegend;
+                console.log('from changeTheme', Legend.layerInfos[0].layer)
                 checkboxids = changeThemeWidget.checkboxid;
                 control = dom.byId(layer + "Select") ? (layer + "Select") : "noControl";
                 layerConstructor = {
@@ -1160,7 +1161,7 @@ define([
 
                 function pushLayers(layertitle, layerlist, x) {
                     var mapLegendLayers = [];
-                    push('Basemap Layers', lmG.vectorBasemap, [7, 12, 17, 22, 23, 24, 25, 26, 27, 28, 32, 35, 36, 37, 38, 39, 50, 51]);
+                    push('Basemap Layers', Legend.layerInfos[0].layer, [7, 12, 17, 22, 23, 24, 25, 26, 27, 28, 32, 35, 36, 37, 38, 39, 50, 51]);
 
                     if (x === 0 && !(layerlist === 0)) {
                         for (i = 0; i < layerlist.length; i++) {
