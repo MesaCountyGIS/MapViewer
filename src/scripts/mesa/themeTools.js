@@ -6,8 +6,8 @@ define([
 ], function (array, domConstruct, domAttr, dom, query, domClass, domStyle, changeTheme) {
 
 
-        function _themeClick(e, self, map, popupObject, popupTemplateObject, legend) {
-            e.stopPropagation();
+        function _themeClick(e, self, map, popupObject, popupTemplateObject, legend, initialBasemap, components) {
+            // e.stopPropagation();
             var newLayer = self.attributes['data-value'].nodeValue;
             _getTemplate(newLayer);
             if (newLayer !== 'epom' && newLayer.length > 0) {
@@ -21,8 +21,10 @@ define([
                         option: option,
                         pVal: null,
                         mapRef: map,
+                        basemapRef: initialBasemap,
                         infoWindowRef: popupObject,
                         infoTemplateRef: popupTemplateObject,
+                        checkboxid: null,
                         mapLegend: legend
                     }).then(_animatePanel(e));
                 }, 200);

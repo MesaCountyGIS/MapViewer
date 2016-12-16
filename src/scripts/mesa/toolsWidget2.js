@@ -48,13 +48,14 @@ define([
                     7,12,17,22,23,24,25,26,27,28,32,35,36,37,38,39,50,51
                 ]
             });
-            console.log(1, legendObject)
             legendObject.refresh(legLayers);
-            console.log(2, legendObject)
             on(query('#mobileSearch ul li'), "click", openSearchDialog);
             on(dom.byId("toolPanel"), touch.release, displayTool);
             on(query(".mainSideMenu li:not(#Imagery)"), "click", dispatchMainMenuClick);
-            on(query('.themeMenu li'), "click", dispatchThemeMenuClick);
+            on(query('.themeMenu li'), "click", function(e){
+                var layer = domAttr.get(this, 'data-value');
+                toolsWidget.dispatchThemeMenuClick(e, this, layer);
+            });
             on(query('.searchMenu li'), "click", dispatchSearchMenuClick);
             on(dom.byId('Imagery'), "click", dispatchImageryToggle);
             on(query('.imageYears li'), "click", dispatchImageChange);
@@ -89,23 +90,23 @@ define([
                 }
             }
 
-            function dispatchThemeMenuClick(e) {
-                var spanList = this.parentNode.getElementsByTagName('span');
-                var thisSpan = this.getElementsByTagName('span')[0];
-                var layer = domAttr.get(this, 'data-value');
-console.log('themin1',legendObject)
-                themeTools.themeClick(e, this, map, popupObject, popupTemplateObject, legendObject);
-                //go to mainSideMenu
-                registry.byId("toolsView2").domNode.style.display = "none";
-                console.log('themin',legendObject)
-                //Place check mark next to currently active theme
-                (function () {
-                    for (i = 0; i < spanList.length; i++) {
-                        spanList[i].innerHTML = '';
-                    };
-                    thisSpan.innerHTML = "&#10004;";
-                })();
-            }
+            // function dispatchThemeMenuClick(e) {
+            //     var spanList = this.parentNode.getElementsByTagName('span');
+            //     var thisSpan = this.getElementsByTagName('span')[0];
+            //     var layer = domAttr.get(this, 'data-value');
+            //     themeTools.themeClick(e, this, map, popupObject, popupTemplateObject, legendObject, initialBasemap);
+            //
+            //     //remove the side panel to show the map only.
+            //     registry.byId("toolsView2").domNode.style.display = "none";
+            //
+            //     //Place check mark next to currently active theme
+            //     (function () {
+            //         for (i = 0; i < spanList.length; i++) {
+            //             spanList[i].innerHTML = '';
+            //         };
+            //         thisSpan.innerHTML = "&#10004;";
+            //     })();
+            // }
 
             function dispatchSearchMenuClick(e) {
                 e.stopPropagation();
@@ -234,7 +235,30 @@ console.log('themin1',legendObject)
         backToMap: function () {
             // query("#map_zoom_slider, #hidePanel, #rightPanel, .collapsedPanel").style("display", "block");
             toolsWidget.domNode.style.display = "none";
-        },0
+        },
+
+        dispatchThemeMenuClick: function(e, that, layer) {
+            var spanList = query('.themeMenu')[0].getElementsByTagName('span');
+            var thisSpan;
+            for(s = 0; s < spanList.length; s++){
+                if(domAttr.get(spanList[s].parentNode, 'data-value') === layer){
+                    thisSpan = spanList[s].parentNode.getElementsByTagName('span')[0];
+                }
+            }
+
+            themeTools.themeClick(e, that, map, popupObject, popupTemplateObject, legendObject, initialBasemap);
+
+            //remove the side panel to show the map only.
+            registry.byId("toolsView2").domNode.style.display = "none";
+
+            //Place check mark next to currently active theme
+            (function () {
+                for (i = 0; i < spanList.length; i++) {
+                    spanList[i].innerHTML = '';
+                };
+                thisSpan.innerHTML = "&#10004;";
+            })();
+        },
 
         measureClick: function () {
             if (!(registry.byId("measureDialog2"))) { //remove the 2 after user caches have been updated

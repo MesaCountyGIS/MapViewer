@@ -68,7 +68,7 @@ function init() {
             /*watches for variables in the url then runs urlMapType
             if it finds one*/
             if ((location.href).indexOf("?") > -1) {
-                urlMapType(location.href, aG.map, legend);
+                urlMapType(location.href, aG.map, legend, initialBasemap);
             } else {
                 return undefined;
             }
@@ -117,7 +117,6 @@ function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
             showShare("socialShare");
         });
         on(query('#layerSelect ul li'), touch.release, function(e){
-
             themeTools.themeClick(e, this, map, popupObject, popupTemplateObject, legendObject);
         });
         on(query('.plus'), touch.release, clickPlus);
@@ -390,7 +389,7 @@ function createScalebar(map) {
 //         },'legendDialog');
 //
 //     }); //end require
-//     setTimeout(function(){console.log('foo', leg)}, 500)
+//     setTimeout(function(){}, 500)
 //     // setTimeout(function(){
 //     //     return leg;
 //     // }, 500)
@@ -697,7 +696,6 @@ function baseLayersSwitch(e, ParcelLayerObject, basemapObject, roadLabelObject) 
             'input.lbsgcbx': roadLabelObject,
             'input.bgcbx': basemapObject
         };
-        console.log(target, thisClassName)
         for (i = 0; i < box.length; i++) {
             box[i].checked = target.checked? true: false;
         }
@@ -748,7 +746,7 @@ function clickPlus(e) {
     });
 }
 
-function urlMapType(url, map, legend) {
+function urlMapType(url, map, legend, initialBasemap) {
     /*urlMapType (and its main sub-function parseParameters) is used to parse
     GET requests to the viewer api.
     The api allows control of the map by setting the map theme,
@@ -857,22 +855,49 @@ function urlMapType(url, map, legend) {
         }
 
         if (urlParams[1] !== 'Select Map') {
-            require([
-                "mesa/changeTheme", "dojo/dom"
-            ], function(changeTheme, dom) {
-                new changeTheme({
-                    newLayer: urlParams[0],
-                    layerTitle: urlParams[1],
-                    option: urlParams[2],
-                    pVal: urlParams[3],
-                    mapRef: map,
-                    infoWindowRef: aG.popup,
-                    infoTemplateRef: aG.pTemp,
-                    checkboxid: urlParams[4],
-                    mapLegend:legend
-                });
 
-            });
+            require([
+                "dijit/registry", "mesa/toolsWidget2"
+            ], function(registry, toolsWidget) {
+
+                if (registry.byId("toolsView2")) {
+                    (registry.byId("toolsView2").destroyRecursive());
+                }
+                    var tools = new toolsWidget({
+                        geometryServiceURL: config.geometryService,
+                        printURL: config.printURL,
+                        imageList: config.imagesList,
+                        mapRef: map,
+                        basemap: initialBasemap,
+                        deviceUsed: device,
+                        popupRef: popupObject,
+                        popupTemplateRef: popupTemplateObject,
+                        legendRef: legendObj
+                    }, "toolsView2");
+                    tools.dispatchThemeMenuClick();
+                    registry.byId("toolsView2").domNode.style.display = "none";
+
+
+
+            // require([
+            //     "mesa/themeTools", "dojo/dom"
+            // ], function(themeTools, dom) {
+            //     themeTools.themeClick(null, this, map, aG.popup, aG.pTemp, legend,
+            //          urlParams[4], initialBasemap);
+            //     new changeTheme({
+            //         newLayer: urlParams[0],
+            //         layerTitle: urlParams[1],
+            //         option: urlParams[2],
+            //         pVal: urlParams[3],
+            //         mapRef: map,
+            //         basemapRef: initialBasemap,
+            //         infoWindowRef: aG.popup,
+            //         infoTemplateRef: aG.pTemp,
+            //         checkboxid: urlParams[4],
+            //         mapLegend:legend
+            //     });
+            //
+            // });
         } else {
             return
         }

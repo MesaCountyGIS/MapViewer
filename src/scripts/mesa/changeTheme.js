@@ -7,7 +7,7 @@ define([
     ConfirmDialog, cookie, IdentifyTask, IdentifyParameters, IdentifyTemplates, ArcGISDynamicMapServiceLayer,
     legendWidget,registry,
     declare, _WidgetBase) {
-    var layer, layerTitle, option, pVal, control, changeThemeWidget, layerConstructor, themeLayers, map, checkboxClick, infoWindow, infoTemplate, checkboxids, Legend;
+    var layer, layerTitle, option, pVal, control, changeThemeWidget, layerConstructor, themeLayers, map, basemap, checkboxClick, infoWindow, infoTemplate, checkboxids, Legend;
 
     return declare("changeTheme", [_WidgetBase], {
 
@@ -16,6 +16,7 @@ define([
             option: null,
             pVal: null,
             mapRef: null,
+            basemapRef: null,
             infoWindowRef: null,
             infoTemplateRef: null,
             checkboxid: null,
@@ -30,8 +31,8 @@ define([
                 layerTitle = changeThemeWidget.layerTitle;
                 option = changeThemeWidget.option;
                 pVal = changeThemeWidget.pVal;
+                basemap = changeThemeWidget.basemapRef;
                 Legend = changeThemeWidget.mapLegend;
-                console.log('from changeTheme', Legend.layerInfos[0].layer)
                 checkboxids = changeThemeWidget.checkboxid;
                 control = dom.byId(layer + "Select") ? (layer + "Select") : "noControl";
                 layerConstructor = {
@@ -1161,7 +1162,7 @@ define([
 
                 function pushLayers(layertitle, layerlist, x) {
                     var mapLegendLayers = [];
-                    push('Basemap Layers', Legend.layerInfos[0].layer, [7, 12, 17, 22, 23, 24, 25, 26, 27, 28, 32, 35, 36, 37, 38, 39, 50, 51]);
+                    push('Basemap Layers', basemap, [7, 12, 17, 22, 23, 24, 25, 26, 27, 28, 32, 35, 36, 37, 38, 39, 50, 51]);
 
                     if (x === 0 && !(layerlist === 0)) {
                         for (i = 0; i < layerlist.length; i++) {
