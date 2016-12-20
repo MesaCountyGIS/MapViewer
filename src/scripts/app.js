@@ -67,10 +67,10 @@ function init() {
             /*watches for variables in the url then runs urlMapType
             if it finds one*/
             if ((location.href).indexOf("?") > -1) {
-                urlMapType(location.href, aG.map, legend, initialBasemap, JSONconfig, device);
+                urlMapType(location.href, aG.map, legend, initialBasemap, JSONconfig, device, lmG.pLay);
             } else {
                 runToolsView(JSONconfig, aG.map, device,
-                    aG.popup, aG.pTemp, legend, initialBasemap);
+                    aG.popup, aG.pTemp, legend, initialBasemap, lmG.pLay);
             }
         });
     }); //end require
@@ -120,9 +120,10 @@ function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
             themeTools.themeClick(this, map, popupObject, popupTemplateObject, legendObject, initialBasemap);
         });
         on(query('.plus'), touch.release, clickPlus);
-        on(query('.baselyrs'), "click", function(e){
-            baseLayersSwitch(e, parcelLayerObject, initialBasemap, roadLabels);
-        });
+        // on(query('.baselyrs'), "click", function(e){
+        //     console.log('krips')
+        //     baseLayersSwitch(e, parcelLayerObject, initialBasemap, roadLabels);
+        // });
         // on(query(".collapsedPanel"), touch.release, animatePanel);
         // on(dom.byId("hidePanel"), "click", themeTools.animatePanel);
         on(dom.byId("locate"), touch.release, function(){
@@ -283,7 +284,7 @@ function checkForMobile() {
 }
 
 function runToolsView(config, map, device,
-    popupObject, popupTemplateObject, legendObj, initialBasemap) {
+    popupObject, popupTemplateObject, legendObj, initialBasemap, parcels) {
     require([
         "dijit/registry", "mesa/toolsWidget2"
     ], function(registry, toolsWidget) {
@@ -297,7 +298,8 @@ function runToolsView(config, map, device,
                 deviceUsed: device,
                 popupRef: popupObject,
                 popupTemplateRef: popupTemplateObject,
-                legendRef: legendObj
+                legendRef: legendObj,
+                parcelLayer: parcels
             }, "toolsView2");
             registry.byId("toolsView2").domNode.style.display = "none"
         } else {
@@ -680,39 +682,39 @@ function extentZoom(extentObject) {
     return viewExtent;
 }
 
-//Turns on and off the base layers
-function baseLayersSwitch(e, ParcelLayerObject, basemapObject, roadLabelObject) {
-    require([
-        "dojo/query", "dojo/dom-attr"
-    ], function(query, domAttr) {
-        var target = e.target? e.target: e.srcElement;
-        var thisClassName = domAttr.get(target, "class");
-        thisClassName = 'input.' + thisClassName.split(" ").pop();
-        var baselayers = query(".expand")[0];
-        var box = query(thisClassName);
-        var layers = {
-            'input.pclcbx': ParcelLayerObject,
-            'input.lbsgcbx': roadLabelObject,
-            'input.bgcbx': basemapObject
-        };
-        for (i = 0; i < box.length; i++) {
-            box[i].checked = target.checked? true: false;
-        }
-        if (baselayers.checked) {
-            for (var x in layers) {
-                if (query(x)[0].checked) {
-                    layers[x].show();
-                } else {
-                    layers[x].hide();
-                }
-            }
-        } else {
-            for (var x in layers) {
-                layers[x].hide();
-            }
-        }
-    });
-}
+// //Turns on and off the base layers
+// function baseLayersSwitch(e, ParcelLayerObject, basemapObject, roadLabelObject) {
+//     require([
+//         "dojo/query", "dojo/dom-attr"
+//     ], function(query, domAttr) {
+//         var target = e.target? e.target: e.srcElement;
+//         var thisClassName = domAttr.get(target, "class");
+//         thisClassName = 'input.' + thisClassName.split(" ").pop();
+//         // var baselayers = query(".expand")[0];
+//         var box = query(thisClassName);
+//         var layers = {
+//             'input.pclcbx': ParcelLayerObject,
+//             'input.lbsgcbx': roadLabelObject,
+//             'input.bgcbx': basemapObject
+//         };
+//         for (i = 0; i < box.length; i++) {
+//             box[i].checked = target.checked? true: false;
+//         }
+//         // if (baselayers.checked) {
+//             for (var x in layers) {
+//                 // if (query(x)[0].checked) {
+//                 //     layers[x].show();
+//                 // } else {
+//                 //     layers[x].hide();
+//                 // }
+//             }
+//         // } else {
+//         //     for (var x in layers) {
+//         //         layers[x].hide();
+//         //     }
+//         // }
+//     });
+// }
 
 function clickPlus(e) {
     /* Toggle expansion of the baselayers check boxes on the "Layers" tab
@@ -745,7 +747,7 @@ function clickPlus(e) {
     });
 }
 
-function urlMapType(url, map, legend, initialBasemap, config, device) {
+function urlMapType(url, map, legend, initialBasemap, config, device, parcels) {
     /*urlMapType (and its main sub-function parseParameters) is used to parse
     GET requests to the viewer api.
     The api allows control of the map by setting the map theme,
@@ -866,7 +868,6 @@ function urlMapType(url, map, legend, initialBasemap, config, device) {
                     (registry.byId("toolsView2").destroyRecursive());
                 }
 
-
                     var tools = new toolsWidget({
                         geometryServiceURL: config.geometryService,
                         printURL: config.printURL,
@@ -876,7 +877,8 @@ function urlMapType(url, map, legend, initialBasemap, config, device) {
                         deviceUsed: device,
                         popupRef: aG.popup,
                         popupTemplateRef: aG.pTemp,
-                        legendRef: legend
+                        legendRef: legend,
+                        parcelLayer: parcels
                     }, "toolsView2");
 
                     tools.dispatchThemeMenuClick(urlParams[0], components);

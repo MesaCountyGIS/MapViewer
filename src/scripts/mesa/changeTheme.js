@@ -1042,7 +1042,6 @@ define([
             },
 
             resetMap: function() {
-                console.log(map)
                 map.infoWindow.hide();
                 map.infoWindow.resize(350, 300);
                 lmG.pLay.infoTemplate = '';

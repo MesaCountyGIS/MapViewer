@@ -10,7 +10,7 @@ define([
     PrintTask, PrintParameters, PrintTemplate, Print, on, lang, touch, themeTools, searchTools,
     _WidgetBase, _TemplatedMixin, template, measureWidget, printWidget, queryWidget,
     bookmarkWidget, helpWidget, shareFormWidget, registry, basemapWidget2) {
-        var map, toolsWidget;
+        var map, toolsWidget, gsvc, popupObject, popupTemplateObject, Images, initialBasemap, device, parcels, legendObject;
 
     return declare("toolsWidget2", [_WidgetBase, _TemplatedMixin], {
 
@@ -25,6 +25,7 @@ define([
         popupRef: null,
         popupTemplateRef: null,
         legendRef: null,
+        parcelLayer: null,
 
         postCreate: function () {
             domConstruct.place(this.domNode, this.srcNodeRef.id, "before");
@@ -38,7 +39,7 @@ define([
             Images = toolsWidget.imageList;
             initialBasemap = toolsWidget.basemap;
             device = toolsWidget.deviceUsed;
-
+            parcels = toolsWidget.parcelLayer;
             //Push the original basemap into the legend
             legendObject = toolsWidget.legendRef;
             var legLayers = [];
@@ -62,6 +63,36 @@ define([
             on(dom.byId('Imagery'), "click", dispatchImageryToggle);
             on(query('.imageYears li'), "click", dispatchImageChange);
             on(dom.byId('backMenu'), touch.release, backButtonEvent);
+            on(query('.baselyrs'), "click", function(e){
+                baseLayersSwitch(e, parcels, initialBasemap, map._layers.roadLabels);
+            });
+
+            //Turns on and off the base layers
+            function baseLayersSwitch(e, ParcelLayerObject, basemapObject, roadLabelObject) {
+                require([
+                    "dojo/query", "dojo/dom-attr"
+                ], function(query, domAttr) {
+                    var target = e.target? e.target: e.srcElement;
+                    var thisClassName = domAttr.get(target, "class");
+                    thisClassName = 'input.' + thisClassName.split(" ").pop();
+                    var box = query(thisClassName);
+                    var layers = {
+                        'input.pclcbx': ParcelLayerObject,
+                        'input.lbsgcbx': roadLabelObject,
+                        'input.bgcbx': basemapObject
+                    };
+                    for (i = 0; i < box.length; i++) {
+                        box[i].checked = target.checked? true: false;
+                    }
+                        for (var x in layers) {
+                            if (query(x)[0].checked) {
+                                layers[x].show();
+                            } else {
+                                layers[x].hide();
+                            }
+                        }
+                });
+            }
 
             function openSearchDialog(e){
                 e.stopPropagation();
