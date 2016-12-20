@@ -30,16 +30,17 @@ define([
             domConstruct.place(this.domNode, this.srcNodeRef.id, "before");
             domConstruct.place(dom.byId("legendDiv"), dom.byId("leg"), "replace");
 
-
             toolsWidget = this;
             map = toolsWidget.mapRef;
             gsvc = toolsWidget.geometryServiceURL;
             popupObject = toolsWidget.popupRef;
             popupTemplateObject = toolsWidget.popupTemplateRef;
-            legendObject = toolsWidget.legendRef;
             Images = toolsWidget.imageList;
             initialBasemap = toolsWidget.basemap;
             device = toolsWidget.deviceUsed;
+
+            //Push the original basemap into the legend
+            legendObject = toolsWidget.legendRef;
             var legLayers = [];
             legLayers.push({
                 layer: initialBasemap,
@@ -49,12 +50,13 @@ define([
                 ]
             });
             legendObject.refresh(legLayers);
-            on(query('#mobileSearch ul li'), "click", openSearchDialog);
-            on(dom.byId("toolPanel"), touch.release, displayTool);
+            //Set up event handlers for slide out menu
+            // on(query('#mobileSearch ul li'), "click", openSearchDialog);
+            // on(dom.byId("toolPanel"), touch.release, displayTool);
             on(query(".mainSideMenu li:not(#Imagery)"), "click", dispatchMainMenuClick);
             on(query('.themeMenu li'), "click", function(e){
                 var layer = domAttr.get(this, 'data-value');
-                toolsWidget.dispatchThemeMenuClick(e, this, layer);
+                toolsWidget.dispatchThemeMenuClick(layer);
             });
             on(query('.searchMenu li'), "click", dispatchSearchMenuClick);
             on(dom.byId('Imagery'), "click", dispatchImageryToggle);
@@ -72,10 +74,10 @@ define([
                 toolsWidget.backToMap();
             }
 
-            function displayTool(e){
-                var name = (domAttr.get(e.target, "data-toolName"));
-                dom.byId(name).style.display = "block";
-            }
+            // function displayTool(e){
+            //     var name = (domAttr.get(e.target, "data-toolName"));
+            //     dom.byId(name).style.display = "block";
+            // }
 
             function dispatchMainMenuClick(e){
                 e.stopPropagation();
@@ -237,7 +239,8 @@ define([
             toolsWidget.domNode.style.display = "none";
         },
 
-        dispatchThemeMenuClick: function(e, that, layer) {
+        dispatchThemeMenuClick: function(layer, components) {
+            //Place check mark next to currently active theme
             var spanList = query('.themeMenu')[0].getElementsByTagName('span');
             var thisSpan;
             for(s = 0; s < spanList.length; s++){
@@ -246,18 +249,17 @@ define([
                 }
             }
 
-            themeTools.themeClick(e, that, map, popupObject, popupTemplateObject, legendObject, initialBasemap);
-
-            //remove the side panel to show the map only.
-            registry.byId("toolsView2").domNode.style.display = "none";
-
-            //Place check mark next to currently active theme
             (function () {
                 for (i = 0; i < spanList.length; i++) {
                     spanList[i].innerHTML = '';
                 };
                 thisSpan.innerHTML = "&#10004;";
             })();
+
+            themeTools.themeClick(thisSpan.parentNode, map, popupObject, popupTemplateObject, legendObject, initialBasemap, components);
+
+            //remove the side panel to show the map only.
+            registry.byId("toolsView2").domNode.style.display = "none";
         },
 
         measureClick: function () {

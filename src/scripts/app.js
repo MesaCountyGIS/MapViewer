@@ -31,7 +31,7 @@ function init() {
         var initExtent = setInitialExtent(utm12, device);
         // Create an ESRI map component
         aG.map = createMap(initExtent);
-        // Initialize the popup for when parcels are clicked on
+        // Initialize the popup for when parcels are clicked
         aG.pTemp = createPopupTemplate();
         // Create 3 layers to be initially added to the map
         lmG.pLay = createFeatureLayer("http://mcmap2.mesacounty.us/arcgis/rest/services/maps/ParcelOnly4Query/MapServer/0");
@@ -54,23 +54,23 @@ function init() {
             then call runToolsView which will configure the legend*/
             var node = domConstruct.toDom("<div data-to='mainSideMenu' class='displayNo legendMenu' id='legendDiv'></div>");
             domConstruct.place(node, document.getElementById('map'), 'before');
+
             var legend = new Legend({
                 map: aG.map,
             }, node);
-            runToolsView(JSONconfig, aG.map, device,
-                aG.popup, aG.pTemp, legend, initialBasemap);
 
             createHomeButton(aG.map);
             setEventHandlers(JSONconfig, aG.map, lmG.pLay, initialBasemap,
-            lmG.roadLabels, aG.popup, aG.pTemp, legend);
+                lmG.roadLabels, aG.popup, aG.pTemp, legend);
             document.getElementById("loading").style.display = "none";
             aG.map.disableKeyboardNavigation();
             /*watches for variables in the url then runs urlMapType
             if it finds one*/
             if ((location.href).indexOf("?") > -1) {
-                urlMapType(location.href, aG.map, legend, initialBasemap);
+                urlMapType(location.href, aG.map, legend, initialBasemap, JSONconfig, device);
             } else {
-                return undefined;
+                runToolsView(JSONconfig, aG.map, device,
+                    aG.popup, aG.pTemp, legend, initialBasemap);
             }
         });
     }); //end require
@@ -117,14 +117,14 @@ function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
             showShare("socialShare");
         });
         on(query('#layerSelect ul li'), touch.release, function(e){
-            themeTools.themeClick(e, this, map, popupObject, popupTemplateObject, legendObject);
+            themeTools.themeClick(this, map, popupObject, popupTemplateObject, legendObject, initialBasemap);
         });
         on(query('.plus'), touch.release, clickPlus);
         on(query('.baselyrs'), "click", function(e){
             baseLayersSwitch(e, parcelLayerObject, initialBasemap, roadLabels);
         });
         // on(query(".collapsedPanel"), touch.release, animatePanel);
-        on(dom.byId("hidePanel"), "click", themeTools.animatePanel);
+        // on(dom.byId("hidePanel"), "click", themeTools.animatePanel);
         on(dom.byId("locate"), touch.release, function(){
             showLocator(JSONconfig.geometryService)
         });
@@ -287,7 +287,6 @@ function runToolsView(config, map, device,
     require([
         "dijit/registry", "mesa/toolsWidget2"
     ], function(registry, toolsWidget) {
-
         if (!(registry.byId("toolsView2"))) {
             var tools = new toolsWidget({
                 geometryServiceURL: config.geometryService,
@@ -746,7 +745,7 @@ function clickPlus(e) {
     });
 }
 
-function urlMapType(url, map, legend, initialBasemap) {
+function urlMapType(url, map, legend, initialBasemap, config, device) {
     /*urlMapType (and its main sub-function parseParameters) is used to parse
     GET requests to the viewer api.
     The api allows control of the map by setting the map theme,
@@ -828,7 +827,7 @@ function urlMapType(url, map, legend, initialBasemap) {
             function maptypeFound(type) {
                 require(["mesa/themeTools"], function(themeTools){
                     themeTools.getTemplate(type);
-                    themeTools.animatePanel("open");
+                    // themeTools.animatePanel("open");
                 });
                 // setTimeout(function(){animatePanel("open")}, 400);
                 //After loading the theme, return the theme title so it can
@@ -855,14 +854,19 @@ function urlMapType(url, map, legend, initialBasemap) {
         }
 
         if (urlParams[1] !== 'Select Map') {
-
             require([
                 "dijit/registry", "mesa/toolsWidget2"
             ], function(registry, toolsWidget) {
 
+                var components = {
+                    pVal: urlParams[3],
+                    checkboxid: urlParams[4]
+                }
                 if (registry.byId("toolsView2")) {
                     (registry.byId("toolsView2").destroyRecursive());
                 }
+
+
                     var tools = new toolsWidget({
                         geometryServiceURL: config.geometryService,
                         printURL: config.printURL,
@@ -870,12 +874,14 @@ function urlMapType(url, map, legend, initialBasemap) {
                         mapRef: map,
                         basemap: initialBasemap,
                         deviceUsed: device,
-                        popupRef: popupObject,
-                        popupTemplateRef: popupTemplateObject,
-                        legendRef: legendObj
+                        popupRef: aG.popup,
+                        popupTemplateRef: aG.pTemp,
+                        legendRef: legend
                     }, "toolsView2");
-                    tools.dispatchThemeMenuClick();
-                    registry.byId("toolsView2").domNode.style.display = "none";
+
+                    tools.dispatchThemeMenuClick(urlParams[0], components);
+
+                    // registry.byId("toolsView2").domNode.style.display = "none";
 
 
 
@@ -898,8 +904,9 @@ function urlMapType(url, map, legend, initialBasemap) {
             //     });
             //
             // });
+            }); //end require
         } else {
             return
         }
-    }); //end require
+}); //end require
 }

@@ -1927,6 +1927,7 @@ input {
   height: 12px;
   position: static;
   padding-left: 12px;
+  margin-right: .2em;
 }
 
 .dep {
@@ -1943,6 +1944,7 @@ input {
   height: 12px;
   position: static;
   padding-left: 12px;
+  margin-right: .2em;
 }
 
 .glo {
@@ -1959,6 +1961,7 @@ input {
   height: 12px;
   position: static;
   padding-left: 12px;
+  margin-right: .2em;
 }
 
 .ded {
@@ -1969,15 +1972,16 @@ input {
   background: transparent url("../images/sprite.png") 0 -2295px;
 }
 
-.ease,
+.perm,
 .vac {
   width: 12px;
   height: 12px;
   position: static;
   padding-left: 12px;
+  margin-right: .2em;
 }
 
-.ease {
+.perm {
   background: transparent url("../images/sprite.png") 0 -639px;
 }
 
@@ -1986,14 +1990,15 @@ input {
 }
 
 .book,
-.road {
+.proc {
   width: 12px;
   height: 12px;
   position: static;
   padding-left: 12px;
+  margin-right: .2em;
 }
 
-.road {
+.proc {
   background: transparent url("../images/sprite.png") 0 -2066px;
 }
 
@@ -2007,6 +2012,7 @@ input {
   height: 12px;
   position: static;
   padding-left: 12px;
+  margin-right: .2em;
 }
 
 .delta {
@@ -2019,6 +2025,7 @@ input {
   height: 12px;
   position: static;
   padding-left: 12px;
+  margin-right: .2em;
 }
 
 .mover {

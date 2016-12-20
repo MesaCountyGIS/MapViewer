@@ -14,13 +14,12 @@ define([
             newLayer: null,
             layerTitle: null,
             option: null,
-            pVal: null,
             mapRef: null,
             basemapRef: null,
             infoWindowRef: null,
             infoTemplateRef: null,
-            checkboxid: null,
             mapLegend: null,
+            components: null,
 
             postCreate: function() {
                 changeThemeWidget = this;
@@ -30,10 +29,10 @@ define([
                 layer = changeThemeWidget.newLayer;
                 layerTitle = changeThemeWidget.layerTitle;
                 option = changeThemeWidget.option;
-                pVal = changeThemeWidget.pVal;
+                pVal = changeThemeWidget.components === undefined? null: changeThemeWidget.components.pVal;
                 basemap = changeThemeWidget.basemapRef;
                 Legend = changeThemeWidget.mapLegend;
-                checkboxids = changeThemeWidget.checkboxid;
+                checkboxids = changeThemeWidget.components === undefined? null: changeThemeWidget.components.checkboxid;
                 control = dom.byId(layer + "Select") ? (layer + "Select") : "noControl";
                 layerConstructor = {
                     "mapFolder": 'http://mcmap2.mesacounty.us/arcgis/rest/services/maps/',
@@ -1043,12 +1042,15 @@ define([
             },
 
             resetMap: function() {
+                console.log(map)
                 map.infoWindow.hide();
                 map.infoWindow.resize(350, 300);
                 lmG.pLay.infoTemplate = '';
-                lmG.maptype = ""; //use the maptype variable when sharing a map through email. First set it to empty, then fill it with the current selection.
+                //use the maptype variable when sharing a map through email. First set it to empty, then fill it with the current selection.
+                lmG.maptype = "";
                 lmG.maptype = layer;
-                dom.byId("layerSelect").childNodes[0].nodeValue = layerTitle; //Set theme dropdown text node
+                 //Set theme dropdown text node
+                dom.byId("layerSelect").childNodes[0].nodeValue = layerTitle;
                 query('#enterpriseSelect, #surveySelect, #demographSelect, #districtsSelect, #engdocsSelect, #landdevSelect, #politicalSelect, #schoolsSelect, #topoSelect, #floodSelect, .noLoad, #transSelect, #lawSelect').style("display", "none");
                 dom.byId(control).style.display = "block";
             },
@@ -1239,6 +1241,7 @@ define([
                             }
                         }
                     }
+
                 }
             },
 
@@ -1247,7 +1250,9 @@ define([
                 var len = lyrs.length;
                 lmG.pLay.infoTemplate = '';
                 var deferred;
-                checkboxClick ? checkboxClick.remove() : void(0);
+                if(checkboxClick){
+                    checkboxClick.remove()
+                }
                 checkboxClick = on(map, "click", function(evt) {
                         var IT = new IdentifyTask("http://mcmap2.mesacounty.us/arcgis/rest/services/maps/" + opt + "/MapServer/");
                         var IP = new IdentifyParameters();
