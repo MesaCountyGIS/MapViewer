@@ -938,13 +938,14 @@ a.maplink {
 .queryHeader {
     font-size: 1.1em;
     font-weight: bold;
-    background-color: #9C9586;
+    // background-color: #9C9586;
     width: auto;
     height: 35px;
-    margin: -0.5em -0.5em 0.5em;
+    // margin: -0.5em -0.5em 0.5em;
+    margin-bottom:0.5em;
     padding:0 0.5em;
-    border: 0.5px solid gray;
-    .borderRadius;
+    border-bottom: 0.5px solid gray;
+    // .borderRadius;
     & > div{
      float:right;
     }
@@ -961,7 +962,7 @@ a.maplink {
         padding:0.3em;
     }
     & a:first-child{
-        margin-left:0.5em;
+        margin-left:3em;
     }
 }
 
@@ -1012,9 +1013,12 @@ a.maplink {
     }
 }
 
-// .qForm ul li{
-//     margin:0 auto;
-// }
+.qForm ul {
+  li{
+    width:24.5em !important;
+    background-color:white !important;
+  }
+}
 
 #clearPrevLI{
     padding-left: 3em;
@@ -1029,7 +1033,7 @@ a.maplink {
 }
 
 #clearGraphic{
- margin-left:1.6em;
+ margin-left:5em;
 }
 
 #bufferLI {
@@ -1062,10 +1066,12 @@ a.maplink {
     overflow: auto;
     font-size: 0.8em;
     li {
-        margin-bottom: 5px;
+        margin-bottom: 0.1em;
+        width: 100%;
+        border-radius:0;
         &:hover {
             cursor: pointer;
-            background-color: #ABABAB;
+            // background-color: #ABABAB;
         }
         table:hover {
             cursor: default;
@@ -1076,6 +1082,10 @@ a.maplink {
 #queryResultDialog {
     position:relative;
     left: 0;
+  opacity: .95;
+  padding: .8em;
+  margin-right: 0;
+  z-index: 1;
 }
 
 #resultSpan{
@@ -1169,6 +1179,8 @@ a.maplink {
     border: 1px solid Gainsboro;
     li {
         padding-left: 1em;
+        padding-bottom: 0;
+        margin-bottom: 0;
         &:hover {
             cursor: pointer;
             background-color: #ABABAB;

@@ -29,7 +29,7 @@ define([
                         this.inherited(arguments);
                         domConstruct.place(this.domNode, this.srcNodeRef.id, "before");
                         //add a property where you can add a number of classes to the widget on startup
-                        domClass.add(this.domNode, "query");
+                        // domClass.add(this.domNode, "query");
 
                         queryWidget = this;
                         device = queryWidget.device;
@@ -48,18 +48,18 @@ define([
                             outputLocation: queryWidget.csvOutputLocation
                         })
 
-                        if (device === "desktop") {
-                            domStyle.set(dom.byId("closeQuery"), 'display', "block");
-                            domStyle.set(dom.byId("returnToMap"), 'display', "none");
-                            domStyle.set(dom.byId("returnToTools"), 'display', "none");
-                            new move.parentConstrainedMoveable(this.domNode, {
-                                handle: this.queryHeader,
-                                area: "margin",
-                                within: true
-                            });
-                        }else{
-                            query(".closeQuery")[0].innerHTML = "Cancel";
-                        }
+                        // if (device === "desktop") {
+                        //     domStyle.set(dom.byId("closeQuery"), 'display', "block");
+                        //     domStyle.set(dom.byId("returnToMap"), 'display', "none");
+                        //     domStyle.set(dom.byId("returnToTools"), 'display', "none");
+                        //     new move.parentConstrainedMoveable(this.domNode, {
+                        //         handle: this.queryHeader,
+                        //         area: "margin",
+                        //         within: true
+                        //     });
+                        // }else{
+                        //     query(".closeQuery")[0].innerHTML = "Cancel";
+                        // }
 
                         on(query(".queryHeader a"), touch.release, function (e) {
                             var targetTab = e.target ? e.target : e.srcElement;
@@ -69,17 +69,17 @@ define([
                             domClass.add(targetTab, "tabActivated");
 
                             if (targetTab.id === "attributeTab") {
-                                device === "mobile"? query(".closeQuery")[0].innerHTML = "Close": void(0);
+                                // device === "mobile"? query(".closeQuery")[0].innerHTML = "Close": void(0);
                                 queryWidget.tabClick(".locationItem, .inlineLocationItem", ".attributeItem", ".inlineAttributeItem");
                             } else {
-                                device === "mobile"? query(".closeQuery")[0].innerHTML = "Cancel": void(0);
+                                // device === "mobile"? query(".closeQuery")[0].innerHTML = "Cancel": void(0);
                                 queryWidget.tabClick(".attributeItem, .inlineAttributeItem", ".locationItem", ".inlineLocationItem");
                             }
                         });
 
-                        on(dom.byId("closeQuery"), touch.release, function () {
-                            queryWidget.closeClick();
-                        });
+                        // on(dom.byId("closeQuery"), touch.release, function () {
+                        //     queryWidget.closeClick();
+                        // });
 
                         on(dom.byId("addBuffer"), "click", function () {
                             if (domClass.contains(dom.byId('bufferSelection'), "displayNo")) {
@@ -219,12 +219,12 @@ define([
                             }
                         });
 
-                        on(query(".returnToMap")[0], "click", function (e) {
-                            dom.byId("toolsView").style.display = "none";
-                            queryWidget.domNode.style.display = "none";
-                            dom.byId("toolPanel").style.display = "block";
-                            query("#map_zoom_slider, #hidePanel, #rightPanel, .collapsedPanel").style("display", "block");
-                        });
+                        // on(query(".returnToMap")[0], "click", function (e) {
+                        //     dom.byId("toolsView").style.display = "none";
+                        //     queryWidget.domNode.style.display = "none";
+                        //     dom.byId("toolPanel").style.display = "block";
+                        //     query("#map_zoom_slider, #hidePanel, #rightPanel, .collapsedPanel").style("display", "block");
+                        // });
 
                         on(query(".returnToTools")[0], "click", function (e) {
                             if(domClass.contains(dom.byId("resultSpan"), "displayNo")){
@@ -243,17 +243,17 @@ define([
                         this.inherited(arguments);
                     },
 
-                    closeClick: function () {
-                        map.graphics.clear();
-                        queryWidget._clearQuery();
-                        domClass.contains(dom.byId("tabSpan"), 'displayNo') ? (domClass.remove(dom.byId("tabSpan"), 'displayNo'),
-                            domClass.add(dom.byId("resultSpan"), 'displayNo')) : void(0);
-                        dom.byId("querytabPanel").style.display = "block";
-                        dom.byId("toolsView").style.display = "none";
-                        dom.byId("returnToTools").innerHTML = "Tools";
-                        dom.byId("hidePanel").style.display = "block";
-                        queryWidget.domNode.style.display = "none";
-                    },
+                    // closeClick: function () {
+                    //     map.graphics.clear();
+                    //     queryWidget._clearQuery();
+                    //     domClass.contains(dom.byId("tabSpan"), 'displayNo') ? (domClass.remove(dom.byId("tabSpan"), 'displayNo'),
+                    //         domClass.add(dom.byId("resultSpan"), 'displayNo')) : void(0);
+                    //     dom.byId("querytabPanel").style.display = "block";
+                    //     dom.byId("toolsView").style.display = "none";
+                    //     dom.byId("returnToTools").innerHTML = "Tools";
+                    //     dom.byId("hidePanel").style.display = "block";
+                    //     queryWidget.domNode.style.display = "none";
+                    // },
 
                     _clearQuery: function () {
                         dom.byId("queryResultDialog").style.display = "none";
@@ -311,6 +311,7 @@ define([
                     },
 
                     _toggleHeader: function () {
+                        console.log('queryheader')
                         query(".queryHeader span").toggleClass("displayNo");
                     },
 
@@ -565,7 +566,7 @@ define([
                                     //If there is a layer chosen and the query is run using a draw tool, run the following code
                                     if (!(dom.byId("qLayer").value === "none") && field.length === 0) {
                                         queryWidget.domNode.style.display = "block";
-                                        device === "mobile"? query(".closeQuery")[0].innerHTML = "View Map": void(0);
+                                        // device === "mobile"? query(".closeQuery")[0].innerHTML = "View Map": void(0);
                                         queryWidget._runloqQuery(result, '');
                                         selectionToolbar.deactivate();
                                         query("#qButtonBlock").children('span').style("backgroundColor", "white");

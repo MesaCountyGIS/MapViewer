@@ -759,15 +759,11 @@ a.maplink:hover {
 .queryHeader {
   font-size: 1.1em;
   font-weight: 700;
-  background-color: #9c9586;
   width: auto;
   height: 35px;
-  margin: -.5em -.5em .5em;
+  margin-bottom: .5em;
   padding: 0 .5em;
-  border: .5px solid gray;
-  border-radius: 4px;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
+  border-bottom: .5px solid gray;
 }
 
 .queryHeader>div {
@@ -788,7 +784,7 @@ a.maplink:hover {
 }
 
 .queryHeader a:first-child {
-  margin-left: .5em;
+  margin-left: 3em;
 }
 
 .left-button {
@@ -838,6 +834,11 @@ a.maplink:hover {
   left: 20em;
 }
 
+.qForm ul li {
+  width: 24.5em!important;
+  background-color: #fff!important;
+}
+
 #clearPrevLI {
   padding-left: 3em;
   margin-bottom: 1em;
@@ -852,7 +853,7 @@ a.maplink:hover {
 }
 
 #clearGraphic {
-  margin-left: 1.6em;
+  margin-left: 5em;
 }
 
 #bufferLI {
@@ -889,12 +890,13 @@ a.maplink:hover {
 }
 
 #resultWindow2 li {
-  margin-bottom: 5px;
+  margin-bottom: .1em;
+  width: 100%;
+  border-radius: 0;
 }
 
 #resultWindow2 li:hover {
   cursor: pointer;
-  background-color: #ababab;
 }
 
 #resultWindow2 li table:hover {
@@ -904,6 +906,10 @@ a.maplink:hover {
 #queryResultDialog {
   position: relative;
   left: 0;
+  opacity: .95;
+  padding: .8em;
+  margin-right: 0;
+  z-index: 1;
 }
 
 #resultSpan {
@@ -1004,6 +1010,8 @@ a.maplink:hover {
 
 #qFields li {
   padding-left: 1em;
+  padding-bottom: 0;
+  margin-bottom: 0;
 }
 
 #qFields li:hover {

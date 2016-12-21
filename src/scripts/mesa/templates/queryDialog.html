@@ -1,14 +1,14 @@
-<div id='queryDialog2' data-dojo-attach-point="domNode" title="Attribute Query">
+<div id='queryTool' class='queryTool' data-dojo-attach-point="domNode" title="Attribute Query">
 
     <div data-dojo-attach-point="queryHeader" class="queryHeader">
-        <div title="Return to tools" class='returnToTools left-button' id=returnToTools>Tools</div>
+        <!-- <div title="Return to tools" class='returnToTools left-button' id=returnToTools>Tools</div> -->
         <span class='none' id='tabSpan'>
         <a class='tabActivated' data-dojo-attach-point="attributeTab" id="attributeTab" title="Switch to a Attribute query">Attribute Query</a>
         <a class='tabDeactivated' data-dojo-attach-point="locationTab" id="locationTab" title="Switch to a location query">Location Query</a>
             </span>
         <span class='displayNo' id='resultSpan'>Query Results</span>
-        <span id="closeQuery" style="display:none;" title="Close" class="closer dialogCloser"></span>
-        <div title="Return to Map" class='returnToMap' id="returnToMap">Map</div>
+        <!-- <span id="closeQuery" style="display:none;" title="Close" class="closer dialogCloser"></span> -->
+        <!-- <div title="Return to Map" class='returnToMap' id="returnToMap">Map</div> -->
     </div>
     <div id="querytabPanel">
     <form class="qForm">
@@ -124,7 +124,7 @@
             <li class="submitQueryLI">
                 <button data-dojo-attach-event="onclick:runQuery" class='showInline inlineAttributeItem' id="submitQuery" title="Submit Query" type="button" />Submit Query</button>
                 <button class='displayNo inlineLocationItem' data-dojo-attach-event="onclick:clearClick">Clear</button>
-                <button data-dojo-attach-event="onclick:closeClick" type="button" class="closeQuery" title="Close Query Dialog">Close</button>
+                <!-- <button data-dojo-attach-event="onclick:closeClick" type="button" class="closeQuery" title="Close Query Dialog">Close</button> -->
                 <a class='inlineAttributeItem' target="_blank" href="http://www.w3schools.com/sql/sql_where.asp">
                     <button type="button" id="qHelp" title="Get help building SQL Queries">Help</button>
                 </a>
@@ -134,7 +134,7 @@
     </form>
 </div><!--end of query tabbed panel-->
 
-    <div id="queryResultDialog" class="query moveableDialog">
+    <div id="queryResultDialog">
         <span id="resultLabel">Layer Here</span>
         <br><span class="displaybytext">     Display By: </span>
         <select name="attdisplayby" id="attdisplayby"></select>
@@ -142,7 +142,7 @@
         <div class="closequeryresults">
             <button data-dojo-attach-event="onclick:backToQueryClick" id="backToQuery">Back to query</button>
             <button title="Download query results as a CSV file to use in spreadsheet software" id="csv">CSV</button>
-            <button class="closeQuery" data-dojo-attach-event="onclick:closeClick">Close</button>
+            <!-- <button class="closeQuery" data-dojo-attach-event="onclick:closeClick">Close</button> -->
         </div>
     </div>
 

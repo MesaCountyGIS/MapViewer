@@ -60,6 +60,7 @@ define([
                 toolsWidget.dispatchThemeMenuClick(layer);
             });
             on(query('.measureClick'), "click", dispatchMeasureTool);
+            on(query('.queryClick'), "click", dispatchQueryTool);
             on(query('.searchMenu li'), "click", dispatchSearchMenuClick);
             on(dom.byId('Imagery'), "click", dispatchImageryToggle);
             on(query('.imageYears li'), "click", dispatchImageChange);
@@ -141,33 +142,28 @@ define([
             }
 
             function dispatchMeasureTool() {
-                if (dom.byId("measureTool") && !(registry.byId("measureTool"))) { //remove the 2 after user caches have been updated
+                if (dom.byId("measureTool") && !(registry.byId("measureTool"))) {
                     var measure = new measureWidget({
                         mapRef: map,
                         gsvc: esriConfig.defaults.geometryService.url,
                         device: device,
                         parcelLayer: parcels
-                    }, "measureTool"); //remove the 2 after user caches have been updated
+                    }, "measureTool");
                     measure.startup();
                 }
             }
 
-            function dispatchQueryTool(map, geometryServiceURL) {
-                    if (dom.byId("queryTool") && !(registry.byId("queryTool"))) { //remove the 2 after user caches have been updated
-                        var queryTool = new queryWidget({
-                            device: "desktop",
+            function dispatchQueryTool() {
+                    if (dom.byId("queryTool") && !(registry.byId("queryTool"))) {
+                        var Query = new queryWidget({
+                            device: device,
                             mapRef: map,
-                            geometryServiceURL: geometryServiceURL,
-                            exportURL: "scripts/php/toCSV.php",
-                            csvOutputLocation: "scripts/php/"
+                            geometryServiceURL: esriConfig.defaults.geometryService.url,
+                            exportURL: "../scripts/php/toCSV.php",
+                            csvOutputLocation: "../scripts/php/"
                         }, "queryTool");
-                        queryTool.startup();
+                        Query.startup();
                     }
-                    // if (dom.byId("queryDialog2")) {
-                    //     dom.byId("queryDialog2").style.display = dom.byId("queryDialog2").style.display === "block"
-                    //         ? "none"
-                    //         : "block";
-                    // }
             }
 
             function dispatchImageChange(e) {
@@ -357,26 +353,6 @@ define([
                 dom.byId("bookmarkDialog2").style.display = dom.byId("bookmarkDialog2").style.display === "block" ? "none" : "block"
             }
             this.backToMap();
-        },
-
-        queryClick: function () {
-            if (!(registry.byId("queryDialog2"))) { //remove the 2 after user caches have been updated
-                var queryTool = new queryWidget({
-                    device: "mobile",
-                    mapRef: map,
-                    geometryServiceURL: gsvc
-                }, "queryDialog2");
-                queryTool.startup();
-                query("#toolPanel").html("Query tool").attr("data-toolName", "queryDialog2");
-            }
-
-            dom.byId("queryResultDialog").style.display = "none";
-
-            if (dom.byId("queryDialog2")) {
-                dom.byId("queryDialog2").style.display = "block";
-            }
-
-            // this.backToMap();
         },
 
         legendClick: function () {

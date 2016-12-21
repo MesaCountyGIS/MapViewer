@@ -103,9 +103,9 @@ function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
         on(query("#DTbookmarks"), touch.release, function(){
             showBookmarks(map);
         });
-        on(query("#DTqueryatts"), touch.release, function() {
-            showQuery(map, JSONconfig.geometryService);
-        });
+        // on(query("#DTqueryatts"), touch.release, function() {
+        //     showQuery(map, JSONconfig.geometryService);
+        // });
         // on(query("#DTmeasure"), touch.release, function() {
         //     showMeasure(map, parcelLayerObject, JSONconfig.geometryService);
         // });
