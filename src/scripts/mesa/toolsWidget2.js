@@ -59,6 +59,7 @@ define([
                 var layer = domAttr.get(this, 'data-value');
                 toolsWidget.dispatchThemeMenuClick(layer);
             });
+            on(query('.measureClick'), "click", dispatchMeasureTool);
             on(query('.searchMenu li'), "click", dispatchSearchMenuClick);
             on(dom.byId('Imagery'), "click", dispatchImageryToggle);
             on(query('.imageYears li'), "click", dispatchImageChange);
@@ -105,11 +106,6 @@ define([
                 toolsWidget.backToMap();
             }
 
-            // function displayTool(e){
-            //     var name = (domAttr.get(e.target, "data-toolName"));
-            //     dom.byId(name).style.display = "block";
-            // }
-
             function dispatchMainMenuClick(e){
                 e.stopPropagation();
                 toPage = domAttr.has(this, 'data-to')?
@@ -122,24 +118,6 @@ define([
                     domAttr.set('backMenu', 'data-from', toPage);
                 }
             }
-
-            // function dispatchThemeMenuClick(e) {
-            //     var spanList = this.parentNode.getElementsByTagName('span');
-            //     var thisSpan = this.getElementsByTagName('span')[0];
-            //     var layer = domAttr.get(this, 'data-value');
-            //     themeTools.themeClick(e, this, map, popupObject, popupTemplateObject, legendObject, initialBasemap);
-            //
-            //     //remove the side panel to show the map only.
-            //     registry.byId("toolsView2").domNode.style.display = "none";
-            //
-            //     //Place check mark next to currently active theme
-            //     (function () {
-            //         for (i = 0; i < spanList.length; i++) {
-            //             spanList[i].innerHTML = '';
-            //         };
-            //         thisSpan.innerHTML = "&#10004;";
-            //     })();
-            // }
 
             function dispatchSearchMenuClick(e) {
                 e.stopPropagation();
@@ -162,23 +140,34 @@ define([
                 });
             }
 
-            function dispatchlegendMenuClick(e) {
-                e.stopPropagation();
-                domAttr.set('backMenu', 'data-to', "searchMenu");
-                domAttr.set('backMenu', 'data-from', "searchBox");
-                var type = this.getAttribute('data-value');
-                //hide the search menu
-                domClass.add(query(".searchMenu")[0], "displayNo");
-                //The searchLI list item is still populated on a small screen
-                //in case the screen is just minimized and gets maximized
-                dom.byId("searchLI").childNodes[0].nodeValue = this.childNodes[0].innerHTML;
-                if (registry.byId("searchFieldDialog")){
-                    (registry.byId("searchFieldDialog").destroyRecursive());
+            function dispatchMeasureTool() {
+                if (dom.byId("measureTool") && !(registry.byId("measureTool"))) { //remove the 2 after user caches have been updated
+                    var measure = new measureWidget({
+                        mapRef: map,
+                        gsvc: esriConfig.defaults.geometryService.url,
+                        device: device,
+                        parcelLayer: parcels
+                    }, "measureTool"); //remove the 2 after user caches have been updated
+                    measure.startup();
                 }
-                searchTools.searchBy(type, undefined, "desktop", undefined, function(){
-                    domClass.remove(query(".searchMenu")[0], "displayNo");
-                    toolsWidget.domNode.style.display = "none";
-                });
+            }
+
+            function dispatchQueryTool(map, geometryServiceURL) {
+                    if (dom.byId("queryTool") && !(registry.byId("queryTool"))) { //remove the 2 after user caches have been updated
+                        var queryTool = new queryWidget({
+                            device: "desktop",
+                            mapRef: map,
+                            geometryServiceURL: geometryServiceURL,
+                            exportURL: "scripts/php/toCSV.php",
+                            csvOutputLocation: "scripts/php/"
+                        }, "queryTool");
+                        queryTool.startup();
+                    }
+                    // if (dom.byId("queryDialog2")) {
+                    //     dom.byId("queryDialog2").style.display = dom.byId("queryDialog2").style.display === "block"
+                    //         ? "none"
+                    //         : "block";
+                    // }
             }
 
             function dispatchImageChange(e) {
@@ -255,6 +244,8 @@ define([
                 domClass.add(query("." + fromPage)[0], "displayNo");
                 domClass.remove(query("." + backToPage)[0], "displayNo");
 
+                //Once back on the main menu, remove the back button (There is
+                //nothing to go back to)
                 if(domClass.contains(query(".mainSideMenu")[0], "displayNo") === false){
                     domStyle.set('backMenu', "visibility", "hidden");
                 }

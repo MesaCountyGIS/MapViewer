@@ -196,18 +196,20 @@ div .titleButton .arrow:hover {
 .dialogHeader {
     font-size: 1.1em;
     font-weight: bold;
-    background-color: #9C9586;
-    width: auto;
+    // background-color: #9C9586;
+    // width: auto;
     height: 35px;
-    margin: -0.5em -0.5em 0.5em;
-    border: 0.5px solid gray;
-    .borderRadius;
+    // margin: -0.5em -0.5em 0.5em;
+    // border: 0.5px solid gray;
+    // .borderRadius;
     & > div:first-child {
         cursor: default;
-        position: absolute;
-        font-size: 16px;
-        top: 10px;
-        left: 15px;
+        text-align:center;
+        margin-left:-1em;
+        // position: absolute;
+        // font-size: 16px;
+        // top: 10px;
+        // left: 15px;
     }
 }
 
@@ -642,15 +644,6 @@ div .titleButton .arrow:hover {
     top: -2.5em;
 }
 
-#drawButtonBlock {
-    /*text-align: center;*/
-    margin: 0 0 0.5em 0;
-    width: 16em;
-    img:hover,
-    img:visited {
-        background-color: #ABABAB;
-    }
-}
 
 #distanceDetails {
     padding: 0.25em;
@@ -666,16 +659,16 @@ div .titleButton .arrow:hover {
 }
 
 #measureYesSpan {
-    margin: 0 0 1em 0;
-    width: 15em;
+  margin-bottom:1em;
+  // width: 15em;
 }
 
 #measureYes {
-    margin-left: 1em;
+    // margin-left: 1em;
 }
 
 #measureButtonBlock {
-    padding: 0 0 0 0.5em;
+    // padding: 0 0 0 0.5em;
     width: 16em;
     button {
         .buttonStyle;
@@ -685,12 +678,14 @@ div .titleButton .arrow:hover {
 #uomPolyBox {
     display: none;
     font-size: 0.9em;
+    margin-left:1em;
 }
 
 #uomLineBox,
 #uomPointBox {
     display: none;
     font-size: 0.9em;
+    margin-left:1em;
 }
 
 #polyResult,
@@ -1739,6 +1734,21 @@ input:-moz-placeholder {
     height: 20px;
 }
 
+#measureTool{
+  margin-left:1em;
+
+}
+
+#drawButtonBlock {
+    /*text-align: center;*/
+    // margin: 0 0 1em 0;
+    width: 20em;
+    img:hover,
+    img:visited {
+        background-color: #ABABAB;
+    }
+}
+
 .drawPoly,
 .drawaLine,
 .drawPoint,
@@ -1748,7 +1758,7 @@ input:-moz-placeholder {
 .drawCircle,
 .drawAnno {
     float: left;
-    margin-right: 0.5em;
+    // margin-right: 0.5em;
     background-image: @spriteurl;
     width: 40px;
     height: 40px;

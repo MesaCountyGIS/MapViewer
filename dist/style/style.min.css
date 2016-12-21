@@ -127,12 +127,8 @@ div .titleButton .arrow:hover {
   padding: .8em;
   margin-right: 0;
   z-index: 1;
-  background-color: #fff;
-}
-
-.dialogHeader,
-.query {
   border: .5px solid gray;
+  background-color: #fff;
   border-radius: 4px;
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
@@ -141,18 +137,13 @@ div .titleButton .arrow:hover {
 .dialogHeader {
   font-size: 1.1em;
   font-weight: 700;
-  background-color: #9c9586;
-  width: auto;
   height: 35px;
-  margin: -.5em -.5em .5em;
 }
 
 .dialogHeader>div:first-child {
   cursor: default;
-  position: absolute;
-  font-size: 16px;
-  top: 10px;
-  left: 15px;
+  text-align: center;
+  margin-left: -1em;
 }
 
 .shareClass {
@@ -500,16 +491,6 @@ div .titleButton .arrow:hover {
   top: -2.5em;
 }
 
-#drawButtonBlock {
-  margin: 0 0 .5em;
-  width: 16em;
-}
-
-#drawButtonBlock img:hover,
-#drawButtonBlock img:visited {
-  background-color: #ababab;
-}
-
 #distanceDetails {
   padding: .25em;
   overflow: auto;
@@ -522,16 +503,10 @@ div .titleButton .arrow:hover {
 }
 
 #measureYesSpan {
-  margin: 0 0 1em;
-  width: 15em;
-}
-
-#measureYes {
-  margin-left: 1em;
+  margin-bottom: 1em;
 }
 
 #measureButtonBlock {
-  padding: 0 0 0 .5em;
   width: 16em;
 }
 
@@ -550,6 +525,7 @@ div .titleButton .arrow:hover {
 #uomPolyBox {
   display: none;
   font-size: .9em;
+  margin-left: 1em;
 }
 
 #gcsPointResult,
@@ -1523,6 +1499,19 @@ input:-moz-placeholder {
   height: 20px;
 }
 
+#measureTool {
+  margin-left: 1em;
+}
+
+#drawButtonBlock {
+  width: 20em;
+}
+
+#drawButtonBlock img:hover,
+#drawButtonBlock img:visited {
+  background-color: #ababab;
+}
+
 .drawaLine,
 .drawAnno,
 .drawCircle,
@@ -1532,7 +1521,6 @@ input:-moz-placeholder {
 .drawPoly,
 .drawRect {
   float: left;
-  margin-right: .5em;
   background-image: url("../images/sprite.png");
   width: 40px;
   height: 40px;

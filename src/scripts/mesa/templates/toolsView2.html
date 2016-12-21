@@ -13,10 +13,10 @@
         <li data-to="legendMenu">Legend</li>
         <li data-value="A2015" id='Imagery' data-to="Imagery">Show Imagery</li>
         <li class='displayNo imageYear' id='imageYears' data-to="imageYears">Image Years</li>
-        <li data-to="measureMenu">Measure</li>
-        <li data-to="queryMenu">Query</li>
-        <li data-to="bookmarkMenu">Bookmarks</li>
-        <li data-to="printMenu">Print</li>
+        <li class='measureClick' data-to="measureTool">Measure</li>
+        <li data-to="queryTool">Query</li>
+        <li data-to="bookmarkTool">Bookmarks</li>
+        <li data-to="printTool">Print</li>
         <li data-to="helpMenu">Help</li>
         <li data-to="shareMenu">Share</li>
     </ul>
@@ -85,7 +85,8 @@
 
     <div class="searchDialog" data-from='searchMenu' id="searchFieldDialog"></div>
     <div id='imagelist'></div>
-    <div class="query moveableDialog" id="measureDialog2" title="Draw/Measure2"></div>
+    <div class="measureTool displayNo" id="measureTool" title="Draw/Measure"></div>
+    <div id='queryTool' class='queryTool displayNo'></div>
     <div id="leg"></div>
     <div data-from='mainSideMenu' class="layersMenu displayNo">
         <div id="noControl" class="noControl">

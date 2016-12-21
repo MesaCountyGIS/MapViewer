@@ -106,9 +106,9 @@ function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
         on(query("#DTqueryatts"), touch.release, function() {
             showQuery(map, JSONconfig.geometryService);
         });
-        on(query("#DTmeasure"), touch.release, function() {
-            showMeasure(map, parcelLayerObject, JSONconfig.geometryService);
-        });
+        // on(query("#DTmeasure"), touch.release, function() {
+        //     showMeasure(map, parcelLayerObject, JSONconfig.geometryService);
+        // });
         // on(query("#DTbasemap,#IPbasemap"), touch.release, function() {
         //     showBasemap(map, JSONconfig.imagesList, initialBasemap);
         //
@@ -505,27 +505,27 @@ function showHelp(e, printURL) {
     });
 }
 
-function showQuery(map, geometryServiceURL) {
-    require([
-        "dojo/dom", "dijit/registry", "mesa/queryWidget"
-    ], function(dom, registry, queryWidget) {
-        if (dom.byId("queryDialog2") && !(registry.byId("queryDialog2"))) { //remove the 2 after user caches have been updated
-            var queryTool = new queryWidget({
-                device: "desktop",
-                mapRef: map,
-                geometryServiceURL: geometryServiceURL,
-                exportURL: "scripts/php/toCSV.php",
-                csvOutputLocation: "scripts/php/"
-            }, "queryDialog2");
-            queryTool.startup();
-        }
-        if (dom.byId("queryDialog2")) {
-            dom.byId("queryDialog2").style.display = dom.byId("queryDialog2").style.display === "block"
-                ? "none"
-                : "block";
-        }
-    });
-}
+// function showQuery(map, geometryServiceURL) {
+//     require([
+//         "dojo/dom", "dijit/registry", "mesa/queryWidget"
+//     ], function(dom, registry, queryWidget) {
+//         if (dom.byId("queryDialog2") && !(registry.byId("queryDialog2"))) { //remove the 2 after user caches have been updated
+//             var queryTool = new queryWidget({
+//                 device: "desktop",
+//                 mapRef: map,
+//                 geometryServiceURL: geometryServiceURL,
+//                 exportURL: "scripts/php/toCSV.php",
+//                 csvOutputLocation: "scripts/php/"
+//             }, "queryDialog2");
+//             queryTool.startup();
+//         }
+//         if (dom.byId("queryDialog2")) {
+//             dom.byId("queryDialog2").style.display = dom.byId("queryDialog2").style.display === "block"
+//                 ? "none"
+//                 : "block";
+//         }
+//     });
+// }
 
 // function showBasemap(map, imageConfig, initialBasemap) {
 //     require([
@@ -561,27 +561,27 @@ function showShareForm(map) {
     });
 }
 
-function showMeasure(map, parcelLayer, geometryService) {
-    require([
-        "mesa/measureWidget", "dojo/dom", "dojo/on", "dijit/registry"
-    ], function(measureWidget, dom, on, registry) {
-        if (dom.byId("measureDialog2") && !(registry.byId("measureDialog2"))) { //remove the 2 after user caches have been updated
-            var measure = new measureWidget({
-                mapRef: map,
-                gsvc: geometryService,
-                device: "desktop",
-                parcelLayer: parcelLayer
-            }, "measureDialog2"); //remove the 2 after user caches have been updated
-            measure.startup();
-        }
-
-        if (dom.byId("measureDialog2")) { //delete
-            dom.byId("measureDialog2").style.display = dom.byId("measureDialog2").style.display === "block"
-                ? "none"
-                : "block";
-        }
-    });
-}
+// function showMeasure(map, parcelLayer, geometryService) {
+//     require([
+//         "mesa/measureWidget", "dojo/dom", "dojo/on", "dijit/registry"
+//     ], function(measureWidget, dom, on, registry) {
+//         if (dom.byId("measureDialog2") && !(registry.byId("measureDialog2"))) { //remove the 2 after user caches have been updated
+//             var measure = new measureWidget({
+//                 mapRef: map,
+//                 gsvc: geometryService,
+//                 device: "desktop",
+//                 parcelLayer: parcelLayer
+//             }, "measureDialog2"); //remove the 2 after user caches have been updated
+//             measure.startup();
+//         }
+//
+//         if (dom.byId("measureDialog2")) { //delete
+//             dom.byId("measureDialog2").style.display = dom.byId("measureDialog2").style.display === "block"
+//                 ? "none"
+//                 : "block";
+//         }
+//     });
+// }
 
 function showLocator(geometryServiceURL) {
     require([

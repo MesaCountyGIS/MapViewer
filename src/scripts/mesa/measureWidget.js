@@ -61,13 +61,14 @@ define([
             this.inherited(arguments);
             domConstruct.place(this.domNode, this.srcNodeRef.id, "before");
             //add a property where you can add a number of classes to the widget on startup
-            domClass.add(this.domNode, "query");
+            // domClass.add(this.domNode, "query");
 
             measureWidget = this;
             map = measureWidget.mapRef;
             parcLayer = measureWidget.parcelLayer;
             gsvc = measureWidget.gsvc;
             device = measureWidget.device;
+
 
             geometryServer = new GeometryService(gsvc);
             meas.point = new GraphicsLayer();
@@ -103,10 +104,6 @@ define([
                 layer: parcLayer
             }];
             snapper.setLayerInfos(lyrinfo);
-
-            on(measureWidget.measureCloser, touch.release, function(){
-                measureWidget.closeClick();
-            });
 
             on(dom.byId("measureYes"), "change", function(){
                 measureWidget.enableCheck(dom.byId("measureYes").checked);
@@ -265,10 +262,10 @@ define([
             }
             toolType = (x.target.id).slice(4);
             meas.del = on(tb, "draw-end", measureWidget._addAreaPoly);
-            if(device === "mobile"){
-                this.domNode.style.display = "none";
-                query("#map_zoom_slider, #toolPanel, #hidePanel, .collapsedPanel").style("display", "block");
-            }
+            // if(device === "mobile"){
+            //     this.domNode.style.display = "none";
+            //     query("#map_zoom_slider, #toolPanel, #hidePanel, .collapsedPanel").style("display", "block");
+            // }
         },
 
         setLine: function (x) {
@@ -279,7 +276,7 @@ define([
             }
             toolType = (x.target.id).slice(4);
             meas.del = on(tb, "draw-end", measureWidget._addlinegraphic);
-            device === "mobile"? (this.domNode.style.display = "none", query("#map_zoom_slider, #toolPanel, #hidePanel, .collapsedPanel").style("display", "block")): void(0);
+            // device === "mobile"? (this.domNode.style.display = "none", query("#map_zoom_slider, #toolPanel, #hidePanel, .collapsedPanel").style("display", "block")): void(0);
         },
 
 
@@ -294,7 +291,7 @@ define([
                     measureWidget._getPointLocation(geometry.geometry);
                 }
             });
-            device === "mobile"? (this.domNode.style.display = "none", query("#map_zoom_slider, #toolPanel, #hidePanel, .collapsedPanel").style("display", "block")): void(0);
+            // device === "mobile"? (this.domNode.style.display = "none", query("#map_zoom_slider, #toolPanel, #hidePanel, .collapsedPanel").style("display", "block")): void(0);
         },
 
         _resetButtonBlock: function (target, segmentText, inlines) {
