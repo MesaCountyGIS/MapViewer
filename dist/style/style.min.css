@@ -750,519 +750,7 @@ a.maplink:hover {
   box-shadow: 0 0 2px #ccc;
 }
 
-.tabActivated {
-  height: 1.65em!important;
-  margin-top: .6em!important;
-  background-color: #fff!important;
-}
-
-.queryHeader {
-  font-size: 1.1em;
-  font-weight: 700;
-  width: auto;
-  height: 35px;
-  margin-bottom: .5em;
-  padding: 0 .5em;
-  border-bottom: .5px solid gray;
-}
-
-.queryHeader>div {
-  float: right;
-}
-
-.queryHeader a {
-  margin-top: .9em;
-  float: left;
-  font-size: .7em;
-  cursor: pointer;
-  border: 1px solid #000;
-  border-bottom: none;
-  border-top-left-radius: 1em;
-  border-top-right-radius: 1em;
-  background-color: #d3cfc8;
-  padding: .3em;
-}
-
-.queryHeader a:first-child {
-  margin-left: 3em;
-}
-
-.left-button {
-  float: left!important;
-  display: inline-block;
-  position: relative;
-  background: #d3cfc8;
-  padding: 5px 0;
-  width: 4em;
-  text-align: center;
-  margin-top: .09em;
-  border-radius: 3px;
-}
-
-.left-button:after {
-  content: '';
-  display: block;
-  position: absolute;
-  right: 100%;
-  top: 50%;
-  margin-top: -10px;
-  width: 0;
-  height: 0;
-  border-top: 10px solid transparent;
-  border-right: 5px solid #000;
-  border-bottom: 10px solid transparent;
-  border-left: 10px solid transparent;
-}
-
-#qButtons {
-  font-size: .8em;
-  margin: 1em 0 1em -1em;
-  text-align: center;
-}
-
-#qButtons>span {
-  display: none;
-}
-
-#qButtons button {
-  font-size: 1em;
-  width: 35px;
-}
-
-#qButtons #getExamples {
-  width: 15em!important;
-  left: 20em;
-}
-
-.qForm ul li {
-  width: 24.5em!important;
-  background-color: #fff!important;
-}
-
-#clearPrevLI {
-  padding-left: 3em;
-  margin-bottom: 1em;
-}
-
-#clearPrevLI input {
-  margin: .5em 0;
-}
-
-#qButtonBlock {
-  margin: 1em 0 1em 1.5em;
-}
-
-#clearGraphic {
-  margin-left: 5em;
-}
-
-#bufferLI {
-  margin: 1em 0 0;
-}
-
-#bufferLI #bufferSelection {
-  margin-bottom: 1.1em;
-}
-
-#bufferLI #bufferSelection #buffDist {
-  width: 4em;
-}
-
-#addBufferQuery {
-  margin-bottom: 1em;
-}
-
-#addBufferQuery:hover {
-  cursor: pointer;
-}
-
-#bufferSpan {
-  margin-left: 1em;
-}
-
-#resultWindow2 {
-  height: 200px;
-  border: 1px solid #dcdcdc;
-  margin: .5em;
-  width: 268px;
-  overflow: auto;
-  font-size: .8em;
-}
-
-#resultWindow2 li {
-  margin-bottom: .1em;
-  width: 100%;
-  border-radius: 0;
-}
-
-#resultWindow2 li:hover {
-  cursor: pointer;
-}
-
-#resultWindow2 li table:hover {
-  cursor: default;
-}
-
-#queryResultDialog {
-  padding: .8em;
-}
-
-#queryTool {
-  height: 60%;
-  overflow: auto;
-}
-
-#resultDiv {
-  font-size: .8em;
-  float: none;
-  text-align: center;
-}
-
-.submitQueryLI {
-  text-align: center;
-  margin-top: 1em;
-}
-
-.submitQueryLI button,
-.submitQueryLI input {
-  background: #d9d6d0;
-  border-style: none;
-  cursor: pointer;
-  padding: 10px 14px;
-  border-radius: 4px;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
-}
-
-#queryDialog {
-  display: none;
-  height: auto;
-  width: 19.5em;
-}
-
-#resultLabel {
-  font-weight: 700;
-}
-
-.displaybytext {
-  font-size: .9em;
-}
-
-.displaybytext+select {
-  font-size: .7em;
-}
-
-#attributeText1 {
-  border: .5px solid #000;
-  padding: 1px .5em 1px 1px;
-  border-radius: 2px;
-  -moz-border-radius: 2px;
-  -webkit-border-radius: 2px;
-}
-
-#attributeText2 {
-  font-size: 11px;
-  marin-left: 1.5em;
-  top: 1.2em;
-}
-
-#attributeText2,
-#locationText1 {
-  cursor: pointer;
-  font-weight: 900;
-  opacity: .5;
-  padding: 1px;
-  border: .5px solid #000;
-  border-radius: 2px;
-  -moz-border-radius: 2px;
-  -webkit-border-radius: 2px;
-}
-
-#locationText1 {
-  font-size: 12px;
-  left: 52%;
-  margin-left: 52%;
-  width: 10em;
-  margin-top: .5em;
-}
-
-#locationText2 {
-  margin-left: 42%;
-  margin-top: .5em;
-  width: 8.6em;
-  font-size: 15px;
-  padding: 1px 1px 1px .5em;
-  border: .5px solid #000;
-  border-radius: 2px;
-  -moz-border-radius: 2px;
-  -webkit-border-radius: 2px;
-}
-
-#qFields {
-  max-width: 19.7em;
-  max-height: 100px;
-  min-width: 19.7em;
-  min-height: 100px;
-  overflow: auto;
-  background-color: #fff;
-  margin-left: 3.8em;
-  border: 1px solid #dcdcdc;
-}
-
-#qFields li {
-  padding-left: 1em;
-  padding-bottom: 0;
-  margin-bottom: 0;
-}
-
-#qFields li:hover {
-  cursor: pointer;
-  background-color: #ababab;
-}
-
-#resultWindow {
-  height: 300px;
-  border: 1px solid #dcdcdc;
-  margin: .5em;
-  width: 360px;
-  overflow: auto;
-  font-size: .8em;
-}
-
-#resultWindow li {
-  margin-bottom: 5px;
-}
-
-#resultWindow li:hover {
-  cursor: pointer;
-  background-color: #ababab;
-}
-
-#resultWindow li table:hover {
-  cursor: default;
-}
-
-#fieldLabel {
-  width: 2.5em;
-  float: left;
-}
-
-.queryButtons {
-  padding-left: 0!important;
-  margin: 1em 0;
-}
-
-#checkExtent {
-  margin: .5em 0;
-}
-
-form,
-li,
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-#displayButtons {
-  display: none;
-}
-
-form.qForm {
-  font-size: .75em;
-}
-
-form.qForm label {
-  font-size: 1em;
-}
-
-#qLayer {
-  width: 20em;
-}
-
-.extent {
-  padding-left: 3em;
-  margin-bottom: 1em;
-}
-
-.null {
-  text-align: left;
-}
-
-#qWhere {
-  width: 15em;
-}
-
-.simpleSymbol {
-  width: 20em;
-  padding-left: 3.2em;
-  margin: 0 0 1em;
-}
-
-#SQLhelpText {
-  display: none;
-  font-size: .8em;
-  margin-left: 5em;
-}
-
-#getExamples {
-  margin-top: 5px;
-}
-
-#showExamples {
-  display: none;
-  max-width: 24.5em;
-  max-height: 50px;
-  min-width: 24.5em;
-  min-height: 50px;
-  overflow: auto;
-  background-color: #fff;
-  margin: 1em 0 0 2em;
-  border: 1px solid #dcdcdc;
-}
-
-#showExamples li {
-  text-align: left;
-  padding-left: 1em;
-}
-
-#showExamples li:hover {
-  cursor: pointer;
-  background-color: #ababab;
-}
-
-#LOQresultWindow {
-  height: 300px;
-  border: 1px solid #dcdcdc;
-  margin: .5em;
-  width: 360px;
-  overflow: auto;
-  font-size: .8em;
-}
-
-#LOQresultWindow li {
-  margin-bottom: 5px;
-}
-
-#LOQresultWindow li:hover {
-  cursor: pointer;
-  background-color: #ababab;
-}
-
-#LOQresultWindow li table:hover {
-  cursor: default;
-}
-
-.closequeryresults {
-  padding-left: 1em;
-}
-
-.closequeryresults button {
-  background: #d9d6d0;
-  border-style: none;
-  cursor: pointer;
-  padding: 10px 14px;
-  border-radius: 4px;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
-}
-
-.loqButtons {
-  font-size: .8em;
-}
-
-.loqButtons button {
-  width: 30px;
-  font-size: .9em;
-}
-
-.loqueryButtons .loqButtons {
-  padding-left: 0!important;
-}
-
-#loqForm ul li #loqLayer {
-  width: 75%;
-  margin-top: .25em;
-}
-
-#loqCloseAndClearBlock {
-  float: right;
-}
-
-#loqCloseAndClearBlock button {
-  background: #d9d6d0;
-  border-style: none;
-  cursor: pointer;
-  padding: 10px 14px;
-  border-radius: 4px;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
-}
-
-#qButtonBlock {
-  text-align: center;
-}
-
-#qButtonBlock img:hover {
-  background-color: #ababab;
-}
-
-#addBuffer {
-  margin-top: .5em;
-}
-
-#addBuffer:hover {
-  cursor: pointer;
-}
-
-#bufferQueryButtons {
-  margin: .5em 0 0 2.1em;
-}
-
-.loqueryFields {
-  display: none;
-  margin-top: .75em;
-  padding: .5em;
-  background-color: #ecf1ef;
-}
-
-#loqFields {
-  max-width: 18em;
-  max-height: 50px;
-  min-width: 18em;
-  min-height: 50px;
-  overflow: auto;
-  background-color: #fff;
-  border: 1px solid #dcdcdc;
-  margin: .5em 0 0 2em;
-}
-
-#loqFields li {
-  padding-left: 1em;
-}
-
-#loqFields li:hover {
-  cursor: pointer;
-  background-color: #ababab;
-}
-
-#queryWhereLI {
-  margin-top: .5em;
-  font-size: .8em;
-}
-
-#loqHelp {
-  width: auto;
-  margin-left: 1.5em;
-}
-
-.loqHelp {
-  display: none;
-  background-color: #fff;
-}
-
-.GCSlabel,
-.loqHelp {
+.GCSlabel {
   font-size: .8em;
 }
 
@@ -2320,6 +1808,518 @@ input {
   background-color: #fff;
   width: 20em;
   margin-left: 4em;
+}
+
+.tabActivated {
+  height: 1.65em!important;
+  margin-top: .6em!important;
+  background-color: #fff!important;
+}
+
+.queryHeader {
+  font-size: 1.1em;
+  font-weight: 700;
+  width: auto;
+  height: 35px;
+  margin-bottom: .5em;
+  padding: 0 .5em;
+  border-bottom: .5px solid gray;
+}
+
+.queryHeader>div {
+  float: right;
+}
+
+.queryHeader a {
+  margin-top: .9em;
+  float: left;
+  font-size: .7em;
+  cursor: pointer;
+  border: 1px solid #000;
+  border-bottom: none;
+  border-top-left-radius: 1em;
+  border-top-right-radius: 1em;
+  background-color: #d3cfc8;
+  padding: .3em;
+}
+
+.queryHeader a:first-child {
+  margin-left: 3em;
+}
+
+.left-button {
+  float: left!important;
+  display: inline-block;
+  position: relative;
+  background: #d3cfc8;
+  padding: 5px 0;
+  width: 4em;
+  text-align: center;
+  margin-top: .09em;
+  border-radius: 3px;
+}
+
+.left-button:after {
+  content: '';
+  display: block;
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  margin-top: -10px;
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-right: 5px solid #000;
+  border-bottom: 10px solid transparent;
+  border-left: 10px solid transparent;
+}
+
+#qButtons {
+  font-size: .8em;
+  margin: 1em 0 1em -1em;
+  text-align: center;
+}
+
+#qButtons>span {
+  display: none;
+}
+
+#qButtons button {
+  font-size: 1em;
+  width: 35px;
+}
+
+#qButtons #getExamples {
+  width: 15em!important;
+  left: 20em;
+}
+
+.qForm ul li {
+  width: 24.5em!important;
+  background-color: #fff!important;
+}
+
+#clearPrevLI {
+  padding-left: 3em;
+  margin-bottom: 1em;
+}
+
+#clearPrevLI input {
+  margin: .5em 0;
+}
+
+#qButtonBlock {
+  margin: 1em 0 1em 1.5em;
+}
+
+#clearGraphic {
+  margin-left: 5em;
+}
+
+#bufferLI {
+  margin: 1em 0 0;
+}
+
+#bufferLI #bufferSelection {
+  margin-bottom: 1.1em;
+}
+
+#bufferLI #bufferSelection #buffDist {
+  width: 4em;
+}
+
+#addBufferQuery {
+  margin-bottom: 1em;
+}
+
+#addBufferQuery:hover {
+  cursor: pointer;
+}
+
+#bufferSpan {
+  margin-left: 1em;
+}
+
+#resultWindow2 {
+  height: 200px;
+  border: 1px solid #dcdcdc;
+  margin: .5em;
+  width: 268px;
+  overflow: auto;
+  font-size: .8em;
+}
+
+#resultWindow2 li {
+  margin-bottom: .1em;
+  width: 100%;
+  border-radius: 0;
+}
+
+#resultWindow2 li:hover {
+  cursor: pointer;
+}
+
+#resultWindow2 li table:hover {
+  cursor: default;
+}
+
+#queryResultDialog {
+  padding: .8em;
+}
+
+#queryTool {
+  height: 60%;
+  overflow: auto;
+}
+
+#resultDiv {
+  font-size: .8em;
+  float: none;
+  text-align: center;
+}
+
+.submitQueryLI {
+  text-align: center;
+  margin-top: 1em;
+}
+
+.submitQueryLI button,
+.submitQueryLI input {
+  background: #d9d6d0;
+  border-style: none;
+  cursor: pointer;
+  padding: 10px 14px;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+
+#queryDialog {
+  display: none;
+  height: auto;
+  width: 19.5em;
+}
+
+#resultLabel {
+  font-weight: 700;
+}
+
+.displaybytext {
+  font-size: .9em;
+}
+
+.displaybytext+select {
+  font-size: .7em;
+}
+
+#attributeText1 {
+  border: .5px solid #000;
+  padding: 1px .5em 1px 1px;
+  border-radius: 2px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+}
+
+#attributeText2 {
+  font-size: 11px;
+  marin-left: 1.5em;
+  top: 1.2em;
+}
+
+#attributeText2,
+#locationText1 {
+  cursor: pointer;
+  font-weight: 900;
+  opacity: .5;
+  padding: 1px;
+  border: .5px solid #000;
+  border-radius: 2px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+}
+
+#locationText1 {
+  font-size: 12px;
+  left: 52%;
+  margin-left: 52%;
+  width: 10em;
+  margin-top: .5em;
+}
+
+#locationText2 {
+  margin-left: 42%;
+  margin-top: .5em;
+  width: 8.6em;
+  font-size: 15px;
+  padding: 1px 1px 1px .5em;
+  border: .5px solid #000;
+  border-radius: 2px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+}
+
+#qFields {
+  max-width: 19.7em;
+  max-height: 100px;
+  min-width: 19.7em;
+  min-height: 100px;
+  overflow: auto;
+  background-color: #fff;
+  margin-left: 3.8em;
+  border: 1px solid #dcdcdc;
+}
+
+#qFields li {
+  padding-left: 1em;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+#qFields li:hover {
+  cursor: pointer;
+  background-color: #ababab;
+}
+
+#resultWindow {
+  height: 300px;
+  border: 1px solid #dcdcdc;
+  margin: .5em;
+  width: 360px;
+  overflow: auto;
+  font-size: .8em;
+}
+
+#resultWindow li {
+  margin-bottom: 5px;
+}
+
+#resultWindow li:hover {
+  cursor: pointer;
+  background-color: #ababab;
+}
+
+#resultWindow li table:hover {
+  cursor: default;
+}
+
+#fieldLabel {
+  width: 2.5em;
+  float: left;
+}
+
+.queryButtons {
+  padding-left: 0!important;
+  margin: 1em 0;
+}
+
+#checkExtent {
+  margin: .5em 0;
+}
+
+form,
+li,
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#displayButtons {
+  display: none;
+}
+
+form.qForm {
+  font-size: .75em;
+}
+
+form.qForm label {
+  font-size: 1em;
+}
+
+#qLayer {
+  width: 20em;
+}
+
+.extent {
+  padding-left: 3em;
+  margin-bottom: 1em;
+}
+
+.null {
+  text-align: left;
+}
+
+#qWhere {
+  width: 15em;
+}
+
+.simpleSymbol {
+  width: 20em;
+  padding-left: 3.2em;
+  margin: 0 0 1em;
+}
+
+#SQLhelpText {
+  display: none;
+  font-size: .8em;
+  margin-left: 5em;
+}
+
+#getExamples {
+  margin-top: 5px;
+}
+
+#showExamples {
+  display: none;
+  max-width: 24.5em;
+  max-height: 50px;
+  min-width: 24.5em;
+  min-height: 50px;
+  overflow: auto;
+  background-color: #fff;
+  margin: 1em 0 0 2em;
+  border: 1px solid #dcdcdc;
+}
+
+#showExamples li {
+  text-align: left;
+  padding-left: 1em;
+}
+
+#showExamples li:hover {
+  cursor: pointer;
+  background-color: #ababab;
+}
+
+#LOQresultWindow {
+  height: 300px;
+  border: 1px solid #dcdcdc;
+  margin: .5em;
+  width: 360px;
+  overflow: auto;
+  font-size: .8em;
+}
+
+#LOQresultWindow li {
+  margin-bottom: 5px;
+}
+
+#LOQresultWindow li:hover {
+  cursor: pointer;
+  background-color: #ababab;
+}
+
+#LOQresultWindow li table:hover {
+  cursor: default;
+}
+
+.closequeryresults {
+  padding-left: 1em;
+}
+
+.closequeryresults button {
+  background: #d9d6d0;
+  border-style: none;
+  cursor: pointer;
+  padding: 10px 14px;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+
+.loqButtons {
+  font-size: .8em;
+}
+
+.loqButtons button {
+  width: 30px;
+  font-size: .9em;
+}
+
+.loqueryButtons .loqButtons {
+  padding-left: 0!important;
+}
+
+#loqForm ul li #loqLayer {
+  width: 75%;
+  margin-top: .25em;
+}
+
+#loqCloseAndClearBlock {
+  float: right;
+}
+
+#loqCloseAndClearBlock button {
+  background: #d9d6d0;
+  border-style: none;
+  cursor: pointer;
+  padding: 10px 14px;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+
+#qButtonBlock {
+  text-align: center;
+}
+
+#qButtonBlock img:hover {
+  background-color: #ababab;
+}
+
+#addBuffer {
+  margin-top: .5em;
+}
+
+#addBuffer:hover {
+  cursor: pointer;
+}
+
+#bufferQueryButtons {
+  margin: .5em 0 0 2.1em;
+}
+
+.loqueryFields {
+  display: none;
+  margin-top: .75em;
+  padding: .5em;
+  background-color: #ecf1ef;
+}
+
+#loqFields {
+  max-width: 18em;
+  max-height: 50px;
+  min-width: 18em;
+  min-height: 50px;
+  overflow: auto;
+  background-color: #fff;
+  border: 1px solid #dcdcdc;
+  margin: .5em 0 0 2em;
+}
+
+#loqFields li {
+  padding-left: 1em;
+}
+
+#loqFields li:hover {
+  cursor: pointer;
+  background-color: #ababab;
+}
+
+#queryWhereLI {
+  margin-top: .5em;
+  font-size: .8em;
+}
+
+#loqHelp {
+  width: auto;
+  margin-left: 1.5em;
+}
+
+.loqHelp {
+  display: none;
+  font-size: .8em;
+  background-color: #fff;
 }
 
 @media only screen and (max-width:1024px) {
