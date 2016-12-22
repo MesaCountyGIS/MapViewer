@@ -378,6 +378,12 @@ div .titleButton .arrow:hover {
   border-radius: 4px;
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
+  margin-left: 1em;
+}
+
+#problemForm {
+  height: 60%;
+  overflow: auto;
 }
 
 #frm1,
@@ -388,6 +394,8 @@ div .titleButton .arrow:hover {
 #frm1 ul li,
 #frm2 ul li {
   margin-bottom: 1em;
+  width: 17em;
+  background-color: #fff;
 }
 
 #frm1 .text,
@@ -395,6 +403,10 @@ div .titleButton .arrow:hover {
   border-radius: 4px;
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
+}
+
+#frm1 fieldset {
+  border: none;
 }
 
 #message {
@@ -1501,7 +1513,7 @@ input {
 }
 
 .mainSideMenu {
-  height: 75%;
+  height: 60%;
   overflow: auto;
 }
 
@@ -2266,6 +2278,11 @@ form.qForm label {
 input#mapTitle {
   border: 1px solid gray;
   text-align: center;
+}
+
+.helpTool {
+  height: 60%;
+  overflow: auto;
 }
 
 #followBlock img {
