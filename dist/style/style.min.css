@@ -1510,6 +1510,8 @@ input:-moz-placeholder {
 
 #measureTool {
   margin-left: 1em;
+  height: 60%;
+  overflow: auto;
 }
 
 #drawButtonBlock {
