@@ -1,7 +1,7 @@
-<div data-dojo-attach-point="domNode" class="query" id="problemForm2" title="Report a Problem">
+<div data-dojo-attach-point="domNode" class="problemForm" id="problemForm" title="Report a Problem">
     <div class="dialogHeader">
         <div>Report a Problem</div>
-        <span data-dojo-attach-point="closeProblem" title="Close" class='closer dialogCloser'></span>
+        <!-- <span data-dojo-attach-point="closeProblem" title="Close" class='closer dialogCloser'></span> -->
     </div>
     <form data-dojo-attach-point="frm1" id="frm1" action="scripts/php/mailerror.php" method="post">
         <fieldset>
@@ -25,5 +25,5 @@
         </fieldset>
     </form>
     <button data-dojo-attach-event="onclick:sendClick" data-dojo-attach-point="sendMessage" id='sendMessage'>Send</button>
-    <button data-dojo-attach-event="onclick:closeClick" data-dojo-attach-point="cancelMessage" id='cancelMessage'>Cancel</button>
+    <!-- <button data-dojo-attach-event="onclick:closeClick" data-dojo-attach-point="cancelMessage" id='cancelMessage'>Cancel</button> -->
 </div>

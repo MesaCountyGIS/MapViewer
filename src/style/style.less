@@ -486,58 +486,6 @@ div .titleButton .arrow:hover {
 /*End Legend Widget*/
 
 
-/*Help Dialog*/
-
-// #helpMenu, #helpMenu2 {
-//     width: 16em;
-//     button {
-//         .buttonStyle;
-//     }
-// }
-
-#followBlock {
-  img {
-      border: none;
-  }
-}
-
-#menu {
-    list-style: none;
-    li {
-        margin-bottom: 1em;
-        width:60%;
-        background-color: white;
-
-    }
-    a {
-        text-decoration:underline;
-        border: none;
-    }
-}
-
-#sendMail {
-    span {
-        background: transparent @spriteurl @contact_20_LR-x @contact_20_LR-y;
-        height: 25px;
-        width: 25px;
-        margin-right: 0.5em;
-        margin-bottom: -0.3em;
-        float: left;
-    }
-    div {
-        display: inline-block;
-        margin-top: 0.25em;
-    }
-}
-
-// #closehelp {
-//     margin: -1.75em 0 0 2em;
-// }
-
-
-/*End Help Dialog*/
-
-
 /*Problem Form Dialog*/
 
 #shareForm,
@@ -735,13 +683,13 @@ input:-moz-placeholder {
 
 /*-----------------------------------display none Style------------------------------*/
 
-#problemForm,
-#shareForm,
-#helpMenu,
-#queryResultDialog,
-#LOQqueryResultDialog {
-    display: none;
-}
+// #problemForm,
+// #shareForm,
+// #helpMenu,
+// #queryResultDialog,
+// #LOQqueryResultDialog {
+//     display: none;
+// }
 
 
 /*-----------------------Desktop tool strip styles---------------------------------------*/
@@ -1704,11 +1652,9 @@ input {
   }
 }
 
-// .esriPopupMobile .titleButton.arrow {
-//     display:block;
-// }
 @import './queryTool.less';
 @import './measureTool.less';
 @import './bookmarkTool.less';
 @import './printTool.less';
+@import './helpTool.less';
 @import './mobile-tablet-horizontal.less';

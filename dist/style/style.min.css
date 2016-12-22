@@ -362,39 +362,6 @@ div .titleButton .arrow:hover {
   margin-left: 3em;
 }
 
-#followBlock img {
-  border: none;
-}
-
-#menu {
-  list-style: none;
-}
-
-#menu li {
-  margin-bottom: 1em;
-  width: 60%;
-  background-color: #fff;
-}
-
-#menu a {
-  text-decoration: underline;
-  border: none;
-}
-
-#sendMail span {
-  background: transparent url("../images/sprite.png") 0 -480px;
-  height: 25px;
-  width: 25px;
-  margin-right: .5em;
-  margin-bottom: -.3em;
-  float: left;
-}
-
-#sendMail div {
-  display: inline-block;
-  margin-top: .25em;
-}
-
 #shareForm,
 #shareForm2 {
   font-size: .75em;
@@ -573,14 +540,6 @@ input:-moz-placeholder {
 #formButtons {
   float: right;
   margin-top: .5em;
-}
-
-#helpMenu,
-#LOQqueryResultDialog,
-#problemForm,
-#queryResultDialog,
-#shareForm {
-  display: none;
 }
 
 #DTtoolstrip {
@@ -2307,6 +2266,39 @@ form.qForm label {
 input#mapTitle {
   border: 1px solid gray;
   text-align: center;
+}
+
+#followBlock img {
+  border: none;
+}
+
+#menu {
+  list-style: none;
+}
+
+#menu li {
+  margin-bottom: 1em;
+  width: 60%;
+  background-color: #fff;
+}
+
+#menu a {
+  text-decoration: underline;
+  border: none;
+}
+
+#sendMail span {
+  background: transparent url("../images/sprite.png") 0 -480px;
+  height: 25px;
+  width: 25px;
+  margin-right: .5em;
+  margin-bottom: -.3em;
+  float: left;
+}
+
+#sendMail div {
+  display: inline-block;
+  margin-top: .25em;
 }
 
 @media only screen and (max-width:1024px) {

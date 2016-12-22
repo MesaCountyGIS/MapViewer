@@ -17,11 +17,11 @@ var problemWidget;
             problemWidget = this;
             domConstruct.place(this.domNode, this.srcNodeRef.id, "before");
             //add a property where you can add a number of classes to the widget on startup
-            domClass.add(this.domNode, "query");
+            // domClass.add(this.domNode, "query");
 
-            on(problemWidget.closeProblem, touch.release, function(){
-                problemWidget.closeClick();
-            });
+            // on(problemWidget.closeProblem, touch.release, function(){
+            //     problemWidget.closeClick();
+            // });
         },
 
         startup: function () {

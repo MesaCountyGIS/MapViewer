@@ -269,6 +269,9 @@ define([
                 if(fromPage === "searchBox" && domClass.contains(query(".searchMenu")[0], "displayNo") === false){
                     backToPage = "mainSideMenu";
                     fromPage = "searchMenu";
+                }else if(fromPage === "problemForm" && domClass.contains(query(".helpTool")[0], "displayNo") === false){
+                    backToPage = "mainSideMenu";
+                    fromPage = "helpTool";
                 }
 
                 domClass.add(query("." + fromPage)[0], "displayNo");

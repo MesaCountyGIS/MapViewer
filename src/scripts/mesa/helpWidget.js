@@ -1,7 +1,7 @@
 define([
-     "dojo/_base/declare", "dojo/dom-construct", "dojo/dom", "dojo/dom-class", "dojo/dnd/move", "dojo/query", "mesa/problemFormWidget", "dijit/registry", "dojo/touch", "dojo/on",
+     "dojo/_base/declare", "dojo/dom-construct", "dojo/dom", "dojo/dom-class", "dojo/dom-attr", "dojo/dnd/move", "dojo/query", "mesa/problemFormWidget", "dijit/registry", "dojo/touch", "dojo/on",
      "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dojo/text!./templates/HelpDialog.html", "dojo/domReady!"
- ], function (declare, domConstruct, dom, domClass, move, query, problemFormWidget, registry, touch, on,
+ ], function (declare, domConstruct, dom, domClass, domAttr, move, query, problemFormWidget, registry, touch, on,
      _WidgetBase, _TemplatedMixin, template) {
          var helpWidget;
 
@@ -16,13 +16,13 @@ define([
 
             helpWidget = this;
             device = helpWidget.device;
-            if (device === "desktop") {
-                new move.parentConstrainedMoveable(this.domNode, {
-                    handle: this.queryHeader,
-                    area: "margin",
-                    within: true
-                });
-            }
+            // if (device === "desktop") {
+            //     new move.parentConstrainedMoveable(this.domNode, {
+            //         handle: this.queryHeader,
+            //         area: "margin",
+            //         within: true
+            //     });
+            // }
             // on(query(".closeHelp"), touch.release, function () {
             //     helpWidget.closeClick();
             // });
@@ -36,17 +36,19 @@ define([
         },
 
         showProblemForm: function(){
-            if (dom.byId("problemForm2") && !(registry.byId("problemForm2"))) { //remove the 2 after user caches have been updated
+            if (dom.byId("problemForm") && !(registry.byId("problemForm"))) { //remove the 2 after user caches have been updated
                 var problemForm = new problemFormWidget({
                     emailServiceUrl: "scripts/php/mailerror.php",
                     device: "desktop",
-                }, "problemForm2");
+                }, "problemForm");
                 problemForm.startup();
-                this.domNode.style.display = "none";
+                // this.domNode.style.display = "none";
             }
-            if (dom.byId("problemForm2")) {
-                dom.byId("problemForm2").style.display = dom.byId("problemForm2").style.display === "block" ? "none" : "block";
-            }
+            domAttr.set('backMenu', 'data-to', "helpTool");
+            domAttr.set('backMenu', 'data-from', "problemForm");
+            //hide the search menu
+            domClass.add(query(".helpTool")[0], "displayNo");
+            domClass.remove(query(".problemForm")[0], "displayNo");
         },
 
         startup: function () {
