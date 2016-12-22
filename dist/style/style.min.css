@@ -1752,6 +1752,11 @@ input:-moz-placeholder {
   margin-left: .5em;
 }
 
+.searchMenu {
+  height: 60%;
+  overflow: auto;
+}
+
 #imagelist,
 #imagelist2 {
   display: none;
