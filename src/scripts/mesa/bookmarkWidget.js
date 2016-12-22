@@ -17,7 +17,7 @@ define([
         postCreate: function () {
             this.inherited(arguments);
             domConstruct.place(this.domNode, this.srcNodeRef.id, "before");
-            domClass.add(this.domNode, "query");
+            // domClass.add(this.domNode, "query");
             bookmarkWidget = this;
             mapReference = bookmarkWidget.mapRef;
             useLocalStorage = supports_local_storage();
@@ -35,21 +35,21 @@ define([
             }, this.mcbookmarks);
 
             //This event handler sort of fixes a problem with the bookmark edit.
-            on(query(".esriBookmarks"), touch.release, function (event) {
-                var target = event.target;
-                if (domClass.contains(target, "esriBookmarkEditImage")) {
-                    query(target).siblings(".esriBookmarkLabel").innerHTML("");
-                    domClass.remove(query(target).parent(".esriBookmarkItem")[0], "esriBookmarkHighlight")
-                }
-            });
+            // on(query(".esriBookmarks"), touch.release, function (event) {
+            //     var target = event.target;
+            //     if (domClass.contains(target, "esriBookmarkEditImage")) {
+            //         query(target).siblings(".esriBookmarkLabel").innerHTML("");
+            //         domClass.remove(query(target).parent(".esriBookmarkItem")[0], "esriBookmarkHighlight")
+            //     }
+            // });
 
-            on(dom.byId("mcbookmarks"), touch.release, function (e) {
-                domClass.contains(e.target, "esriBookmarkLabel")? bookmarkWidget.domNode.style.display = "none": void(0);
-            });
+            // on(dom.byId("mcbookmarks"), touch.release, function (e) {
+            //     domClass.contains(e.target, "esriBookmarkLabel")? bookmarkWidget.domNode.style.display = "none": void(0);
+            // });
 
-            on(bookmarkWidget.closeBookmarks, touch.release, function () {
-                bookmarkWidget.domNode.style.display = "none";
-            });
+            // on(bookmarkWidget.closeBookmarks, touch.release, function () {
+            //     bookmarkWidget.domNode.style.display = "none";
+            // });
 
 
             // Look for stored bookmarks
@@ -75,11 +75,11 @@ define([
         },
 
 
-        closeClick: function () {
-            this.domNode.style.display = "none";
-            dom.byId("toolPanel").style.display = "none";
-            // query("#map_zoom_slider, #hidePanel, .collapsedPanel").style("display", "block");
-        },
+        // closeClick: function () {
+        //     this.domNode.style.display = "none";
+        //     dom.byId("toolPanel").style.display = "none";
+        //     // query("#map_zoom_slider, #hidePanel, .collapsedPanel").style("display", "block");
+        // },
 
 
         _restoreDefault: function () {

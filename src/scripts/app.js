@@ -100,9 +100,9 @@ function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
         on(query("#DTprint"), touch.release, function() {
             showPrinter(map, JSONconfig.printURL);
         });
-        on(query("#DTbookmarks"), touch.release, function(){
-            showBookmarks(map);
-        });
+        // on(query("#DTbookmarks"), touch.release, function(){
+        //     showBookmarks(map);
+        // });
         // on(query("#DTqueryatts"), touch.release, function() {
         //     showQuery(map, JSONconfig.geometryService);
         // });
@@ -458,25 +458,25 @@ function showPrinter(map, printURL) {
     });
 }
 
-function showBookmarks(map) {
-    require([
-        "dijit/registry", "mesa/bookmarkWidget", "dojo/dom"
-    ], function(registry, bookmarkWidget, dom) {
-
-        if (!(registry.byId("bookmarkDialog2"))) { //remove the 2 after user caches have been updated
-            var bookmarks = new bookmarkWidget({
-                mapRef: map
-            }, "bookmarkDialog2");
-            bookmarks.startup();
-        }
-
-        if (dom.byId("bookmarkDialog2")) { //delete
-            dom.byId("bookmarkDialog2").style.display = dom.byId("bookmarkDialog2").style.display === "block"
-                ? "none"
-                : "block";
-        }
-    });
-}
+// function showBookmarks(map) {
+//     require([
+//         "dijit/registry", "mesa/bookmarkWidget", "dojo/dom"
+//     ], function(registry, bookmarkWidget, dom) {
+//
+//         if (!(registry.byId("bookmarkTool"))) { //remove the 2 after user caches have been updated
+//             var bookmarks = new bookmarkWidget({
+//                 mapRef: map
+//             }, "bookmarkTool");
+//             bookmarks.startup();
+//         }
+//
+//         if (dom.byId("bookmarkTool")) { //delete
+//             dom.byId("bookmarkTool").style.display = dom.byId("bookmarkTool").style.display === "block"
+//                 ? "none"
+//                 : "block";
+//         }
+//     });
+// }
 
 //update showPrinter to remove old code after users have replaced code in their cache
 function showHelp(e, printURL) {

@@ -465,17 +465,22 @@ div .titleButton .arrow:hover {
 
 /*Bookmarks*/
 
-#bookmarkDialog {
-    display: none;
-    width: 13.5em;
-    button {
-        .buttonStyle;
-        padding: 10px 12px;
-    }
+#bookmarkTool {
+    height:60%;
+    overflow:auto;
+}
+
+.centered{
+  text-align: center;
+}
+
+.bookmarkHeader{
+  text-align:center;
+  font-size:1.2em;
 }
 
 #mcbookmarks {
-    margin-bottom: 0.5em;
+    margin: 0.5em auto;
 }
 
 .esriAddBookmark {
@@ -483,6 +488,14 @@ div .titleButton .arrow:hover {
     &:hover {
         cursor: pointer;
     }
+}
+
+.esriBookmarks{
+  border:none;
+}
+
+.esriAddBookmark{
+  margin:1em 0;
 }
 
 //#clear-storage, #restore-storage

@@ -61,6 +61,7 @@ define([
             });
             on(query('.measureClick'), "click", dispatchMeasureTool);
             on(query('.queryClick'), "click", dispatchQueryTool);
+            on(query('.bookmarkClick'), "click", dispatchBookmarks);
             on(query('.searchMenu li'), "click", dispatchSearchMenuClick);
             on(dom.byId('Imagery'), "click", dispatchImageryToggle);
             on(query('.imageYears li'), "click", dispatchImageChange);
@@ -163,6 +164,15 @@ define([
                             csvOutputLocation: "scripts/php/"
                         }, "queryTool");
                         Query.startup();
+                    }
+            }
+
+            function dispatchBookmarks() {
+                    if (!(registry.byId("bookmarkTool"))) {
+                        var bookmarks = new bookmarkWidget({
+                            mapRef: map
+                        }, "bookmarkTool");
+                        bookmarks.startup();
                     }
             }
 
