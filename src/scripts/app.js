@@ -97,9 +97,9 @@ function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
         // on(query("#DTLegend, #legendDialog > .dialogHeader > .dialogCloser"), touch.release, function() {
         //     toggleDialog("legendDialog");
         // });
-        on(query("#DTprint"), touch.release, function() {
-            showPrinter(map, JSONconfig.printURL);
-        });
+        // on(query("#DTprint"), touch.release, function() {
+        //     showPrinter(map, JSONconfig.printURL);
+        // });
         // on(query("#DTbookmarks"), touch.release, function(){
         //     showBookmarks(map);
         // });
@@ -434,29 +434,29 @@ function toggleDialog(dialogId) { //fires on click of #DTLegend and #IPLegend - 
 }
 
 //update showPrinter to remove old code after users have replaced code in their cache
-function showPrinter(map, printURL) {
-    require([
-        "mesa/printWidget",
-        "dojo/dom-construct",
-        "dojo/dom",
-        "dojo/on",
-        "dijit/registry",
-        "dojo/dom-style"
-    ], function(printWidget, domConstruct, dom, on, registry, domStyle) {
-        if (!(registry.byId("printDialog2"))) {
-            var printer = new printWidget({
-                printUrl: printURL,
-                mapRef: map,
-                device: "desktop"
-            }, "printDialog2"); //remove the 2 after user caches have been updated
-            printer.startup();
-        }
-        domStyle.set(dom.byId("printDialog2"), { //remove the 2
-            display: domStyle.get(dom.byId("printDialog2"), "display") === "block"
-                ? "none": "block" //remove the 2
-        });
-    });
-}
+// function showPrinter(map, printURL) {
+//     require([
+//         "mesa/printWidget",
+//         "dojo/dom-construct",
+//         "dojo/dom",
+//         "dojo/on",
+//         "dijit/registry",
+//         "dojo/dom-style"
+//     ], function(printWidget, domConstruct, dom, on, registry, domStyle) {
+//         if (!(registry.byId("printDialog2"))) {
+//             var printer = new printWidget({
+//                 printUrl: printURL,
+//                 mapRef: map,
+//                 device: "desktop"
+//             }, "printDialog2"); //remove the 2 after user caches have been updated
+//             printer.startup();
+//         }
+//         domStyle.set(dom.byId("printDialog2"), { //remove the 2
+//             display: domStyle.get(dom.byId("printDialog2"), "display") === "block"
+//                 ? "none": "block" //remove the 2
+//         });
+//     });
+// }
 
 // function showBookmarks(map) {
 //     require([

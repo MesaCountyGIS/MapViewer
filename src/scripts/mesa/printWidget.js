@@ -23,7 +23,7 @@ define([
         postCreate: function () {
             this.inherited(arguments);
             domConstruct.place(this.domNode, this.srcNodeRef.id, "before");
-            domClass.add(this.domNode, "query");
+            // domClass.add(this.domNode, "query");
 
             printWidget = this;
             device = printWidget.device;
@@ -37,9 +37,9 @@ define([
                 });
             }
 
-            on(printWidget.closePrint, touch.release, function(){
-                printWidget.closeClick();
-            })
+            // on(printWidget.closePrint, touch.release, function(){
+            //     printWidget.closeClick();
+            // })
         },
 
         startup: function () {
@@ -51,13 +51,13 @@ define([
              domConstruct.destroy("progressbar");
         },
 
-        closeClick: function (e) {
-            printWidget.domNode.style.display = "none";
-            printWidget.mapTitle.value = "";
-            printWidget.printLayout[0].selected = "true";
-            printWidget.printLayout[0].selected = "true";
-            callback();
-        },
+        // closeClick: function (e) {
+        //     printWidget.domNode.style.display = "none";
+        //     printWidget.mapTitle.value = "";
+        //     printWidget.printLayout[0].selected = "true";
+        //     printWidget.printLayout[0].selected = "true";
+        //     callback();
+        // },
         exportClick: function () {
             printWidget.set("spinner", "show");
             var printTask = new PrintTask(this.printUrl, {

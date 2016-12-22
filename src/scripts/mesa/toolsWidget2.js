@@ -39,6 +39,7 @@ define([
             Images = toolsWidget.imageList;
             initialBasemap = toolsWidget.basemap;
             device = toolsWidget.deviceUsed;
+            printerURL = toolsWidget.printURL;
             parcels = toolsWidget.parcelLayer;
             //Push the original basemap into the legend
             legendObject = toolsWidget.legendRef;
@@ -62,6 +63,7 @@ define([
             on(query('.measureClick'), "click", dispatchMeasureTool);
             on(query('.queryClick'), "click", dispatchQueryTool);
             on(query('.bookmarkClick'), "click", dispatchBookmarks);
+            on(query('.printClick'), "click", dispatchPrinter);
             on(query('.searchMenu li'), "click", dispatchSearchMenuClick);
             on(dom.byId('Imagery'), "click", dispatchImageryToggle);
             on(query('.imageYears li'), "click", dispatchImageChange);
@@ -173,6 +175,17 @@ define([
                             mapRef: map
                         }, "bookmarkTool");
                         bookmarks.startup();
+                    }
+            }
+
+            function dispatchPrinter() {
+                    if (!(registry.byId("printTool"))) {
+                        var printer = new printWidget({
+                            printUrl: printerURL,
+                            mapRef: map,
+                            device: device
+                        }, "printTool");
+                        printer.startup();
                     }
             }
 

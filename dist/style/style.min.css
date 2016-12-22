@@ -347,136 +347,6 @@ div .titleButton .arrow:hover {
   margin: -.2em 0 0 .5em;
 }
 
-#bookmarkTool {
-  height: 60%;
-  overflow: auto;
-}
-
-.bookmarkHeader,
-.centered {
-  text-align: center;
-}
-
-.bookmarkHeader {
-  font-size: 1.2em;
-}
-
-#mcbookmarks {
-  margin: .5em auto;
-}
-
-.esriAddBookmark {
-  text-align: center;
-}
-
-.esriAddBookmark:hover {
-  cursor: pointer;
-}
-
-.esriBookmarks {
-  border: none;
-}
-
-.esriAddBookmark {
-  margin: 1em 0;
-}
-
-#printDialog,
-#printDialog2 {
-  font-size: .9em;
-  display: none;
-  width: 16.5em;
-}
-
-#printDropdowns {
-  margin: 0 5%;
-  width: 90%;
-}
-
-#buttonToPrint {
-  margin: 0 1em;
-  width: 40%;
-}
-
-#printNavButtons {
-  margin: 0 6%;
-  width: 90%;
-  font-size: .9em;
-}
-
-#printNavButtons button {
-  background: #d9d6d0;
-  border-style: none;
-  cursor: pointer;
-  padding: 10px 14px;
-  border-radius: 4px;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
-}
-
-#closePrinter {
-  width: 40%;
-  padding-left: 0;
-  margin-left: 0;
-}
-
-#progressbar {
-  background-color: #fff;
-  opacity: .8;
-  z-index: 1;
-  padding: .8em;
-  width: 12em;
-  top: 50%;
-  left: 45%;
-  position: absolute;
-  border-radius: 4px;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
-}
-
-@keyframes a {
-  to {
-    transform: rotate(1turn);
-  }
-}
-
-@-webkit-keyframes a {
-  to {
-    -webkit-transform: rotate(1turn);
-  }
-}
-
-.spinner {
-  bottom: 3em;
-  min-width: 24px;
-  min-height: 24px;
-}
-
-.loading {
-  bottom: 4em;
-  margin-bottom: 1em;
-}
-
-.spinner:before {
-  position: absolute;
-  right: 2em;
-  width: 16px;
-  height: 16px;
-}
-
-.spinner:not(:required):before {
-  content: '';
-  border-radius: 50%;
-  border-top: 2px solid #03ade0;
-  border-right: 2px solid transparent;
-  animation: a .6s linear infinite;
-  -webkit-animation: a .6s linear infinite;
-}
-
-#cbxLayout {
-  margin-top: 1em;
-}
-
 #legendDialog {
   height: 22em;
   width: 14.5em;
@@ -2326,6 +2196,130 @@ form.qForm label {
   border-radius: 5px;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
+}
+
+#bookmarkTool {
+  height: 60%;
+  overflow: auto;
+}
+
+.bookmarkHeader,
+.centered {
+  text-align: center;
+}
+
+.bookmarkHeader {
+  font-size: 1.2em;
+}
+
+#mcbookmarks {
+  margin: .5em auto;
+}
+
+.esriAddBookmark {
+  text-align: center;
+}
+
+.esriAddBookmark:hover {
+  cursor: pointer;
+}
+
+.esriBookmarks {
+  border: none;
+}
+
+.esriAddBookmark {
+  margin: 1em 0;
+}
+
+#printDialog,
+#printDialog2 {
+  font-size: .9em;
+  display: none;
+  width: 16.5em;
+}
+
+#printDropdowns {
+  margin: 0 5%;
+  width: 90%;
+}
+
+#printNavButtons {
+  text-align: center;
+}
+
+#printNavButtons button {
+  background: #d9d6d0;
+  border-style: none;
+  cursor: pointer;
+  padding: 10px 14px;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  width: 8em;
+}
+
+#closePrinter {
+  width: 40%;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+#progressbar {
+  background-color: #fff;
+  opacity: .8;
+  z-index: 1;
+  padding: .8em;
+  width: 12em;
+  top: 50%;
+  left: 45%;
+  position: absolute;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+
+@keyframes a {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+@-webkit-keyframes a {
+  to {
+    -webkit-transform: rotate(1turn);
+  }
+}
+
+.spinner {
+  bottom: 3em;
+  min-width: 24px;
+  min-height: 24px;
+}
+
+.loading {
+  bottom: 4em;
+  margin-bottom: 1em;
+}
+
+.spinner:before {
+  position: absolute;
+  right: 2em;
+  width: 16px;
+  height: 16px;
+}
+
+.spinner:not(:required):before {
+  content: '';
+  border-radius: 50%;
+  border-top: 2px solid #03ade0;
+  border-right: 2px solid transparent;
+  animation: a .6s linear infinite;
+  -webkit-animation: a .6s linear infinite;
+}
+
+#cbxLayout {
+  margin-top: 1em;
 }
 
 @media only screen and (max-width:1024px) {

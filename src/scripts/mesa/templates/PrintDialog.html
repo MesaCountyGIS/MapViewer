@@ -1,7 +1,7 @@
-<div data-dojo-attach-point="domNode">
+<div class='printTool' data-dojo-attach-point="domNode">
     <div data-dojo-attach-point="printHeader" id='printHeader' class="dialogHeader">
         <div>${widgetTitle}</div>
-        <span title="Close" class='closer dialogCloser' data-dojo-attach-point="closePrint"></span>
+        <!-- <span title="Close" class='closer dialogCloser' data-dojo-attach-point="closePrint"></span> -->
     </div>
     <div class='centered'>
         <p>Print Size and Format:</p>
@@ -36,8 +36,5 @@
     </div>
     <div id='printNavButtons' data-dojo-attach-point="printNavButtons">
         <button id="buttonToPrint" data-dojo-attach-point="buttonToPrint" data-dojo-attach-event="onclick:exportClick">Export</button>
-        <button id="closePrinter" data-dojo-attach-point="closePrinter" data-dojo-attach-event="onclick:closeClick">Close</button>
     </div>
-
-    <!-- <div id="progressbar" class='spinner loading' data-dojo-attach-point="progressbar"><span>Exporting...</span></div> -->
 </div>
