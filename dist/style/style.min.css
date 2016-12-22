@@ -471,94 +471,6 @@ div .titleButton .arrow:hover {
   margin-top: 1em;
 }
 
-#measureDialog,
-#measureDialog2 {
-  font-size: .8em;
-  display: none;
-  width: 15em;
-}
-
-#measureDialog2+div,
-#measureDialog+div {
-  width: 12em;
-}
-
-#clearSelected {
-  display: none;
-  font-size: .4em!important;
-  width: 5em!important;
-  left: 1em;
-  top: -2.5em;
-}
-
-#distanceDetails {
-  padding: .25em;
-  overflow: auto;
-  max-height: .33%;
-}
-
-#clearMeasure {
-  margin: .5em;
-  width: 45%;
-}
-
-#measureYesSpan {
-  margin-bottom: 1em;
-}
-
-#measureButtonBlock {
-  width: 16em;
-}
-
-#measureButtonBlock button {
-  background: #d9d6d0;
-  border-style: none;
-  cursor: pointer;
-  padding: 10px 14px;
-  border-radius: 4px;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
-}
-
-#uomLineBox,
-#uomPointBox,
-#uomPolyBox {
-  display: none;
-  font-size: .9em;
-  margin-left: 1em;
-}
-
-#gcsPointResult,
-#lineResult,
-#polyResult,
-#utmPointResult {
-  display: none;
-}
-
-#snapmessage {
-  font-size: .8em;
-  margin-top: .5em;
-  width: 17.5em;
-}
-
-#addTextDialog,
-#addTextToScreen,
-#annoText {
-  display: none;
-}
-
-#annoText {
-  position: relative;
-  height: 1em;
-  width: 16em;
-  font-size: .9em;
-  margin: 0 auto;
-  top: .6em;
-  border-radius: 5px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-}
-
 #legendDialog {
   height: 22em;
   width: 14.5em;
@@ -994,21 +906,6 @@ input:-moz-placeholder {
   background: transparent url("../images/sprite.png") 0 -661px;
   width: 20px;
   height: 20px;
-}
-
-#measureTool {
-  margin-left: 1em;
-  height: 60%;
-  overflow: auto;
-}
-
-#drawButtonBlock {
-  width: 20em;
-}
-
-#drawButtonBlock img:hover,
-#drawButtonBlock img:visited {
-  background-color: #ababab;
 }
 
 .drawaLine,
@@ -2320,6 +2217,109 @@ form.qForm label {
   display: none;
   font-size: .8em;
   background-color: #fff;
+}
+
+#measureTool {
+  margin-left: 1em;
+  height: 60%;
+  overflow: auto;
+}
+
+#drawButtonBlock {
+  width: 20em;
+}
+
+#drawButtonBlock img:hover,
+#drawButtonBlock img:visited {
+  background-color: #ababab;
+}
+
+#measureDialog,
+#measureDialog2 {
+  font-size: .8em;
+  display: none;
+  width: 15em;
+}
+
+#measureDialog2+div,
+#measureDialog+div {
+  width: 12em;
+}
+
+#clearSelected {
+  display: none;
+  font-size: .4em!important;
+  width: 5em!important;
+  left: 1em;
+  top: -2.5em;
+}
+
+#distanceDetails {
+  padding: .25em;
+  overflow: auto;
+  max-height: .33%;
+}
+
+#clearMeasure {
+  margin: .5em;
+  width: 45%;
+}
+
+#measureYesSpan {
+  margin-bottom: 1em;
+}
+
+#measureButtonBlock {
+  width: 16em;
+}
+
+#measureButtonBlock button {
+  background: #d9d6d0;
+  border-style: none;
+  cursor: pointer;
+  padding: 10px 14px;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+
+#uomLineBox,
+#uomPointBox,
+#uomPolyBox {
+  display: none;
+  font-size: .9em;
+  margin-left: 1em;
+}
+
+#gcsPointResult,
+#lineResult,
+#polyResult,
+#utmPointResult {
+  display: none;
+}
+
+#snapmessage {
+  font-size: .8em;
+  margin-top: .5em;
+  width: 17.5em;
+}
+
+#addTextDialog,
+#addTextToScreen,
+#annoText {
+  display: none;
+}
+
+#annoText {
+  position: relative;
+  height: 1em;
+  width: 16em;
+  font-size: .9em;
+  margin: 0 auto;
+  top: .6em;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
 }
 
 @media only screen and (max-width:1024px) {

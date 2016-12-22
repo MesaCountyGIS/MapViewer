@@ -1,0 +1,116 @@
+/*Measurement Widget*/
+
+#measureTool{
+  margin-left:1em;
+  height:60%;
+  overflow:auto;
+}
+
+#drawButtonBlock {
+    /*text-align: center;*/
+    // margin: 0 0 1em 0;
+    width: 20em;
+    img:hover,
+    img:visited {
+        background-color: #ABABAB;
+    }
+}
+
+#measureDialog,
+#measureDialog2 {
+    font-size: 0.8em;
+    display: none;
+    width: 15em;
+    & + div {
+        width: 12em;
+    }
+}
+
+#clearSelected {
+    display: none;
+    font-size: 0.4em !important;
+    width: 5em !important;
+    left: 1em;
+    top: -2.5em;
+}
+
+
+#distanceDetails {
+    padding: 0.25em;
+    overflow: auto;
+    max-height: 0.33%;
+    /*display:none;*/
+}
+
+#clearMeasure {
+    margin: 0.5em;
+    width: 45%;
+    /*display: none;*/
+}
+
+#measureYesSpan {
+  margin-bottom:1em;
+  // width: 15em;
+}
+
+#measureYes {
+    // margin-left: 1em;
+}
+
+#measureButtonBlock {
+    // padding: 0 0 0 0.5em;
+    width: 16em;
+    button {
+        .buttonStyle;
+    }
+}
+
+#uomPolyBox {
+    display: none;
+    font-size: 0.9em;
+    margin-left:1em;
+}
+
+#uomLineBox,
+#uomPointBox {
+    display: none;
+    font-size: 0.9em;
+    margin-left:1em;
+}
+
+#polyResult,
+#lineResult,
+#gcsPointResult,
+#utmPointResult
+//.showBlock
+{
+    display: none;
+}
+
+#snapmessage {
+    font-size: 0.8em;
+    margin-top: 0.5em;
+    width: 17.5em;
+}
+
+#addTextDialog {
+    display: none;
+}
+
+#addTextToScreen {
+    display: none;
+}
+
+#annoText {
+    display: none;
+    position: relative;
+    height: 1em;
+    width: 16em;
+    font-size: 0.9em;
+    margin: 0 auto;
+    top: 0.6em;
+    .borderRadius(5px);
+}
+
+
+/*End Measurement Widget*/

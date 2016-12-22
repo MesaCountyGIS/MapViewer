@@ -624,108 +624,6 @@ div .titleButton .arrow:hover {
 /*End Print Widget*/
 
 
-/*Measurement Widget*/
-
-#measureDialog,
-#measureDialog2 {
-    font-size: 0.8em;
-    display: none;
-    width: 15em;
-    & + div {
-        width: 12em;
-    }
-}
-
-#clearSelected {
-    display: none;
-    font-size: 0.4em !important;
-    width: 5em !important;
-    left: 1em;
-    top: -2.5em;
-}
-
-
-#distanceDetails {
-    padding: 0.25em;
-    overflow: auto;
-    max-height: 0.33%;
-    /*display:none;*/
-}
-
-#clearMeasure {
-    margin: 0.5em;
-    width: 45%;
-    /*display: none;*/
-}
-
-#measureYesSpan {
-  margin-bottom:1em;
-  // width: 15em;
-}
-
-#measureYes {
-    // margin-left: 1em;
-}
-
-#measureButtonBlock {
-    // padding: 0 0 0 0.5em;
-    width: 16em;
-    button {
-        .buttonStyle;
-    }
-}
-
-#uomPolyBox {
-    display: none;
-    font-size: 0.9em;
-    margin-left:1em;
-}
-
-#uomLineBox,
-#uomPointBox {
-    display: none;
-    font-size: 0.9em;
-    margin-left:1em;
-}
-
-#polyResult,
-#lineResult,
-#gcsPointResult,
-#utmPointResult
-//.showBlock
-{
-    display: none;
-}
-
-#snapmessage {
-    font-size: 0.8em;
-    margin-top: 0.5em;
-    width: 17.5em;
-}
-
-#addTextDialog {
-    display: none;
-}
-
-#addTextToScreen {
-    display: none;
-}
-
-#annoText {
-    display: none;
-    position: relative;
-    height: 1em;
-    width: 16em;
-    font-size: 0.9em;
-    margin: 0 auto;
-    top: 0.6em;
-    .borderRadius(5px);
-}
-
-
-/*End Measurement Widget*/
-
-
 /*Legend Widget*/
 
 #legendDialog {
@@ -985,22 +883,6 @@ input:-moz-placeholder {
 
 /*-----------------------------------End Esri Scalebar Style------------------------------*/
 
-//.ui-autocomplete
-//{
-//    max-height: 400px;
-//    overflow-y: scroll;
-//    overflow-x: hidden;
-//}
-//
-//.ui-menu
-//{
-//    width: 150px;
-//}
-//
-//.ui-button, .ui-button-text .ui-button
-//{
-//    font-size: 14px !important;
-//}
 #formButtons {
     float: right;
     margin-top: 0.5em;
@@ -1121,92 +1003,7 @@ input:-moz-placeholder {
     @i_help_text-height,
     1px);
 }
-//
-//#IPprint {
-//    .toolstripbuttons(@i_print_text-x,
-//    @i_print_text-y,
-//    @i_print_text-width,
-//    @i_print_text-height,
-//    1px,
-//    1.75px);
-//    //    background-image: url('../images/sprites.png');
-//    //    background-position: -94px -307px;
-//    width: 32px;
-//    height: 32px;
-//}
-//
-//#IPbasemap {
-//    .toolstripbuttons(@Imagery_text-x,
-//    @Imagery_text-y,
-//    @Imagery_text-width,
-//    @Imagery_text-height,
-//    1px);
-//    //    background-image: url('../images/sprites.png');
-//    //    background-position: -138px -309px;
-//    margin-top: 0.5em;
-//    width: 32px;
-//    height: 32px;
-//}
-//
-//#IPmeasure {
-//    .toolstripbuttons(@measure_text-x,
-//    @measure_text-y,
-//    @measure_text-width,
-//    @measure_text-height);
-//    //    background-image: url('../images/sprites.png');
-//    //    background-position: -48px -308px;
-//    width: 32px;
-//    height: 32px;
-//}
-//
-//#IPqueryatts {
-//    .toolstripbuttons(@tab_queryattribute_text-x,
-//    @tab_queryattribute_text-y,
-//    @tab_queryattribute_text-width,
-//    @tab_queryattribute_text-height);
-//    //    background-image: url('../images/sprites.png');
-//    //    background-position: -88px -199px;
-//    width: 32px;
-//    height: 32px;
-//}
-//
-//#IPLegend {
-//    .toolstripbuttons(@legend_text-x,
-//    @legend_text-y,
-//    @legend_text-width,
-//    @legend_text-height,
-//    0,
-//    0.75px);
-//    //    background-image: url('../images/sprites.png');
-//    //    background-position: -0px -310px;
-//    width: 32px;
-//    height: 32px;
-//}
-//
-//#IPbookmarks {
-//    .toolstripbuttons(@i_bookmark_text2-x,
-//    @i_bookmark_text2-y,
-//    @i_bookmark_text2-width,
-//    @i_bookmark_text2-height,
-//    1px,
-//    1.5px);
-//    //    background-image: url('../images/sprites.png');
-//    //    background-position: -97px -530px;
-//    width: 32px;
-//    height: 32px;
-//}
-//
-//#IPhelp {
-//    .toolstripbuttons(@i_help_text-x,
-//    @i_help_text-y,
-//    @i_help_text-width,
-//    @i_help_text-height,
-//    1px);
-//    //    background-image: url('../images/sprites.png');
-//    //    background-position: -41px -414px;
-//    width: 32px;
-//    height: 32px;
-//}
+
 
 #toolList {
     display: none;
@@ -1262,22 +1059,7 @@ input:-moz-placeholder {
     height: 20px;
 }
 
-#measureTool{
-  margin-left:1em;
-  height:60%;
-  overflow:auto;
-}
-
-#drawButtonBlock {
-    /*text-align: center;*/
-    // margin: 0 0 1em 0;
-    width: 20em;
-    img:hover,
-    img:visited {
-        background-color: #ABABAB;
-    }
-}
-
+/*Rules for draw tools are used in the measure widget and the query widget*/
 .drawPoly,
 .drawaLine,
 .drawPoint,
@@ -1325,6 +1107,8 @@ input:-moz-placeholder {
     background-position: -87px -414px;
     visibility: hidden;
 }
+
+/*End rules for draw tools*/
 
 #limitSign {
     float: left;
@@ -2080,4 +1864,5 @@ input {
 //     display:block;
 // }
 @import './queryTool.less';
+@import './measureTool.less';
 @import './mobile-tablet-horizontal.less';
