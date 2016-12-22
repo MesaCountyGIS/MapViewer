@@ -210,11 +210,11 @@ define([
                                 break;
                             }
 
-                            if(device === "mobile"){
-                                dom.byId("toolsView").style.display = "none";
-                                dom.byId("hidePanel").style.display = "block";
-                                queryWidget.domNode.style.display = "none";
-                            }
+                            // if(device === "mobile"){
+                            //     dom.byId("toolsView").style.display = "none";
+                            //     dom.byId("hidePanel").style.display = "block";
+                            //     queryWidget.domNode.style.display = "none";
+                            // }
 
                             }
                         });
@@ -226,17 +226,17 @@ define([
                         //     query("#map_zoom_slider, #hidePanel, #rightPanel, .collapsedPanel").style("display", "block");
                         // });
 
-                        on(query(".returnToTools")[0], "click", function (e) {
-                            if(domClass.contains(dom.byId("resultSpan"), "displayNo")){
-                                queryWidget.domNode.style.display = "none";
-                                dom.byId("toolPanel").style.display = "none";
-                                dom.byId("toolsView").style.display = "block";
-                                dom.byId("hidePanel").style.display = "none";
-                            }else{
-                                queryWidget.backToQueryClick();
-                            }
-
-                        });
+                        // on(query(".returnToTools")[0], "click", function (e) {
+                        //     if(domClass.contains(dom.byId("resultDiv"), "displayNo")){
+                        //         queryWidget.domNode.style.display = "none";
+                        //         dom.byId("toolPanel").style.display = "none";
+                        //         dom.byId("toolsView").style.display = "block";
+                        //         dom.byId("hidePanel").style.display = "none";
+                        //     }else{
+                        //         queryWidget.backToQueryClick();
+                        //     }
+                        //
+                        // });
                     },
 
                     startup: function () {
@@ -247,7 +247,7 @@ define([
                     //     map.graphics.clear();
                     //     queryWidget._clearQuery();
                     //     domClass.contains(dom.byId("tabSpan"), 'displayNo') ? (domClass.remove(dom.byId("tabSpan"), 'displayNo'),
-                    //         domClass.add(dom.byId("resultSpan"), 'displayNo')) : void(0);
+                    //         domClass.add(dom.byId("resultDiv"), 'displayNo')) : void(0);
                     //     dom.byId("querytabPanel").style.display = "block";
                     //     dom.byId("toolsView").style.display = "none";
                     //     dom.byId("returnToTools").innerHTML = "Tools";
@@ -280,7 +280,7 @@ define([
                     backToQueryClick: function () {
                         dom.byId("querytabPanel").style.display = "block";
                         dom.byId("queryResultDialog").style.display = "none";
-                        dom.byId("returnToTools").innerHTML = "Tools";
+                        // dom.byId("returnToTools").innerHTML = "Tools";
                         queryWidget._toggleHeader();
                     },
 
@@ -303,7 +303,7 @@ define([
                         ga('send', 'event', 'attQuery', 'attQueryLayer', selValue);
                         dom.byId("querytabPanel").style.display = "none";
                         dom.byId("queryResultDialog").style.display = "block";
-                        dom.byId("returnToTools").innerHTML = "Query";
+                        // dom.byId("returnToTools").innerHTML = "Query";
                         // domClass.replace(dom.byId("returnToTools"), "returnToQuery", "returnToTools");
                         type !== "location"? queryWidget.submitQuery(): void(0);
                         queryWidget._toggleHeader();
@@ -311,8 +311,7 @@ define([
                     },
 
                     _toggleHeader: function () {
-                        console.log('queryheader')
-                        query(".queryHeader span").toggleClass("displayNo");
+                        query(".queryHeader span, .queryHeader div").toggleClass("displayNo");
                     },
 
                     _showResult: function (results) {

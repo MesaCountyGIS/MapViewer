@@ -159,8 +159,8 @@ define([
                             device: device,
                             mapRef: map,
                             geometryServiceURL: esriConfig.defaults.geometryService.url,
-                            exportURL: "../scripts/php/toCSV.php",
-                            csvOutputLocation: "../scripts/php/"
+                            exportURL: "scripts/php/toCSV.php",
+                            csvOutputLocation: "scripts/php/"
                         }, "queryTool");
                         Query.startup();
                     }

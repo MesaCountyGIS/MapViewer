@@ -904,17 +904,18 @@ a.maplink:hover {
 }
 
 #queryResultDialog {
-  position: relative;
-  left: 0;
-  opacity: .95;
   padding: .8em;
-  margin-right: 0;
-  z-index: 1;
 }
 
-#resultSpan {
+#queryTool {
+  height: 75%;
+  overflow: auto;
+}
+
+#resultDiv {
   font-size: .8em;
-  margin: 1em;
+  float: none;
+  text-align: center;
 }
 
 .submitQueryLI {
