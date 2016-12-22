@@ -64,6 +64,7 @@ define([
             on(query('.queryClick'), "click", dispatchQueryTool);
             on(query('.bookmarkClick'), "click", dispatchBookmarks);
             on(query('.printClick'), "click", dispatchPrinter);
+            on(query('.helpClick'), "click", dispatchHelp);
             on(query('.searchMenu li'), "click", dispatchSearchMenuClick);
             on(dom.byId('Imagery'), "click", dispatchImageryToggle);
             on(query('.imageYears li'), "click", dispatchImageChange);
@@ -187,6 +188,16 @@ define([
                         }, "printTool");
                         printer.startup();
                     }
+            }
+
+            function dispatchHelp() {
+                if (dom.byId("helpTool") && !(registry.byId("helpTool"))) {
+                    var help = new helpWidget({
+                        printUrl: printerURL,
+                        device: device
+                    }, "helpTool");
+                    help.startup();
+                }
             }
 
             function dispatchImageChange(e) {

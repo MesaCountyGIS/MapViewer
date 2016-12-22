@@ -13,7 +13,6 @@ define([
         postCreate: function () {
             this.inherited(arguments);
             domConstruct.place(this.domNode, this.srcNodeRef.id, "before");
-            domClass.add(this.domNode, "query");
 
             helpWidget = this;
             device = helpWidget.device;
@@ -24,9 +23,9 @@ define([
                     within: true
                 });
             }
-            on(query(".closeHelp"), touch.release, function () {
-                helpWidget.closeClick();
-            });
+            // on(query(".closeHelp"), touch.release, function () {
+            //     helpWidget.closeClick();
+            // });
             on(query(helpWidget), touch.release, function (a) {
                 a.target.href? window.open(a.target.href, "_blank"): void(0);
             });

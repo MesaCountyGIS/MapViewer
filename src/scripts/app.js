@@ -88,9 +88,9 @@ function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
         on(dom.byId("menuSelect"), "click", function(legendObject) {
             runToolsView();
         });
-        on(dom.byId("help"), touch.release, function(e) {
-            showHelp(e, JSONconfig.printURL);
-        });
+        // on(dom.byId("help"), touch.release, function(e) {
+        //     showHelp(e, JSONconfig.printURL);
+        // });
         on(dom.byId("shareMap"), touch.release, function(){
             showShareForm(map);
         });
@@ -478,32 +478,32 @@ function toggleDialog(dialogId) { //fires on click of #DTLegend and #IPLegend - 
 //     });
 // }
 
-//update showPrinter to remove old code after users have replaced code in their cache
-function showHelp(e, printURL) {
-    e.preventDefault();
-    require([
-        "mesa/helpWidget",
-        "dojo/dom-construct",
-        "dojo/dom",
-        "dojo/on",
-        "dijit/registry",
-        "dojo/dom-style"
-    ], function(helpWidget, domConstruct, dom, on, registry, domStyle) {
-        if (dom.byId("helpMenu2") && !(registry.byId("helpMenu2"))) { //remove the 2 after user caches have been updated
-            var help = new helpWidget({
-                printUrl: printURL,
-                device: "desktop"
-            }, "helpMenu2"); //remove the 2 after user caches have been updated
-            help.startup();
-        }
-        if (dom.byId("helpMenu2")) { //delete
-            domStyle.set(dom.byId("helpMenu2"), { //remove the 2
-                display: domStyle.get(dom.byId("helpMenu2"), "display") === "block"
-                    ? "none": "block" //remove the 2
-            });
-        }
-    });
-}
+// //update showPrinter to remove old code after users have replaced code in their cache
+// function showHelp(e, printURL) {
+//     e.preventDefault();
+//     require([
+//         "mesa/helpWidget",
+//         "dojo/dom-construct",
+//         "dojo/dom",
+//         "dojo/on",
+//         "dijit/registry",
+//         "dojo/dom-style"
+//     ], function(helpWidget, domConstruct, dom, on, registry, domStyle) {
+//         if (dom.byId("helpMenu2") && !(registry.byId("helpMenu2"))) { //remove the 2 after user caches have been updated
+//             var help = new helpWidget({
+//                 printUrl: printURL,
+//                 device: "desktop"
+//             }, "helpMenu2"); //remove the 2 after user caches have been updated
+//             help.startup();
+//         }
+//         if (dom.byId("helpMenu2")) { //delete
+//             domStyle.set(dom.byId("helpMenu2"), { //remove the 2
+//                 display: domStyle.get(dom.byId("helpMenu2"), "display") === "block"
+//                     ? "none": "block" //remove the 2
+//             });
+//         }
+//     });
+// }
 
 // function showQuery(map, geometryServiceURL) {
 //     require([

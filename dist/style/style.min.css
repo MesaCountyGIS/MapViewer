@@ -362,22 +362,6 @@ div .titleButton .arrow:hover {
   margin-left: 3em;
 }
 
-#helpMenu,
-#helpMenu2 {
-  width: 16em;
-}
-
-#helpMenu2 button,
-#helpMenu button {
-  background: #d9d6d0;
-  border-style: none;
-  cursor: pointer;
-  padding: 10px 14px;
-  border-radius: 4px;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
-}
-
 #followBlock img {
   border: none;
 }
@@ -388,6 +372,8 @@ div .titleButton .arrow:hover {
 
 #menu li {
   margin-bottom: 1em;
+  width: 60%;
+  background-color: #fff;
 }
 
 #menu a {
@@ -407,10 +393,6 @@ div .titleButton .arrow:hover {
 #sendMail div {
   display: inline-block;
   margin-top: .25em;
-}
-
-#closehelp {
-  margin: -1.75em 0 0 2em;
 }
 
 #shareForm,
@@ -2320,6 +2302,11 @@ form.qForm label {
 
 #cbxLayout {
   margin-top: 1em;
+}
+
+input#mapTitle {
+  border: 1px solid gray;
+  text-align: center;
 }
 
 @media only screen and (max-width:1024px) {
