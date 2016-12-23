@@ -30,11 +30,6 @@ define([
             on(query(shareWidget), touch.release, function (a) {
                 a.target.href? window.open(a.target.href, "_blank"): void(0);
             });
-
-            // on(shareWidget.closer, touch.release, function(){
-            //     shareWidget.domNode.style.display = "none";
-            // })
-
         },
 
         startup: function () {
@@ -66,9 +61,7 @@ define([
                     load: function (r) {
                         if (r === "Message sent!") {
                             confirm("Map was shared successfully!");
-                            name.value = "";
-                            emailS.value = "";
-                            emailFrom.value = "";
+                            frm2.reset();
                         }
                     },
                     error: function (error) {
@@ -79,9 +72,7 @@ define([
         },
 
         clearClick: function () {
-            shareWidget.shareName.value = "";
-            shareWidget.shareEmail.value = "";
-            shareWidget.fromEmail.value = "";
+            frm2.reset();
         },
 
         _createURL: function(){
