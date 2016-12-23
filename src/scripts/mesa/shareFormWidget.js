@@ -17,7 +17,7 @@ define([
         postCreate: function () {
             this.inherited(arguments);
             domConstruct.place(this.domNode, this.srcNodeRef.id, "before");
-            domClass.add(this.domNode, "query");
+            // domClass.add(this.domNode, "query");
             shareWidget = this;
             map = shareWidget.mapRef;
 
@@ -31,9 +31,9 @@ define([
                 a.target.href? window.open(a.target.href, "_blank"): void(0);
             });
 
-            on(shareWidget.closer, touch.release, function(){
-                shareWidget.domNode.style.display = "none";
-            })
+            // on(shareWidget.closer, touch.release, function(){
+            //     shareWidget.domNode.style.display = "none";
+            // })
 
         },
 

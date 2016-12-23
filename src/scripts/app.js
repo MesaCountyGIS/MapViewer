@@ -91,9 +91,9 @@ function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
         // on(dom.byId("help"), touch.release, function(e) {
         //     showHelp(e, JSONconfig.printURL);
         // });
-        on(dom.byId("shareMap"), touch.release, function(){
-            showShareForm(map);
-        });
+        // on(dom.byId("shareMap"), touch.release, function(){
+        //     showShareForm(map);
+        // });
         // on(query("#DTLegend, #legendDialog > .dialogHeader > .dialogCloser"), touch.release, function() {
         //     toggleDialog("legendDialog");
         // });
@@ -543,23 +543,23 @@ function toggleDialog(dialogId) { //fires on click of #DTLegend and #IPLegend - 
 //     });
 // }
 
-function showShareForm(map) {
-    require([
-        "mesa/shareFormWidget", "dijit/registry", "dojo/dom"
-    ], function(shareFormWidget, registry, dom) {
-        if (!(registry.byId("shareForm2"))) { //remove the 2 after user caches have been updated
-            var shareForm = new shareFormWidget({
-                emailServiceUrl: "scripts/php/ShareMail.php",
-                mapRef: map
-            }, "shareForm2");
-            shareForm.startup();
-        }
-        if (dom.byId("shareForm2")) { //delete
-            dom.byId("shareForm2").style.display = dom.byId("shareForm2").style.display === "block"
-                ? "none": "block";
-        }
-    });
-}
+// function showShareForm(map) {
+//     require([
+//         "mesa/shareFormWidget", "dijit/registry", "dojo/dom"
+//     ], function(shareFormWidget, registry, dom) {
+//         if (!(registry.byId("shareForm2"))) { //remove the 2 after user caches have been updated
+//             var shareForm = new shareFormWidget({
+//                 emailServiceUrl: "scripts/php/ShareMail.php",
+//                 mapRef: map
+//             }, "shareForm2");
+//             shareForm.startup();
+//         }
+//         if (dom.byId("shareForm2")) { //delete
+//             dom.byId("shareForm2").style.display = dom.byId("shareForm2").style.display === "block"
+//                 ? "none": "block";
+//         }
+//     });
+// }
 
 // function showMeasure(map, parcelLayer, geometryService) {
 //     require([

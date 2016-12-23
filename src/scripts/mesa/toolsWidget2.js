@@ -65,6 +65,7 @@ define([
             on(query('.bookmarkClick'), "click", dispatchBookmarks);
             on(query('.printClick'), "click", dispatchPrinter);
             on(query('.helpClick'), "click", dispatchHelp);
+            on(query('.shareClick'), "click", dispatchShareForm);
             on(query('.searchMenu li'), "click", dispatchSearchMenuClick);
             on(dom.byId('Imagery'), "click", dispatchImageryToggle);
             on(query('.imageYears li'), "click", dispatchImageChange);
@@ -197,6 +198,16 @@ define([
                         device: device
                     }, "helpTool");
                     help.startup();
+                }
+            }
+
+            function dispatchShareForm(map) {
+                if (!(registry.byId("shareTool"))) {
+                    var shareForm = new shareFormWidget({
+                        emailServiceUrl: "scripts/php/ShareMail.php",
+                        mapRef: map
+                    }, "shareTool");
+                    shareForm.startup();
                 }
             }
 
