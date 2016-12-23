@@ -386,23 +386,45 @@ div .titleButton .arrow:hover {
   overflow: auto;
 }
 
-#frm1,
+#frm1 {
+  margin: 0 0 .5em;
+}
+
+#frm1 ul li {
+  margin-bottom: 1em;
+  width: 17em;
+  background-color: #fff;
+}
+
+#frm1 .text {
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+
 #frm2 {
   margin: 0 0 .5em;
 }
 
-#frm1 ul li,
 #frm2 ul li {
   margin-bottom: 1em;
   width: 17em;
   background-color: #fff;
 }
 
-#frm1 .text,
 #frm2 .text {
   border-radius: 4px;
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
+}
+
+#frm2 fieldset {
+  border: none;
+}
+
+.shareButtonBlock {
+  width: 100%;
+  text-align: center;
 }
 
 #frm1 fieldset {
@@ -1525,12 +1547,12 @@ input {
   z-index: 0!important;
 }
 
-.layersMenu {
+.layersMen {
   height: 60%;
   overflow: auto;
 }
 
-.layersMenu ul li {
+.layersMen ul li {
   background-color: #fff;
   width: 20em;
   margin-left: 4em;

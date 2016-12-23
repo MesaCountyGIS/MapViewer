@@ -1,7 +1,7 @@
 <div class='shareTool' id='shareTool' data-dojo-attach-point="domNode" title="Share the current map extent via email">
             <div data-dojo-attach-point="shareHeader" class="dialogHeader">
                 <div>Share map extent</div>
-                <span title="Close" data-dojo-attach-point='closer' class='closer dialogCloser'></span>
+                <!-- <span title="Close" data-dojo-attach-point='closer' class='closer dialogCloser'></span> -->
             </div>
             <form data-dojo-attach-point="frm2" id="frm2">
                 <fieldset>
@@ -23,6 +23,8 @@
                     </ul>
                 </fieldset>
             </form>
+            <div class='shareButtonBlock'>
             <button data-dojo-attach-point="shareSend" data-dojo-attach-event="onclick:sendClick" id="shareSend">Share</button>
-            <button data-dojo-attach-point="cancelShare" data-dojo-attach-event="onclick:closeClick" id="cancelShare">Cancel</button>
+            <button data-dojo-attach-point="clearShare" data-dojo-attach-event="onclick:clearClick" id="cancelShare">Clear</button>
+          </div>
 </div>

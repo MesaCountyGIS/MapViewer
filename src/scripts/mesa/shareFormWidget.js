@@ -69,7 +69,6 @@ define([
                             name.value = "";
                             emailS.value = "";
                             emailFrom.value = "";
-                            dialog.style.display = "none";
                         }
                     },
                     error: function (error) {
@@ -79,11 +78,10 @@ define([
             }
         },
 
-        closeClick: function () {
+        clearClick: function () {
             shareWidget.shareName.value = "";
             shareWidget.shareEmail.value = "";
             shareWidget.fromEmail.value = "";
-            shareWidget.domNode.style.display = "none";
         },
 
         _createURL: function(){

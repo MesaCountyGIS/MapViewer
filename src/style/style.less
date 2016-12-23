@@ -508,7 +508,18 @@ div .titleButton .arrow:hover {
   overflow: auto;
 }
 
-#frm1,
+#frm1{
+    margin: 0 0 0.5em;;
+    ul li {
+        margin-bottom: 1em;
+        width: 17em;
+        background-color:white;
+    }
+    .text{
+        .borderRadius;
+    }
+}
+
 #frm2 {
     margin: 0 0 0.5em;;
     ul li {
@@ -520,6 +531,16 @@ div .titleButton .arrow:hover {
         .borderRadius;
     }
 }
+
+#frm2 fieldset{
+  border:none;
+}
+
+.shareButtonBlock{
+  width:100%;
+  text-align: center;
+}
+
 
 #frm1 fieldset{
   border:none;
@@ -1650,11 +1671,12 @@ input {
   display:none;
 }
 
+
 #map_zoom_slider{
   z-index:0 !important;
 }
 
-.layersMen
+.layersMen{
   height:60%;
   overflow: auto;
   & ul li{
