@@ -1280,6 +1280,7 @@ input {
 
 .layersMenu ul li {
   width: 16em!important;
+  background-color: #fff!important;
 }
 
 .layersMenu ul li a {
