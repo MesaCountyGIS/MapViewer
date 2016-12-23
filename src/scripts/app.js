@@ -119,7 +119,7 @@ function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
         on(query('#layerSelect ul li'), touch.release, function(e){
             themeTools.themeClick(this, map, popupObject, popupTemplateObject, legendObject, initialBasemap);
         });
-        on(query('.plus'), touch.release, clickPlus);
+        // on(query('.plus'), touch.release, clickPlus);
         // on(query('.baselyrs'), "click", function(e){
         //     console.log('krips')
         //     baseLayersSwitch(e, parcelLayerObject, initialBasemap, roadLabels);
@@ -716,36 +716,36 @@ function extentZoom(extentObject) {
 //     });
 // }
 
-function clickPlus(e) {
-    /* Toggle expansion of the baselayers check boxes on the "Layers" tab
-    on the right side of the map. */
-    require([
-        "dojo/query",
-        "dojo/dom-attr",
-        "dojo/dom-style",
-        "dojo/dom-class",
-        "dojo/NodeList-traverse",
-        "dojo/NodeList-manipulate"
-    ], function(query, domAttr, domStyle, domClass) {
-        var cls = domAttr.get(e.target, "class");
-        cls = cls.split(" ")[1];
-        if("minus" !== cls){
-            query(".plus").forEach(function(node) {
-                domClass.replace(node, "minus", "plus");
-            });
-            query(".lyrexpand").children("li").forEach(function(node) {
-                domStyle.set(node, "display", "block");
-            });
-        }else{
-            query(".plusSign").forEach(function(node) {
-                domClass.replace(node, "plus", "minus");
-            });
-            query(".lyrexpand").children("li").forEach(function(node) {
-                domStyle.set(node, "display", "none");
-            });
-        }
-    });
-}
+// function clickPlus(e) {
+//     /* Toggle expansion of the baselayers check boxes on the "Layers" tab
+//     on the right side of the map. */
+//     require([
+//         "dojo/query",
+//         "dojo/dom-attr",
+//         "dojo/dom-style",
+//         "dojo/dom-class",
+//         "dojo/NodeList-traverse",
+//         "dojo/NodeList-manipulate"
+//     ], function(query, domAttr, domStyle, domClass) {
+//         var cls = domAttr.get(e.target, "class");
+//         cls = cls.split(" ")[1];
+//         if("minus" !== cls){
+//             query(".plus").forEach(function(node) {
+//                 domClass.replace(node, "minus", "plus");
+//             });
+//             query(".lyrexpand").children("li").forEach(function(node) {
+//                 domStyle.set(node, "display", "block");
+//             });
+//         }else{
+//             query(".plusSign").forEach(function(node) {
+//                 domClass.replace(node, "plus", "minus");
+//             });
+//             query(".lyrexpand").children("li").forEach(function(node) {
+//                 domStyle.set(node, "display", "none");
+//             });
+//         }
+//     });
+// }
 
 function urlMapType(url, map, legend, initialBasemap, config, device, parcels) {
     /*urlMapType (and its main sub-function parseParameters) is used to parse
