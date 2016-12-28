@@ -1,0 +1,70 @@
+#searchFieldDialog {
+  position:absolute;
+  left:1.5em;
+    #resultUL{
+        background-color: white !important;
+        margin-left: 1.1em;
+        margin-top: 0.5em;
+        width:14.7em;
+        z-index:20;
+        & :hover{
+            cursor:pointer;
+            background-color:#EDECE9;
+        }
+        & :focus{
+            background-color:#EDECE9;
+        }
+        li{
+          background-color: white !important;
+            .borderRadius;
+            padding:0.3em;
+            outline:none;
+            width:13em;
+        }
+    }
+}
+
+.searchBox {
+    position: absolute;
+    left: 33%;
+    width: 17em;
+    height: 5em;
+    & .searchheader {
+        width: 16.5em;
+        height: 1.5em;
+        margin: 0.25em auto;
+        text-align:center;
+    }
+}
+
+#loc {
+    position: relative;
+    height: 1em;
+    width: 16em;
+    font-size: 0.9em;
+    margin-left:1.5em;
+    top: 0.6em;
+    .borderRadius(5px);
+    z-index:10;
+}
+
+#GCSblock {
+    /*:inline-block; This will be turned on when Lat/lon search is selected*/
+    display: none;
+    float: left;
+    margin: 0.8em 0 0 0.5em;
+}
+
+#coords {
+    margin-top: -0.1em;
+    float: left;
+    font-size: 0.8em;
+    height: 1.05em;
+    width: 13em;
+    .borderRadius;
+}
+
+#coordzoom {
+    position: absolute;
+    margin: -0.20em 0 0 0.5em;
+}

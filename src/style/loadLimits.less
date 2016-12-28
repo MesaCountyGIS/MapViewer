@@ -1,0 +1,33 @@
+.noLoad {
+    display: none;
+}
+
+#loadWindow {
+    position: relative;
+    display: none;
+    width: 45em;
+    height: 50em;
+    z-index: 1000;
+    iframe {
+        display: block;
+        width: 500px;
+        height: 700px;
+    }
+}
+
+#pdfLinks {
+    min-width: 20em;
+    font-size: 0.75em;
+    position: absolute;
+    bottom: 1em;
+    left: 40%;
+    z-index: 1;
+    & > a {
+        background: Cornsilk;
+        .borderRadius(5px);
+        padding: 5px;
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+}

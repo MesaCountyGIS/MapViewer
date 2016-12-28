@@ -213,140 +213,6 @@ div .titleButton .arrow:hover {
   background-position: 0 -416px;
 }
 
-.dijitSliderBumperV,
-.dijitSliderProgressBar,
-.dijitSliderRemainingBar {
-  background-color: #add8e6;
-  z-index: 1;
-}
-
-.dijitRuleMark,
-.dijitRuleMarkV {
-  border-color: #add8e6;
-  width: 5px;
-}
-
-.dijitSliderImageHandle,
-.dijitSliderImageHandleV {
-  border-color: #add8e6;
-  border-radius: 5px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-}
-
-.dijitRuleLabel {
-  cursor: default;
-  position: relative;
-  height: 500px;
-  color: #add8e6;
-  text-shadow: -.5px 0 #fff,0 .5px #fff,.5px 0 #fff,0 -.5px #fff;
-}
-
-.dijitRuleLabelV {
-  font-size: .75em;
-  top: -.1em;
-}
-
-#loading {
-  position: relative;
-  width: 300px;
-  z-index: 50;
-  left: 45%;
-  top: 40%;
-  padding: 7px 0 0;
-  font: 700 11px Verdana,Geneva,Arial,Helvetica,sans-serif;
-}
-
-#imageSlider {
-  display: none;
-  position: absolute;
-  left: 1em;
-  top: 12em;
-  width: 1.5em;
-  z-index: 50;
-}
-
-#searchFieldDialog {
-  position: absolute;
-  left: 1.5em;
-}
-
-#searchFieldDialog #resultUL {
-  background-color: #fff!important;
-  margin-left: 1.1em;
-  margin-top: .5em;
-  width: 14.7em;
-  z-index: 20;
-}
-
-#searchFieldDialog #resultUL :hover {
-  cursor: pointer;
-  background-color: #edece9;
-}
-
-#searchFieldDialog #resultUL :focus {
-  background-color: #edece9;
-}
-
-#searchFieldDialog #resultUL li {
-  background-color: #fff!important;
-  border-radius: 4px;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
-  padding: .3em;
-  outline: none;
-  width: 13em;
-}
-
-.searchBox {
-  position: absolute;
-  left: 33%;
-  width: 17em;
-  height: 5em;
-}
-
-.searchBox .searchheader {
-  width: 16.5em;
-  height: 1.5em;
-  margin: .25em auto;
-  text-align: center;
-}
-
-#loc {
-  position: relative;
-  height: 1em;
-  width: 16em;
-  font-size: .9em;
-  margin-left: 1.5em;
-  top: .6em;
-  border-radius: 5px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  z-index: 10;
-}
-
-#GCSblock {
-  display: none;
-  float: left;
-  margin: .8em 0 0 .5em;
-}
-
-#coords {
-  margin-top: -.1em;
-  float: left;
-  font-size: .8em;
-  height: 1.05em;
-  width: 13em;
-  border-radius: 4px;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
-}
-
-#coordzoom {
-  position: absolute;
-  margin: -.2em 0 0 .5em;
-}
-
 #legendDialog {
   height: 22em;
   width: 14.5em;
@@ -1381,45 +1247,6 @@ input {
   margin-left: 1em;
 }
 
-#loadWindow,
-.noLoad {
-  display: none;
-}
-
-#loadWindow {
-  position: relative;
-  width: 45em;
-  height: 50em;
-  z-index: 1000;
-}
-
-#loadWindow iframe {
-  display: block;
-  width: 500px;
-  height: 700px;
-}
-
-#pdfLinks {
-  min-width: 20em;
-  font-size: .75em;
-  position: absolute;
-  bottom: 1em;
-  left: 40%;
-  z-index: 1;
-}
-
-#pdfLinks>a {
-  background: #fff8dc;
-  border-radius: 5px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  padding: 5px;
-}
-
-#pdfLinks>a:hover {
-  opacity: .8;
-}
-
 .dijitButtonNode {
   border-radius: 4px;
   padding: .5em;
@@ -1533,6 +1360,98 @@ input {
   background-color: #fff;
   width: 20em;
   margin-left: 4em;
+}
+
+#loadWindow,
+.noLoad {
+  display: none;
+}
+
+#loadWindow {
+  position: relative;
+  width: 45em;
+  height: 50em;
+  z-index: 1000;
+}
+
+#loadWindow iframe {
+  display: block;
+  width: 500px;
+  height: 700px;
+}
+
+#pdfLinks {
+  min-width: 20em;
+  font-size: .75em;
+  position: absolute;
+  bottom: 1em;
+  left: 40%;
+  z-index: 1;
+}
+
+#pdfLinks>a {
+  background: #fff8dc;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  padding: 5px;
+}
+
+#pdfLinks>a:hover {
+  opacity: .8;
+}
+
+.dijitSliderBumperV,
+.dijitSliderProgressBar,
+.dijitSliderRemainingBar {
+  background-color: #add8e6;
+  z-index: 1;
+}
+
+.dijitRuleMark,
+.dijitRuleMarkV {
+  border-color: #add8e6;
+  width: 5px;
+}
+
+.dijitSliderImageHandle,
+.dijitSliderImageHandleV {
+  border-color: #add8e6;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+
+.dijitRuleLabel {
+  cursor: default;
+  position: relative;
+  height: 500px;
+  color: #add8e6;
+  text-shadow: -.5px 0 #fff,0 .5px #fff,.5px 0 #fff,0 -.5px #fff;
+}
+
+.dijitRuleLabelV {
+  font-size: .75em;
+  top: -.1em;
+}
+
+#loading {
+  position: relative;
+  width: 300px;
+  z-index: 50;
+  left: 45%;
+  top: 40%;
+  padding: 7px 0 0;
+  font: 700 11px Verdana,Geneva,Arial,Helvetica,sans-serif;
+}
+
+#imageSlider {
+  display: none;
+  position: absolute;
+  left: 1em;
+  top: 12em;
+  width: 1.5em;
+  z-index: 50;
 }
 
 .tabActivated {
@@ -2317,6 +2236,87 @@ input#mapTitle {
   margin-top: .25em;
 }
 
+#searchFieldDialog {
+  position: absolute;
+  left: 1.5em;
+}
+
+#searchFieldDialog #resultUL {
+  background-color: #fff!important;
+  margin-left: 1.1em;
+  margin-top: .5em;
+  width: 14.7em;
+  z-index: 20;
+}
+
+#searchFieldDialog #resultUL :hover {
+  cursor: pointer;
+  background-color: #edece9;
+}
+
+#searchFieldDialog #resultUL :focus {
+  background-color: #edece9;
+}
+
+#searchFieldDialog #resultUL li {
+  background-color: #fff!important;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  padding: .3em;
+  outline: none;
+  width: 13em;
+}
+
+.searchBox {
+  position: absolute;
+  left: 33%;
+  width: 17em;
+  height: 5em;
+}
+
+.searchBox .searchheader {
+  width: 16.5em;
+  height: 1.5em;
+  margin: .25em auto;
+  text-align: center;
+}
+
+#loc {
+  position: relative;
+  height: 1em;
+  width: 16em;
+  font-size: .9em;
+  margin-left: 1.5em;
+  top: .6em;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  z-index: 10;
+}
+
+#GCSblock {
+  display: none;
+  float: left;
+  margin: .8em 0 0 .5em;
+}
+
+#coords {
+  margin-top: -.1em;
+  float: left;
+  font-size: .8em;
+  height: 1.05em;
+  width: 13em;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+
+#coordzoom {
+  position: absolute;
+  margin: -.2em 0 0 .5em;
+}
+
 @media only screen and (max-width:1024px) {
   #autocompleteSearch,
   #coordinateBlock,
@@ -2431,22 +2431,6 @@ input#mapTitle {
 
   #clearSelected {
     display: inline;
-  }
-
-  #MSearch {
-    background: #e1ded9 url("../images/sprite.png") no-repeat 2px -236px;
-    border-style: none;
-    width: 50px;
-    height: 35px;
-    padding-bottom: 1em;
-    border-radius: 3px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-  }
-
-  #MSearch:hover {
-    cursor: pointer;
-    background-color: #dad7d0;
   }
 
   #staticDropdown {
