@@ -28,8 +28,6 @@ define([
 
                         this.inherited(arguments);
                         domConstruct.place(this.domNode, this.srcNodeRef.id, "before");
-                        //add a property where you can add a number of classes to the widget on startup
-                        // domClass.add(this.domNode, "query");
 
                         queryWidget = this;
                         device = queryWidget.device;

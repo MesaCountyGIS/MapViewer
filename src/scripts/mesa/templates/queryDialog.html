@@ -124,7 +124,6 @@
             <li class="submitQueryLI">
                 <button data-dojo-attach-event="onclick:runQuery" class='showInline inlineAttributeItem' id="submitQuery" title="Submit Query" type="button" />Submit Query</button>
                 <button class='displayNo inlineLocationItem' data-dojo-attach-event="onclick:clearClick">Clear</button>
-                <!-- <button data-dojo-attach-event="onclick:closeClick" type="button" class="closeQuery" title="Close Query Dialog">Close</button> -->
                 <a class='inlineAttributeItem' target="_blank" href="http://www.w3schools.com/sql/sql_where.asp">
                     <button type="button" id="qHelp" title="Get help building SQL Queries">Help</button>
                 </a>
@@ -134,7 +133,7 @@
     </form>
 </div><!--end of query tabbed panel-->
 
-    <div id="queryResultDialog">
+    <div style='display:none;' id="queryResultDialog">
         <span id="resultLabel">Layer Here</span>
         <br><span class="displaybytext">     Display By: </span>
         <select name="attdisplayby" id="attdisplayby"></select>
