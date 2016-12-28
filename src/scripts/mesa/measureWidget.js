@@ -484,7 +484,7 @@ define([
                         var lon = point84.x;
                         var lat = point84.y;
                         var firstPoint = new Point(lon, lat);
-                        text = firstPoint.y.toFixed(7) + " " + firstPoint.x.toFixed(7);
+                        text = firstPoint.y.toFixed(3) + " " + firstPoint.x.toFixed(3);
                         measureWidget._measurementPointText(UTMPoint, text);
                         query("#latResult").text(firstPoint.y.toFixed(3) + " deg");
                         query("#lonResult").text(firstPoint.x.toFixed(3) + " deg");
@@ -494,7 +494,7 @@ define([
                     query("#gcsPointResult span.remove").forEach(function (i) {
                         domConstruct.empty(i);
                     })
-                    text = "X: " + UTMPoint.x.toFixed(7) + " Y: " + UTMPoint.y.toFixed(7)
+                    text = "X: " + UTMPoint.x.toFixed(3) + " Y: " + UTMPoint.y.toFixed(3)
                     measureWidget._measurementPointText(UTMPoint, text);
                     query("#yResult").text(UTMPoint.y.toFixed(3) + " meters");
                     query("#xResult").text(UTMPoint.x.toFixed(3) + " meters");
