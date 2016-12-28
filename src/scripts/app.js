@@ -295,27 +295,6 @@ function showShare(id) {
             ? "none": "block";
 }
 
-function makeBoxesMoveable() {
-    //Make dialog boxes moveable
-    require([
-        "dojo/dnd/move", "dojo/query", "dojo/dom"
-    ], function(move, query, dom) {
-        for (i = 0, len = query(".moveableDialog"); i < len.length; i++) {
-            move.parentConstrainedMoveable(dom.byId(len[i].id), {
-                handle: query("#" + len[i].id + " > header"),
-                area: "margin",
-                within: true
-            });
-        }
-
-        new move.parentConstrainedMoveable(dom.byId("popup"), {
-            handle: dom.byId("popup"),
-            area: "margin",
-            within: !0
-        });
-    });
-}
-
 function createHomeButton(map) {
     require(["mesa/homeButton"], function(homeButton) {
         homeButton({mapRef: map});
@@ -328,65 +307,11 @@ function createContextMenu(map, geometryServiceConfig) {
     });
 }
 
-// function createImageList(imageConfig) {
-//     //Add the selected imagery and theme layer to the map
-//     require(["esri/layers/ArcGISTiledMapServiceLayer"], function(ArcGISTiledMapServiceLayer) {
-//         for (var x in imageConfig.images) {
-//             lmG[imageConfig.images[x].imageId] = new ArcGISTiledMapServiceLayer(imageConfig.mapFolder + imageConfig.images[x].serviceName + imageConfig.serverType, {id: imageConfig.images[x].imageId});
-//         }
-//     }); // end require
-// }
-
 function createScalebar(map) {
     require(["esri/dijit/Scalebar"], function(Scalebar) {
         var scalebar = new Scalebar({map: map, attachTo: "bottom-right", scalebarUnit: "dual"});
     }); //end require
 }
-
-// function createLegend(map, initialBasemap, popup, button){
-//     var leg, legendLayers = [];
-//     require(["mesa/legendWidget", "esri/dijit/Legend"], function(legendWidget, Legend) {
-//         leg = new Legend({
-//                 map: map
-//             }, "legendDiv");
-//
-//         new legendWidget({
-//             mapRef: map,
-//             defaultBasemap: initialBasemap,
-//             popupRef: popup,
-//             attachControl: button,
-//             legendObject: leg
-//         },'legendDialog');
-//
-//     }); //end require
-//     setTimeout(function(){}, 500)
-//     // setTimeout(function(){
-//     //     return leg;
-//     // }, 500)
-// }
-
-// function createLegend(map, device) {
-//     var leg, legLayers = [];
-//     legLayers.push({
-//         layer: lmG.vectorBasemap,
-//         title: 'Basemap Layers',
-//         hideLayers: [
-//             7,12,17,22,23,24,25,26,27,28,32,35,36,37,38,39,50,51
-//         ]
-//     });
-//     require(["esri/dijit/Legend"], function(Legend) {
-//         leg = new Legend({
-//             map: map,
-//             layerInfos: legLayers
-//         }, "legendDiv");
-//         leg.startup();
-//     });
-//     if (device === 'esriPopup') {
-//         // toggleDialog("legendDialog");
-//         // makeBoxesMoveable();
-//     }
-//     return leg;
-// }
 
 function toggleDialog(dialogId) { //fires on click of #DTLegend and #IPLegend - toggles the legend
     require([
@@ -402,156 +327,6 @@ function toggleDialog(dialogId) { //fires on click of #DTLegend and #IPLegend - 
     });
 }
 
-//update showPrinter to remove old code after users have replaced code in their cache
-// function showPrinter(map, printURL) {
-//     require([
-//         "mesa/printWidget",
-//         "dojo/dom-construct",
-//         "dojo/dom",
-//         "dojo/on",
-//         "dijit/registry",
-//         "dojo/dom-style"
-//     ], function(printWidget, domConstruct, dom, on, registry, domStyle) {
-//         if (!(registry.byId("printDialog2"))) {
-//             var printer = new printWidget({
-//                 printUrl: printURL,
-//                 mapRef: map,
-//                 device: "desktop"
-//             }, "printDialog2"); //remove the 2 after user caches have been updated
-//             printer.startup();
-//         }
-//         domStyle.set(dom.byId("printDialog2"), { //remove the 2
-//             display: domStyle.get(dom.byId("printDialog2"), "display") === "block"
-//                 ? "none": "block" //remove the 2
-//         });
-//     });
-// }
-
-// function showBookmarks(map) {
-//     require([
-//         "dijit/registry", "mesa/bookmarkWidget", "dojo/dom"
-//     ], function(registry, bookmarkWidget, dom) {
-//
-//         if (!(registry.byId("bookmarkTool"))) { //remove the 2 after user caches have been updated
-//             var bookmarks = new bookmarkWidget({
-//                 mapRef: map
-//             }, "bookmarkTool");
-//             bookmarks.startup();
-//         }
-//
-//         if (dom.byId("bookmarkTool")) { //delete
-//             dom.byId("bookmarkTool").style.display = dom.byId("bookmarkTool").style.display === "block"
-//                 ? "none"
-//                 : "block";
-//         }
-//     });
-// }
-
-// //update showPrinter to remove old code after users have replaced code in their cache
-// function showHelp(e, printURL) {
-//     e.preventDefault();
-//     require([
-//         "mesa/helpWidget",
-//         "dojo/dom-construct",
-//         "dojo/dom",
-//         "dojo/on",
-//         "dijit/registry",
-//         "dojo/dom-style"
-//     ], function(helpWidget, domConstruct, dom, on, registry, domStyle) {
-//         if (dom.byId("helpMenu2") && !(registry.byId("helpMenu2"))) { //remove the 2 after user caches have been updated
-//             var help = new helpWidget({
-//                 printUrl: printURL,
-//                 device: "desktop"
-//             }, "helpMenu2"); //remove the 2 after user caches have been updated
-//             help.startup();
-//         }
-//         if (dom.byId("helpMenu2")) { //delete
-//             domStyle.set(dom.byId("helpMenu2"), { //remove the 2
-//                 display: domStyle.get(dom.byId("helpMenu2"), "display") === "block"
-//                     ? "none": "block" //remove the 2
-//             });
-//         }
-//     });
-// }
-
-// function showQuery(map, geometryServiceURL) {
-//     require([
-//         "dojo/dom", "dijit/registry", "mesa/queryWidget"
-//     ], function(dom, registry, queryWidget) {
-//         if (dom.byId("queryDialog2") && !(registry.byId("queryDialog2"))) { //remove the 2 after user caches have been updated
-//             var queryTool = new queryWidget({
-//                 device: "desktop",
-//                 mapRef: map,
-//                 geometryServiceURL: geometryServiceURL,
-//                 exportURL: "scripts/php/toCSV.php",
-//                 csvOutputLocation: "scripts/php/"
-//             }, "queryDialog2");
-//             queryTool.startup();
-//         }
-//         if (dom.byId("queryDialog2")) {
-//             dom.byId("queryDialog2").style.display = dom.byId("queryDialog2").style.display === "block"
-//                 ? "none"
-//                 : "block";
-//         }
-//     });
-// }
-
-// function showBasemap(map, imageConfig, initialBasemap) {
-//     require([
-//         "dijit/registry", "mesa/basemapWidget"
-//     ], function(registry) {
-//         if (!(registry.byId("imagelist2"))) { //remove the 2 after user caches have been updated
-//             createImageList(imageConfig);
-//             lmG.imageTool = new basemapWidget({
-//                 mapRef: map,
-//                 device: "desktop",
-//                 initialBasemap: initialBasemap
-//             }, "imagelist2");
-//         }
-//         lmG.imageTool.basemapChanger();
-//     });
-// }
-
-// function showShareForm(map) {
-//     require([
-//         "mesa/shareFormWidget", "dijit/registry", "dojo/dom"
-//     ], function(shareFormWidget, registry, dom) {
-//         if (!(registry.byId("shareForm2"))) { //remove the 2 after user caches have been updated
-//             var shareForm = new shareFormWidget({
-//                 emailServiceUrl: "scripts/php/ShareMail.php",
-//                 mapRef: map
-//             }, "shareForm2");
-//             shareForm.startup();
-//         }
-//         if (dom.byId("shareForm2")) { //delete
-//             dom.byId("shareForm2").style.display = dom.byId("shareForm2").style.display === "block"
-//                 ? "none": "block";
-//         }
-//     });
-// }
-
-// function showMeasure(map, parcelLayer, geometryService) {
-//     require([
-//         "mesa/measureWidget", "dojo/dom", "dojo/on", "dijit/registry"
-//     ], function(measureWidget, dom, on, registry) {
-//         if (dom.byId("measureDialog2") && !(registry.byId("measureDialog2"))) { //remove the 2 after user caches have been updated
-//             var measure = new measureWidget({
-//                 mapRef: map,
-//                 gsvc: geometryService,
-//                 device: "desktop",
-//                 parcelLayer: parcelLayer
-//             }, "measureDialog2"); //remove the 2 after user caches have been updated
-//             measure.startup();
-//         }
-//
-//         if (dom.byId("measureDialog2")) { //delete
-//             dom.byId("measureDialog2").style.display = dom.byId("measureDialog2").style.display === "block"
-//                 ? "none"
-//                 : "block";
-//         }
-//     });
-// }
-
 function showLocator(geometryServiceURL) {
     require([
         "mesa/locatorWidget", "dojo/dom", "dojo/on", "dijit/registry"
@@ -561,73 +336,6 @@ function showLocator(geometryServiceURL) {
     });
 }
 
-// function searchBy(type, option, device, turnOff) {
-//     var thisFunctionParam = "noPoint";
-//     var thisTargetGeometry = "polygon";
-//     var thisOutFields = "LOCATION";
-//     var thisService = "ParcelOnly4Query/MapServer/0/query";
-//     var thisType = "Address";
-//     require(["mesa/searchCompleteWidget"], function(searchCompleteWidget) {
-//         switch (type) {
-//             case "address":
-//                 thisTargetGeometry = "point";
-//                 thisService = "ParcePointQuery/MapServer/0/query";
-//                 break;
-//             case "intersection":
-//                 thisFunctionParam = "Intersection";
-//                 thisTargetGeometry = "point";
-//                 thisOutFields = "Intersection";
-//                 thisService = "roads_and_intersections/MapServer/0/query";
-//                 thisType = "Intersection";
-//                 break;
-//             case "account":
-//                 thisOutFields = "ACCOUNTNO";
-//                 thisType = "Account";
-//                 break;
-//             case "parcelNo":
-//                 thisOutFields = "PARCELNUM";
-//                 thisType = "Parcel Number";
-//                 break;
-//             case "subdivision":
-//                 thisOutFields = "SUBNAME";
-//                 thisService = "eSurveyor/MapServer/13/query";
-//                 thisType = "Subdivision";
-//                 break;
-//             case "place":
-//                 thisFunctionParam = "FEATURE_NAME";
-//                 thisTargetGeometry = "point";
-//                 thisOutFields = "FEATURE_NAME";
-//                 thisService = "PlaceNames/MapServer/0/query";
-//                 thisType = "Place Name";
-//                 break;
-//             case "PLSS":
-//                 thisOutFields = "TRSM";
-//                 thisService = "eSurveyor/MapServer/26/query";
-//                 thisType = "Township/Range";
-//                 break;
-//             case "Latitude/Longitude":
-//                 thisFunctionParam = "gcs";
-//                 thisTargetGeometry = "point";
-//                 thisType = "Latitude/Longitude";
-//                 break;
-//             default:
-//                 alert("This tool has not been implemented");
-//         }
-//         new searchCompleteWidget({
-//             device: device,
-//             mapRef: aG.map,
-//             type: thisType,
-//             service: thisService,
-//             where: thisOutFields + " LIKE",
-//             outFields: thisOutFields,
-//             targetGeom: thisTargetGeometry,
-//             functionParam: thisFunctionParam,
-//             geometryServiceURL: esriConfig.defaults.geometryService,
-//             option: option !== undefined? option: undefined,
-//             turnOff: turnOff
-//         }, "searchFieldDialog").startup();
-//     }); //End require
-// } //end searchBy function
 
 ////----------------Begin screen coordinate display code---------------------------------------------//
 function showCoords(evt, id) {
@@ -650,71 +358,6 @@ function extentZoom(extentObject) {
     });
     return viewExtent;
 }
-
-// //Turns on and off the base layers
-// function baseLayersSwitch(e, ParcelLayerObject, basemapObject, roadLabelObject) {
-//     require([
-//         "dojo/query", "dojo/dom-attr"
-//     ], function(query, domAttr) {
-//         var target = e.target? e.target: e.srcElement;
-//         var thisClassName = domAttr.get(target, "class");
-//         thisClassName = 'input.' + thisClassName.split(" ").pop();
-//         // var baselayers = query(".expand")[0];
-//         var box = query(thisClassName);
-//         var layers = {
-//             'input.pclcbx': ParcelLayerObject,
-//             'input.lbsgcbx': roadLabelObject,
-//             'input.bgcbx': basemapObject
-//         };
-//         for (i = 0; i < box.length; i++) {
-//             box[i].checked = target.checked? true: false;
-//         }
-//         // if (baselayers.checked) {
-//             for (var x in layers) {
-//                 // if (query(x)[0].checked) {
-//                 //     layers[x].show();
-//                 // } else {
-//                 //     layers[x].hide();
-//                 // }
-//             }
-//         // } else {
-//         //     for (var x in layers) {
-//         //         layers[x].hide();
-//         //     }
-//         // }
-//     });
-// }
-
-// function clickPlus(e) {
-//     /* Toggle expansion of the baselayers check boxes on the "Layers" tab
-//     on the right side of the map. */
-//     require([
-//         "dojo/query",
-//         "dojo/dom-attr",
-//         "dojo/dom-style",
-//         "dojo/dom-class",
-//         "dojo/NodeList-traverse",
-//         "dojo/NodeList-manipulate"
-//     ], function(query, domAttr, domStyle, domClass) {
-//         var cls = domAttr.get(e.target, "class");
-//         cls = cls.split(" ")[1];
-//         if("minus" !== cls){
-//             query(".plus").forEach(function(node) {
-//                 domClass.replace(node, "minus", "plus");
-//             });
-//             query(".lyrexpand").children("li").forEach(function(node) {
-//                 domStyle.set(node, "display", "block");
-//             });
-//         }else{
-//             query(".plusSign").forEach(function(node) {
-//                 domClass.replace(node, "plus", "minus");
-//             });
-//             query(".lyrexpand").children("li").forEach(function(node) {
-//                 domStyle.set(node, "display", "none");
-//             });
-//         }
-//     });
-// }
 
 function urlMapType(url, map, legend, initialBasemap, config, device, parcels) {
     /*urlMapType (and its main sub-function parseParameters) is used to parse
@@ -852,29 +495,6 @@ function urlMapType(url, map, legend, initialBasemap, config, device, parcels) {
 
                     tools.dispatchThemeMenuClick(urlParams[0], components);
 
-                    // registry.byId("toolsView2").domNode.style.display = "none";
-
-
-
-            // require([
-            //     "mesa/themeTools", "dojo/dom"
-            // ], function(themeTools, dom) {
-            //     themeTools.themeClick(null, this, map, aG.popup, aG.pTemp, legend,
-            //          urlParams[4], initialBasemap);
-            //     new changeTheme({
-            //         newLayer: urlParams[0],
-            //         layerTitle: urlParams[1],
-            //         option: urlParams[2],
-            //         pVal: urlParams[3],
-            //         mapRef: map,
-            //         basemapRef: initialBasemap,
-            //         infoWindowRef: aG.popup,
-            //         infoTemplateRef: aG.pTemp,
-            //         checkboxid: urlParams[4],
-            //         mapLegend:legend
-            //     });
-            //
-            // });
             }); //end require
         } else {
             return
