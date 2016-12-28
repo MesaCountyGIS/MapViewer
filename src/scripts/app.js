@@ -88,44 +88,13 @@ function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
         on(dom.byId("menuSelect"), "click", function(legendObject) {
             runToolsView();
         });
-        // on(dom.byId("help"), touch.release, function(e) {
-        //     showHelp(e, JSONconfig.printURL);
-        // });
-        // on(dom.byId("shareMap"), touch.release, function(){
-        //     showShareForm(map);
-        // });
-        // on(query("#DTLegend, #legendDialog > .dialogHeader > .dialogCloser"), touch.release, function() {
-        //     toggleDialog("legendDialog");
-        // });
-        // on(query("#DTprint"), touch.release, function() {
-        //     showPrinter(map, JSONconfig.printURL);
-        // });
-        // on(query("#DTbookmarks"), touch.release, function(){
-        //     showBookmarks(map);
-        // });
-        // on(query("#DTqueryatts"), touch.release, function() {
-        //     showQuery(map, JSONconfig.geometryService);
-        // });
-        // on(query("#DTmeasure"), touch.release, function() {
-        //     showMeasure(map, parcelLayerObject, JSONconfig.geometryService);
-        // });
-        // on(query("#DTbasemap,#IPbasemap"), touch.release, function() {
-        //     showBasemap(map, JSONconfig.imagesList, initialBasemap);
-        //
-        // });
+
         on(query(".shareClass, #sharebutton"), touch.release, function(){
             showShare("socialShare");
         });
         on(query('#layerSelect ul li'), touch.release, function(e){
             themeTools.themeClick(this, map, popupObject, popupTemplateObject, legendObject, initialBasemap);
         });
-        // on(query('.plus'), touch.release, clickPlus);
-        // on(query('.baselyrs'), "click", function(e){
-        //     console.log('krips')
-        //     baseLayersSwitch(e, parcelLayerObject, initialBasemap, roadLabels);
-        // });
-        // on(query(".collapsedPanel"), touch.release, animatePanel);
-        // on(dom.byId("hidePanel"), "click", themeTools.animatePanel);
         on(dom.byId("locate"), touch.release, function(){
             showLocator(JSONconfig.geometryService)
         });
