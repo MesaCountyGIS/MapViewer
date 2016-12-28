@@ -11,11 +11,9 @@ define([
     dom, domStyle, domConstruct, domClass, on) {
 
     var fillColor = new Color([255, 255, 0, 0.25]);
-    var fillStyle;
     var fillOpacity = 0.5;
     var outlineColor = new Color([255, 255, 0, 1]); //new Color([0, 0, 0, 1]);
     var outlineWidth = 5;
-    var outlineStyle;
     var outlineOpacity = 1;
     var lineColor = new Color([255, 255, 0, 1]);
     var lineStyle = SimpleLineSymbol.STYLE_SOLID;
@@ -28,18 +26,14 @@ define([
     var textWeight = Font.WEIGHT_BOLDER;
     var textVariant = Font.VARIANT_NORMAL;
     var textFamily = "Courier New";
-    var textUnderline;
-    var textItalic;
     var toolType;
     var fillOpacity;
     var meas = {};
     // var editToolbar;
     var enabled = false;
     var newText = [];
-    var initExtent;
     var shape;
     var selected;
-    var polyClicked = 0;
     jerry = null;
     var ctxMenuForGraphics = new Menu({});
     var outLineLength;
@@ -60,8 +54,6 @@ define([
         postCreate: function () {
             this.inherited(arguments);
             domConstruct.place(this.domNode, this.srcNodeRef.id, "before");
-            //add a property where you can add a number of classes to the widget on startup
-            // domClass.add(this.domNode, "query");
 
             measureWidget = this;
             map = measureWidget.mapRef;
@@ -83,11 +75,11 @@ define([
                 // domStyle.set(measureWidget.measureCloser, 'display', "none");
                 // domStyle.set(dom.byId("measureToMap"), 'display', "block");
                 // domStyle.set(dom.byId("measureToTools"), 'display', "block");
-            new move.parentConstrainedMoveable(this.domNode, {
-                handle: this.dialogHeader,
-                area: "margin",
-                within: true
-            });
+            // new move.parentConstrainedMoveable(this.domNode, {
+            //     handle: this.dialogHeader,
+            //     area: "margin",
+            //     within: true
+            // });
             }else{
                 // domStyle.set(measureWidget.measureCloser, 'display', "none");
                 // domStyle.set(dom.byId("measureToMap"), 'display', "block");
@@ -246,13 +238,13 @@ define([
             });
         },
 
-        closeClick: function () {
-            measureWidget._disconnect();
-            map.infoWindow = aG.popup;
-            this.domNode.style.display = "none";
-            dom.byId("toolPanel").style.display = "none";
-            query("#map_zoom_slider, #hidePanel, .collapsedPanel").style("display", "block");
-        },
+        // closeClick: function () {
+        //     measureWidget._disconnect();
+        //     map.infoWindow = aG.popup;
+        //     this.domNode.style.display = "none";
+        //     dom.byId("toolPanel").style.display = "none";
+        //     query("#map_zoom_slider, #hidePanel, .collapsedPanel").style("display", "block");
+        // },
 
         setPoly: function (x) {
             measureWidget._resetButtonBlock(x.target, ['polySeg', x.target.getAttribute("data-set")], "#polyResult, #uomPolyBox, #uomText");
@@ -262,6 +254,7 @@ define([
             }
             toolType = (x.target.id).slice(4);
             meas.del = on(tb, "draw-end", measureWidget._addAreaPoly);
+            // dom.byId("toolsView2").style.display = "none";
             // if(device === "mobile"){
             //     this.domNode.style.display = "none";
             //     query("#map_zoom_slider, #toolPanel, #hidePanel, .collapsedPanel").style("display", "block");
@@ -344,6 +337,7 @@ define([
             if (dom.byId("measureYes").checked) {
                 measureWidget._getAreaAndLength(areaGeometry);
             }
+            measureWidget._disconnect();
         },
 
         _getAreaAndLength: function (areaGeometry) {
@@ -390,6 +384,7 @@ define([
             if (dom.byId('measureYes').checked === true) {
                 measureWidget._getLineLength(geometry);
             }
+            measureWidget._disconnect();
         },
 
         _getLineLength: function (geometry) {
@@ -509,6 +504,7 @@ define([
 
         _measurementPointText: function (point, text) {
             meas.text.add(new Graphic(point, new TextSymbol(text).setFont(new Font(textSize, textStyle, textVariant, textWeight, textFamily)).setColor(textColor).setOffset(0, 12).setAlign(TextSymbol.ALIGN_START))); //.setFont(textFont.setWeight(textWeight))
+            measureWidget._disconnect();
         },
 
         _segments: function (uomBox, segment, selectedTool) {
