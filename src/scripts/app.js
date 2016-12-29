@@ -313,19 +313,19 @@ function createScalebar(map) {
     }); //end require
 }
 
-function toggleDialog(dialogId) { //fires on click of #DTLegend and #IPLegend - toggles the legend
-    require([
-        "dojo/dom", "dojo/dom-class"
-    ], function(dom, domClass) {
-        if (domClass.contains(dom.byId("legendDialog"), "displayNo")) {
-            dom.byId("legendDialog").style.display = "block";
-            (domClass.remove(dom.byId("legendDialog"), "displayNo"));
-        } else {
-            dom.byId("legendDialog").style.display = "none";
-            (domClass.add(dom.byId("legendDialog"), "displayNo"));
-        }
-    });
-}
+// function toggleDialog(dialogId) { //fires on click of #DTLegend and #IPLegend - toggles the legend
+//     require([
+//         "dojo/dom", "dojo/dom-class"
+//     ], function(dom, domClass) {
+//         if (domClass.contains(dom.byId("legendDialog"), "displayNo")) {
+//             dom.byId("legendDialog").style.display = "block";
+//             (domClass.remove(dom.byId("legendDialog"), "displayNo"));
+//         } else {
+//             dom.byId("legendDialog").style.display = "none";
+//             (domClass.add(dom.byId("legendDialog"), "displayNo"));
+//         }
+//     });
+// }
 
 function showLocator(geometryServiceURL) {
     require([

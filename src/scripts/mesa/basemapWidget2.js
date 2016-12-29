@@ -49,23 +49,24 @@ define([
                 this.loadYear(target);
                 return target;
             }else{
-                var j = target.id
                 var newLayer = target.attributes['data-value'].nodeValue;
                 this.loadYear(newLayer);
                 if(this.device === "desktop"){
-                    this._change(j, "block", "Default Basemap", ["DTimagery", "DTbasemap", "Mimagery", "Mbasemap"]);
+                    this._change(target.id, "block", "Default Basemap", ["DTimagery", "DTbasemap"]);
                 }
                 return newLayer;
             }
         },
 
-        _change: function(i, display, message, addRemove){
-            i.style.display = display;
+        _change : function(i, display, message, addRemove) {
+            // document.getElementById(i).style.display = display;
             domAttr.set(dom.byId("DTbasemap"), 'title', "Turn on " + message);
-            if(thisWidget.device === "desktop"){
-                domClass.replace(dom.byId("DTbasemap"), addRemove[0], addRemove[1]);
-            }else{
-                domClass.replace(dom.byId("MBasemap"), addRemove[2], addRemove[3]);
+            if (thisWidget.device === "desktop") {
+                if (domClass.contains(dom.byId("DTbasemap"), addRemove[1])) {
+                    domClass.replace(dom.byId("DTbasemap"), addRemove[0], addRemove[1]);
+                } else {
+                    domClass.replace(dom.byId("DTbasemap"), addRemove[1], addRemove[0]);
+                }
             }
         },
 

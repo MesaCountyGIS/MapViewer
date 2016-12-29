@@ -67,7 +67,7 @@ define([
             on(query('.helpClick'), "click", dispatchHelp);
             on(query('.shareClick'), "click", dispatchShareForm);
             on(query('.searchMenu li'), "click", dispatchSearchMenuClick);
-            on(dom.byId('Imagery'), "click", dispatchImageryToggle);
+            on(query('#Imagery, .DTbasemap'), "click", dispatchImageryToggle);
             on(query('.imageYears li'), "click", dispatchImageChange);
             on(dom.byId('backMenu'), touch.release, backButtonEvent);
             on(query('.baselyrs'), "click", function(e){

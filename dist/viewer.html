@@ -43,7 +43,7 @@
     <header id="toolbar">
         <nav id="headerButtonGroup">
             <div id="DTtoolstrip">
-                <button class="DTbasemap" id="DTbasemap" title="Turn on Imagery"></button>
+                <button data-to="Imagery" data-value="A2015" class="DTbasemap" id="DTbasemap" title="Turn on Imagery"></button>
                 <button id="DTLegend" title="Display Legend"></button>
                 <button id="DTmeasure" title="Draw and Measure"></button>
                 <button id="DTqueryatts" title="Query Tools"></button>
@@ -53,7 +53,7 @@
             </div>
 
             <div id='menuSelect'>
-            <a class=stacked-toggle href='#'>
+            <a class='stacked-toggle' href='#'>
               <span></span>
               <span></span>
               <span></span>
@@ -167,85 +167,40 @@
         <figure id="loading">
             Loading Map...
         </figure>
-
-        <div id="toolPanel">toolName</div>
-
-        <!-- <div class="collapsedPanel" id="rightPanel">
-            <div id="hidePanel">Layers</div>
-            <div id="noControl" class="noControl">
-                <ul>
-                    <li>
-                        <span class="plusSign plus"></span>
-                        <input type="checkbox" class="baselyrs expand" checked /><span>Base Layers</span>
-                        <ul class="lyrexpand" style="margin-left: 1.1em;">
-                            <li>
-                                <input class="baselyrs bgcbx" type="checkbox" checked /><span>background</span></li>
-                            <li>
-                                <input class="baselyrs lbsgcbx" type="checkbox" checked /><span>Labels</span></li>
-                            <li>
-                                <input class="baselyrs pclcbx" type="checkbox" checked /><span>Parcels</span></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div> -->
-
-        <!-- <div id="searchFieldDialog"></div> -->
-        <!-- <div id="bookmarkDialog2"></div> -->
-        <!-- <div id='printDialog2'></div> -->
-        <!-- <div class="query moveableDialog" id="measureDialog2" title="Draw/Measure2"></div> -->
-        <!-- <div id='imagelist2'></div> -->
-        <!-- <div id="helpMenu2"></div> -->
-        <!-- <div id="problemForm2"></div> -->
-        <!-- <div id="shareForm2"></div> -->
-        <!-- <div id='queryDialog2'></div> -->
         <div id="popup"></div>
     </div>
-
-
-
     <!-- end #map -->
 
-    <script>
-        var dojoConfig = {
-            // async: true,
+<script>
+    var dojoConfig = {
+        packages: [
+        {
+            "name": "libs",
+            "location": location.pathname.replace(/\/[^/]+$/, "") + "/scripts/libs/"
+    }
+]
+    };
+</script>
 
-            packages: [
-            //     {
-            //         "name": "mesa",
-            //         "location": location.pathname.replace(/\/[^/]+$/, "") + "/scripts/esri//mesa/"
-            // },
-            {
-                "name": "libs",
-                "location": location.pathname.replace(/\/[^/]+$/, "") + "/scripts/libs/"
-        }
-    ]
-        };
-    </script>
-
-    <!-- <script src="http://js.arcgis.com/3.16/"></script> -->
 <script src="scripts/esri/dojo/dojo.js" data-dojo-config="async: true"></script>
-<!-- <script src="scripts/esri/dojo/dojo.js"></script> -->
+<script src="scripts/app.min.js"></script>
 
+<script>
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-    <script src="scripts/app.min.js"></script>
-
-    <script>
-        (function (i, s, o, g, r, a, m) {
-            i['GoogleAnalyticsObject'] = r;
-            i[r] = i[r] || function () {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date();
-            a = s.createElement(o),
-                m = s.getElementsByTagName(o)[0];
-            a.async = 1;
-            a.src = g;
-            m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-
-        ga('create', 'UA-49367500-1', 'mesacounty.us');
-        ga('send', 'pageview');
-    </script>
+    ga('create', 'UA-49367500-1', 'mesacounty.us');
+    ga('send', 'pageview');
+</script>
 </body>
 
 </html>
