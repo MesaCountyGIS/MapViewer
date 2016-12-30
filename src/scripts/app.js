@@ -99,8 +99,7 @@ function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
             showLocator(JSONconfig.geometryService)
         });
         on(query(".submen li, .submenu li"), touch.release, function() {
-            var classname = "." + this.parentNode.className;
-            query(classname)[0].style.display = "none";
+            showDropdownMenu.call(this, undefined, 'none');
         });
         on(query("#combobox, #mainfish"), "mouseenter, mouseleave, touchstart", function(e) {
             showDropdownMenu.call(this, e);
@@ -109,7 +108,8 @@ function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
         on(query('#searchLI ul li'), touch.release, function(e) {
             e.stopPropagation();
             var type = this.getAttribute('data-value');
-            dom.byId("searchLI").childNodes[0].nodeValue = this.childNodes[0].innerHTML;
+            var id = this.parentNode.parentNode.id;
+            dom.byId(id).childNodes[0].nodeValue = this.childNodes[0].innerHTML;
             require(["dijit/registry", "mesa/searchTools"], function(registry, searchTools) {
                 if (registry.byId("searchFieldDialog"))
                     (registry.byId("searchFieldDialog").destroyRecursive());
@@ -119,12 +119,16 @@ function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
     });
 }
 
-function showDropdownMenu(e){
+function showDropdownMenu(e, display){
     /*On mouse enter or click, display the dropdown. On mouse leave,
     remove the dropdown.*/
     require(['dojo/query'], function(query){
-        var display = e.type === "mouseleave"? "none": "block";
-        var classname = "." + query("#" + this.id + " ul")[0].className;
+        if(display === undefined){
+            display = e.type === "mouseleave"? "none": "block";
+            classname = "." + query("#" + this.id + " ul")[0].className;
+        }else{
+            classname = "." + this.parentNode.className;
+        }
         query(classname)[0].style.display = display;
     }.bind(this));
 }
