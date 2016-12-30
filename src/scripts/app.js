@@ -103,9 +103,7 @@ function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
             query(classname)[0].style.display = "none";
         });
         on(query("#combobox, #mainfish"), "mouseenter, mouseleave, touchstart", function(e) {
-            var display = e.type === "mouseleave"? "none": "block";
-            var classname = "." + query("#" + this.id + " ul")[0].className;
-            query(classname)[0].style.display = display;
+            showDropdownMenu.call(this, e);
         });
 
         on(query('#searchLI ul li'), touch.release, function(e) {
@@ -119,6 +117,16 @@ function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
             }); //End require
         });
     });
+}
+
+function showDropdownMenu(e){
+    /*On mouse enter or click, display the dropdown. On mouse leave,
+    remove the dropdown.*/
+    require(['dojo/query'], function(query){
+        var display = e.type === "mouseleave"? "none": "block";
+        var classname = "." + query("#" + this.id + " ul")[0].className;
+        query(classname)[0].style.display = display;
+    }.bind(this));
 }
 
 function createTiledMapServiceLayer(url, id) {
