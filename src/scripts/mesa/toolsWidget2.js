@@ -56,6 +56,7 @@ define([
             // on(query('#mobileSearch ul li'), "click", openSearchDialog);
             // on(dom.byId("toolPanel"), touch.release, displayTool);
             on(query(".mainSideMenu li:not(#Imagery), #DTtoolstrip button"), "click", dispatchMainMenuClick);
+            on(query("#DTtoolstrip button"), "click", togglePanel);
             on(query('.themeMenu li'), "click", function(e){
                 var layer = domAttr.get(this, 'data-value');
                 toolsWidget.dispatchThemeMenuClick(layer);
@@ -112,16 +113,19 @@ define([
                 toolsWidget.backToMap();
             }
 
+            function togglePanel(){
+                if(domStyle.get('toolsView2', 'display') === "none"){
+                    domStyle.set('toolsView2', "display", "block");
+                }else{
+                    domStyle.set('toolsView2', "display", "none");
+                }
+            }
+
             function dispatchMainMenuClick(e){
                 e.stopPropagation();
                 toPage = domAttr.has(this, 'data-to')?
                     domAttr.get(this, 'data-to'): undefined;
                 if(toPage !== undefined){
-                    if(domStyle.get('toolsView2', 'display') === "none"){
-                    domStyle.set('toolsView2', "display", "block");
-                }else{
-                    domStyle.set('toolsView2', "display", "none");
-                }
                     domStyle.set('backMenu', "visibility", "visible");
                     domClass.add(query(".mainSideMenu")[0], "displayNo");
                     domClass.remove(query("." + toPage)[0], "displayNo");
