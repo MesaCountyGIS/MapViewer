@@ -118,6 +118,31 @@ define([
                     domStyle.set('toolsView2', "display", "block");
                 }else{
                     domStyle.set('toolsView2', "display", "none");
+                    backButtonEvent();
+                }
+            }
+
+            function backButtonEvent(){
+                var backToPage = domAttr.get(dom.byId("backMenu"), 'data-to');
+                var fromPage = domAttr.get(dom.byId("backMenu"), 'data-from');
+
+                //This is a terrible hack to get a single case of a back button
+                //to work. Replace soon.
+                if(fromPage === "searchBox" && domClass.contains(query(".searchMenu")[0], "displayNo") === false){
+                    backToPage = "mainSideMenu";
+                    fromPage = "searchMenu";
+                }else if(fromPage === "problemForm" && domClass.contains(query(".helpTool")[0], "displayNo") === false){
+                    backToPage = "mainSideMenu";
+                    fromPage = "helpTool";
+                }
+
+                domClass.add(query("." + fromPage)[0], "displayNo");
+                domClass.remove(query("." + backToPage)[0], "displayNo");
+
+                /*Once back on the main menu, remove the back button (There is
+                nothing to go back to)*/
+                if(domClass.contains(query(".mainSideMenu")[0], "displayNo") === false){
+                    domStyle.set('backMenu', "visibility", "hidden");
                 }
             }
 
@@ -277,30 +302,6 @@ define([
                 }else{
                     lmG.imageTool.basemapChanger('vector');
                     query('#Imagery').text("Show Imagery");
-                }
-            }
-
-            function backButtonEvent(e){
-                var backToPage = domAttr.get(e.target, 'data-to');
-                var fromPage = domAttr.get(e.target, 'data-from');
-
-                //This is a terrible hack to get a single case of a back button
-                //to work. Replace soon.
-                if(fromPage === "searchBox" && domClass.contains(query(".searchMenu")[0], "displayNo") === false){
-                    backToPage = "mainSideMenu";
-                    fromPage = "searchMenu";
-                }else if(fromPage === "problemForm" && domClass.contains(query(".helpTool")[0], "displayNo") === false){
-                    backToPage = "mainSideMenu";
-                    fromPage = "helpTool";
-                }
-
-                domClass.add(query("." + fromPage)[0], "displayNo");
-                domClass.remove(query("." + backToPage)[0], "displayNo");
-
-                //Once back on the main menu, remove the back button (There is
-                //nothing to go back to)
-                if(domClass.contains(query(".mainSideMenu")[0], "displayNo") === false){
-                    domStyle.set('backMenu', "visibility", "hidden");
                 }
             }
         },
