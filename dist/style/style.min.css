@@ -1344,6 +1344,10 @@ input {
   overflow: auto;
 }
 
+#sideMenuHeader span {
+  cursor: pointer;
+}
+
 #staticDropdown {
   display: none;
 }
