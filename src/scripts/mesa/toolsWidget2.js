@@ -56,7 +56,7 @@ define([
             // on(query('#mobileSearch ul li'), "click", openSearchDialog);
             // on(dom.byId("toolPanel"), touch.release, displayTool);
             on(query(".mainSideMenu li:not(#Imagery)"), "click", dispatchMainMenuClick);
-            on(query("#DTtoolstrip button"), "click", togglePanel);
+            on(query("#DTtoolstrip button:not(#DTbasemap)"), "click", togglePanel);
             on(query('.themeMenu li'), "click", function(e){
                 var layer = domAttr.get(this, 'data-value');
                 toolsWidget.dispatchThemeMenuClick(layer);
@@ -124,6 +124,7 @@ define([
                 }
                 dispatchMainMenuClick.call(this, e);
             }
+
 
             function backButtonEvent(){
                 var backToPage = domAttr.get(dom.byId("backMenu"), 'data-to');
@@ -293,7 +294,7 @@ define([
                 }
 
                 //close menu
-                registry.byId("toolsView2").domNode.style.display = "none";
+                // registry.byId("toolsView2").domNode.style.display = "none";
                 //display imageyear button on menu or remove it
                 if(domClass.contains('imageYears', 'displayNo')){
                     domClass.remove('imageYears', "displayNo");
