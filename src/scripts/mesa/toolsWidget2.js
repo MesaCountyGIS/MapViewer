@@ -92,13 +92,13 @@ define([
                     for (i = 0; i < box.length; i++) {
                         box[i].checked = target.checked? true: false;
                     }
-                        for (var x in layers) {
-                            if (query(x)[0].checked) {
-                                layers[x].show();
-                            } else {
-                                layers[x].hide();
-                            }
+                    for (var x in layers) {
+                        if (query(x)[0].checked) {
+                            layers[x].show();
+                        } else {
+                            layers[x].hide();
                         }
+                    }
                 });
             }
 
@@ -115,6 +115,9 @@ define([
 
             function togglePanel(e){
                 if(domStyle.get('toolsView2', 'display') === "none"){
+                    if(domStyle.get('backMenu', "visibility") === 'visible'){
+                        backButtonEvent();
+                    }
                     domStyle.set('toolsView2', "display", "block");
                 }else{
                     if(domAttr.get(this, 'data-to') === domAttr.get(dom.byId("backMenu"), 'data-from')){
@@ -125,6 +128,20 @@ define([
                 dispatchMainMenuClick.call(this, e);
             }
 
+            function dispatchMainMenuClick(e){
+                e.stopPropagation();
+                toPage = domAttr.has(this, 'data-to')?
+                    domAttr.get(this, 'data-to'): undefined;
+                if(toPage !== undefined){
+                    domStyle.set('backMenu', "visibility", "visible");
+
+                    domClass.add(query(".mainSideMenu")[0], "displayNo");
+                    domClass.remove(query("." + toPage)[0], "displayNo");
+
+                    domAttr.set('backMenu', 'data-to', 'mainSideMenu');
+                    domAttr.set('backMenu', 'data-from', toPage);
+                }
+            }
 
             function backButtonEvent(){
                 var backToPage = domAttr.get(dom.byId("backMenu"), 'data-to');
@@ -147,20 +164,6 @@ define([
                 nothing to go back to)*/
                 if(domClass.contains(query(".mainSideMenu")[0], "displayNo") === false){
                     domStyle.set('backMenu', "visibility", "hidden");
-                }
-            }
-
-            function dispatchMainMenuClick(e){
-                e.stopPropagation();
-                toPage = domAttr.has(this, 'data-to')?
-                    domAttr.get(this, 'data-to'): undefined;
-                    console.log('backbutton; to page', toPage)
-                if(toPage !== undefined){
-                    domStyle.set('backMenu', "visibility", "visible");
-                    domClass.add(query(".mainSideMenu")[0], "displayNo");
-                    domClass.remove(query("." + toPage)[0], "displayNo");
-                    domAttr.set('backMenu', 'data-to', 'mainSideMenu');
-                    domAttr.set('backMenu', 'data-from', toPage);
                 }
             }
 
