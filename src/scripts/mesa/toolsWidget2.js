@@ -55,7 +55,7 @@ define([
             //Set up event handlers for slide out menu
             // on(query('#mobileSearch ul li'), "click", openSearchDialog);
             // on(dom.byId("toolPanel"), touch.release, displayTool);
-            on(query(".mainSideMenu li:not(#Imagery), #DTtoolstrip button"), "click", dispatchMainMenuClick);
+            on(query(".mainSideMenu li:not(#Imagery)"), "click", dispatchMainMenuClick);
             on(query("#DTtoolstrip button"), "click", togglePanel);
             on(query('.themeMenu li'), "click", function(e){
                 var layer = domAttr.get(this, 'data-value');
@@ -113,21 +113,24 @@ define([
                 toolsWidget.backToMap();
             }
 
-            function togglePanel(){
+            function togglePanel(e){
                 if(domStyle.get('toolsView2', 'display') === "none"){
                     domStyle.set('toolsView2', "display", "block");
                 }else{
-                    domStyle.set('toolsView2', "display", "none");
+                    if(domAttr.get(this, 'data-to') === domAttr.get(dom.byId("backMenu"), 'data-from')){
+                        domStyle.set('toolsView2', "display", "none");
+                    }
                     backButtonEvent();
                 }
+                dispatchMainMenuClick.call(this, e);
             }
 
             function backButtonEvent(){
                 var backToPage = domAttr.get(dom.byId("backMenu"), 'data-to');
                 var fromPage = domAttr.get(dom.byId("backMenu"), 'data-from');
 
-                //This is a terrible hack to get a single case of a back button
-                //to work. Replace soon.
+                /*This is a terrible hack to get a single case of a back button
+                to work. Replace soon.*/
                 if(fromPage === "searchBox" && domClass.contains(query(".searchMenu")[0], "displayNo") === false){
                     backToPage = "mainSideMenu";
                     fromPage = "searchMenu";
@@ -150,6 +153,7 @@ define([
                 e.stopPropagation();
                 toPage = domAttr.has(this, 'data-to')?
                     domAttr.get(this, 'data-to'): undefined;
+                    console.log('backbutton; to page', toPage)
                 if(toPage !== undefined){
                     domStyle.set('backMenu', "visibility", "visible");
                     domClass.add(query(".mainSideMenu")[0], "displayNo");
