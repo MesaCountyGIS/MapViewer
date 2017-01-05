@@ -56,7 +56,7 @@ define([
             // on(query('#mobileSearch ul li'), "click", openSearchDialog);
             // on(dom.byId("toolPanel"), touch.release, displayTool);
             on(query(".mainSideMenu li:not(#Imagery)"), "click", dispatchMainMenuClick);
-            on(query("#DTtoolstrip button:not(#DTbasemap)"), "click", togglePanel);
+            on(query("#DTtoolstrip button:not(#DTbasemap), #panelTab"), "click", togglePanel);
             on(query('.themeMenu li'), "click", function(e){
                 var layer = domAttr.get(this, 'data-value');
                 toolsWidget.dispatchThemeMenuClick(layer);
@@ -114,8 +114,9 @@ define([
             }
 
             function togglePanel(e){
+                console.log(this.id)
                 if(domStyle.get('toolsView2', 'display') === "none"){
-                    if(domStyle.get('backMenu', "visibility") === 'visible'){
+                    if((this.id !== "panelTab") && (domStyle.get('backMenu', "visibility") === 'visible')){
                         backButtonEvent();
                     }
                     domStyle.set('toolsView2', "display", "block");
