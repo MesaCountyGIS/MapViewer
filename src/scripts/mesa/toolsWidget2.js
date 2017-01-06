@@ -114,7 +114,6 @@ define([
             }
 
             function togglePanel(e){
-                console.log(this.id)
                 if(domStyle.get('toolsView2', 'display') === "none"){
                     if((this.id !== "panelTab") && (domStyle.get('backMenu', "visibility") === 'visible')){
                         backButtonEvent();
@@ -133,6 +132,7 @@ define([
                 e.stopPropagation();
                 toPage = domAttr.has(this, 'data-to')?
                     domAttr.get(this, 'data-to'): undefined;
+                    console.log(toPage)
                 if(toPage !== undefined){
                     domStyle.set('backMenu', "visibility", "visible");
 
@@ -301,6 +301,7 @@ define([
                 // registry.byId("toolsView2").domNode.style.display = "none";
                 //display imageyear button on menu or remove it
                 if(domClass.contains('imageYears', 'displayNo')){
+                    // dispatchMainMenuClick.call(this, e);
                     domClass.remove('imageYears', "displayNo");
                 }else{
                     domClass.add('imageYears', "displayNo");

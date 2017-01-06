@@ -33,16 +33,6 @@ define([
             map = thisWidget.mapRef;
         },
 
-        //----Imagery basemap changing-----//
-        // historicalImageryDropdown: function(e) {
-        //     if (e !== undefined){e.stopPropagation();}
-        //     var thisYear = this.attributes['data-value'].nodeValue;
-        //     if (thisYear.length > 0) {
-        //         // dom.byId("historicalImagery").childNodes[0].nodeValue = this.childNodes[0].innerHTML; //Set the dropdown view to show currently selected year
-        //         thisWidget.loadYear(thisYear);
-        //     }
-        //     return thisYear;
-        // },
 
         basemapChanger: function(target) {
             if(typeof(target) === 'string'){
