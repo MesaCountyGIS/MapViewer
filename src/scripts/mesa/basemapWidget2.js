@@ -35,13 +35,14 @@ define([
 
 
         basemapChanger: function(target) {
+            console.log('prime', this, target)
             if(typeof(target) === 'string'){
                 this.loadYear(target);
                 return target;
             }else{
                 var newLayer = target.attributes['data-value'].nodeValue;
                 this.loadYear(newLayer);
-                if(this.device === "desktop"){
+                if(this.device === "desktop" && target.id === "DTbasemap"){
                     this._change(target.id, "block", "Default Basemap", ["DTimagery", "DTbasemap"]);
                 }
                 return newLayer;
