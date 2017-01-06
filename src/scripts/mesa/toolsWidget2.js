@@ -261,7 +261,7 @@ define([
 
                 lmG.imageTool.basemapChanger(this);
                 //go to mainSideMenu
-                registry.byId("toolsView2").domNode.style.display = "none";
+                // registry.byId("toolsView2").domNode.style.display = "none";
 
 
                 //Place check mark next to currently active theme
