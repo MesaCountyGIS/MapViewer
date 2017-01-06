@@ -42,7 +42,7 @@ define([
             }else{
                 var newLayer = target.attributes['data-value'].nodeValue;
                 this.loadYear(newLayer);
-                if(this.device === "desktop" && target.id === "DTbasemap"){
+                if(this.device === "desktop" && target.className !== "imageLI"){
                     this._change(target.id, "block", "Default Basemap", ["DTimagery", "DTbasemap"]);
                 }
                 return newLayer;

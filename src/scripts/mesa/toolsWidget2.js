@@ -304,6 +304,7 @@ define([
                     // dispatchMainMenuClick.call(this, e);
                     domClass.remove('imageYears', "displayNo");
                 }else{
+                    backButtonEvent();
                     domClass.add('imageYears', "displayNo");
                 }
                 //change button innerText to "Show Basemap" or "Show Imagery"
