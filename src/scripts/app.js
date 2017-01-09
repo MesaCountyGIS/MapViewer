@@ -89,9 +89,9 @@ function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
             runToolsView();
         });
 
-        on(query(".shareClass, #sharebutton"), touch.release, function(){
-            showShare("socialShare");
-        });
+        // on(query(".shareClass, #sharebutton"), touch.release, function(){
+        //     showShare("socialShare");
+        // });
         on(query('#layerSelect ul li'), touch.release, function(e){
             themeTools.themeClick(this, map, popupObject, popupTemplateObject, legendObject, initialBasemap);
         });
@@ -301,11 +301,11 @@ function orientationChanged() {
     });
 }
 
-function showShare(id) {
-    //Toggle the social sharing tools UI
-        document.getElementById(id).style.display = document.getElementById(id).style.display === "block"
-            ? "none": "block";
-}
+// function showShare(id) {
+//     //Toggle the social sharing tools UI
+//         document.getElementById(id).style.display = document.getElementById(id).style.display === "block"
+//             ? "none": "block";
+// }
 
 function createHomeButton(map) {
     require(["mesa/homeButton"], function(homeButton) {

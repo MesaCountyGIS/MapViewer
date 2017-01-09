@@ -55,8 +55,8 @@ define([
             //Set up event handlers for slide out menu
             // on(query('#mobileSearch ul li'), "click", openSearchDialog);
             // on(dom.byId("toolPanel"), touch.release, displayTool);
-            on(query(".mainSideMenu li:not(#Imagery)"), "click", dispatchMainMenuClick);
-            on(query("#DTtoolstrip button:not(#DTbasemap), #panelTab"), "click", togglePanel);
+            on(query(".mainSideMenu li:not(#Imagery), #sharebutton"), "click", dispatchMainMenuClick);
+            on(query("#DTtoolstrip button:not(#DTbasemap), #panelTab, #sharebutton"), "click", togglePanel);
             on(query('.themeMenu li'), "click", function(e){
                 var layer = domAttr.get(this, 'data-value');
                 toolsWidget.dispatchThemeMenuClick(layer);
@@ -66,7 +66,7 @@ define([
             on(query('.bookmarkClick'), "click", dispatchBookmarks);
             on(query('.printClick'), "click", dispatchPrinter);
             on(query('.helpClick'), "click", dispatchHelp);
-            on(query('.shareClick'), "click", dispatchShareForm);
+            on(query('.shareClick, #sharebutton'), "click", dispatchShareForm);
             on(query('.searchMenu li'), "click", dispatchSearchMenuClick);
             on(query('#Imagery, .DTbasemap'), "click", dispatchImageryToggle);
             on(query('.imageYears li'), "click", dispatchImageChange);
@@ -314,6 +314,20 @@ define([
                     lmG.imageTool.basemapChanger('vector');
                     query('#Imagery').text("Show Imagery");
                 }
+            }
+
+            function shareMap() {
+                if (!(registry.byId("shareForm2"))) { //remove the 2 after user caches have been updated
+                    var shareForm = new shareFormWidget({
+                        emailServiceUrl: "scripts/php/ShareMail.php",
+                        mapRef: map
+                    }, "shareForm2");
+                    shareForm.startup();
+                }
+            // if (dom.byId("shareForm2")) { //delete
+            //     dom.byId("shareForm2").style.display = dom.byId("shareForm2").style.display === "block" ? "none" : "block";
+            // }
+            // this.backToMap();
             }
         },
 
