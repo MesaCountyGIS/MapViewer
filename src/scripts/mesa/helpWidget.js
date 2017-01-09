@@ -16,20 +16,6 @@ define([
 
             helpWidget = this;
             device = helpWidget.device;
-            // if (device === "desktop") {
-            //     new move.parentConstrainedMoveable(this.domNode, {
-            //         handle: this.queryHeader,
-            //         area: "margin",
-            //         within: true
-            //     });
-            // }
-            // on(query(".closeHelp"), touch.release, function () {
-            //     helpWidget.closeClick();
-            // });
-            // on(query(helpWidget), touch.release, function (a) {
-            //     a.target.href? window.open(a.target.href, "_blank"): void(0);
-            // });
-
             on(helpWidget.sendMail, touch.release, function () {
                 helpWidget.showProblemForm();
             });
@@ -42,7 +28,6 @@ define([
                     device: "desktop",
                 }, "problemForm");
                 problemForm.startup();
-                // this.domNode.style.display = "none";
             }
             domAttr.set('backMenu', 'data-to', "helpTool");
             domAttr.set('backMenu', 'data-from', "problemForm");
