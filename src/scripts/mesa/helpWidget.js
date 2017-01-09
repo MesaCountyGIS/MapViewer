@@ -26,9 +26,9 @@ define([
             // on(query(".closeHelp"), touch.release, function () {
             //     helpWidget.closeClick();
             // });
-            on(query(helpWidget), touch.release, function (a) {
-                a.target.href? window.open(a.target.href, "_blank"): void(0);
-            });
+            // on(query(helpWidget), touch.release, function (a) {
+            //     a.target.href? window.open(a.target.href, "_blank"): void(0);
+            // });
 
             on(helpWidget.sendMail, touch.release, function () {
                 helpWidget.showProblemForm();
