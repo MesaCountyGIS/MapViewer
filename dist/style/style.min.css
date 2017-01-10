@@ -147,12 +147,17 @@ div .titleButton .arrow:hover {
 }
 
 .shareClass {
-  float: left;
+  display: inline-block;
   margin-right: .5em;
   background: url("../images/sprite.png");
   width: 32px;
   height: 32px;
   cursor: pointer;
+}
+
+#shareSocialBlock {
+  text-align: center;
+  margin-top: 1.5em;
 }
 
 #socialShare {
