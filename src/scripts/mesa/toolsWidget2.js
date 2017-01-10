@@ -125,14 +125,16 @@ define([
                     }
                     backButtonEvent();
                 }
-                dispatchMainMenuClick.call(this, e);
+                if(this.id !== "panelTab"){
+                    dispatchMainMenuClick.call(this, e);
+                }
+
             }
 
             function dispatchMainMenuClick(e){
                 e.stopPropagation();
                 toPage = domAttr.has(this, 'data-to')?
                     domAttr.get(this, 'data-to'): undefined;
-                    console.log(toPage)
                 if(toPage !== undefined){
                     domStyle.set('backMenu', "visibility", "visible");
 
