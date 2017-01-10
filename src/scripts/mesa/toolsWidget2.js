@@ -55,7 +55,7 @@ define([
             //Set up event handlers for slide out menu
             // on(query('#mobileSearch ul li'), "click", openSearchDialog);
             // on(dom.byId("toolPanel"), touch.release, displayTool);
-            on(query(".mainSideMenu li:not(#Imagery), #sharebutton"), "click", dispatchMainMenuClick);
+            on(query(".mainSideMenu li:not(#Imagery)"), "click", dispatchMainMenuClick);
             on(query("#DTtoolstrip button:not(#DTbasemap), #panelTab, #sharebutton"), "click", togglePanel);
             on(query('.themeMenu li'), "click", function(e){
                 var layer = domAttr.get(this, 'data-value');

@@ -293,6 +293,16 @@ div .titleButton .arrow:hover {
   text-align: center;
 }
 
+.shareButtonBlock button {
+  background: #d9d6d0;
+  border-style: none;
+  cursor: pointer;
+  padding: 10px 14px;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+
 #frm1 fieldset {
   border: none;
 }
