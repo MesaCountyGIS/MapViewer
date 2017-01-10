@@ -26,10 +26,6 @@ define([
                 area: "margin",
                 within: true
             });
-
-            on(query(shareWidget), touch.release, function (a) {
-                a.target.href? window.open(a.target.href, "_blank"): void(0);
-            });
         },
 
         startup: function () {
