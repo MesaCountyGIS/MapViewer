@@ -20,12 +20,6 @@ define([
             // domClass.add(this.domNode, "query");
             shareWidget = this;
             map = shareWidget.mapRef;
-
-            new move.parentConstrainedMoveable(this.domNode, {
-                handle: this.shareHeader,
-                area: "margin",
-                within: true
-            });
         },
 
         startup: function () {

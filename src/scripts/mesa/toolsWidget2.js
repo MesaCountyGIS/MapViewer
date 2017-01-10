@@ -250,7 +250,7 @@ define([
                         emailServiceUrl: "scripts/php/ShareMail.php",
                         mapRef: map
                     }, "shareTool");
-                    shareForm.startup();
+                    // shareForm.startup();
                 }
             }
 
