@@ -63,6 +63,7 @@ define([
 
         clearClick: function () {
             frm2.reset();
+            shareWidget.validateTips.innerHTML = "";
         },
 
         _createURL: function(){
