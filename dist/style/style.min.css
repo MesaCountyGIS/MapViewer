@@ -282,8 +282,11 @@ div .titleButton .arrow:hover {
   float: right;
 }
 
+.validateTips {
+  margin-left: .7em;
+}
+
 .state-error {
-  margin-bottom: 2em;
   color: #d8000c;
   background-color: #ffbaba;
 }
