@@ -188,80 +188,6 @@ div .titleButton .arrow:hover {
 /*-------------End Utility Styles----------------------*/
 
 
-/*-----------------Social Media Styling---------------------------*/
-
-.shareClass {
-    display:inline-block;
-    margin-right: 0.5em;
-    background: @spriteurl;
-    width: 32px;
-    height: 32px;
-    cursor: pointer;
-}
-
-#shareSocialBlock{
-  text-align:center;
-  margin-top:1.5em;
-}
-
-#socialShare {
-    float: right;
-    right: 2em;
-    top: 3.5em;
-    position: absolute;
-    background: white;
-    padding: 0.7em;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
-}
-
-#sharebutton {
-    display: block;
-    float: right;
-    margin: 0.2em 2em 0 0;
-    text-align: right;
-    height: 22px;
-    width: 82px;
-    padding-right: 0.3em;
-    background: #D3CFC8 @spriteurl @sharethis-x + 4px @sharethis-y + 3px;
-    .borderRadius(3px);
-    &:hover {
-        cursor: pointer;
-    }
-}
-
-#shareMap {
-    background-position: @share32-x @share32-y;
-}
-
-#twittershare,
-#twitterfollow {
-    background-position: @Twitter32-x @Twitter32-y;
-}
-
-#facebookshare,
-#facebookfollow {
-    background-position: @Facebook32-x @Facebook32-y;
-}
-
-#googleshare,
-#googlefollow {
-    background-position: @GooglePlus32-x @GooglePlus32-y;
-}
-
-#pinterestshare,
-#pinterestfollow {
-    background-position: @Pinterest32-x @Pinterest32-y;
-}
-
-#youtubeshare,
-#youtubefollow {
-    background-position: @YouTube32-x @YouTube32-y;
-}
-
-
-/*-----------------End Social Media Styling---------------------------*/
-
 /*Legend Widget*/
 
 #legendDialog {
@@ -1402,4 +1328,5 @@ input {
 @import './printTool.less';
 @import './helpTool.less';
 @import './searchTool.less';
+@import './shareTool.less';
 @import './mobile-tablet-horizontal.less';

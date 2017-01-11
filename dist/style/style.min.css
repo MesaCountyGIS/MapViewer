@@ -146,78 +146,6 @@ div .titleButton .arrow:hover {
   margin-left: -1em;
 }
 
-.shareClass {
-  display: inline-block;
-  margin-right: .5em;
-  background: url("../images/sprite.png");
-  width: 32px;
-  height: 32px;
-  cursor: pointer;
-}
-
-#shareSocialBlock {
-  text-align: center;
-  margin-top: 1.5em;
-}
-
-#socialShare {
-  float: right;
-  right: 2em;
-  top: 3.5em;
-  position: absolute;
-  background: #fff;
-  padding: .7em;
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
-}
-
-#sharebutton {
-  display: block;
-  float: right;
-  margin: .2em 2em 0 0;
-  text-align: right;
-  height: 22px;
-  width: 82px;
-  padding-right: .3em;
-  background: #d3cfc8 url("../images/sprite.png") 4px -2199px;
-  border-radius: 3px;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-}
-
-#sharebutton:hover {
-  cursor: pointer;
-}
-
-#shareMap {
-  background-position: 0 -2130px;
-}
-
-#twitterfollow,
-#twittershare {
-  background-position: 0 -374px;
-}
-
-#facebookfollow,
-#facebookshare {
-  background-position: 0 0;
-}
-
-#googlefollow,
-#googleshare {
-  background-position: 0 -72px;
-}
-
-#pinterestfollow,
-#pinterestshare {
-  background-position: 0 -294px;
-}
-
-#youtubefollow,
-#youtubeshare {
-  background-position: 0 -416px;
-}
-
 #legendDialog {
   height: 22em;
   width: 14.5em;
@@ -2370,6 +2298,83 @@ input#mapTitle {
 #coordzoom {
   position: absolute;
   margin: -.2em 0 0 .5em;
+}
+
+#shareTool {
+  height: 60%;
+  overflow: auto;
+}
+
+.shareClass {
+  display: inline-block;
+  margin-right: .5em;
+  background: url("../images/sprite.png");
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+
+#shareSocialBlock {
+  text-align: center;
+  margin-top: 1.5em;
+}
+
+#socialShare {
+  float: right;
+  right: 2em;
+  top: 3.5em;
+  position: absolute;
+  background: #fff;
+  padding: .7em;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+#sharebutton {
+  display: block;
+  float: right;
+  margin: .2em 2em 0 0;
+  text-align: right;
+  height: 22px;
+  width: 82px;
+  padding-right: .3em;
+  background: #d3cfc8 url("../images/sprite.png") 4px -2199px;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+}
+
+#sharebutton:hover {
+  cursor: pointer;
+}
+
+#shareMap {
+  background-position: 0 -2130px;
+}
+
+#twitterfollow,
+#twittershare {
+  background-position: 0 -374px;
+}
+
+#facebookfollow,
+#facebookshare {
+  background-position: 0 0;
+}
+
+#googlefollow,
+#googleshare {
+  background-position: 0 -72px;
+}
+
+#pinterestfollow,
+#pinterestshare {
+  background-position: 0 -294px;
+}
+
+#youtubefollow,
+#youtubeshare {
+  background-position: 0 -416px;
 }
 
 @media only screen and (max-width:1024px) {
