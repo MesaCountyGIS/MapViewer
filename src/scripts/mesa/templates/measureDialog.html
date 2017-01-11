@@ -1,15 +1,7 @@
 <div id='measureTool' class='measureTool'  data-dojo-attach-point="domNode" title="Draw/Measure">
     <div data-dojo-attach-point="dialogHeader" class="dialogHeader">
-        <!-- <div title="Return to Tools" style="display:none;" class="left-button returnToTools" id="measureToTools">Tools</div> -->
         <div id="measureText">Measure/Draw</div>
-        <!-- <div data-dojo-attach-event="onclick:closeClick" title="Close" class='closer dialogCloser' id='measureCloser' data-dojo-attach-point="measureCloser"></div> -->
-        <!-- <div class="right-button returnToMap" title="Return to Map" style="display:none;" id="measureToMap">Map</div> -->
     </div>
-<!--
-    <div data-dojo-attach-point="measureYesSpan" id="measureYesSpan">
-        <input data-dojo-attach-event="onchange:enableCheck" data-dojo-attach-point="measureYes" id="measureYes" type="checkbox" />Enable Measurement?
-    </div>
--->
     <div>Select a Draw Tool:</div>
     <div data-dojo-attach-point="drawButtonBlock" id="drawButtonBlock">
         <span data-set='block' data-dojo-attach-event="onclick:setPoly" data-dojo-attach-point="drawPolygon" id="drawPolygon" class="drawPoly drawButton" title="Draw or measure using a polygon"></span>
@@ -47,15 +39,12 @@
             <option value="utm">UTM X/Y</option>
         </select>
     </div>
-    <!--End of showBlock-->
 
     <div data-dojo-attach-point="snapmessage" id="snapmessage">Press <b>CTRL</b> to enable snapping.</div>
     <div class="showBlock">
         <p>Measurement Results</p>
-        <!-- <hr> -->
         <div data-dojo-attach-point="polyResult" id="polyResult">
             <span data-dojo-attach-point="polySeg" id="polySeg">Segment: <span data-dojo-attach-point="polysegment" class="remove" id="polysegment"></span></span>
-            <!-- <br>-->
             <span>Area: </span><span class="remove" data-dojo-attach-point="area" id="area"></span><span data-dojo-attach-point="polyMeasureResult1" class="remove" id="polyMeasureResult1"></span>
             <br>
             <span>Perimeter: </span><span class="remove" data-dojo-attach-point="length" id="length"></span><span data-dojo-attach-point="snapmessage" class="remove" data-dojo-attach-point="polyMeasureResult2" id="polyMeasureResult2"></span>
@@ -63,7 +52,6 @@
         </div>
         <div data-dojo-attach-point="lineResult" id="lineResult">
             <span data-dojo-attach-point="lineSeg" id="lineSeg">Segment: <span class="remove" data-dojo-attach-point="segment" id="segment"></span></span>
-            <!--<br>-->
             <span>Length: </span><span class="remove" data-dojo-attach-point="lineLength" id="lineLength"></span><span class="remove" data-dojo-attach-point="lineMeasureResult" id="lineMeasureResult"></span>
             <br>
         </div>
@@ -82,6 +70,5 @@
     </div>
     <div data-dojo-attach-point="measureButtonBlock" id="measureButtonBlock">
         <button data-dojo-attach-point="clearMeasure" id="clearMeasure" title="Clears all onscreen drawings and measurements" data-dojo-attach-event="onclick:clearClick">Clear All</button>
-        <!-- <button data-dojo-attach-point="closeMeasure" id="closeMeasure" title="Closes the measurement dialog" data-dojo-attach-event="onclick:closeClick">Close</button> -->
     </div>
 </div>
