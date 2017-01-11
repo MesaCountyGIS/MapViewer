@@ -105,17 +105,17 @@ function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
             showDropdownMenu.call(this, e);
         });
 
-        on(query('#searchLI ul li'), touch.release, function(e) {
-            e.stopPropagation();
-            var type = this.getAttribute('data-value');
-            var id = this.parentNode.parentNode.id;
-            dom.byId(id).childNodes[0].nodeValue = this.childNodes[0].innerHTML;
-            require(["dijit/registry", "mesa/searchTools"], function(registry, searchTools) {
-                if (registry.byId("searchFieldDialog"))
-                    (registry.byId("searchFieldDialog").destroyRecursive());
-                searchTools.searchBy(type, undefined, "desktop");
-            }); //End require
-        });
+        // on(query('#searchLI ul li'), touch.release, function(e) {
+        //     e.stopPropagation();
+        //     var type = this.getAttribute('data-value');
+        //     var id = this.parentNode.parentNode.id;
+        //     dom.byId(id).childNodes[0].nodeValue = this.childNodes[0].innerHTML;
+        //     require(["dijit/registry", "mesa/searchTools"], function(registry, searchTools) {
+        //         if (registry.byId("searchFieldDialog"))
+        //             (registry.byId("searchFieldDialog").destroyRecursive());
+        //         searchTools.searchBy(type, undefined, "desktop");
+        //     }); //End require
+        // });
     });
 }
 

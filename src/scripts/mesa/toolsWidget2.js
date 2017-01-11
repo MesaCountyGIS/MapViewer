@@ -56,7 +56,7 @@ define([
             // on(query('#mobileSearch ul li'), "click", openSearchDialog);
             // on(dom.byId("toolPanel"), touch.release, displayTool);
             on(query(".mainSideMenu li:not(#Imagery)"), "click", dispatchMainMenuClick);
-            on(query("#DTtoolstrip button:not(#DTbasemap), #panelTab, #sharebutton"), "click", togglePanel);
+            on(query("#DTtoolstrip button:not(#DTbasemap), #panelTab, #sharebutton, .submen li"), "click", togglePanel);
             on(query('.themeMenu li'), "click", function(e){
                 var layer = domAttr.get(this, 'data-value');
                 toolsWidget.dispatchThemeMenuClick(layer);
@@ -67,7 +67,7 @@ define([
             on(query('.printClick'), "click", dispatchPrinter);
             on(query('.helpClick'), "click", dispatchHelp);
             on(query('.shareClick, #sharebutton'), "click", dispatchShareForm);
-            on(query('.searchMenu li'), "click", dispatchSearchMenuClick);
+            on(query('.searchMenu li, .submen li'), "click", dispatchSearchMenuClick);
             on(query('#Imagery, .DTbasemap'), "click", dispatchImageryToggle);
             on(query('.imageYears li'), "click", dispatchImageChange);
             on(dom.byId('backMenu'), touch.release, backButtonEvent);
@@ -172,8 +172,15 @@ define([
 
             function dispatchSearchMenuClick(e) {
                 e.stopPropagation();
-                domAttr.set('backMenu', 'data-to', "searchMenu");
+                var to = this.parentNode.className === 'submen'?
+                    'mainSideMenu': 'searchMenu';
+                    var from = this.parentNode.className === 'submen'?
+                        'searchFieldDialog': 'searchBox';
+                domAttr.set('backMenu', 'data-to', to);
                 domAttr.set('backMenu', 'data-from', "searchBox");
+
+                // domAttr.set('backMenu', 'data-to', "searchMenu");
+                // domAttr.set('backMenu', 'data-from', "searchBox");
                 var type = this.getAttribute('data-value');
                 //hide the search menu
                 domClass.add(query(".searchMenu")[0], "displayNo");
