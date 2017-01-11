@@ -2,7 +2,7 @@
     <div data-dojo-attach-point="dialogHeader" class="dialogHeader">
         <div id="measureText">Measure/Draw</div>
     </div>
-    <div>Select a Draw Tool:</div>
+    <div id='drawToolInstruction'>Select a Draw Tool:</div>
     <div data-dojo-attach-point="drawButtonBlock" id="drawButtonBlock">
         <span data-set='block' data-dojo-attach-event="onclick:setPoly" data-dojo-attach-point="drawPolygon" id="drawPolygon" class="drawPoly drawButton" title="Draw or measure using a polygon"></span>
         <span data-set='block' data-dojo-attach-event="onclick:setLine" data-dojo-attach-point="drawPolyline" id="drawPolyline" class="drawaLine drawButton" title="Draw or measure using a line"></span>
@@ -42,29 +42,29 @@
 
     <div data-dojo-attach-point="snapmessage" id="snapmessage">Press <b>CTRL</b> to enable snapping.</div>
     <div class="showBlock">
-        <p>Measurement Results</p>
+        <p class='results'>Measurement Results</p>
         <div data-dojo-attach-point="polyResult" id="polyResult">
-            <span data-dojo-attach-point="polySeg" id="polySeg">Segment: <span data-dojo-attach-point="polysegment" class="remove" id="polysegment"></span></span>
-            <span>Area: </span><span class="remove" data-dojo-attach-point="area" id="area"></span><span data-dojo-attach-point="polyMeasureResult1" class="remove" id="polyMeasureResult1"></span>
+            <span class="results" data-dojo-attach-point="polySeg" id="polySeg">Segment: <span data-dojo-attach-point="polysegment" class="remove" id="polysegment"></span></span>
+            <span class="results">Area: </span><span class="remove" data-dojo-attach-point="area" id="area"></span><span data-dojo-attach-point="polyMeasureResult1" class="remove" id="polyMeasureResult1"></span>
             <br>
-            <span>Perimeter: </span><span class="remove" data-dojo-attach-point="length" id="length"></span><span data-dojo-attach-point="snapmessage" class="remove" data-dojo-attach-point="polyMeasureResult2" id="polyMeasureResult2"></span>
+            <span class="results">Perimeter: </span><span data-dojo-attach-point="length" id="length"></span><span data-dojo-attach-point="snapmessage" class="remove" data-dojo-attach-point="polyMeasureResult2" id="polyMeasureResult2"></span>
             <br>
         </div>
         <div data-dojo-attach-point="lineResult" id="lineResult">
-            <span data-dojo-attach-point="lineSeg" id="lineSeg">Segment: <span class="remove" data-dojo-attach-point="segment" id="segment"></span></span>
-            <span>Length: </span><span class="remove" data-dojo-attach-point="lineLength" id="lineLength"></span><span class="remove" data-dojo-attach-point="lineMeasureResult" id="lineMeasureResult"></span>
+            <span class="results" data-dojo-attach-point="lineSeg" id="lineSeg">Segment: <span class="remove" data-dojo-attach-point="segment" id="segment"></span></span>
+            <span class="results">Length: </span><span class="remove" data-dojo-attach-point="lineLength" id="lineLength"></span><span class="remove" data-dojo-attach-point="lineMeasureResult" id="lineMeasureResult"></span>
             <br>
         </div>
         <div data-dojo-attach-point="gcsPointResult" id="gcsPointResult">
-            <span>Latitude: </span><span class="remove" data-dojo-attach-point="latResult" id="latResult"></span>
+            <span class="results">Latitude: </span><span class="remove" data-dojo-attach-point="latResult" id="latResult"></span>
             <br>
-            <span>Longitude: </span><span class="remove" data-dojo-attach-point="lonResult" id="lonResult"></span>
+            <span class="results">Longitude: </span><span class="remove" data-dojo-attach-point="lonResult" id="lonResult"></span>
             <br>
         </div>
         <div data-dojo-attach-point="utmPointResult" id="utmPointResult">
-            <span>Y Coord: </span><span class="remove" data-dojo-attach-point="yResult" id="yResult"></span>
+            <span class="results">Y Coord: </span><span class="remove" data-dojo-attach-point="yResult" id="yResult"></span>
             <br>
-            <span>X Coord: </span><span class="remove" data-dojo-attach-point="xResult" id="xResult"></span>
+            <span class="results">X Coord: </span><span class="remove" data-dojo-attach-point="xResult" id="xResult"></span>
             <br>
         </div>
     </div>

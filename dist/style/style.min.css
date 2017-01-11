@@ -684,7 +684,7 @@ input:-moz-placeholder {
 
 .drawAnno {
   background-position: -87px -414px;
-  visibility: hidden;
+  display: none;
 }
 
 #limitSign {
@@ -2009,18 +2009,26 @@ form.qForm label {
 }
 
 #measureTool {
-  margin-left: 1em;
   height: 60%;
   overflow: auto;
 }
 
+#drawToolInstruction {
+  margin-left: 1em;
+}
+
 #drawButtonBlock {
-  width: 20em;
+  width: 18em;
+  margin-left: 1em;
 }
 
 #drawButtonBlock img:hover,
 #drawButtonBlock img:visited {
   background-color: #ababab;
+}
+
+.results {
+  margin-left: 1em;
 }
 
 #measureDialog,
@@ -2056,10 +2064,13 @@ form.qForm label {
 
 #measureYesSpan {
   margin-bottom: 1em;
+  margin: 2.5em 0 0 1em;
 }
 
 #measureButtonBlock {
-  width: 16em;
+  width: auto;
+  text-align: center;
+  margin-top: 1em;
 }
 
 #measureButtonBlock button {
@@ -2070,6 +2081,10 @@ form.qForm label {
   border-radius: 4px;
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
+}
+
+#uomText {
+  margin: 1em;
 }
 
 #uomLineBox,
@@ -2089,8 +2104,7 @@ form.qForm label {
 
 #snapmessage {
   font-size: .8em;
-  margin-top: .5em;
-  width: 17.5em;
+  margin: .5em 0 0 1.2em;
 }
 
 #addTextDialog,
