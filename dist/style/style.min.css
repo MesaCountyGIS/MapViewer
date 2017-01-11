@@ -137,7 +137,6 @@ div .titleButton .arrow:hover {
 .dialogHeader {
   font-size: 1.1em;
   font-weight: 700;
-  height: 35px;
 }
 
 .dialogHeader>div:first-child {
@@ -185,8 +184,12 @@ div .titleButton .arrow:hover {
   overflow: auto;
 }
 
+#sendMessageDiv {
+  text-align: center;
+}
+
 #frm1 {
-  margin: 0 0 .5em;
+  margin: 0 0 -1em;
 }
 
 #frm1 ul li {
