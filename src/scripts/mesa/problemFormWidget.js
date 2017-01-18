@@ -46,7 +46,6 @@ var problemWidget;
                     load: function (r) {
                         if (r === "Message sent!") {
                             confirm("You have successfully submitted your problem report.");
-                            // problemWidget.domNode.style.display = "none";
                         }
                     },
                     error: function (error) {

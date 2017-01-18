@@ -70,7 +70,7 @@ define([
             currentBasemap.length = 0;
             var historicalImagery = ({
                 "vector": thisWidget.initialBasemap,
-                // "A2016": lmG.A2016,
+                "A2016": lmG.A2016,
                 "A2015": lmG.A2015,
                 "A2014": lmG.A2014,
                 "A2012": lmG.A2012,
