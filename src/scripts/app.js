@@ -170,7 +170,6 @@ function createPopupTemplate() {
             ],
             title: "<b>Parcel Information:</b>",
             description: "<b>Account number:</b>  <a href='http://emap.mesacounty.us/assessor_lookup/Assessor_Parcel_Report.aspx?Account={ACCOUNTNO}'" + "target='_blank'>{ACCOUNTNO}</a><br><b>Parcel Number:</b> {PARCEL_NUM}<br><b>Owner:</b>  {OWNER}<br><b>Joint Owner:</b>  {JTOWNER}<br><b>Address:</b>" + "{LOCATION}<br><b>Sale Date:</b>" + " {SDATE}<br>" + "<b>Zoning:</b> {ZONING}<br><b>Approximate Acres:</b> {Acres}<br><b>Jurisdiction: </b>{JURISDICTION}<br>" + "<div id='mapButtons'>" +
-            //"<a title='Click to view parcel in Google Maps' class='maplink' target='_blank' href='http://maps.google.com/maps?t=h&q=http://emap.mesacounty.us/kmls?acct={ACCOUNTNO}'>Google Maps</a>" +
             "<a title='Click to view parcel in Google Earth' class='maplink' target='_blank' href='http://emap.mesacounty.us/kmls?acct={ACCOUNTNO}'>Google Earth</a>" + "<a title='Click to view parcel in Bing Maps' class='maplink' target='_blank' href='http://www.bing.com/maps/?mapurl=http://emap.mesacounty.us/kmls?acct={ACCOUNTNO}'>Bing Maps</a></div><br>"
         });
     });
@@ -285,12 +284,6 @@ function orientationChanged() {
     });
 }
 
-// function showShare(id) {
-//     //Toggle the social sharing tools UI
-//         document.getElementById(id).style.display = document.getElementById(id).style.display === "block"
-//             ? "none": "block";
-// }
-
 function createHomeButton(map) {
     require(["mesa/homeButton"], function(homeButton) {
         homeButton({mapRef: map});
@@ -308,20 +301,6 @@ function createScalebar(map) {
         var scalebar = new Scalebar({map: map, attachTo: "bottom-right", scalebarUnit: "dual"});
     }); //end require
 }
-
-// function toggleDialog(dialogId) { //fires on click of #DTLegend and #IPLegend - toggles the legend
-//     require([
-//         "dojo/dom", "dojo/dom-class"
-//     ], function(dom, domClass) {
-//         if (domClass.contains(dom.byId("legendDialog"), "displayNo")) {
-//             dom.byId("legendDialog").style.display = "block";
-//             (domClass.remove(dom.byId("legendDialog"), "displayNo"));
-//         } else {
-//             dom.byId("legendDialog").style.display = "none";
-//             (domClass.add(dom.byId("legendDialog"), "displayNo"));
-//         }
-//     });
-// }
 
 function showLocator(geometryServiceURL) {
     require([
@@ -437,11 +416,7 @@ function urlMapType(url, map, legend, initialBasemap, config, device, parcels) {
             function maptypeFound(type) {
                 require(["mesa/themeTools"], function(themeTools){
                     themeTools.getTemplate(type);
-                    // themeTools.animatePanel("open");
                 });
-                // setTimeout(function(){animatePanel("open")}, 400);
-                //After loading the theme, return the theme title so it can
-                //be displayed on the map.
                 return type;
             }
 
