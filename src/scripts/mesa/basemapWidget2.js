@@ -27,7 +27,6 @@ define([
         initialBasemap: undefined,
 
         postCreate: function() {
-            // this.inherited(arguments);
             thisWidget = this;
             currentBasemap.push(thisWidget.initialBasemap);
             map = thisWidget.mapRef;
@@ -35,7 +34,6 @@ define([
 
 
         basemapChanger: function(target) {
-            console.log('prime', this, target)
             if(typeof(target) === 'string'){
                 this.loadYear(target);
                 return target;

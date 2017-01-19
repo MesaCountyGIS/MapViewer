@@ -70,6 +70,9 @@ function init() {
             aG.map.disableKeyboardNavigation();
             /*watches for variables in the url then runs urlMapType
             if it finds one*/
+
+            JSONconfig.parcelTemplate = aG.pTemp;
+            JSONconfig.popupTemplate = aG.popup;
             if ((location.href).indexOf("?") > -1) {
                 urlMapType(location.href, aG.map, legend, initialBasemap, JSONconfig, device, lmG.pLay);
             } else {
@@ -452,8 +455,8 @@ function urlMapType(url, map, legend, initialBasemap, config, device, parcels) {
                         mapRef: map,
                         basemap: initialBasemap,
                         deviceUsed: device,
-                        popupRef: aG.popup,
-                        popupTemplateRef: aG.pTemp,
+                        popupRef: config.popupTemplate,
+                        popupTemplateRef: config.parcelTemplate,
                         legendRef: legend,
                         parcelLayer: parcels
                     }, "toolsView2");
