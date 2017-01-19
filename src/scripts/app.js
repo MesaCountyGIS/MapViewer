@@ -16,7 +16,7 @@ function init() {
 
         // Check if the site is being requested from a mobile or desktop device. then
         // set the map's popup accordingly.
-        aG.popup = checkForMobile() === 1? setPopup("mobile"): setPopup("static");
+        aG.popup = checkForMobile() === 1? setPopup("mobile", "popup"): setPopup("static", "popup");
         var device = aG.popup.domNode.className === 'esriPopupMobile'? 'mobile': 'desktop';
 
         // Set esriConfig variables
@@ -202,19 +202,19 @@ function setSpatialRef(wkid) {
     return ref;
 }
 
-function setPopup(type) {
+function setPopup(type, popupNode) {
     /* Set the popup type depending on whether the requesting device is
     mobile or desktop*/
     var pop;
     if (type === "mobile") {
         require(["dojo/dom", "esri/dijit/PopupMobile"], function(dom, PopupMobile) {
-            pop = PopupMobile(null, dom.byId('popup'));
+            pop = PopupMobile(null, dom.byId(popupNode));
         }); //end require
     } else {
         require(["esri/dijit/Popup"], function(Popup) {
             pop = Popup({
                 titleInBody: false
-            }, document.getElementById('popup'));
+            }, document.getElementById(popupNode));
         }); //end else require
     }
     return pop;
