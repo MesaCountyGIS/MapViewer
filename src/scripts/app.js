@@ -88,10 +88,6 @@ function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
         on(dom.byId("menuSelect"), "click", function(legendObject) {
             runToolsView();
         });
-
-        // on(query(".shareClass, #sharebutton"), touch.release, function(){
-        //     showShare("socialShare");
-        // });
         on(query('#layerSelect ul li'), touch.release, function(e){
             themeTools.themeClick(this, map, popupObject, popupTemplateObject, legendObject, initialBasemap);
         });
@@ -104,18 +100,6 @@ function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
         on(query("#combobox, #mainfish"), "mouseenter, mouseleave, touchstart", function(e) {
             showDropdownMenu.call(this, e);
         });
-
-        // on(query('#searchLI ul li'), touch.release, function(e) {
-        //     e.stopPropagation();
-        //     var type = this.getAttribute('data-value');
-        //     var id = this.parentNode.parentNode.id;
-        //     dom.byId(id).childNodes[0].nodeValue = this.childNodes[0].innerHTML;
-        //     require(["dijit/registry", "mesa/searchTools"], function(registry, searchTools) {
-        //         if (registry.byId("searchFieldDialog"))
-        //             (registry.byId("searchFieldDialog").destroyRecursive());
-        //         searchTools.searchBy(type, undefined, "desktop");
-        //     }); //End require
-        // });
     });
 }
 

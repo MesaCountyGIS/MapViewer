@@ -53,8 +53,6 @@ define([
             });
             legendObject.refresh(legLayers);
             //Set up event handlers for slide out menu
-            // on(query('#mobileSearch ul li'), "click", openSearchDialog);
-            // on(dom.byId("toolPanel"), touch.release, displayTool);
             on(query(".mainSideMenu li:not(#Imagery)"), "click", dispatchMainMenuClick);
             on(query("#DTtoolstrip button:not(#DTbasemap), #panelTab, #sharebutton, .submen li"), "click", togglePanel);
             on(query('.themeMenu li'), "click", function(e){
@@ -179,13 +177,9 @@ define([
                 domAttr.set('backMenu', 'data-to', to);
                 domAttr.set('backMenu', 'data-from', "searchBox");
 
-                // domAttr.set('backMenu', 'data-to', "searchMenu");
-                // domAttr.set('backMenu', 'data-from', "searchBox");
                 var type = this.getAttribute('data-value');
                 //hide the search menu
                 domClass.add(query(".searchMenu")[0], "displayNo");
-                //display the search tool
-                // domClass.remove(dom.byId("searchFieldDialog"), "displayNo");
                 //The searchLI list item is still populated on a small screen
                 //in case the screen is just minimized and gets maximized
                 dom.byId("searchLI").childNodes[0].nodeValue = this.childNodes[0].innerHTML;
@@ -269,9 +263,6 @@ define([
                 var layer = domAttr.get(this, 'data-value');
 
                 lmG.imageTool.basemapChanger(this);
-                //go to mainSideMenu
-                // registry.byId("toolsView2").domNode.style.display = "none";
-
 
                 //Place check mark next to currently active theme
                 (function () {
@@ -306,9 +297,6 @@ define([
                     }); // end require
                 }
 
-                //close menu
-                // registry.byId("toolsView2").domNode.style.display = "none";
-                //display imageyear button on menu or remove it
                 if(domClass.contains('imageYears', 'displayNo')){
                     // dispatchMainMenuClick.call(this, e);
                     domClass.remove('imageYears', "displayNo");
@@ -333,10 +321,6 @@ define([
                     }, "shareForm2");
                     shareForm.startup();
                 }
-            // if (dom.byId("shareForm2")) { //delete
-            //     dom.byId("shareForm2").style.display = dom.byId("shareForm2").style.display === "block" ? "none" : "block";
-            // }
-            // this.backToMap();
             }
         },
 
@@ -345,7 +329,6 @@ define([
         },
 
         backToMap: function () {
-            // query("#map_zoom_slider, #hidePanel, #rightPanel, .collapsedPanel").style("display", "block");
             toolsWidget.domNode.style.display = "none";
         },
 
@@ -370,94 +353,6 @@ define([
 
             //remove the side panel to show the map only.
             registry.byId("toolsView2").domNode.style.display = "none";
-        },
-
-        measureClick: function () {
-            if (!(registry.byId("measureDialog2"))) { //remove the 2 after user caches have been updated
-                var measure = new measureWidget({
-                    gsvc: this.geometryServiceURL,
-                    device: "mobile"
-                }, "measureDialog2"); //remove the 2 after user caches have been updated
-                measure.startup();
-                query("#toolPanel").html("Measure").attr("data-toolName", "measureDialog2");
-            }
-            dom.byId("measureDialog2").style.display = dom.byId("measureDialog2").style.display === "block" ? "none" : "block";
-            toolsWidget.domNode.style.display = "none";
-        },
-
-        shareClick: function () {
-            if (!(registry.byId("shareForm2"))) { //remove the 2 after user caches have been updated
-                var shareForm = new shareFormWidget({
-                    emailServiceUrl: "scripts/php/ShareMail.php",
-                    mapRef: map
-                }, "shareForm2");
-                shareForm.startup();
-            }
-        if (dom.byId("shareForm2")) { //delete
-            dom.byId("shareForm2").style.display = dom.byId("shareForm2").style.display === "block" ? "none" : "block";
         }
-        this.backToMap();
-        },
-
-        printClick: function () {
-            if (!(registry.byId("printDialog2"))) { //remove the 2 after user caches have been updated
-                var printer = new printWidget({
-                    printUrl: toolsWidget.printURL,
-                    mapRef: map,
-                    device: "mobile",
-                    callBack: toolsWidget.onClose
-                }, "printDialog2"); //remove the 2 after user caches have been updated
-                printer.startup();
-            }
-            domStyle.set(dom.byId("printDialog2"), { //remove the 2
-                display: domStyle.get(dom.byId("printDialog2"), "display") === "block" ? "none" : "block"
-            });
-            this.backToMap();
-        },
-
-        helpClick: function () {
-            if (dom.byId("helpMenu2") && !(registry.byId("helpMenu2"))) { //remove the 2 after user caches have been updated
-                var help = new helpWidget({
-                    printUrl: "http://mcmap2.mesacounty.us/arcgis/rest/services/Printing/MCExportWebMap/GPServer/Export%20Web%20Map",
-                    device:"desktop"
-                }, "helpMenu2"); //remove the 2 after user caches have been updated
-                help.startup();
-            }
-            if (dom.byId("helpMenu2")) { //delete
-                toolsWidget.domNode.style.display = "none";
-                domStyle.set(dom.byId("helpMenu2"), { //remove the 2
-                    display: domStyle.get(dom.byId("helpMenu2"), "display") === "block" ? "none" : "block" //remove the 2
-                });
-            }
-            this.backToMap();
-        },
-
-        bookmarkClick: function () {
-            if (!(registry.byId("bookmarkDialog2"))) { //remove the 2 after user caches have been updated
-                var bookmarks = new bookmarkWidget({
-                    mapRef: map
-                }, "bookmarkDialog2");
-                bookmarks.startup();
-            }
-
-            if (dom.byId("bookmarkDialog2")) { //delete
-                toolsWidget.domNode.style.display = "none";
-                dom.byId("bookmarkDialog2").style.display = dom.byId("bookmarkDialog2").style.display === "block" ? "none" : "block"
-            }
-            this.backToMap();
-        },
-
-        legendClick: function () {
-            dom.byId("legendDialog").style.display = "block";
-            domClass.contains(dom.byId("legendDialog"), "displayNo") ? domClass.remove(dom.byId("legendDialog"), "displayNo") : domClass.add(dom.byId("legendDialog"), "displayNo");
-            this.backToMap();
-        },
-
-
-        onClose: function (){
-            dom.byId("toolPanel").style.display = "none";
-            query("#map_zoom_slider, #hidePanel, #rightPanel, .collapsedPanel").style("display", "block");
-        }
-
     }); //end of declare
 }); //end of define
