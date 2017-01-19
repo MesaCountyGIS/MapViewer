@@ -30,7 +30,7 @@ function init() {
         // See the setInitialExtent function for actual extent bounds
         var initExtent = setInitialExtent(utm12, device);
         // Create an ESRI map component
-        aG.map = createMap(initExtent);
+        aG.map = createMap(initExtent, aG.popup);
         // Initialize the popup for when parcels are clicked
         aG.pTemp = createPopupTemplate();
         // Create 3 layers to be initially added to the map
@@ -170,13 +170,13 @@ function createPopupTemplate() {
     return temp;
 }
 
-function createMap(initExtent) {
+function createMap(initExtent, popup) {
     var map;
     require(["esri/map"], function(Map) {
         map = new Map("map", {
             extent: initExtent,
             logo: false,
-            infoWindow: aG.popup
+            infoWindow: popup
         });
     });
     return map;
