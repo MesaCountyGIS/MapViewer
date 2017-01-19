@@ -283,9 +283,9 @@ define([
                         device: device,
                         initialBasemap: initialBasemap
                     }, "imagelist");
-                    lmG.imageTool.basemapChanger(e.target);
+                    lmG.imageTool.basemapChanger(this);
                 }else{
-                    lmG.imageTool.basemapChanger(e.target);
+                    lmG.imageTool.basemapChanger(this);
                 }
 
                 function createImageList(imageConfig) {
@@ -298,7 +298,6 @@ define([
                 }
 
                 if(domClass.contains('imageYears', 'displayNo')){
-                    // dispatchMainMenuClick.call(this, e);
                     domClass.remove('imageYears', "displayNo");
                 }else{
                     backButtonEvent();
@@ -342,6 +341,7 @@ define([
                 }
             }
 
+            //Set a checkmark next to the currently selected theme
             (function () {
                 for (i = 0; i < spanList.length; i++) {
                     spanList[i].innerHTML = '';
