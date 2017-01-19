@@ -96,7 +96,7 @@ function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
             themeTools.themeClick(this, map, popupObject, popupTemplateObject, legendObject, initialBasemap);
         });
         on(dom.byId("locate"), touch.release, function(){
-            showLocator(JSONconfig.geometryService)
+            showLocator(JSONconfig.geometryService, map)
         });
         on(query(".submen li, .submenu li"), touch.release, function() {
             showDropdownMenu.call(this, undefined, 'none');
@@ -296,11 +296,11 @@ function createScalebar(map) {
     }); //end require
 }
 
-function showLocator(geometryServiceURL) {
+function showLocator(geometryServiceURL, map) {
     require([
         "mesa/locatorWidget", "dojo/dom", "dojo/on", "dijit/registry"
     ], function(locatorWidget, dom, on, registry) {
-        var locate = new locatorWidget({mapRef: aG.map, gsvc: geometryServiceURL, device: "desktop"});
+        var locate = new locatorWidget({mapRef: map, gsvc: geometryServiceURL, device: "desktop"});
         locate.startup();
     });
 }
