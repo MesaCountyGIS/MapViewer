@@ -34,7 +34,11 @@ function init() {
         // Initialize the popup for when parcels are clicked
         aG.pTemp = createPopupTemplate();
         // Create 3 layers to be initially added to the map
-        lmG.pLay = createFeatureLayer("http://mcmap2.mesacounty.us/arcgis/rest/services/maps/ParcelOnly4Query/MapServer/0");
+        lmG.pLay = createFeatureLayer(
+            "http://mcmap2.mesacounty.us/arcgis/rest/services/maps/ParcelOnly4Query/MapServer/0",
+            aG.pTemp,
+            ["LOCATION","ACCOUNTNO","OWNER","JTOWNER","SDATE","PARCEL_NUM","ZONING","Acres","JURISDICTION"]
+            );
         lmG.roadLabels = createTiledMapServiceLayer("http://mcmap2.mesacounty.us/arcgis/rest/services/maps/parcel_road_labels/MapServer", "roadLabels");
         // Set a reference to the initial basemap. This is passed to the
         // basemapWidget module where it can be changed.
@@ -125,23 +129,13 @@ function createTiledMapServiceLayer(url, id) {
     return tile;
 }
 
-function createFeatureLayer(url) {
+function createFeatureLayer(url, template, fields) {
     var service;
     require(["esri/layers/FeatureLayer"], function(FeatureLayer) {
         service = new FeatureLayer(url, {
             mode: FeatureLayer.MODE_ONDEMAND,
-            infoTemplate: aG.pTemp,
-            outFields: [
-                "LOCATION",
-                "ACCOUNTNO",
-                "OWNER",
-                "JTOWNER",
-                "SDATE",
-                "PARCEL_NUM",
-                "ZONING",
-                "Acres",
-                "JURISDICTION"
-            ]
+            infoTemplate: template,
+            outFields: fields
         });
     });
     return service;
