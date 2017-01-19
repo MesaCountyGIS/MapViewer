@@ -147,7 +147,7 @@ define([
             function backButtonEvent(){
                 var backToPage = domAttr.get(dom.byId("backMenu"), 'data-to');
                 var fromPage = domAttr.get(dom.byId("backMenu"), 'data-from');
-
+console.log(fromPage)
                 /*This is a terrible hack to get a single case of a back button
                 to work. Replace soon.*/
                 if(fromPage === "searchBox" && domClass.contains(query(".searchMenu")[0], "displayNo") === false){
@@ -300,7 +300,6 @@ define([
                 if(domClass.contains('imageYears', 'displayNo')){
                     domClass.remove('imageYears', "displayNo");
                 }else{
-                    backButtonEvent();
                     domClass.add('imageYears', "displayNo");
                 }
                 //change button innerText to "Show Basemap" or "Show Imagery"
