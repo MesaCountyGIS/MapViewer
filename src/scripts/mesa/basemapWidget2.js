@@ -48,7 +48,6 @@ define([
         },
 
         _change : function(i, display, message, addRemove) {
-            // document.getElementById(i).style.display = display;
             domAttr.set(dom.byId("DTbasemap"), 'title', "Turn on " + message);
             if (thisWidget.device === "desktop") {
                 if (domClass.contains(dom.byId("DTbasemap"), addRemove[1])) {
@@ -61,9 +60,6 @@ define([
 
         loadYear: function(newBasemap) {
             var imageYear;
-            // if (!(newBasemap === 'vector')) {
-            //     dom.byId("historicalImagery").attributes['data-value'].nodeValue = newBasemap;
-            // }
             map.removeLayer(currentBasemap[0]);
             currentBasemap.length = 0;
             var historicalImagery = ({
