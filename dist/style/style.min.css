@@ -1308,6 +1308,9 @@ input {
   width: auto;
   padding: 1px;
   border-radius: 0 0 3px 3px;
+  border-right: 1px solid #d3d3d3;
+  border-left: 1px solid #d3d3d3;
+  border-bottom: 1px solid #d3d3d3;
   font-size: .8em;
   background-color: #fff;
   -webkit-transform: rotate(270deg);
