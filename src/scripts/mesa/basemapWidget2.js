@@ -19,7 +19,7 @@ define([
     template,
     query, dom, domClass, domStyle, domConstruct, domAttr, on, touch, tap) {
 
-    var thisWidget,currentBasemap = [];
+    var thisWidget, currentBasemap = [], basemapMemory;
     return declare("basemapWidget", [_WidgetBase, _TemplatedMixin], {
         templateString: template,
         mapRef: undefined,
@@ -28,16 +28,16 @@ define([
 
         postCreate: function() {
             thisWidget = this;
-            currentBasemap.push(thisWidget.initialBasemap);
+            basemapMemory = currentBasemap.push(thisWidget.initialBasemap);
             map = thisWidget.mapRef;
         },
 
 
         basemapChanger: function(target) {
-            if(typeof(target) === 'string'){
+            if(typeof(target) === 'string'){ //if we are going from imagery to vector
                 this.loadYear(target);
                 return target;
-            }else{
+            }else{ //if going from vector to imagery
                 var newLayer = target.attributes['data-value'].nodeValue;
                 this.loadYear(newLayer);
                 if(this.device === "desktop" && target.className !== "imageLI"){
@@ -60,6 +60,7 @@ define([
 
         loadYear: function(newBasemap) {
             var imageYear;
+            basemapMemory = currentBasemap[0];
             map.removeLayer(currentBasemap[0]);
             currentBasemap.length = 0;
             var historicalImagery = ({

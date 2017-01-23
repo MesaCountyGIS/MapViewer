@@ -264,17 +264,35 @@ console.log(fromPage)
 
                 lmG.imageTool.basemapChanger(this);
 
-                //Place check mark next to currently active theme
-                (function () {
-                    for (i = 0; i < spanList.length; i++) {
-                        spanList[i].innerHTML = '';
-                    };
-                    thisSpan.innerHTML = "&#10004;";
-                })();
+                //Place check mark next to currently active image year
+                new checkmarks().set(spanList, thisSpan);
+            }
+
+            function checkmarks(){
+                return{
+                    get: function (spanList) {
+                        for (i = 0; i < spanList.length; i++) {
+                            if(spanList[i].innerHTML !== ""){
+                                defaultYearElement = spanList[i].parentNode;
+                                return defaultYearElement;
+                            }
+                        };
+                    },
+
+                    set: function (spanList, thisSpan) {
+                        for (i = 0; i < spanList.length; i++) {
+                            spanList[i].innerHTML = '';
+                        };
+                        thisSpan.innerHTML = "&#10004;";
+                    }
+                }
             }
 
             function dispatchImageryToggle(e) {
-                var defaultYear = domAttr.get(this, "data-value");
+                //set and get
+                var defaultYear, defaultYearElement;
+                var spanList2 = query('.imageYears')[0].getElementsByTagName('span');
+                var defaults = new checkmarks().get(spanList2);
                 //toggle between imagery and basemap
                 if (!(registry.byId("imagelist"))) {
                     createImageList(Images);
@@ -283,9 +301,9 @@ console.log(fromPage)
                         device: device,
                         initialBasemap: initialBasemap
                     }, "imagelist");
-                    lmG.imageTool.basemapChanger(this);
+                    lmG.imageTool.basemapChanger(defaults);
                 }else{
-                    lmG.imageTool.basemapChanger(this);
+                    lmG.imageTool.basemapChanger(defaults);
                 }
 
                 function createImageList(imageConfig) {
