@@ -60,7 +60,6 @@ createJSONPolygon: function(coords, selector, style, lineColor, polyColor) {
                 },
                 "type": "esriSFS",
                 "style": "esriSFSNull"
-                // "style": style
             }
         }
     return PolyPost;
@@ -99,7 +98,6 @@ pointText: function(point, text) {
 
 zoom: function(coordinates) {
     map.graphics.clear();
-    // defaultSearch();
     coordinateCleaner.cleanCoordinates(coordinates, this.doMath);
 },
 

@@ -479,12 +479,12 @@ define([
                                 map.graphics.clear();
                             }
 
-                            for (var i = 0, il = featuresLength; i < il; i++) {
-                                if(results.features[i].geometry !== null){
-                                map.graphics.add(new Graphic(graphicTools.createJSONPolygon(results.features[i].geometry.rings, "noclear", "esriSFSSolid", [220, 20, 60])));
+                            if(results.geometryType === "esriGeometryPolygon"){
+                                for (var i = 0, il = featuresLength; i < il; i++) {
+                                    map.graphics.add(new Graphic(graphicTools.createJSONPolygon(results.features[i].geometry.rings, "noclear", "esriSFSSolid", [220, 20, 60])));
+                                }
+                                map.setExtent(graphicsUtils.graphicsExtent(map.graphics.graphics))
                             }
-                            }
-                            map.setExtent(graphicsUtils.graphicsExtent(map.graphics.graphics))
 
                             for (var x = 0, xl = fieldsLength; x < xl; x++) {
                                 fieldNames.push(results.fields[x].name);
@@ -646,12 +646,5 @@ define([
                                     loqQueryTask.execute(selectQuery, queryWidget._showSelected);
                                 }
                             }
-
-
                     }); //end of declare
-
-
-
-
-
             }); //end of define
