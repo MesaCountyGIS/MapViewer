@@ -395,8 +395,14 @@ define([
                                     query('select[name=attdisplayby]')[0].value = splitText[0];
                                     geomQuery.where = dom.byId("qWhere").value;
                                 } else {
+                                    //Get items from list to build the where clause
+                                    var ids = [];
+                                    query('#resultWindow2 ul li div span').forEach(function(e){
+                                        ids.push(e.innerText);
+                                    });
+                                    var newWhere = "OBJECTID IN " + '(' + ids + ')';
                                     splitText[0] = changefield;
-                                    geomQuery.where = dom.byId("qWhere").value;
+                                    geomQuery.where = newWhere;
                                 }
                                 attQueryTask.execute(geomQuery, queryWidget._showSelected);
                             })
@@ -502,7 +508,6 @@ define([
                                     }
                                     //If there is a layer chosen and the query is run using a draw tool, run the following code
                                     if (!(dom.byId("qLayer").value === "none") && field.length === 0) {
-                                        console.log(44, result)
                                         queryWidget.domNode.style.display = "block";
                                         queryWidget._runloqQuery(result, '');
                                         selectionToolbar.deactivate();
@@ -510,7 +515,6 @@ define([
                                         map.setMapCursor("default");
                                         //Otherwise, if the query is being run from the results dialog, pass in the field name so the results can be displayed using it
                                     } else if ((dom.byId("qLayer").value !== "none") && field.length > 0) {
-                                        console.log(55, result, field)
                                         queryWidget._runloqQuery(result, field);
                                     } else {
                                         confirm("Please choose a layer before trying to run the query")
