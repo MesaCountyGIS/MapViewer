@@ -1,14 +1,11 @@
 <div id='queryTool' class='queryTool' data-dojo-attach-point="domNode" title="Attribute Query">
 
     <div data-dojo-attach-point="queryHeader" class="queryHeader">
-        <!-- <div title="Return to tools" class='returnToTools left-button' id=returnToTools>Tools</div> -->
         <span class='none' id='tabSpan'>
         <a class='tabActivated' data-dojo-attach-point="attributeTab" id="attributeTab" title="Switch to a Attribute query">Attribute Query</a>
         <a class='tabDeactivated' data-dojo-attach-point="locationTab" id="locationTab" title="Switch to a location query">Location Query</a>
             </span>
         <div class='displayNo' id='resultDiv'>Query Results</div>
-        <!-- <span id="closeQuery" style="display:none;" title="Close" class="closer dialogCloser"></span> -->
-        <!-- <div title="Return to Map" class='returnToMap' id="returnToMap">Map</div> -->
     </div>
     <div id="querytabPanel">
     <form class="qForm">
@@ -69,10 +66,6 @@
             <li class="queryFields attributeItem">
                 <div id="fieldLabel">Fields:</div>
                 <div id="qFields"></div>
-                <!--            </li>-->
-
-                <!--            <li class="queryButtons attributeItem">-->
-                <!--                <div id="displayButtons">Show Operators<span class='aDiv'>&#9662;</span></div>-->
                 <div id="qButtons">
                     <button type="button" class="dimButtons like" name="LIKE '%value%' " value="LIKE '%value%' " title="Like">Like</button>
                     <button type="button" class="and" value="AND" title="And">And</button>
@@ -95,14 +88,9 @@
                     <br>
                     <div id="showExamples"></div>
                 </div>
-                <!--            </li>-->
-
-                <!--            <li class="queryWhere attributeItem">-->
                 <label for="qWhere">Where:</label>
                 <input data-dojo-attach-point="qWhere" name="qWhere" id="qWhere" />
                 <button type="button" id="clearWhere" title="Clear SQL Statement">Clear</button>
-                <!--            </li>-->
-                <!--            <li class="SQLhelp attributeItem">-->
                 <span id="SQLhelpText">This is where the help goes</span>
             </li>
 
@@ -141,7 +129,6 @@
         <div class="closequeryresults">
             <button data-dojo-attach-event="onclick:backToQueryClick" id="backToQuery">Back to query</button>
             <button title="Download query results as a CSV file to use in spreadsheet software" id="csv">CSV</button>
-            <!-- <button class="closeQuery" data-dojo-attach-event="onclick:closeClick">Close</button> -->
         </div>
     </div>
 

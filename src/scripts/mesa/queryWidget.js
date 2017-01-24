@@ -143,9 +143,8 @@ define([
 
                         on(query("#qButtonBlock span"), "click", function (event) {
                             if(query("#qLayer")[0].value === "none"){
-                            confirm("Please select a layer first")
-                        }else{
-                            //Why does _drawfunc get called as many times as qButtonBlock spans are clicked? I don't know but functionStopper stops it.
+                                confirm("Please select a layer first")
+                            }else{
                             functionStopper = 0;
                             var t;
                             query("#qButtonBlock span").style("backgroundColor", "white")
@@ -221,7 +220,6 @@ define([
                     backToQueryClick: function () {
                         dom.byId("querytabPanel").style.display = "block";
                         dom.byId("queryResultDialog").style.display = "none";
-                        // dom.byId("returnToTools").innerHTML = "Tools";
                         queryWidget._toggleHeader();
                     },
 
@@ -244,9 +242,9 @@ define([
                         ga('send', 'event', 'attQuery', 'attQueryLayer', selValue);
                         dom.byId("querytabPanel").style.display = "none";
                         dom.byId("queryResultDialog").style.display = "block";
-                        // dom.byId("returnToTools").innerHTML = "Query";
-                        // domClass.replace(dom.byId("returnToTools"), "returnToQuery", "returnToTools");
-                        type !== "location"? queryWidget.submitQuery(): void(0);
+                        if(type !== "location"){
+                            queryWidget.submitQuery();
+                        }
                         queryWidget._toggleHeader();
                     }
                     },
@@ -482,7 +480,6 @@ define([
                                     if (incoming === "single"){
                                         map.setExtent(result.features[0].geometry.getExtent().expand(1.5))
                                     }else{
-                                        // new SimpleLineSymbol().setColor(new Color([255, 0, 0, 0.5]))
                                     map.setExtent((map.graphics.add(gra = new Graphic(graphicTools.createJSONPolygon(result.features[0].geometry.rings)))).geometry.getExtent().expand(1.5));
                                 }
                                 } else if (geomType === "polyline") {
@@ -505,13 +502,15 @@ define([
                                     }
                                     //If there is a layer chosen and the query is run using a draw tool, run the following code
                                     if (!(dom.byId("qLayer").value === "none") && field.length === 0) {
+                                        console.log(44, result)
                                         queryWidget.domNode.style.display = "block";
                                         queryWidget._runloqQuery(result, '');
                                         selectionToolbar.deactivate();
                                         query("#qButtonBlock").children('span').style("backgroundColor", "white");
                                         map.setMapCursor("default");
                                         //Otherwise, if the query is being run from the results dialog, pass in the field name so the results can be displayed using it
-                                    } else if (!(dom.byId("qLayer").value === "none") && field.length > 0) {
+                                    } else if ((dom.byId("qLayer").value !== "none") && field.length > 0) {
+                                        console.log(55, result, field)
                                         queryWidget._runloqQuery(result, field);
                                     } else {
                                         confirm("Please choose a layer before trying to run the query")
