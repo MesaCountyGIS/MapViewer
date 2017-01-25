@@ -309,7 +309,7 @@ define([
                         if (selText === "value") {
                             text = text.slice(1, -1);
                             rangy.replaceSelectedText(whereBox, text);
-                        } else if (!(selText === "value") && (selText.length > 0)) {
+                        } else if (selText !== "value" && selText.length > 0) {
                             rangy.replaceSelectedText(whereBox, text);
                             whereBox.value += (text + " ");
                         } else {
