@@ -467,9 +467,11 @@ define([
                                     gra;
                                 var fieldLength = result.fields.length;
                                 var featureLength = result.features.length;
-                                for (var x = 0, xl = fieldLength; x < xl; x++) {
-                                    fieldNames.push(result.fields[x].name);
-                                }
+
+                                fieldNames = result.fields.map(function(f){
+                                    return f.name;
+                                });
+
                                 for (var i = 0, il = featureLength; i < il; i++) {
                                     showHTML = "<table id='querydiv' style='font-size:0.7em;padding-left:1.5em;background-color:#ECF1EF'>";
                                     var len = fieldNames.length;
