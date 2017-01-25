@@ -413,9 +413,7 @@ define([
 
 
                     _showSelected: function (results) {
-                        var fieldNames = [],
-                            showHTML = "<ul>",
-                            obID;
+                        var showHTML = "<ul>";
                         var fieldsLength = results.fields.length;
                         var featuresLength = results.features.length;
                         if (domClass.contains(dom.byId("locationTab"), "tabActivated")) {
@@ -433,14 +431,13 @@ define([
                             map.setExtent(graphicsUtils.graphicsExtent(map.graphics.graphics))
                         }
 
-                        for (var x = 0, xl = fieldsLength; x < xl; x++) {
-                            fieldNames.push(results.fields[x].name);
-                        }
                         for (var i = 0, il = featuresLength; i < il; i++) {
-                            obID = results.features[i].attributes["OBJECTID"];
+                            var obID = results.features[i].attributes["OBJECTID"];
                             showHTML += "<li><span class='arrowSpan'>&#9654;</span><div class='resultdiv' style='display:inline;'>" + results.features[i].attributes[splitText[0]] + "<span style='display:none'>" + obID + "</span>";
                         }
-                        showHTML += "</div></li></ul>"; dom.byId("resultWindow2").innerHTML = showHTML;
+
+                        showHTML += "</div></li></ul>";
+                        dom.byId("resultWindow2").innerHTML = showHTML;
                         var x = dom.byId('qLayer');
                         var layer = x.options[x.selectedIndex].innerHTML; dom.byId("resultLabel").innerHTML = layer;
 
