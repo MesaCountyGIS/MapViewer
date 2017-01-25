@@ -88,6 +88,14 @@ define([
                             }
                         });
 
+                        on(dom.byId('clearWhere'), "click", function () {
+                            dom.byId("qWhere").value = "";
+                            dom.byId("showExamples").style.display = "none";
+                            dom.byId("getExamples").innerHTML = "Get Examples";
+                            dom.byId("showExamples").value = "";
+                            queryWidget.clearHelpText();
+                        });
+
                         on(query("#qButtons button"), "click", function (e) {
                             var targetButton = e.target ? e.target : e.srcElement;
                             if (targetButton.title != "Field examples") {
@@ -99,14 +107,6 @@ define([
                                 }
                                 queryWidget.buildWhere("qWhere", targetButton.value);
                             }
-                        });
-
-                        on(dom.byId('clearWhere'), "click", function () {
-                            dom.byId("qWhere").value = "";
-                            dom.byId("showExamples").style.display = "none";
-                            dom.byId("getExamples").innerHTML = "Get Examples";
-                            dom.byId("showExamples").value = "";
-                            queryWidget.clearHelpText();
                         });
 
                         on(dom.byId("qWhere"), "keypress", function (e) {
@@ -325,37 +325,31 @@ define([
                         exampleQuery.returnDistinctValues = true;
                         var whereString = fieldName;
                         switch (type) {
-                        case "(OID)":
-                        case "(Integer)":
-                            whereString += " <> ''";
-                            break;
-                        case "(String)":
-                            whereString += " <> '' AND " + fieldName + " <> 'Common' AND NOT " + fieldName + " LIKE 'M%' AND NOT " + fieldName + " LIKE '%DPT%' AND NOT " + fieldName + " LIKE '%PENDING%' AND " + fieldName + " IS NOT NULL AND " + fieldName + " NOT LIKE '%[.]00[%]%'";
-                            break;
-                        case "(Double)":
-                            whereString += " > '0' AND " + fieldName + " IS NOT NULL";
-                            break;
-                        default:
-                            whereString += " <> ''";
+                            case "(OID)":
+                            case "(Integer)":
+                                whereString += " <> ''";
+                                break;
+                            case "(String)":
+                                whereString += " <> '' AND " + fieldName + " <> 'Common' AND NOT " + fieldName + " LIKE 'M%' AND NOT " + fieldName + " LIKE '%DPT%' AND NOT " + fieldName + " LIKE '%PENDING%' AND " + fieldName + " IS NOT NULL AND " + fieldName + " NOT LIKE '%[.]00[%]%'";
+                                break;
+                            case "(Double)":
+                                whereString += " > '0' AND " + fieldName + " IS NOT NULL";
+                                break;
+                            default:
+                                whereString += " <> ''";
                         }
                         exampleQuery.where = whereString;
 
                         attQueryTask.execute(exampleQuery, showExamples);
 
                         function showExamples(results) {
-                            var values = [],
-                                uniqueValues = [];
-                            var featuresLength = results.features.length;
-                            for (var i = 0, il = featuresLength; i < il; i++) {
-                                values.push(results.features[i].attributes[splitText[0]]);
-                            }
-                            array.forEach(values, function (el, i) {
-                                if (array.indexOf(el, uniqueValues) === -1) {
-                                    uniqueValues.push(el);
-                                }
-                            })
-                            dom.byId("showExamples").style.display = "inline-block";
                             var html = "<ul>";
+                            var uniqueValues = results.features.slice(1, 49).map(function(f){
+                                return f.attributes[splitText[0]];
+                            })
+
+                            dom.byId("showExamples").style.display = "inline-block";
+
                             for (var i = 0, il = uniqueValues.length; i < il; i++) {
                                 html += "<li>" + uniqueValues[i] + "</li>";
                             }
