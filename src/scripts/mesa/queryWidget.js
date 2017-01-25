@@ -344,7 +344,7 @@ define([
 
                         function showExamples(results) {
                             var html = "<ul>";
-                            var uniqueValues = results.features.slice(1, 49).map(function(f){
+                            var uniqueValues = results.features.slice(1, 50).map(function(f){
                                 return f.attributes[splitText[0]];
                             })
 
@@ -396,9 +396,8 @@ define([
                                     geomQuery.where = dom.byId("qWhere").value;
                                 } else {
                                     //Get items from list to build the where clause
-                                    var ids = [];
-                                    query('#resultWindow2 ul li div span').forEach(function(e){
-                                        ids.push(e.innerText);
+                                    var ids = query('#resultWindow2 ul li div span').map(function(e){
+                                        return e.innerText;
                                     });
                                     var newWhere = "OBJECTID IN " + '(' + ids + ')';
                                     splitText[0] = changefield;
