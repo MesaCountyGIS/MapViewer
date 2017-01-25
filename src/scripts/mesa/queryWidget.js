@@ -47,33 +47,15 @@ define([
                         })
 
                         on(query(".queryHeader a"), touch.release, function (e) {
-                            var targetTab = e.target ? e.target : e.srcElement;
-                            query(".queryHeader a").forEach(function (tab) {
-                                tab.className = ''
-                            });
-                            domClass.add(targetTab, "tabActivated");
-
-                            if (targetTab.id === "attributeTab") {
-                                queryWidget.tabClick(".locationItem, .inlineLocationItem", ".attributeItem", ".inlineAttributeItem");
-                            } else {
-                                queryWidget.tabClick(".attributeItem, .inlineAttributeItem", ".locationItem", ".inlineLocationItem");
-                            }
+                            activateQueryHeaderTabs(e);
                         });
 
                         on(dom.byId("addBuffer"), "click", function () {
-                            if (domClass.contains(dom.byId('bufferSelection'), "displayNo")) {
-                                domClass.replace(dom.byId('bufferSelection'), "showBlock", "displayNo");
-                            } else {
-                                domClass.replace(dom.byId('bufferSelection'), "displayNo", "showBlock");
-                            }
+                            toggleElementClass("#bufferSelection");
                         });
 
                         on(dom.byId("addBufferQuery"), "click", function () {
-                            if (domClass.contains(query(".queryFields")[0], "displayNo")) {
-                                domClass.replace(query(".queryFields")[0], "showBlock", "displayNo");
-                            } else {
-                                domClass.replace(query(".queryFields")[0], "displayNo", "showBlock");
-                            }
+                            toggleElementClass(".queryFields");
                         });
 
                         on(dom.byId("qLayer"), "change", function () {
@@ -189,6 +171,30 @@ define([
                             }
                             }
                         });
+
+                        function activateQueryHeaderTabs(e){
+                            var targetTab = e.target ? e.target : e.srcElement;
+                            (function (){
+                                query(".queryHeader a").forEach(function (tab) {
+                                    tab.className = '';
+                                });
+                                domClass.add(targetTab, "tabActivated");
+                            })();
+
+                            if (targetTab.id === "attributeTab") {
+                                queryWidget.tabClick(".locationItem, .inlineLocationItem", ".attributeItem", ".inlineAttributeItem");
+                            } else {
+                                queryWidget.tabClick(".attributeItem, .inlineAttributeItem", ".locationItem", ".inlineLocationItem");
+                            }
+                        }
+
+                        function toggleElementClass(elementClass){
+                            if (domClass.contains(query(elementClass)[0], "displayNo")) {
+                                domClass.replace(query(elementClass)[0], "showBlock", "displayNo");
+                            } else {
+                                domClass.replace(query(elementClass)[0], "displayNo", "showBlock");
+                            }
+                        }
                     },
 
                     startup: function () {
