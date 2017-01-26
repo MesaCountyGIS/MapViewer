@@ -65,7 +65,7 @@ define([
                             dom.byId("showExamples").style.display = "none";
                             dom.byId("showExamples").innerHTML = dom.byId("showExamples").value = "";
                             selValue = query('select[name=qLayer]')[0].value;
-                            if (!(selValue === "none")) {
+                            if (selValue !== "none") {
                                 attQueryTask = new QueryTask("http://mcmap2.mesacounty.us/arcgis/rest/services/maps/" + selValue);
                                 attQuery = new Query();
                                 attQuery.returnGeometry = true;
@@ -76,7 +76,7 @@ define([
                         });
 
                         on(dom.byId("getExamples"), "click", function () {
-                            if (!(dom.byId("showExamples").style.display === "none")) {
+                            if (dom.byId("showExamples").style.display !== "none") {
                                 dom.byId("showExamples").style.display = "none";
                                 dom.byId("getExamples").innerHTML = "Show Examples";
                             } else {
@@ -283,7 +283,7 @@ define([
                         dom.byId("qFields").innerHTML = html;
                         //Populate list of fields that the results should be listed by
                         dom.byId("attdisplayby").innerHTML = html2;
-
+console.log('showing')
                         on(query('#qFields li'), "click", function () {
                             dom.byId("showExamples").innerHTML = "";
                             dom.byId("showExamples").style.display = "none";
@@ -390,7 +390,6 @@ define([
                                 }
                                 geomQuery.returnGeometry = true;
                                 geomQuery.outFields = ["*"];
-
                                 if (!changefield) {
                                     query('select[name=attdisplayby]')[0].value = splitText[0];
                                     geomQuery.where = dom.byId("qWhere").value;
@@ -505,7 +504,7 @@ define([
                                         field = results;
                                     }
                                     //If there is a layer chosen and the query is run using a draw tool, run the following code
-                                    if (!(dom.byId("qLayer").value === "none") && field.length === 0) {
+                                    if (dom.byId("qLayer").value !== "none" && field.length === 0) {
                                         queryWidget.domNode.style.display = "block";
                                         queryWidget._runloqQuery(result, '');
                                         selectionToolbar.deactivate();
