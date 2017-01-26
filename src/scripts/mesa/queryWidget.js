@@ -283,7 +283,6 @@ define([
                         dom.byId("qFields").innerHTML = html;
                         //Populate list of fields that the results should be listed by
                         dom.byId("attdisplayby").innerHTML = html2;
-console.log('showing')
                         on(query('#qFields li'), "click", function () {
                             dom.byId("showExamples").innerHTML = "";
                             dom.byId("showExamples").style.display = "none";
@@ -460,19 +459,17 @@ console.log('showing')
                     },
 
                         _showResults: function (result, incoming) {
-                                var fieldNames = [],
-                                    showHTML = "",
-                                    gra;
-                                var fieldLength = result.fields.length;
+                                var showHTML = "";
+                                var gra;
                                 var featureLength = result.features.length;
-
-                                fieldNames = result.fields.map(function(f){
+                                var geom = result.features[0].geometry;
+                                var fieldNames = result.fields.map(function(f){
                                     return f.name;
                                 });
+                                var len = fieldNames.length;
 
                                 for (var i = 0, il = featureLength; i < il; i++) {
                                     showHTML = "<table id='querydiv' style='font-size:0.7em;padding-left:1.5em;background-color:#ECF1EF'>";
-                                    var len = fieldNames.length;
                                     for (var u = 0; u < len; u++) {
                                         showHTML += "<tr><td style='font-weight:bold;'>" + fieldNames[u] + "</td><td style='padding-left:2em;'>" + result.features[i].attributes[fieldNames[u]] + "</td></tr>";
                                     }
@@ -488,9 +485,7 @@ console.log('showing')
                                 } else if (geomType === "polyline") {
                                     map.setExtent((map.graphics.add(new Graphic(result.features[0].geometry, new SimpleLineSymbol().setColor(new Color([255, 0, 0, 0.5]))))).geometry.getExtent().expand(1.5));
                                 } else if (geomType === "point") {
-                                    var lon = result.features[0].geometry.x;
-                                    var lat = result.features[0].geometry.y;
-                                    graphicTools.zoomToPoint(lon, lat, "");
+                                    graphicTools.zoomToPoint(geom.x, geom.y, "");
                                 }
                             },
 
