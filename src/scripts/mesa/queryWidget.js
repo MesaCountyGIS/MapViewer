@@ -532,7 +532,8 @@ define([
                                     splitText = trig;
                                 }
 
-                                if (!(domClass.contains(dom.byId("bufferSelection"), "displayNo")) && (dom.byId("buffDist").value.length > 0 || dom.byId("buffDist").value > 0)) { //We are doing a buffer and a buffere value is listed
+                                if (!(domClass.contains(dom.byId("bufferSelection"), "displayNo")) &&
+                                    (dom.byId("buffDist").value.length > 0 || dom.byId("buffDist").value > 0)) { //We are doing a buffer and a buffer value is listed
                                     var params = new BufferParameters();
                                     bufUOM = dom.byId("bufferUOM").value;
                                     bufDist = dom.byId("buffDist").value;
@@ -574,6 +575,7 @@ define([
                                     fireQuery();
                                 }else{
                                     ga('send', 'event', 'loqQuery', 'loqQueryFilter', 'loq Query without filter');
+                                    query('select[name=attdisplayby]')[0].value = "ACCOUNTNO";
                                     selectQuery.geometry = results.geometry;
                                     fireQuery();
                                 }
