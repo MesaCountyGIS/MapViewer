@@ -129,7 +129,7 @@ define([
     }
 
     function _clearBookmarks() {
-            var conf = confirm('This action will clear all of your custom bookmarks!');
+            var conf = confirm('This action will remove all of your bookmarks!');
             if (conf) {
                 if (useLocalStorage) {
                     // Remove from local storage
