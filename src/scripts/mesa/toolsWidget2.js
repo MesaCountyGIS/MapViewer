@@ -299,9 +299,11 @@ define([
                         device: device,
                         initialBasemap: initialBasemap
                     }, "imagelist");
-                    lmG.imageTool.basemapChanger(defaults);
+                    // lmG.imageTool.basemapChanger(defaults);
+                    lmG.imageTool.basemapChanger.call(this, defaults);
                 }else{
-                    lmG.imageTool.basemapChanger(defaults);
+                    // lmG.imageTool.basemapChanger(defaults);
+                    lmG.imageTool.basemapChanger.call(this, defaults);
                 }
 
                 function createImageList(imageConfig) {

@@ -35,14 +35,15 @@ define([
 
         basemapChanger: function(target) {
             if(typeof(target) === 'string'){ //if we are going from imagery to vector
-                this.loadYear(target);
+                thisWidget.loadYear(target);
                 return target;
             }else{ //if going from vector to imagery
                 var newLayer = target.attributes['data-value'].nodeValue;
-                this.loadYear(newLayer);
-                if(this.device === "desktop" && target.className !== "imageLI"){
-                    this._change(target.id, "block", "Default Basemap", ["DTimagery", "DTbasemap"]);
+                thisWidget.loadYear(newLayer);
+                if(domClass.contains(this, "basemapClick")){
+                    thisWidget._change(target.id, "block", "Default Basemap", ["DTimagery", "DTbasemap"]);
                 }
+
                 return newLayer;
             }
         },
