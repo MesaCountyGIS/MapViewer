@@ -5,11 +5,11 @@ module.exports = function (grunt) {
         spriteGenerator: {
             sprite: {
                 src: [
-                    'images/sprites/*.png'
+                    'src/images/sprites/*.png'
                 ],
                 stylesheet: 'less',
-                spritePath: 'images/test/sprite.png',
-                stylesheetPath: 'style/test/sprite.less',
+                spritePath: 'src/images/sprite.png',
+                stylesheetPath: 'src/style/sprite.less',
                 layoutOptions: {
                     padding: 10
                 }
