@@ -449,24 +449,27 @@ input:-moz-placeholder {
     float: left;
 }
 
-.toolstripbuttons( @bg-position-x,
-@bg-position-y,
-@bg-width,
-@bg-height,
-@push-x: 0px,
-@push-y: 0px,
-@button-width: 45px,
-@button-height: 41px,
-@button-bg-color: #E1DED9) {
-    .imageposition(@bg-position-x,
-    @bg-position-y,
-    @bg-width,
-    @bg-height,
-    @button-width,
-    @button-height,
-    @button-bg-color,
-    @push-x,
-    @push-y);
+.toolstripbuttons(
+  @bg-position-x,
+  @bg-position-y,
+  @bg-width,
+  @bg-height,
+  @push-x: 0px,
+  @push-y: 0px,
+  @button-width: 45px,
+  @button-height: 41px,
+  @button-bg-color: #E1DED9) {
+    .imageposition(
+      @bg-position-x,
+      @bg-position-y,
+      @bg-width,
+      @bg-height,
+      @button-width,
+      @button-height,
+      @button-bg-color,
+      @push-x,
+      @push-y
+    );
     border-style: none;
     width: @button-width;
     height: @button-height;
@@ -479,14 +482,12 @@ input:-moz-placeholder {
 }
 
 .DTlayers {
-    // .toolstripbuttons(@Imagery_text-x,
-    // @Imagery_text-y,
-    // @Imagery_text-width,
-    // @Imagery_text-height,
-    // 1px);
-    // color: #A05959;
-    // font-weight: bold;
-    // .buttonStyle(13px,2px);
+    .toolstripbuttons(
+      @layers-x,
+      @layers-y,
+      @layers-width,
+      @layers-height,
+      0px, 1px);
 }
 
 .DTbasemap {

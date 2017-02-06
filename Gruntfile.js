@@ -32,6 +32,5 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('node-sprite-generator');
 
    grunt.registerTask('spritegen', ['spriteGenerator:sprite']);
-//    grunt.registerTask('mobilesprite', ['spriteGenerator:mobile']);
 
 };
