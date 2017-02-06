@@ -54,7 +54,7 @@ define([
             legendObject.refresh(legLayers);
             //Set up event handlers for slide out menu
             on(query(".mainSideMenu li:not(#Imagery)"), "click", dispatchMainMenuClick);
-            on(query("#DTtoolstrip button:not(#DTbasemap), #panelTab, #sharebutton, .submen li"), "click", togglePanel);
+            on(query("#DTtoolstrip button, #panelTab, #sharebutton, .submen li"), "click", togglePanel);
             on(query('.themeMenu li'), "click", function(e){
                 var layer = domAttr.get(this, 'data-value');
                 toolsWidget.dispatchThemeMenuClick(layer);
@@ -66,7 +66,7 @@ define([
             on(query('.helpClick'), "click", dispatchHelp);
             on(query('.shareClick, #sharebutton'), "click", dispatchShareForm);
             on(query('.searchMenu li, .submen li'), "click", dispatchSearchMenuClick);
-            on(query('#Imagery, .DTbasemap'), "click", dispatchImageryToggle);
+            on(query('#Imagery, .DTimagery'), "click", dispatchImageryToggle);
             on(query('.imageYears li'), "click", dispatchImageChange);
             on(dom.byId('backMenu'), touch.release, backButtonEvent);
             on(query('.baselyrs'), "click", function(e){
@@ -255,17 +255,6 @@ define([
                 }
             }
 
-            function dispatchImageChange(e) {
-                var spanList = this.parentNode.getElementsByTagName('span');
-                var thisSpan = this.getElementsByTagName('span')[0];
-                var layer = domAttr.get(this, 'data-value');
-
-                lmG.imageTool.basemapChanger(this);
-
-                //Place check mark next to currently active image year
-                new checkmarks().set(spanList, thisSpan);
-            }
-
             function checkmarks(){
                 return{
                     get: function (spanList) {
@@ -286,11 +275,23 @@ define([
                 }
             }
 
+            function dispatchImageChange(e) {
+                var spanList = this.parentNode.getElementsByTagName('span');
+                var thisSpan = this.getElementsByTagName('span')[0];
+                var layer = domAttr.get(this, 'data-value');
+
+                lmG.imageTool.basemapChanger(this);
+
+                //Place check mark next to currently active image year
+                new checkmarks().set(spanList, thisSpan);
+            }
+
             function dispatchImageryToggle(e) {
+                console.log('here')
                 //set and get
-                var defaultYear, defaultYearElement;
-                var spanList2 = query('.imageYears')[0].getElementsByTagName('span');
-                var defaults = new checkmarks().get(spanList2);
+                // var defaultYear, defaultYearElement;
+                // var spanList2 = query('.imageYears')[0].getElementsByTagName('span');
+                // var defaults = new checkmarks().get(spanList2);
                 //toggle between imagery and basemap
                 if (!(registry.byId("imagelist"))) {
                     createImageList(Images);
@@ -300,11 +301,12 @@ define([
                         initialBasemap: initialBasemap
                     }, "imagelist");
                     // lmG.imageTool.basemapChanger(defaults);
-                    lmG.imageTool.basemapChanger.call(this, defaults);
-                }else{
-                    // lmG.imageTool.basemapChanger(defaults);
-                    lmG.imageTool.basemapChanger.call(this, defaults);
+                    // lmG.imageTool.basemapChanger.call(this, defaults);
                 }
+                // else{
+                    // lmG.imageTool.basemapChanger(defaults);
+                //     lmG.imageTool.basemapChanger.call(this, defaults);
+                // }
 
                 function createImageList(imageConfig) {
                     //Add the selected imagery and theme layer to the map
@@ -315,18 +317,18 @@ define([
                     }); // end require
                 }
 
-                if(domClass.contains('imageYears', 'displayNo')){
-                    domClass.remove('imageYears', "displayNo");
-                }else{
-                    domClass.add('imageYears', "displayNo");
-                }
-                //change button innerText to "Show Basemap" or "Show Imagery"
-                if(query('#Imagery').text() === "Show Imagery"){
-                    query('#Imagery').text("Show Basemap");
-                }else{
-                    lmG.imageTool.basemapChanger('vector');
-                    query('#Imagery').text("Show Imagery");
-                }
+                // if(domClass.contains('imageYears', 'displayNo')){
+                //     domClass.remove('imageYears', "displayNo");
+                // }else{
+                //     domClass.add('imageYears', "displayNo");
+                // }
+                // //change button innerText to "Show Basemap" or "Show Imagery"
+                // if(query('#Imagery').text() === "Show Imagery"){
+                //     query('#Imagery').text("Show Basemap");
+                // }else{
+                //     lmG.imageTool.basemapChanger('vector');
+                //     query('#Imagery').text("Show Imagery");
+                // }
             }
 
             function shareMap() {
