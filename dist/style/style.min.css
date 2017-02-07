@@ -1342,6 +1342,10 @@ input {
   display: none;
 }
 
+#staticDropdown li {
+  cursor: pointer;
+}
+
 #map_zoom_slider {
   z-index: 0!important;
 }
