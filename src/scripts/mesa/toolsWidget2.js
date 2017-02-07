@@ -134,9 +134,9 @@ define([
                 toPage = domAttr.has(this, 'data-to')?
                     domAttr.get(this, 'data-to'): undefined;
                 if(toPage !== undefined){
-                    // if(){
-                    domStyle.set('backMenu', "visibility", "visible");
-                // }
+                    if(domStyle.get(query('.stacked-toggle span')[0], "display") === "block"){
+                        domStyle.set('backMenu', "visibility", "visible");
+                    }
 
                     domClass.add(query(".mainSideMenu")[0], "displayNo");
                     domClass.remove(query("." + toPage)[0], "displayNo");
