@@ -331,14 +331,14 @@ define([
             //Place check mark next to currently active theme
             var spanList = query('.themeMenu')[0].getElementsByTagName('span');
             var thisSpan;
-            for(s = 0; s < spanList.length; s++){
-                if(domAttr.get(spanList[s].parentNode, 'data-value') === layer){
-                    thisSpan = spanList[s].parentNode.getElementsByTagName('span')[0];
-                }
-            }
-
-            //Set a checkmark next to the currently selected theme
             (function () {
+                //Set thisSpan to the currently selected theme
+                for(s = 0; s < spanList.length; s++){
+                    if(domAttr.get(spanList[s].parentNode, 'data-value') === layer){
+                        thisSpan = spanList[s].parentNode.getElementsByTagName('span')[0];
+                    }
+                }
+                //Set a checkmark next to the currently selected theme
                 for (i = 0; i < spanList.length; i++) {
                     spanList[i].innerHTML = '';
                 };
