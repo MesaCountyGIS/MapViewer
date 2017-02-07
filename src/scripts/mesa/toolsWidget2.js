@@ -289,12 +289,6 @@ define([
             }
 
             function dispatchImageryToggle(e) {
-                console.log('calling')
-                //set and get
-                // var defaultYear, defaultYearElement;
-                // var spanList2 = query('.imageYears')[0].getElementsByTagName('span');
-                // var defaults = new checkmarks().get(spanList2);
-                //toggle between imagery and basemap
                 if (!(registry.byId("imagelist"))) {
                     createImageList(Images);
                     lmG.imageTool = new basemapWidget2({
@@ -302,14 +296,7 @@ define([
                         device: device,
                         initialBasemap: initialBasemap
                     }, "imagelist");
-
-                    // lmG.imageTool.basemapChanger(defaults);
-                    // lmG.imageTool.basemapChanger.call(this, defaults);
                 }
-                // else{
-                    // lmG.imageTool.basemapChanger(defaults);
-                //     lmG.imageTool.basemapChanger.call(this, defaults);
-                // }
 
                 function createImageList(imageConfig) {
                     //Add the selected imagery and theme layer to the map
@@ -319,19 +306,6 @@ define([
                         }
                     }); // end require
                 }
-
-                // if(domClass.contains('imageYears', 'displayNo')){
-                //     domClass.remove('imageYears', "displayNo");
-                // }else{
-                //     domClass.add('imageYears', "displayNo");
-                // }
-                // //change button innerText to "Show Basemap" or "Show Imagery"
-                // if(query('#Imagery').text() === "Show Imagery"){
-                //     query('#Imagery').text("Show Basemap");
-                // }else{
-                //     lmG.imageTool.basemapChanger('vector');
-                //     query('#Imagery').text("Show Imagery");
-                // }
             }
 
             function shareMap() {
