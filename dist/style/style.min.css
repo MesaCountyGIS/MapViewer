@@ -1312,6 +1312,7 @@ input {
 .imageYears li a,
 .themeMenu li a {
   margin-left: .5em;
+  font-size: 95%;
 }
 
 .mainSideMenu {
