@@ -6,6 +6,10 @@
         "mapFolder": "http://mcmap2.mesacounty.us/arcgis/rest/services/Mosaic_Datasets/",
         "serverType": "/ImageServer",
         "images": [
+          {
+              "imageId": "usgs",
+              "serviceName": "USGS_Topo"
+          },
             {
                 "imageId": "A2016",
                 "serviceName": "City_Color_2016"
