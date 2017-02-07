@@ -2408,6 +2408,10 @@ input#mapTitle {
 }
 
 @media only screen and (max-width:1024px) {
+  #loading {
+    left: 25%;
+  }
+
   #autocompleteSearch,
   #coordinateBlock,
   #layerSelect,

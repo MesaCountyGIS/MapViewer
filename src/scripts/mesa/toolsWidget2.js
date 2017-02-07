@@ -347,8 +347,7 @@ define([
 
             setTimeout(function () {
                 themeTools.themeClick(thisSpan.parentNode, map, popupObject, popupTemplateObject, legendObject, initialBasemap, components);
-            }, 5);
-
+            }, 10);
 
             //remove the side panel to show the map only.
             registry.byId("toolsView2").domNode.style.display = "none";
