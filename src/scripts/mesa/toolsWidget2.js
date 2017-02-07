@@ -113,7 +113,7 @@ define([
 
             function togglePanel(e){
                 if(domStyle.get('toolsView2', 'display') === "none"){
-                    if((this.id !== "panelTab") && (domStyle.get('backMenu', "visibility") === 'visible')){
+                    if(domAttr.get(dom.byId("backMenu"), 'data-from') !== null){
                         backButtonEvent();
                     }
                     domStyle.set('toolsView2', "display", "block");
@@ -134,6 +134,7 @@ define([
                 toPage = domAttr.has(this, 'data-to')?
                     domAttr.get(this, 'data-to'): undefined;
                 if(toPage !== undefined){
+                    // if device is mobile, enable backMenu functionality
                     if(domStyle.get(query('.stacked-toggle span')[0], "display") === "block"){
                         domStyle.set('backMenu', "visibility", "visible");
                     }
