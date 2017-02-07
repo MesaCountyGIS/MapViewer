@@ -53,7 +53,7 @@ define([
             });
             legendObject.refresh(legLayers);
             //Set up event handlers for slide out menu
-            on(query(".mainSideMenu li:not(#Imagery)"), "click", dispatchMainMenuClick);
+            on(query(".mainSideMenu li"), "click", dispatchMainMenuClick);
             on(query("#DTtoolstrip button, #panelTab, #sharebutton, .submen li"), "click", togglePanel);
             on(query('.themeMenu li'), "click", function(e){
                 var layer = domAttr.get(this, 'data-value');
@@ -66,7 +66,7 @@ define([
             on(query('.helpClick'), "click", dispatchHelp);
             on(query('.shareClick, #sharebutton'), "click", dispatchShareForm);
             on(query('.searchMenu li, .submen li'), "click", dispatchSearchMenuClick);
-            on(query('#Imagery, .DTimagery'), "click", dispatchImageryToggle);
+            on(query('.Imagery, .DTimagery'), "click", dispatchImageryToggle);
             on(query('.imageYears li'), "click", dispatchImageChange);
             on(dom.byId('backMenu'), touch.release, backButtonEvent);
             on(query('.baselyrs'), "click", function(e){
@@ -134,9 +134,9 @@ define([
                 toPage = domAttr.has(this, 'data-to')?
                     domAttr.get(this, 'data-to'): undefined;
                 if(toPage !== undefined){
-                    if(){
+                    // if(){
                     domStyle.set('backMenu', "visibility", "visible");
-                }
+                // }
 
                     domClass.add(query(".mainSideMenu")[0], "displayNo");
                     domClass.remove(query("." + toPage)[0], "displayNo");
@@ -289,6 +289,7 @@ define([
             }
 
             function dispatchImageryToggle(e) {
+                console.log('calling')
                 //set and get
                 // var defaultYear, defaultYearElement;
                 // var spanList2 = query('.imageYears')[0].getElementsByTagName('span');
@@ -301,6 +302,7 @@ define([
                         device: device,
                         initialBasemap: initialBasemap
                     }, "imagelist");
+
                     // lmG.imageTool.basemapChanger(defaults);
                     // lmG.imageTool.basemapChanger.call(this, defaults);
                 }
