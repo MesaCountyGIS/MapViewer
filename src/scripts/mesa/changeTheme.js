@@ -35,7 +35,7 @@ define([
                 checkboxids = changeThemeWidget.components === undefined? null: changeThemeWidget.components.checkboxid;
                 control = dom.byId(layer + "Select") ? (layer + "Select") : "noControl";
                 layerConstructor = {
-                    "mapFolder": 'http://mcmap2.mesacounty.us/arcgis/rest/services/maps/',
+                    "mapFolder": 'https://mcmap2.mesacounty.us/arcgis/rest/services/maps/',
                     "serverType": '/MapServer',
                     "layers": [{
                         "layerId": "asbuilt",
@@ -1253,7 +1253,7 @@ define([
                     checkboxClick.remove()
                 }
                 checkboxClick = on(map, "click", function(evt) {
-                        var IT = new IdentifyTask("http://mcmap2.mesacounty.us/arcgis/rest/services/maps/" + opt + "/MapServer/");
+                        var IT = new IdentifyTask("https://mcmap2.mesacounty.us/arcgis/rest/services/maps/" + opt + "/MapServer/");
                         var IP = new IdentifyParameters();
                         IP.geometry = evt.mapPoint;
                         IP.layerOption = IdentifyParameters.LAYER_OPTION_VISIBLE;

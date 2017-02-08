@@ -74,7 +74,7 @@ define([
                 type = type;
             }
             var mapextt = aG.map.extent;
-            var url = "http://emap.mesacounty.us/viewer?EXTENT=" + String(mapextt.xmin.toFixed(0) + ':' + mapextt.ymin.toFixed(0) + ':' + mapextt.xmax.toFixed(0) + ':' + mapextt.ymax.toFixed(0)) +
+            var url = "https://emap.mesacounty.us/viewer?EXTENT=" + String(mapextt.xmin.toFixed(0) + ':' + mapextt.ymin.toFixed(0) + ':' + mapextt.xmax.toFixed(0) + ':' + mapextt.ymax.toFixed(0)) +
                 "&maptype=" + type;
             return url
         },

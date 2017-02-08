@@ -35,14 +35,14 @@ function init() {
         aG.pTemp = createPopupTemplate();
         // Create 3 layers to be initially added to the map
         lmG.pLay = createFeatureLayer(
-            "http://mcmap2.mesacounty.us/arcgis/rest/services/maps/ParcelOnly4Query/MapServer/0",
+            "https://mcmap2.mesacounty.us/arcgis/rest/services/maps/ParcelOnly4Query/MapServer/0",
             aG.pTemp,
             ["LOCATION","ACCOUNTNO","OWNER","JTOWNER","SDATE","PARCEL_NUM","ZONING","Acres","JURISDICTION"]
             );
-        lmG.roadLabels = createTiledMapServiceLayer("http://mcmap2.mesacounty.us/arcgis/rest/services/maps/parcel_road_labels/MapServer", "roadLabels");
+        lmG.roadLabels = createTiledMapServiceLayer("https://mcmap2.mesacounty.us/arcgis/rest/services/maps/parcel_road_labels/MapServer", "roadLabels");
         // Set a reference to the initial basemap. This is passed to the
         // basemapWidget module where it can be changed.
-        var initialBasemap = createTiledMapServiceLayer("http://mcmap2.mesacounty.us/arcgis/rest/services/maps/vector_basemap/MapServer", "vectorBasemap");
+        var initialBasemap = createTiledMapServiceLayer("https://mcmap2.mesacounty.us/arcgis/rest/services/maps/vector_basemap/MapServer", "vectorBasemap");
 
         // Add the initial basemap, labels and parcel layer to the map
         aG.map.addLayers([initialBasemap, lmG.pLay, lmG.roadLabels]);
@@ -166,8 +166,8 @@ function createPopupTemplate() {
                 }
             ],
             title: "<b>Parcel Information:</b>",
-            description: "<b>Account number:</b>  <a href='http://emap.mesacounty.us/assessor_lookup/Assessor_Parcel_Report.aspx?Account={ACCOUNTNO}'" + "target='_blank'>{ACCOUNTNO}</a><br><b>Parcel Number:</b> {PARCEL_NUM}<br><b>Owner:</b>  {OWNER}<br><b>Joint Owner:</b>  {JTOWNER}<br><b>Address:</b>" + "{LOCATION}<br><b>Sale Date:</b>" + " {SDATE}<br>" + "<b>Zoning:</b> {ZONING}<br><b>Approximate Acres:</b> {Acres}<br><b>Jurisdiction: </b>{JURISDICTION}<br>" + "<div id='mapButtons'>" +
-            "<a title='Click to view parcel in Google Earth' class='maplink' target='_blank' href='http://emap.mesacounty.us/kmls?acct={ACCOUNTNO}'>Google Earth</a>" + "<a title='Click to view parcel in Bing Maps' class='maplink' target='_blank' href='http://www.bing.com/maps/?mapurl=http://emap.mesacounty.us/kmls?acct={ACCOUNTNO}'>Bing Maps</a></div><br>"
+            description: "<b>Account number:</b>  <a href='https://emap.mesacounty.us/assessor_lookup/Assessor_Parcel_Report.aspx?Account={ACCOUNTNO}'" + "target='_blank'>{ACCOUNTNO}</a><br><b>Parcel Number:</b> {PARCEL_NUM}<br><b>Owner:</b>  {OWNER}<br><b>Joint Owner:</b>  {JTOWNER}<br><b>Address:</b>" + "{LOCATION}<br><b>Sale Date:</b>" + " {SDATE}<br>" + "<b>Zoning:</b> {ZONING}<br><b>Approximate Acres:</b> {Acres}<br><b>Jurisdiction: </b>{JURISDICTION}<br>" + "<div id='mapButtons'>" +
+            "<a title='Click to view parcel in Google Earth' class='maplink' target='_blank' href='https://emap.mesacounty.us/kmls?acct={ACCOUNTNO}'>Google Earth</a>" + "<a title='Click to view parcel in Bing Maps' class='maplink' target='_blank' href='https://www.bing.com/maps/?mapurl=https://emap.mesacounty.us/kmls?acct={ACCOUNTNO}'>Bing Maps</a></div><br>"
         });
     });
     return temp;
@@ -289,7 +289,7 @@ function createHomeButton(map) {
 
 function createContextMenu(map, geometryServiceConfig) {
     require(["mesa/contextMenuWidget"], function(contextMenuWidget) {
-        contextMenuWidget({mapRef: map, geometryServiceURL: geometryServiceConfig, trsURL: "http://mcmap2.mesacounty.us/arcgis/rest/services/maps/eSurveyor/MapServer/26"});
+        contextMenuWidget({mapRef: map, geometryServiceURL: geometryServiceConfig, trsURL: "https://mcmap2.mesacounty.us/arcgis/rest/services/maps/eSurveyor/MapServer/26"});
     });
 }
 
@@ -422,7 +422,7 @@ function urlMapType(url, map, legend, initialBasemap, config, device, parcels) {
                     "esri/tasks/QueryTask", "esri/tasks/query", "esri/graphic", "mesa/graphicsTools"
                 ], function(QueryTask, Query, Graphic, graphicsTools) {
                     var graphicTool = new graphicsTools({geometryServiceURL: esriConfig.defaults.geometryService, mapRef: map});
-                    dQueryTask = new QueryTask("http://mcmap2.mesacounty.us/arcgis/rest/services/maps/" + service + "/MapServer/" + layerid);
+                    dQueryTask = new QueryTask("https://mcmap2.mesacounty.us/arcgis/rest/services/maps/" + service + "/MapServer/" + layerid);
                     dQuery = new Query();
                     dQuery.returnGeometry = true;
                     dQuery.outFields = [""];

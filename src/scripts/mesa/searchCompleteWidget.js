@@ -127,7 +127,7 @@ define([
 
         _runScript: function(){
             var value = option !== undefined? thisWidget.option: thisWidget.loc.value.replace(/\'/g, '\'\'').replace(/\-/g, '');
-            return(script.get("http://mcmap2.mesacounty.us/arcgis/rest/services/maps/" + thisWidget.service, {
+            return(script.get("https://mcmap2.mesacounty.us/arcgis/rest/services/maps/" + thisWidget.service, {
              jsonp: "callback",
              query: {
                        where: thisWidget.where  + " '%" + value + "%'",

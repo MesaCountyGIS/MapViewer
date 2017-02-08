@@ -66,7 +66,7 @@ define([
                             dom.byId("showExamples").innerHTML = dom.byId("showExamples").value = "";
                             selValue = query('select[name=qLayer]')[0].value;
                             if (selValue !== "none") {
-                                attQueryTask = new QueryTask("http://mcmap2.mesacounty.us/arcgis/rest/services/maps/" + selValue);
+                                attQueryTask = new QueryTask("https://mcmap2.mesacounty.us/arcgis/rest/services/maps/" + selValue);
                                 attQuery = new Query();
                                 attQuery.returnGeometry = true;
                                 attQuery.outFields = ["*"];
@@ -522,7 +522,7 @@ define([
                                 var bufDist = "",
                                     bufUOM, whereClause;
                                 selectQuery = new Query();
-                                loqQueryTask = new QueryTask("http://mcmap2.mesacounty.us/arcgis/rest/services/maps/" + selValue);
+                                loqQueryTask = new QueryTask("https://mcmap2.mesacounty.us/arcgis/rest/services/maps/" + selValue);
                                 selectQuery.returnGeometry = true;
                                 selectQuery.outFields = ["*"];
 

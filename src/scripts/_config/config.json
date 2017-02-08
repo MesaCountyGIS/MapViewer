@@ -1,9 +1,9 @@
 {
-    "geometryService": "http://mcmap2.mesacounty.us/arcgis/rest/services/Utilities/Geometry/GeometryServer",
-    "printURL": "http://mcmap2.mesacounty.us/arcgis/rest/services/Printing/MCExportWebMap/GPServer/Export%20Web%20Map",
-    "proxyURL": "http://emap.mesacounty.us/proxypage/proxy.ashx",
+    "geometryService": "https://mcmap2.mesacounty.us/arcgis/rest/services/Utilities/Geometry/GeometryServer",
+    "printURL": "https://mcmap2.mesacounty.us/arcgis/rest/services/Printing/MCExportWebMap/GPServer/Export%20Web%20Map",
+    "proxyURL": "https://emap.mesacounty.us/proxypage/proxy.ashx",
     "imagesList": {
-        "mapFolder": "http://mcmap2.mesacounty.us/arcgis/rest/services/Mosaic_Datasets/",
+        "mapFolder": "https://mcmap2.mesacounty.us/arcgis/rest/services/Mosaic_Datasets/",
         "serverType": "/ImageServer",
         "images": [
           {

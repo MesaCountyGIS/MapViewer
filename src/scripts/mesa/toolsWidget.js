@@ -111,7 +111,7 @@ define([
         helpClick: function () {
             if (dom.byId("helpMenu2") && !(registry.byId("helpMenu2"))) { //remove the 2 after user caches have been updated
                 var help = new helpWidget({
-                    printUrl: "http://mcmap2.mesacounty.us/arcgis/rest/services/Printing/MCExportWebMap/GPServer/Export%20Web%20Map",
+                    printUrl: "https://mcmap2.mesacounty.us/arcgis/rest/services/Printing/MCExportWebMap/GPServer/Export%20Web%20Map",
                     device:"desktop"
                 }, "helpMenu2"); //remove the 2 after user caches have been updated
                 help.startup();

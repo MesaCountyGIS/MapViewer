@@ -8,7 +8,7 @@ define([
             deferred.addCallback(function (response) {
                 return array.map(response, function (result) {
                     var feature = result.feature, fieldName = feature.attributes, html='';
-                    if (fieldName.MAP_ID !== "Null") html += "<b>Site Inventory No: </b><a href='http://www.mesacounty.us/WorkArea/linkit.aspx?LinkIdentifier=id&ItemID=26132&libID=26277'>{MAP_ID}</a><br>";
+                    if (fieldName.MAP_ID !== "Null") html += "<b>Site Inventory No: </b><a href='https://www.mesacounty.us/WorkArea/linkit.aspx?LinkIdentifier=id&ItemID=26132&libID=26277'>{MAP_ID}</a><br>";
                     if (fieldName.FCC_NO !== "Null") html += "<b>FCC #: </b>{FCC_NO}<br>";
                     if (fieldName.HEIGHT !== "Null") html += "<b>Height: </b>{HEIGHT}<br>";
                     if (fieldName.STRCTR_TYPE !== "Null") html += "<b>Structure Type: </b>{STRCTR_TYPE}<br>";
@@ -111,7 +111,7 @@ define([
                     feature.attributes.layerName = result.layerName;
                     var template = new PopupTemplate({
                         title: "Mesa County Soils",
-                        description: "<b>Soil Unit Name: </b><a target='_blank' href='http://emap.mesacounty.us/Soils/osd/{WEBLINK}.htm'>{MUNAME}</a><br><b>Farmland Capability: </b>{FARMLNDCL}<br><b>Flooding Frequency: </b>{FLODFREQDC}<br><b>Ponding Frequency: </b>{PONDFREQPR}"
+                        description: "<b>Soil Unit Name: </b><a target='_blank' href='https://emap.mesacounty.us/Soils/osd/{WEBLINK}.htm'>{MUNAME}</a><br><b>Farmland Capability: </b>{FARMLNDCL}<br><b>Flooding Frequency: </b>{FLODFREQDC}<br><b>Ponding Frequency: </b>{PONDFREQPR}"
                     });
                     feature.setInfoTemplate(template);
                     return feature;
@@ -128,7 +128,7 @@ define([
                     feature.attributes.layerName = result.layerName;
                     var template = new PopupTemplate({
                         title: "Septic Systems",
-                        description: "<b>Date: </b>{Date}<br><b>Tax Number: </b>{Tax Number}<br><b>Permit Number: </b>{Permit Number}<br><b>Street Address: </b>{Street Address}<br><b>Septic Records: </b><a target='_blank' href='http://www.mesacounty.us/gisweb/gisweb.aspx?wci=viewpages&wce=h{Septic Records}'>{Septic Records}</a>"
+                        description: "<b>Date: </b>{Date}<br><b>Tax Number: </b>{Tax Number}<br><b>Permit Number: </b>{Permit Number}<br><b>Street Address: </b>{Street Address}<br><b>Septic Records: </b><a target='_blank' href='https://www.mesacounty.us/gisweb/gisweb.aspx?wci=viewpages&wce=h{Septic Records}'>{Septic Records}</a>"
                     });
                     feature.setInfoTemplate(template);
                     return feature;
@@ -145,7 +145,7 @@ define([
                     feature.attributes.layerName = result.layerName;
                     var template = new PopupTemplate({
                         title: "Property Sales",
-                        description: "<b>ACCOUNT NO: </b><a target='_blank' href='http://emap.mesacounty.us/assessor_lookup/Assessor_Parcel_Report.aspx?Account={ACCOUNTNO}'>{ACCOUNTNO}</a><br><b>PARCEL NO: </b>{PARCEL_NUM}<br><b>ASSOCPAR: </b>{ASSOCPAR}<br><b>OWNER: </b>{OWNER}<br><b>JOINT OWNER: </b>{JTOWNER}<br><b>LOCATION: </b>{LOCATION}<br><b>LOCATION ZIP: </b>{SITUS_ZIP}<br><b>ACRES: </b>{Acres}<br><b>SALE PRICE: </b>{SPRICE}<br><b>SALE DATE: </b>{SDATE}<br><b>SALE QUALIFICATION CODE: </b>{SQUAL}<br><b>SALE RECEPTION NO: </b><a target='_blank' href='https://recording.mesacounty.us/Landmarkweb//search/DocumentBy?ClerkFileNumber={SRECPT}'>{SRECPT}</a><br><b>SALE COUNT: </b>{SCOUNT}<br><b>LOT: </b>{LOT}<br><b>BLOCK: </b>{BLOCK}<br><b>SUBDIVISION CODE: </b>{SCN}<br><b>NEIGHBORHOOD: </b>{NBHD}<br><b>NEIGHBORHOOD DESC: </b>{NBDESC}<br><b>LEGAL: </b>{LEGAL}<br><b>ECONOMIC AREA: </b>{ECON}<br><b>GRANTEE: </b>{GRANTEE}<br><b>GRANTOR: </b>{GRANTOR}<br><b>PROPERTY TYPE: </b>{PROPTYPE}<br><b>YEAR BUILT: </b>{AYB1ST}<br><b>EFFECTIVE YEAR BUILT: </b>{EFFYRBLT1ST}<br><b>ARCHETECTURAL TYPE: </b>{ARCH1ST}<br><b>TOTAL SQ FT: </b>{TOTHTSQF}<br><b>ROOMS: </b>{RMS1ST}<br><b>BEDROOMS: </b>{BDRMS1ST}<br><b>BATHROOMS: </b>{BTHS1ST}<br><b>TOTAL UNITS: </b>{TOTNOUNITS}<br><b>TOTAL BUILDINGS: </b>{TOTNOBLDGS}<br><b>BUILDING USE CODE: </b>{BLDGUSE}<br><b>LAND USE CODE: </b>{LNDUSE}<br><b>STATUS: </b>{STATUS}<br><b>TAC: </b>{TAC}<br><b>CURRENT LAND VALUE: </b>${LNDVALCUR}.00<br><b>CURRENT IMPROVEMENTS VALUE: </b>${IMPVALCUR}.00<br><b>TOTAL CURRENT VALUE: </b>${TOTVALCUR}.00<br><b>CURRENT LAND ASSESSED VALUE: </b>${LNDASSCUR}.00<br><b>CURRENT IMPROVEMENTS ASSESSED VALUE: </b>${IMPASSCUR}.00<br><b>CURRENT TOTAL ASSESSED VALUE: </b>${TOTASSCUR}.00<br><b>PREVIOUS LAND VALUE: </b>${LNDVALPRE}.00<br><b>PREVIOUS IMPROVEMENTS VALUE: </b>${IMPVALPRE}.00<br><b>TOTAL PREVIOUS VALUE: $</b>{TOTVALPRE}.00<br><b>PREVIOUS LAND ASSESSED VALUE: $</b>{LNDASSPRE}.00<br><b>PREVIOUS IMPROVEMENTS ASSESSED VALUE: $</b>{IMPASSPRE}.00<br><b>TOTAL PREVIOUS ASSESSED VALUE: </b>${TOTASSPRE}.00<br><b>MAILING ADDRESS: </b>{MAILING}<br>{CITY}, {ST}, {ZIP}<br><b>ZONING: </b>{ZONING}"
+                        description: "<b>ACCOUNT NO: </b><a target='_blank' href='https://emap.mesacounty.us/assessor_lookup/Assessor_Parcel_Report.aspx?Account={ACCOUNTNO}'>{ACCOUNTNO}</a><br><b>PARCEL NO: </b>{PARCEL_NUM}<br><b>ASSOCPAR: </b>{ASSOCPAR}<br><b>OWNER: </b>{OWNER}<br><b>JOINT OWNER: </b>{JTOWNER}<br><b>LOCATION: </b>{LOCATION}<br><b>LOCATION ZIP: </b>{SITUS_ZIP}<br><b>ACRES: </b>{Acres}<br><b>SALE PRICE: </b>{SPRICE}<br><b>SALE DATE: </b>{SDATE}<br><b>SALE QUALIFICATION CODE: </b>{SQUAL}<br><b>SALE RECEPTION NO: </b><a target='_blank' href='https://recording.mesacounty.us/Landmarkweb//search/DocumentBy?ClerkFileNumber={SRECPT}'>{SRECPT}</a><br><b>SALE COUNT: </b>{SCOUNT}<br><b>LOT: </b>{LOT}<br><b>BLOCK: </b>{BLOCK}<br><b>SUBDIVISION CODE: </b>{SCN}<br><b>NEIGHBORHOOD: </b>{NBHD}<br><b>NEIGHBORHOOD DESC: </b>{NBDESC}<br><b>LEGAL: </b>{LEGAL}<br><b>ECONOMIC AREA: </b>{ECON}<br><b>GRANTEE: </b>{GRANTEE}<br><b>GRANTOR: </b>{GRANTOR}<br><b>PROPERTY TYPE: </b>{PROPTYPE}<br><b>YEAR BUILT: </b>{AYB1ST}<br><b>EFFECTIVE YEAR BUILT: </b>{EFFYRBLT1ST}<br><b>ARCHETECTURAL TYPE: </b>{ARCH1ST}<br><b>TOTAL SQ FT: </b>{TOTHTSQF}<br><b>ROOMS: </b>{RMS1ST}<br><b>BEDROOMS: </b>{BDRMS1ST}<br><b>BATHROOMS: </b>{BTHS1ST}<br><b>TOTAL UNITS: </b>{TOTNOUNITS}<br><b>TOTAL BUILDINGS: </b>{TOTNOBLDGS}<br><b>BUILDING USE CODE: </b>{BLDGUSE}<br><b>LAND USE CODE: </b>{LNDUSE}<br><b>STATUS: </b>{STATUS}<br><b>TAC: </b>{TAC}<br><b>CURRENT LAND VALUE: </b>${LNDVALCUR}.00<br><b>CURRENT IMPROVEMENTS VALUE: </b>${IMPVALCUR}.00<br><b>TOTAL CURRENT VALUE: </b>${TOTVALCUR}.00<br><b>CURRENT LAND ASSESSED VALUE: </b>${LNDASSCUR}.00<br><b>CURRENT IMPROVEMENTS ASSESSED VALUE: </b>${IMPASSCUR}.00<br><b>CURRENT TOTAL ASSESSED VALUE: </b>${TOTASSCUR}.00<br><b>PREVIOUS LAND VALUE: </b>${LNDVALPRE}.00<br><b>PREVIOUS IMPROVEMENTS VALUE: </b>${IMPVALPRE}.00<br><b>TOTAL PREVIOUS VALUE: $</b>{TOTVALPRE}.00<br><b>PREVIOUS LAND ASSESSED VALUE: $</b>{LNDASSPRE}.00<br><b>PREVIOUS IMPROVEMENTS ASSESSED VALUE: $</b>{IMPASSPRE}.00<br><b>TOTAL PREVIOUS ASSESSED VALUE: </b>${TOTASSPRE}.00<br><b>MAILING ADDRESS: </b>{MAILING}<br>{CITY}, {ST}, {ZIP}<br><b>ZONING: </b>{ZONING}"
                     });
                     feature.setInfoTemplate(template);
                     return feature;
@@ -170,7 +170,7 @@ define([
                     } else if (result.layerName === 'Consolidated Zoning Districts') {
                         template = new PopupTemplate({
                             title: "Zoning Districts",
-                            description: "<b>Zone Class: </b>{Zoning Classification}<br><b>Previous Zoning: </b>{PREV_CLASS}<br><b>Date of Rezone: </b>{Date_Rezone}<br><b>Year Rezoned: </b>{Year_Rezone}<br><b>Reception Number: </b>{Recept_Num}" + "<br><br><a target=_blank href='http://www.mesacounty.us/planning/land-development-code.aspx'>Mesa County Land Development Code</a>"
+                            description: "<b>Zone Class: </b>{Zoning Classification}<br><b>Previous Zoning: </b>{PREV_CLASS}<br><b>Date of Rezone: </b>{Date_Rezone}<br><b>Year Rezoned: </b>{Year_Rezone}<br><b>Reception Number: </b>{Recept_Num}" + "<br><br><a target=_blank href='https://www.mesacounty.us/planning/land-development-code.aspx'>Mesa County Land Development Code</a>"
                         });
                         feature.setInfoTemplate(template);
                     }
@@ -199,7 +199,7 @@ define([
                     } else if (n === 'White' || n === 'Yellow' || n === 'Orange' || n === 'Black' || n === 'Red') {
                         template = new PopupTemplate({
                             title: "Load Limit Structure",
-                            description: "<b>Name: </b>{Structure Name}<br><b>Location: </b>{Location}<br><b>Latitude: </b>{Latitude}<br><b>Longitude: </b>{Longitude}<br>" + "<a href='http://emap.mesacounty.us/viewerdocs/loadlimits/loadlegend.pdf'>Click for Load Limit information</a>"
+                            description: "<b>Name: </b>{Structure Name}<br><b>Location: </b>{Location}<br><b>Latitude: </b>{Latitude}<br><b>Longitude: </b>{Longitude}<br>" + "<a href='https://emap.mesacounty.us/viewerdocs/loadlimits/loadlegend.pdf'>Click for Load Limit information</a>"
                         });
                         feature.setInfoTemplate(template);
                     } else if (n === 'Load Limit Roads') {
@@ -211,7 +211,7 @@ define([
                     } else if (n === 'Escort Requirements') {
                         template = new PopupTemplate({
                             title: "Escort Requirements",
-                            description: "<b>Name: </b>{NAME}<br>" + "<a href='http://emap.mesacounty.us/viewerdocs/loadlimits/escortlegend.pdf'>Click for Road Escort information</a>"
+                            description: "<b>Name: </b>{NAME}<br>" + "<a href='https://emap.mesacounty.us/viewerdocs/loadlimits/escortlegend.pdf'>Click for Road Escort information</a>"
                         });
                         feature.setInfoTemplate(template);
                     } else if (n === 'Regulatory Speed Limits') {
@@ -313,7 +313,7 @@ define([
         },
 
         vac: function (evt, deferred, len) {
-            var desc = "<b>ACCOUNT NO: </b><a target='_blank' href='http://emap.mesacounty.us/assessor_lookup/Assessor_Parcel_Report.aspx?Account={ACCOUNTNO}'>{ACCOUNTNO}</a><br><b>PARCEL NO: </b>{PARCEL_NUM}" + "<br><b>LOCATION: </b>{LOCATION}<br><b>LOCATION ZIP: </b>{SITUS_ZIP}<br>          <b>MAILING ADDRESS: </b>{MAILING}" + "<br>{CITY}, {ST}, {ZIP}<br><b>APPROXIMATE ACRES: </b>{Acres}<br><b>SALE PRICE: </b>{SPRICE}<br><b>SALE DATE: </b>{SDATE}" + "<br><b>SALE QUALIFICATION CODE: </b>{SQUAL}<br><b>SALE RECEPTION NO: </b><a target='_blank' href='https://recording.mesacounty.us/Landmarkweb//search/DocumentBy?ClerkFileNumber={SRECPT}'>{SRECPT}</a>" + "<br><b>SALE COUNT: </b>{SCOUNT}<br><b>SUBDIVISION CODE: </b>{SCN}<br><b>NEIGHBORHOOD: </b>{NBHD}<br><b>NEIGHBORHOOD DESC: </b>{NBDESC}<br><b>LEGAL: </b>{LEGAL}" + "<br><b>ECONOMIC AREA: </b>{ECON}<br><b>PROPERTY TYPE: </b>{PROPTYPE}<br><b>LAND USE CODE: </b>{LNDUSE}<br><b>STATUS: </b>{STATUS}<br><b>TAC: </b>{TAC}<br><b>CURRENT LAND VALUE: </b>${LNDVALCUR}.00" + "<br><b>CURRENT LAND ASSESSED VALUE: </b>${LNDASSCUR}.00<br><b>ZONING: </b>{ZONING}<br><b>JURISDICTION: </b>{Juris}<br><b>PLANNING AREA: </b>{Planning_Area}";
+            var desc = "<b>ACCOUNT NO: </b><a target='_blank' href='https://emap.mesacounty.us/assessor_lookup/Assessor_Parcel_Report.aspx?Account={ACCOUNTNO}'>{ACCOUNTNO}</a><br><b>PARCEL NO: </b>{PARCEL_NUM}" + "<br><b>LOCATION: </b>{LOCATION}<br><b>LOCATION ZIP: </b>{SITUS_ZIP}<br>          <b>MAILING ADDRESS: </b>{MAILING}" + "<br>{CITY}, {ST}, {ZIP}<br><b>APPROXIMATE ACRES: </b>{Acres}<br><b>SALE PRICE: </b>{SPRICE}<br><b>SALE DATE: </b>{SDATE}" + "<br><b>SALE QUALIFICATION CODE: </b>{SQUAL}<br><b>SALE RECEPTION NO: </b><a target='_blank' href='https://recording.mesacounty.us/Landmarkweb//search/DocumentBy?ClerkFileNumber={SRECPT}'>{SRECPT}</a>" + "<br><b>SALE COUNT: </b>{SCOUNT}<br><b>SUBDIVISION CODE: </b>{SCN}<br><b>NEIGHBORHOOD: </b>{NBHD}<br><b>NEIGHBORHOOD DESC: </b>{NBDESC}<br><b>LEGAL: </b>{LEGAL}" + "<br><b>ECONOMIC AREA: </b>{ECON}<br><b>PROPERTY TYPE: </b>{PROPTYPE}<br><b>LAND USE CODE: </b>{LNDUSE}<br><b>STATUS: </b>{STATUS}<br><b>TAC: </b>{TAC}<br><b>CURRENT LAND VALUE: </b>${LNDVALCUR}.00" + "<br><b>CURRENT LAND ASSESSED VALUE: </b>${LNDASSCUR}.00<br><b>ZONING: </b>{ZONING}<br><b>JURISDICTION: </b>{Juris}<br><b>PLANNING AREA: </b>{Planning_Area}";
             deferred.addCallback(function (response) {
 
                 return array.map(response, function (result) {
@@ -599,7 +599,7 @@ define([
                     feature.attributes.layerName = result.layerName;
                     template = new PopupTemplate({
                         title: result.layerName,
-                        description: "<b>Project Number: </b><a target='_blank' href='http://www.mesacounty.us/Planning/ProjectDetail.aspx?pn={Land Project Number}'>{Land Project " +
+                        description: "<b>Project Number: </b><a target='_blank' href='https://www.mesacounty.us/Planning/ProjectDetail.aspx?pn={Land Project Number}'>{Land Project " +
                             "Number}<br><b>Project Name: </b> {Project Name}<br><b>Year: </b> {Year}<br><b>Status: </b> {STATUS}"
                     });
                     feature.setInfoTemplate(template);
@@ -652,7 +652,7 @@ define([
                     if (result.layerName === 'FEMA Map Panel Index') {
                         template = new PopupTemplate({
                             title: "FEMA Map Panel Index",
-                            description: "<b>Layer Name: </b>FEMA Map Panel Index<br><b>FIRM Panel Number: </b><a title='Click to view FIRM panel map' href='http://www.mesacounty.us/gisweb/gisweb.aspx?wci=viewpages&wce=F{FIRM_PAN}'>{FIRM_PAN}</a><br><br>" + "<a title='The FEMA Map Service Center provides access to LOMC documents (if available)' href='https://msc.fema.gov/webapp/wcs/stores/servlet/MapSearchResult?storeId=10001&catalogId=10001&langId=-1&panelIDs={FIRM_PAN}$&Type=pbp&nonprinted=&unmapped='>(Additional FEMA Data)</a>"
+                            description: "<b>Layer Name: </b>FEMA Map Panel Index<br><b>FIRM Panel Number: </b><a title='Click to view FIRM panel map' href='https://www.mesacounty.us/gisweb/gisweb.aspx?wci=viewpages&wce=F{FIRM_PAN}'>{FIRM_PAN}</a><br><br>" + "<a title='The FEMA Map Service Center provides access to LOMC documents (if available)' href='https://msc.fema.gov/webapp/wcs/stores/servlet/MapSearchResult?storeId=10001&catalogId=10001&langId=-1&panelIDs={FIRM_PAN}$&Type=pbp&nonprinted=&unmapped='>(Additional FEMA Data)</a>"
                         });
                         feature.setInfoTemplate(template);
                     } else if (result.layerName === 'FEMA Regulatory Floodplain') {
@@ -686,13 +686,13 @@ define([
         engdocs: function (evt, deferred) {
             deferred.addCallback(function (response) {
                 return array.map(response, function (result) {
-                    var url = "http://www.mesacounty.us/gisweb/gisweb.aspx?wci=viewpages&wce=e";
+                    var url = "https://www.mesacounty.us/gisweb/gisweb.aspx?wci=viewpages&wce=e";
                     var template;
                     var feature = result.feature;
                     feature.attributes.layerName = result.layerName;
                     template = new PopupTemplate({
                         title: result.layerName,
-                        description: "<b>Name:</b> {Name}<br><b>Prepared By:</b> {Prepared By}<br><b>Date:</b> {Date}<br><b>Type:</b> {Type}<br><b>Project Number:</b> {Project No}" + "<br><b>Document Type:</b> {Document Type}<br><b>Weblink:</b> <a target='_blank' href='http://www.mesacounty.us/gisweb/gisweb.aspx?wci=viewpages&wce=e{Dev Weblink}'>{Dev Weblink}</a>"
+                        description: "<b>Name:</b> {Name}<br><b>Prepared By:</b> {Prepared By}<br><b>Date:</b> {Date}<br><b>Type:</b> {Type}<br><b>Project Number:</b> {Project No}" + "<br><b>Document Type:</b> {Document Type}<br><b>Weblink:</b> <a target='_blank' href='https://www.mesacounty.us/gisweb/gisweb.aspx?wci=viewpages&wce=e{Dev Weblink}'>{Dev Weblink}</a>"
                     });
                     feature.setInfoTemplate(template);
                     return feature;
@@ -763,7 +763,7 @@ define([
                         template = new PopupTemplate({
                             title: "Deposit Surveys",
                             description: "<span title='Deposit Survey - Click to highlight' class='nored dep' id='{iOBJECTID}' onclick='getit({OBJECTID},15);'></span> " +
-                                " <a target='_blank' href='http://www.mesacounty.us/gisweb/gisweb.aspx?wci=viewpages&wce=GD{Deposit Number}'> " +
+                                " <a target='_blank' href='https://www.mesacounty.us/gisweb/gisweb.aspx?wci=viewpages&wce=GD{Deposit Number}'> " +
                                 " {Deposit Number}</a> {Title} - {Date}<br>"
                         });
                         feature.setInfoTemplate(template);
@@ -772,7 +772,7 @@ define([
                             title: "Historical Surveys",
                             description: "<span title='Historic Survey - Click to highlight' class='nored hist' id='i{OBJECTID}" +
                                 "' onclick='getit({OBJECTID},14);'></span> " +
-                                "<a target='_blank' href='http://www.mesacounty.us/gisweb/gisweb.aspx?wci=viewpages&wce=GH{HISTORICAL S. WEBLINK}'>" +
+                                "<a target='_blank' href='https://www.mesacounty.us/gisweb/gisweb.aspx?wci=viewpages&wce=GH{HISTORICAL S. WEBLINK}'>" +
                                 "{HISTORICAL S. WEBLINK}</a> {NAME} - {DATE}<br>"
                         });
                         feature.setInfoTemplate(template);
@@ -781,7 +781,7 @@ define([
                             title: "Historical Surveys",
                             description: "<span title='GLO Survey - Click to highlight' class='nored glo' id='i{OBJECTID}'" +
                                 " onclick='getit({OBJECTID},16);'></span> " +
-                                "<a target='_blank' href='http://www.mesacounty.us/gisweb/gisweb.aspx?wci=viewpages&wce=GL{GLO WEBLINK}'>" +
+                                "<a target='_blank' href='https://www.mesacounty.us/gisweb/gisweb.aspx?wci=viewpages&wce=GL{GLO WEBLINK}'>" +
                                 "<b>{NAME}</b> (GLO Plat)</a><br>"
                         });
                         feature.setInfoTemplate(template);
@@ -847,7 +847,7 @@ define([
                             description: "<span title='Mesa County Survey Monuments' class='nored mon' id='i{OBJECTID}'" +
                             " onclick='pointit({OBJECTID},2);'></span>Monument Surveyor: {Surveyor}<br>Date: {Date}" +
                             "<br>Corner: {Corner}<br>Monument Record: " +
-                            "<a target='_blank' href='http://www.mesacounty.us/gisweb/gisweb.aspx?wci=viewpages&wce=gm{Monument Weblink}'>" +
+                            "<a target='_blank' href='https://www.mesacounty.us/gisweb/gisweb.aspx?wci=viewpages&wce=gm{Monument Weblink}'>" +
                             "{Monument Weblink}</a><br><span title='Mesa County Survey Monument'>MCSM</span>: {Mesa County Survey Monument}"
                         });
                         feature.setInfoTemplate(template);
@@ -856,7 +856,7 @@ define([
                             title: "Delta County GPS Monuments/SIMS",
                             description: "<span title='Delta County GPS Monuments/SIMS - Click to expand' class='nored delta' id='i{OBJECTID}'" +
                             " onclick='pointit({OBJECTID},1);'></span><b>GPS ID: </b>" +
-                            "<a target='_blank' href='http://emap.mesacounty.us/DeltaCountyMapping/default.aspx?value={GPS_ID_Delta}'>{GPS_ID_Delta}</a>" +
+                            "<a target='_blank' href='https://emap.mesacounty.us/DeltaCountyMapping/default.aspx?value={GPS_ID_Delta}'>{GPS_ID_Delta}</a>" +
                             "<br><div class='nored collapse' id='{GPS_ID}' style='display:none;'><b>BLM ID: </b>{BLM_ID_NO}<br>" +
                             "<b>GPS Precision: </b>{GPS_PRECIS}<br><b>UTM Northing: </b>{UTM_NORTHI}<br><b>UTM Easting: </b>{UTM_EASTIN}<br>" +
                             "<b>NAVD88 Elevation: </b>{NAVD88_ELE}<br><b>Latitude (DMS): </b>{LATITUDE_D}<br><b>Longitude (DMS): </b>" +
@@ -869,7 +869,7 @@ define([
                             title: "Mesa County GPS Monuments/SIMS",
                             description: "<span title='Mesa County GPS Monuments/SIMS - Click to expand' class='nored mesa' id='i{OBJECTID}'" +
                             " onclick='pointit({OBJECTID},0,{GPS_ID});'></span> " + "<b>GPS ID: </b>" +
-                            "<a target='_blank' href='http://emap.mesacounty.us/SIMS/Default.aspx?value={GPS_ID}'>{GPS_ID}</a><br>" +
+                            "<a target='_blank' href='https://emap.mesacounty.us/SIMS/Default.aspx?value={GPS_ID}'>{GPS_ID}</a><br>" +
                             "<div class='nored collapse' id='{GPS_ID}' style='display:none;'><b>Monument placed: </b>{DATE_}<br>   <b>Revised Date: </b>" +
                             "{REVISE_DAT}<br><b>State Number: </b>{STATE_NO}<br><b>Former ID: </b>{FORMER_ID}<br><b>Township: </b>{TNSHP}<br>" +
                             "<b>Range: </b>{RANGE}<br><b>Prime Meridian: </b>{PM}<br><b>Code: </b>{CODE}<br><b>Monument Box: </b>{MON_BOX}<br>" +
@@ -960,7 +960,7 @@ function getit(objID, layerID, opt) {
             geometryServiceURL: esriConfig.defaults.geometryService,
             mapRef: aG.map,
         });
-        var borderQueryTask = new QueryTask("http://mcmap2.mesacounty.us/arcgis/rest/services/maps/eSurveyor/MapServer/" + layerID);
+        var borderQueryTask = new QueryTask("https://mcmap2.mesacounty.us/arcgis/rest/services/maps/eSurveyor/MapServer/" + layerID);
         var borderQuery = new Query();
         borderQuery.returnGeometry = !0, borderQuery.outFields = ["OBJECTID"], borderQuery.where = "OBJECTID = " + objID, borderQueryTask.execute(borderQuery, function (border) {
             aG.map.graphics.add(new Graphic(graphicTool.createJSONPolygon(border.features[0].geometry.rings)));
