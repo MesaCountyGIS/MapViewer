@@ -31,11 +31,21 @@ nav {
 }
 
 #headerMessage {
-  width: 100%;
+  width: 70%;
   position: fixed;
   text-align: center;
   left: 0;
-  top: 1em;
+  top: 2em;
+  margin-left: 15%;
+  font-size: .7em;
+}
+
+#headerMessage span {
+  cursor: pointer;
+  width: auto;
+  background-color: #ceb889;
+  padding: .5em;
+  border-radius: 3px;
 }
 
 div .titleButton .arrow:hover {
@@ -1370,6 +1380,12 @@ input {
   margin-left: 4em;
 }
 
+@media only screen and (max-width:568px) {
+  #loading {
+    left: 25%;
+  }
+}
+
 #loadWindow,
 .noLoad {
   display: none;
@@ -2417,10 +2433,6 @@ input#mapTitle {
 }
 
 @media only screen and (max-width:1024px) {
-  #loading {
-    left: 25%;
-  }
-
   #autocompleteSearch,
   #coordinateBlock,
   #layerSelect,

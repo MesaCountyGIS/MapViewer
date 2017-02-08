@@ -70,11 +70,20 @@ figure {
 }
 
 #headerMessage{
-  width: 100%;
+  width: 70%;
   position: fixed;
   text-align: center;
   left: 0;
-  top: 1em;
+  top: 2em;
+  margin-left:15%;
+  font-size:0.7em;
+  span{
+    cursor:pointer;
+    width:auto;
+    background-color: #ceb889;
+    padding: 0.5em;
+    border-radius: 3px;
+  }
 }
 
 div .titleButton .arrow:hover {
@@ -1353,6 +1362,14 @@ input {
     margin-left:4em;
   }
 }
+
+@media only screen and (max-width: 568px) {
+  #loading{
+    left:25%;
+  }
+}
+
+
 
 @import './loadLimits.less';
 @import './slidersAndSpinners.less';

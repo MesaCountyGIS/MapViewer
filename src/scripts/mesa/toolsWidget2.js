@@ -54,9 +54,10 @@ define([
             legendObject.refresh(legLayers);
             //Set up event handlers for slide out menu
             on(query(".mainSideMenu li"), "click", dispatchMainMenuClick);
-            on(query("#DTtoolstrip button, #panelTab, #sharebutton, .submen li"), "click", togglePanel);
+            on(query("#DTtoolstrip button, #panelTab, #sharebutton, .submen li, #headerMessage span"), "click", togglePanel);
             on(query('.themeMenu li'), "click", function(e){
                 var layer = domAttr.get(this, 'data-value');
+                query("#headerMessage span")[0].innerText = this.innerText;
                 toolsWidget.dispatchThemeMenuClick(layer);
             });
             on(query('.measureClick'), "click", dispatchMeasureTool);
