@@ -44,7 +44,7 @@ nav {
 #headerMessage span {
   cursor: pointer;
   width: auto;
-  background-color: #9d9584;
+  background-color: #c8ba9e;
   padding: .5em;
   border-radius: 3px;
 }
@@ -1302,7 +1302,7 @@ input {
 
 .mesaTools ul li {
   margin: 0 auto .5em;
-  background-color: #ffe284;
+  background-color: #efddb9;
   padding: .2em;
   width: 10em;
   border-radius: 3px;
