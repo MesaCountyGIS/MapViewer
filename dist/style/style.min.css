@@ -31,6 +31,7 @@ nav {
 }
 
 #headerMessage {
+  display: none;
   width: 70%;
   position: fixed;
   text-align: center;
@@ -2433,12 +2434,19 @@ input#mapTitle {
 }
 
 @media only screen and (max-width:1024px) {
-  #autocompleteSearch,
-  #coordinateBlock,
   #layerSelect,
   #map_zoom_slider,
+  #snapmessage {
+    display: none;
+  }
+
+  #headerMessage {
+    display: block;
+  }
+
+  #autocompleteSearch,
+  #coordinateBlock,
   #sharebutton,
-  #snapmessage,
   #socialShare,
   .esriScalebar {
     display: none;
