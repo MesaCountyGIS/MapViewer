@@ -233,7 +233,8 @@ define([
                         var printer = new printWidget({
                             printUrl: printerURL,
                             mapRef: map,
-                            device: device
+                            device: device,
+                            panel: registry.byId("toolsView2").domNode
                         }, "printTool");
                         printer.startup();
                     }

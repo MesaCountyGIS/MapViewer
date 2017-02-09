@@ -57,6 +57,7 @@ div .titleButton .arrow:hover {
   width: 100%;
   height: 100%;
   padding: 0;
+  text-align: center;
 }
 
 #toolbar {
@@ -1381,12 +1382,6 @@ input {
   margin-left: 4em;
 }
 
-@media only screen and (max-width:568px) {
-  #loading {
-    left: 25%;
-  }
-}
-
 #loadWindow,
 .noLoad {
   display: none;
@@ -2176,13 +2171,13 @@ form.qForm label {
 }
 
 #progressbar {
+  display: inline-block;
   background-color: #fff;
   opacity: .8;
   z-index: 1;
   padding: .8em;
   width: 12em;
   top: 50%;
-  left: 45%;
   position: absolute;
   border-radius: 4px;
   -moz-border-radius: 4px;
@@ -2433,7 +2428,7 @@ input#mapTitle {
   background-position: 0 -2314px;
 }
 
-@media only screen and (max-width:1024px) {
+@media only screen and (max-width:1367px) {
   #layerSelect,
   #map_zoom_slider,
   #snapmessage {

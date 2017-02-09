@@ -13,6 +13,7 @@ define([
         printUrl: null,
         mapRef: null,
         device:null,
+        panel: null,
         callBack: null,
         widgetTitle: "Export For Printing",
         mapTitle: "Mesa County Map",
@@ -27,6 +28,7 @@ define([
 
             printWidget = this;
             device = printWidget.device;
+            panelNode = printWidget.panel;
             map = this.mapRef;
             callback = printWidget.callBack? printWidget.callBack: function(){void(0)};
             if (device === "desktop") {
@@ -47,18 +49,12 @@ define([
         },
 
         _setSpinnerAttr: function (dis) {
-            dis === 'show'? (domConstruct.place("<div id='progressbar' data-dojo-attach-point='progressbar'>Exporting...<span class='spinner'></span></div>", dom.byId(this.mapRef.id), "before")):
+            dis === 'show'? (domConstruct.place("<div id='progressbar' data-dojo-attach-point='progressbar'>Exporting...<span class='spinner'></span></div>", dom.byId("loading"), "before")):
              domConstruct.destroy("progressbar");
         },
 
-        // closeClick: function (e) {
-        //     printWidget.domNode.style.display = "none";
-        //     printWidget.mapTitle.value = "";
-        //     printWidget.printLayout[0].selected = "true";
-        //     printWidget.printLayout[0].selected = "true";
-        //     callback();
-        // },
         exportClick: function () {
+            panelNode.style.display = "none";
             printWidget.set("spinner", "show");
             var printTask = new PrintTask(this.printUrl, {
                     async: true
