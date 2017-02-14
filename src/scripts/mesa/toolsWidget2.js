@@ -73,6 +73,9 @@ define([
             on(query('.baselyrs'), "click", function(e){
                 baseLayersSwitch(e, parcels, initialBasemap, map._layers.roadLabels);
             });
+            window.onresize = function(event) {
+                backButtonDisplay();
+            };
 
             //Turns on and off the base layers
             function baseLayersSwitch(e, ParcelLayerObject, basemapObject, roadLabelObject) {
@@ -129,17 +132,24 @@ define([
                 }
 
             }
+            
+
+            function backButtonDisplay(){
+                // if device is mobile, enable backMenu functionality
+                if(domStyle.get(query('.stacked-toggle span')[0], "display") === "block"){
+                    domStyle.set('backMenu', "visibility", "visible");
+                }else{
+                    domStyle.set('backMenu', "visibility", "hidden");
+                }
+            }
 
             function dispatchMainMenuClick(e){
                 e.stopPropagation();
                 toPage = domAttr.has(this, 'data-to')?
                     domAttr.get(this, 'data-to'): undefined;
                 if(toPage !== undefined){
-                    // if device is mobile, enable backMenu functionality
-                    if(domStyle.get(query('.stacked-toggle span')[0], "display") === "block"){
-                        domStyle.set('backMenu', "visibility", "visible");
-                    }
 
+                    backButtonDisplay();
                     domClass.add(query(".mainSideMenu")[0], "displayNo");
                     domClass.remove(query("." + toPage)[0], "displayNo");
 
