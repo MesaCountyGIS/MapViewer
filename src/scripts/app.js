@@ -231,11 +231,11 @@ function checkForMobile() {
         has.add("mobile", function(global, document, anElement) {
             if (has("ie")) {
                 require(["libs/matchMedia"], function() {
-                    return window.matchMedia("only screen and (max-width: 1024px)").matches && has("touch")
+                    return window.matchMedia("only screen and (max-width: 1024px)").matches// && has("touch")
                         ? true: false;
                 });
             } else {
-                return window.matchMedia("only screen and (max-width: 1024px)").matches && has("touch")
+                return window.matchMedia("only screen and (max-width: 1024px)").matches// && has("touch")
                     ? true: false;
             }
         });
