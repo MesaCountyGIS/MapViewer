@@ -133,7 +133,6 @@ define([
 
             }
             
-
             function backButtonDisplay(){
                 // if device is mobile, enable backMenu functionality
                 if(domStyle.get(query('.stacked-toggle span')[0], "display") === "block"){

@@ -10,12 +10,14 @@ define([
             domAttr, array, keys, Query, rangy, exportcsv, graphicsTools, SimpleFillSymbol, Draw, BufferParameters, GeometryService, graphicsUtils,
             _WidgetBase, _TemplatedMixin, template) {
 
+            var esriQuery;
+            var attQueryTask;
             var queryWidget;
             var functionStopper = 0;
             var returnToolsClick, returnQueryClick;
             var locator = {}, CSV,
                 map, result, field, selectedLI, gsvc, graphicTools;
-            var selValue, selectionToolbar, selectQuery, loqQueryTask, splitText, loqGeomType;
+            var selValue, selectionToolbar, esriQuery, loqQueryTask, splitText, loqGeomType;
             return declare("queryWidget", [_WidgetBase, _TemplatedMixin], {
                     templateString: template,
                     device: null,
@@ -120,7 +122,7 @@ define([
 
                         on(dom.byId("csv"), "click", function () {
                             ga('send', 'event', 'Query', 'Queryexport', 'Exported to CSV');
-                            attQueryTask.execute(geomQuery, CSV.returnCSV);
+                            attQueryTask.execute(esriQuery, CSV.returnCSV);
                         });
 
                         on(query("#qButtonBlock span"), "click", function (event) {
@@ -381,17 +383,17 @@ define([
                                     "ymax": 4428929,
                                     "spatialReference": utm12
                                 });
-                                geomQuery = new Query();
+                                esriQuery = new Query();
                                 if (dom.byId('checkExtent').checked) {
-                                    geomQuery.geometry = map.extent;
+                                    esriQuery.geometry = map.extent;
                                 } else {
-                                    geomQuery.geometry = countyExtent;
+                                    esriQuery.geometry = countyExtent;
                                 }
-                                geomQuery.returnGeometry = true;
-                                geomQuery.outFields = ["*"];
+                                esriQuery.returnGeometry = true;
+                                esriQuery.outFields = ["*"];
                                 if (!changefield) {
                                     query('select[name=attdisplayby]')[0].value = splitText[0];
-                                    geomQuery.where = dom.byId("qWhere").value;
+                                    esriQuery.where = dom.byId("qWhere").value;
                                 } else {
                                     //Get items from list to build the where clause
                                     var ids = query('#resultWindow2 ul li div span').map(function(e){
@@ -399,9 +401,9 @@ define([
                                     });
                                     var newWhere = "OBJECTID IN " + '(' + ids + ')';
                                     splitText[0] = changefield;
-                                    geomQuery.where = newWhere;
+                                    esriQuery.where = newWhere;
                                 }
-                                attQueryTask.execute(geomQuery, queryWidget._showSelected);
+                                attQueryTask.execute(esriQuery, queryWidget._showSelected);
                             })
                         } else {
                             return
@@ -519,12 +521,11 @@ define([
                                 ga('send', 'event', 'loqQuery', 'loqQueryLayer', selValue);
                                 selectionToolbar.deactivate();
                                 lmG.pLay.infoTemplate = aG.pTemp;
-                                var bufDist = "",
-                                    bufUOM, whereClause;
-                                selectQuery = new Query();
+                                var bufDist = "", bufUOM, whereClause;
+                                esriQuery = new Query();
                                 loqQueryTask = new QueryTask("https://mcmap2.mesacounty.us/arcgis/rest/services/maps/" + selValue);
-                                selectQuery.returnGeometry = true;
-                                selectQuery.outFields = ["*"];
+                                esriQuery.returnGeometry = true;
+                                esriQuery.outFields = ["*"];
 
                                 if (trig.length === 0) {
                                     splitText = ["ACCOUNTNO"];
@@ -554,12 +555,12 @@ define([
                                     gsvc.simplify([results.geometry], function (geometries) {
                                         params.geometries = geometries;
                                         gsvc.buffer(params, function (geom) {
-                                            selectQuery.geometry = geom[0];
+                                            esriQuery.geometry = geom[0];
                                             //if buffer tool and attribute tool are displayed and have a value listed
                                             if (
                                             !(domClass.contains(query(".queryFields")[0], "displayNo")) && dom.byId("qWhere").value.length > 0
                                         ){
-                                                selectQuery.where = dom.byId("qWhere").value;
+                                                esriQuery.where = dom.byId("qWhere").value;
                                                 ga('send', 'event', 'loqQuery', 'loqQueryFilter', 'Filtered by attributes and buffer');
                                                 fireQuery();
                                             } else {
@@ -569,20 +570,20 @@ define([
                                         });
                                     });
                             } else if (!(domClass.contains(query(".queryFields")[0], "displayNo")) && dom.byId("qWhere").value.length > 0) {
-                                    selectQuery.where = dom.byId("qWhere").value;
-                                    selectQuery.geometry = results.geometry;
+                                    esriQuery.where = dom.byId("qWhere").value;
+                                    esriQuery.geometry = results.geometry;
                                     ga('send', 'event', 'loqQuery', 'loqQueryFilter', 'Filtered by attributes');
                                     fireQuery();
                                 }else{
                                     ga('send', 'event', 'loqQuery', 'loqQueryFilter', 'loq Query without filter');
                                     query('select[name=attdisplayby]')[0].value = "ACCOUNTNO";
-                                    selectQuery.geometry = results.geometry;
+                                    esriQuery.geometry = results.geometry;
                                     fireQuery();
                                 }
 
                                 function fireQuery() {
                                     queryWidget.runQuery("location");
-                                    loqQueryTask.execute(selectQuery, queryWidget._showSelected);
+                                    loqQueryTask.execute(esriQuery, queryWidget._showSelected);
                                 }
                             }
                     }); //end of declare
