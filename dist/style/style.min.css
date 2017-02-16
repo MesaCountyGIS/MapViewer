@@ -624,6 +624,16 @@ input:-moz-placeholder {
   height: 40px;
 }
 
+#clearWhere {
+  background: #d9d6d0;
+  border-style: none;
+  cursor: pointer;
+  padding: 2px 3px;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+
 .drawPoly {
   background-position: 0 -765px;
 }
@@ -2428,7 +2438,7 @@ input#mapTitle {
   background-position: 0 -2314px;
 }
 
-@media only screen and (max-width:1367px) {
+@media only screen and (max-width:1024px) {
   #layerSelect,
   #map_zoom_slider,
   #snapmessage {
