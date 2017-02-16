@@ -2,7 +2,10 @@
     <div data-dojo-attach-point="dialogHeader" class="dialogHeader">
         <div id="measureText">Measure/Draw</div>
     </div>
-    <div id='drawToolInstruction'>Select a Draw Tool:</div>
+    <div data-dojo-attach-point="measureYesSpan" id="measureYesSpan">
+        <input data-dojo-attach-point="measureYes" id="measureYes" type="checkbox" checked />Enable Measurement?
+    </div>
+    <div id='drawToolInstruction'>Select a <span id='drawOrMeasure'>Draw</span> Tool:</div>
     <div data-dojo-attach-point="drawButtonBlock" id="drawButtonBlock">
         <span data-set='block' data-dojo-attach-event="onclick:setPoly" data-dojo-attach-point="drawPolygon" id="drawPolygon" class="drawPoly drawButton" title="Draw or measure using a polygon"></span>
         <span data-set='block' data-dojo-attach-event="onclick:setLine" data-dojo-attach-point="drawPolyline" id="drawPolyline" class="drawaLine drawButton" title="Draw or measure using a line"></span>
@@ -13,10 +16,7 @@
         <span data-set='none' data-dojo-attach-event="onclick:setPoly" data-dojo-attach-point="drawCircle" id="drawCircle" class="drawCircle drawButton" title="Draw or measure using a circle"></span>
         <span data-set='none' data-dojo-attach-point="drawAnno" id="drawAnno" class="drawAnno drawButton" title="Add text to the map"></span>
     </div>
-
-    <div data-dojo-attach-point="measureYesSpan" id="measureYesSpan">
-        <input data-dojo-attach-point="measureYes" id="measureYes" type="checkbox" checked />Enable Measurement?
-    </div>
+    <div data-dojo-attach-point="snapmessage" id="snapmessage">Hold <b>CTRL</b> to enable snapping.</div>
 
     <div class="showBlock">
         <span data-dojo-attach-point="uomText" id="uomText">Unit of Measure</span>
@@ -40,7 +40,7 @@
         </select>
     </div>
 
-    <div data-dojo-attach-point="snapmessage" id="snapmessage">Press <b>CTRL</b> to enable snapping.</div>
+
     <div class="showBlock">
         <p class='results'>Measurement Results</p>
         <div data-dojo-attach-point="polyResult" id="polyResult">
