@@ -193,7 +193,6 @@ define([
                 domAttr.set('backMenu', 'data-to', to);
                 domAttr.set('backMenu', 'data-from', "searchBox");
 
-                var type = this.getAttribute('data-value');
                 //hide the search menu
                 domClass.add(query(".searchMenu")[0], "displayNo");
                 //The searchLI list item is still populated on a small screen
@@ -202,7 +201,7 @@ define([
                 if (registry.byId("searchFieldDialog")){
                     (registry.byId("searchFieldDialog").destroyRecursive());
                 }
-                searchTools.searchBy(type, undefined, "desktop", undefined, function(){
+                searchTools.searchBy(getLayerValue(this), undefined, "desktop", undefined, function(){
                     domClass.remove(query(".searchMenu")[0], "displayNo");
                     toolsWidget.domNode.style.display = "none";
                 });
