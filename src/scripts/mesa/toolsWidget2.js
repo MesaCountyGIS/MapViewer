@@ -52,14 +52,31 @@ define([
                 ]
             });
             legendObject.refresh(legLayers);
+
+            var getLayer = function(obj){
+                /*Get the name of the layer the app is changing to*/
+                return domAttr.get(obj, 'data-name');
+            }
+            var setHeader = function(layerName){
+                /* Set the header button to the name of the current selected
+                layer*/
+                query("#headerMessage span")[0].innerText = layerName;
+            }
+            var getLayerValue = function(obj){
+                /*Layer value is is an abbreviated name reference to the
+                selected layer. It is used to set the layer on the map*/
+                return domAttr.get(obj, 'data-value');
+            }
+
             //Set up event handlers for slide out menu
             on(query(".mainSideMenu li"), "click", dispatchMainMenuClick);
-            on(query("#DTtoolstrip button, #panelTab, #sharebutton, .submen li, #headerMessage span"), "click", togglePanel);
+            on(query("#DTtoolstrip button, #panelTab, #sharebutton, .submen li,
+                #headerMessage span"), "click", togglePanel);
             on(query('.themeMenu li'), "click", function(e){
-                var layer = domAttr.get(this, 'data-value');
-                query("#headerMessage span")[0].innerText = this.innerText;
-                toolsWidget.dispatchThemeMenuClick(layer);
+                setHeader(getLayer(this));
+                toolsWidget.dispatchThemeMenuClick(getLayerValue(this));
             });
+
             on(query('.measureClick'), "click", dispatchMeasureTool);
             on(query('.queryClick'), "click", dispatchQueryTool);
             on(query('.bookmarkClick'), "click", dispatchBookmarks);
@@ -132,7 +149,7 @@ define([
                 }
 
             }
-            
+
             function backButtonDisplay(){
                 // if device is mobile, enable backMenu functionality
                 if(domStyle.get(query('.stacked-toggle span')[0], "display") === "block"){
