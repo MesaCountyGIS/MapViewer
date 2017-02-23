@@ -70,8 +70,7 @@ define([
 
             //Set up event handlers for slide out menu
             on(query(".mainSideMenu li"), "click", dispatchMainMenuClick);
-            on(query("#DTtoolstrip button, #panelTab, #sharebutton, .submen li,
-                #headerMessage span"), "click", togglePanel);
+            on(query("#DTtoolstrip button, #panelTab, #sharebutton, .submen li, #headerMessage span"), "click", togglePanel);
             on(query('.themeMenu li'), "click", function(e){
                 setHeader(getLayer(this));
                 toolsWidget.dispatchThemeMenuClick(getLayerValue(this));
@@ -119,17 +118,6 @@ define([
                         }
                     }
                 });
-            }
-
-            function openSearchDialog(e){
-                e.stopPropagation();
-                var type = this.getAttribute('data-value');
-                dom.byId('mobileSearch').style.display = "none";
-                if(registry.byId("searchFieldDialog")){
-                    registry.byId("searchFieldDialog").destroyRecursive();
-                }
-                searchBy(type, undefined, "mobile", "toolsView");
-                toolsWidget.backToMap();
             }
 
             function togglePanel(e){
