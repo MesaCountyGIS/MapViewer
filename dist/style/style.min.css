@@ -854,6 +854,10 @@ input:-moz-placeholder {
   overflow: auto;
 }
 
+.searchMenu li {
+  cursor: pointer;
+}
+
 #imagelist,
 #imagelist2 {
   display: none;
