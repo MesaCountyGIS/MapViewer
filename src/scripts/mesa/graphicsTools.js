@@ -1,7 +1,8 @@
 define(["dojo/_base/declare", "dijit/_WidgetBase", "esri/graphic", "esri/geometry/Point", "esri/SpatialReference", "esri/tasks/query", "esri/layers/FeatureLayer", "dojo/json",
-"esri/symbols/TextSymbol", "esri/symbols/Font", "dojo/_base/Color", "esri/tasks/GeometryService", "esri/symbols/SimpleMarkerSymbol", "mesa/coordinateCleaner"],
+"esri/symbols/TextSymbol", "esri/symbols/Font", "dojo/_base/Color", "esri/tasks/GeometryService", "esri/symbols/SimpleMarkerSymbol", "mesa/coordinateCleaner",
+"dijit/ConfirmDialog"],
 function (declare, _WidgetBase, Graphic, Point, SpatialReference,Query, FeatureLayer, JSON,
-TextSymbol, Font, Color, GeometryService, SimpleMarkerSymbol, coordinateCleaner
+TextSymbol, Font, Color, GeometryService, SimpleMarkerSymbol, coordinateCleaner, ConfirmDialog
 ) {
     var graphicsWidget, map, gsvc, utm12;
 
@@ -98,11 +99,30 @@ pointText: function(point, text) {
 
 zoom: function(coordinates) {
     map.graphics.clear();
-    coordinateCleaner.cleanCoordinates(coordinates, this.doMath);
+    //Input coords will return as decimal degrees or an input error
+    coordinateCleaner.cleanCoordinates(coordinates, this.doMath, this.zoomError);
+},
+
+zoomError: function(errorMessage){
+    console.log(1)
+        var latDproc, lonDproc, Dlat, Dlon, latD, lonD;
+        var coordDialog = new ConfirmDialog({
+            title: "<span style='margin:0 auto;width:auto;font-size:1.2em;font-weight:bolder;'>Coordinate Entry Error!</span><br><br>",
+            content: "",
+            style: "width: 33%; background-color:white;border-radius:5px;padding:1em;"
+        });
+
+        function showDialog(content) {
+            coordDialog.set("content", content);
+            coordDialog.show();
+        }
+
+        showDialog(errorMessage)
 },
 
 
 doMath: function(latD, lonD) {
+    console.log(2)
         document.getElementById("searchFieldDialog").style.display = "none";
         latD = (Math.abs(latD));
         lonD = -(Math.abs(lonD));
