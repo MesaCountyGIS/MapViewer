@@ -49,7 +49,9 @@ define(["dijit/ConfirmDialog"], function (Dialog) {
 
         if (latDproc.length === 1 && lonDproc.length === 1) {
             if (!(latDproc[0] >= -90 && latDproc[0] <= 90 && lonDproc[0] >= -180 && lonDproc[0] <= 180)) {
-                showDialog("<div class='alertmessageIP alertmessage'>Latitude entries must be -90 and 90 and longitude entries must be between -180 and 180.");
+                showDialog("<div class='alertmessageIP alertmessage'>" +
+                    "Latitude entries must be -90 and 90 and longitude entries must be between -180 and 180."
+                );
             } else {
                 return [latD, lonD];
             }
@@ -59,7 +61,9 @@ define(["dijit/ConfirmDialog"], function (Dialog) {
                 Dlat = parseFloat(latDproc[0]);
                 Dlon = parseFloat(lonDproc[0]);
                 if (!(Dlat >= -90 && Dlat <= 90 && Dlon >= -180 && Dlon <= 180)) {
-                    showDialog("<div class='alertmessageIP alertmessage'>Latitude entries must be -90 and 90 and longitude entries must be between -180 and 180.");
+                    showDialog("<div class='alertmessageIP alertmessage'>" +
+                        "Latitude entries must be -90 and 90 and longitude entries must be between -180 and 180."
+                    );
                 } else {
                     latD = latDproc[2] ? (((parseFloat(latDproc[2]) / 60.0) + parseFloat(latDproc[1])) / 60.0) + (Dlat) : latDproc.length>1?(parseFloat(latDproc[1]) / 60.0) + (Dlat):Dlat;
                     lonD = lonDproc[2] ? (((parseFloat(lonDproc[2]) / 60.0) + parseFloat(lonDproc[1])) / 60.0) + (Dlon) : lonDproc.length>1?(parseFloat(lonDproc[1]) / 60.0) + (Dlon):Dlon;
