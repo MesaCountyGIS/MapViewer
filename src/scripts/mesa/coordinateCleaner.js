@@ -8,7 +8,7 @@ define(["dijit/ConfirmDialog"], function (Dialog) {
     });
 
     function showDialog(content) {
-        coordDialog.set("content", content);// + "<hr><br><button id='coordDialog' style='position:absolute;bottom:1em;right:1em;font-weight:bold;width:3.5em;height:2.1em;'>OK</button>");
+        coordDialog.set("content", content);
         coordDialog.show();
     }
 
@@ -75,7 +75,11 @@ define(["dijit/ConfirmDialog"], function (Dialog) {
         cleanCoordinates: function (coordinates, callback) {
             var mycoords = coordinates.indexOf(",") > -1 ? coordinates.split(",") : coordinates.split(":");
             if(!mycoords[0] || !mycoords[1]){
-                showDialog("<div class='alertmessageIP alertmessage'>Please enter valid Latitude and Longitude values separated by a comma.<br><br>Examples:<br><br>39.27595,-108.547315</u><br><br>or<br><br>39 25 45.325,-108 28 15.22<br><br>Separate Degrees Minutes and Seconds with a space.</div>")
+                showDialog("<div class='alertmessageIP alertmessage'>" +
+                    "Please enter valid Latitude and Longitude values separated by a comma." +
+                    "<br><br>Examples:<br><br>39.27595,-108.547315</u><br><br>or" +
+                    "<br><br>39 25 45.325,-108 28 15.22<br><br>Separate Degrees Minutes and Seconds with a space.</div>"
+                )
             } else {
                 latD = mycoords[0].replace(/^\s+|\s+$/g, ''); //Remove leading and trailing white space
                 lonD = mycoords[1].replace(/^\s+|\s+$/g, ''); //Remove leading and trailing white space
