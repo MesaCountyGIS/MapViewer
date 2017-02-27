@@ -1,9 +1,16 @@
-define("null", function () {
+define("", function () {
     'use strict';
     var latDproc, lonDproc, Dlat, Dlon, latD, lonD;
 
     function compareMS(lat,lon){
-        var message = "<div class='alertmessageIP alertmessage'>Minute and Second entries must be 0-60. Please correct the following indicated entries.";
+        /*compareMS checks the minutes and seconds portion of the Input
+        coordinates to see if they are within the bounds of 0-60 degrees. If
+        the coordinates are all within bounds, this function returns 0. If
+        the minutes or seconds or both are outside the bounds, this function
+        returns an error message showing the errant entry in red.*/
+        var message = "<div class='alertmessageIP alertmessage'>" +
+            "Minute and Second entries must be 0-60. " +
+            "Please correct the following indicated entries.";
         var latM=" <b>" + lat[1] + "</b> ";
         var lonM=" <b>" + lon[1] + "</b> ";
         var latS=lat[2]?" <b>" + lat[2] + "</b> ":"";
@@ -14,24 +21,31 @@ define("null", function () {
         var i;
         for (i = 0; i < 2; i += 1){
             if(lats[i] > 60 || lats[i] < 0){
-                i<1?String(latM = " <u style='color:red;'>" + lats[i] + "</u> "):String(latS = " <u style='color:red;'>" + lats[i] + "</u> ");
+                i < 1? String(latM = " <u style='color:red;'>" + lats[i] + "</u> "):
+                String(latS = " <u style='color:red;'>" + lats[i] + "</u> ");
                 dialogSwitch = 1;
             }
         }
         for (i=0;i<2;i+=1){
             if(lons[i] > 60 || lons[i] < 0){
-                i<1?String(lonM = " <u style='color:red;'>" + lons[i] + "</u> "):String(lonS = " <u style='color:red;'>" + lons[i] + "</u> ");
+                i < 1? String(lonM = " <u style='color:red;'>" + lons[i] + "</u> "):
+                String(lonS = " <u style='color:red;'>" + lons[i] + "</u> ");
                 dialogSwitch = 1;
             }
         }
-        message = message + "</div><br><b>Lat: " + lat[0] + "</b>" + latM + latS + "<br><br><b>Lon: " + lon[0] + "</b>" + lonM + lonS;
+        message = message + "</div><br><b>Lat: " + lat[0] + "</b>" +
+            latM + latS + "<br><br><b>Lon: " + lon[0] + "</b>" + lonM + lonS;
         var ret = dialogSwitch > 0? ['error', message]: 0;
         return ret;
     }
     function processCoordinates(latD, lonD) {
-        if (latD.match(/[ a-zA-Z][a-zA-Z!@#$%\^&*()°\-_+=\[\]{}?<>`~;:'"\|\,\\]/g) || lonD.match(/[ a-zA-Z][a-zA-Z\W\WC!@#$%\^&*()°\-_+=\[\]{}?<>`~;:'"\|,\\]/g)) { //Get rid of all characters
-            latD = latD.replace(/[ a-zA-Z][a-zA-Z!@#$%\^&*()°\-_+=\[\]{}?<>`~;:'"\|,\\]/g, '').replace(/^\s+|\s+$/g, '');
-            lonD = lonD.replace(/[ a-zA-Z][a-zA-Z!@#$%\^&*()°\-_+=\[\]{}?<>`~;:'"\|,\\]/g, '').replace(/^\s+|\s+$/g, '');
+        //Remove characters that might have been input by the user
+        if (latD.match(/[ a-zA-Z][a-zA-Z!@#$%\^&*()°\-_+=\[\]{}?<>`~;:'"\|\,\\]/g) ||
+            lonD.match(/[ a-zA-Z][a-zA-Z\W\WC!@#$%\^&*()°\-_+=\[\]{}?<>`~;:'"\|,\\]/g)) {
+                latD = latD.replace(/[ a-zA-Z][a-zA-Z!@#$%\^&*()°\-_+=\[\]{}?<>`~;:'"\|,\\]/g, '')
+                    .replace(/^\s+|\s+$/g, '');
+                lonD = lonD.replace(/[ a-zA-Z][a-zA-Z!@#$%\^&*()°\-_+=\[\]{}?<>`~;:'"\|,\\]/g, '')
+                    .replace(/^\s+|\s+$/g, '');
         }
 
         latDproc = latD.split(" ");
@@ -55,8 +69,10 @@ define("null", function () {
                         "Latitude entries must be -90 and 90 and longitude entries must be between -180 and 180.";
                         return ['error', err]
                 } else {
-                    latD = latDproc[2] ? (((parseFloat(latDproc[2]) / 60.0) + parseFloat(latDproc[1])) / 60.0) + (Dlat) : latDproc.length>1?(parseFloat(latDproc[1]) / 60.0) + (Dlat):Dlat;
-                    lonD = lonDproc[2] ? (((parseFloat(lonDproc[2]) / 60.0) + parseFloat(lonDproc[1])) / 60.0) + (Dlon) : lonDproc.length>1?(parseFloat(lonDproc[1]) / 60.0) + (Dlon):Dlon;
+                    latD = latDproc[2] ? (((parseFloat(latDproc[2]) / 60.0) + parseFloat(latDproc[1])) / 60.0) + (Dlat) :
+                        latDproc.length>1?(parseFloat(latDproc[1]) / 60.0) + (Dlat):Dlat;
+                    lonD = lonDproc[2] ? (((parseFloat(lonDproc[2]) / 60.0) + parseFloat(lonDproc[1])) / 60.0) + (Dlon) :
+                        lonDproc.length>1?(parseFloat(lonDproc[1]) / 60.0) + (Dlon):Dlon;
                     return ['coords', latD.toFixed(7), lonD.toFixed(7)];
                 }
             } else {
