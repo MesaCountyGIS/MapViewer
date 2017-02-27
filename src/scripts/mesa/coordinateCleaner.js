@@ -1,4 +1,4 @@
-define(null, function () {
+define("null", function () {
     'use strict';
     var latDproc, lonDproc, Dlat, Dlon, latD, lonD;
 

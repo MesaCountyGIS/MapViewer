@@ -104,8 +104,6 @@ zoom: function(coordinates) {
 },
 
 zoomError: function(errorMessage){
-    console.log(1)
-        var latDproc, lonDproc, Dlat, Dlon, latD, lonD;
         var coordDialog = new ConfirmDialog({
             title: "<span style='margin:0 auto;width:auto;font-size:1.2em;font-weight:bolder;'>Coordinate Entry Error!</span><br><br>",
             content: "",
@@ -117,12 +115,11 @@ zoomError: function(errorMessage){
             coordDialog.show();
         }
 
-        showDialog(errorMessage)
+        showDialog(errorMessage);
 },
 
 
 doMath: function(latD, lonD) {
-    console.log(2)
         document.getElementById("searchFieldDialog").style.display = "none";
         latD = (Math.abs(latD));
         lonD = -(Math.abs(lonD));
