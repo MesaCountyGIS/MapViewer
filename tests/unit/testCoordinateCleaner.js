@@ -33,10 +33,10 @@ define([
 
         'Test _compareMS function with an invalid degree/minute value': function() {
             assert.deepEqual(coordinateCleaner._compareMS(["39", "61"], ["108", "25"]),
-            "<div class='alertmessageIP alertmessage'>Minute and Second entries" +
+            ['error',"<div class='alertmessageIP alertmessage'>Minute and Second entries" +
                 " must be 0-60. Please correct the following indicated entries." +
                 "</div><br><b>Lat: 39</b> <u style='color:red;'>61</u>" +
-                " <br><br><b>Lon: 108</b> <b>25</b> ",
+                " <br><br><b>Lon: 108</b> <b>25</b> "],
             'The return value of a latitude and longitude value in degrees/minutes ' +
             'with an invalid value is an HTML error message');
         },
