@@ -49,7 +49,7 @@ define([
 
         'Test _processCoordinates function with valid degree/minute values': function() {
             assert.deepEqual(coordinateCleaner._processCoordinates("39 25", "108 55"),
-            ['39.4166667', '108.9166667'],
+            ['coords', '39.4166667', '108.9166667'],
             'Valid degree/minute coordinates passed to _processCoordinates should return an array ' +
             'with appropriate decimal degree coordinates and 7 decimal places.');
         },
