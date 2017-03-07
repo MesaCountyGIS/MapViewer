@@ -116,6 +116,7 @@ zoomError: function(errorMessage){
         }
 
         showDialog(errorMessage);
+        return "There was an error in the input coordinates";
 },
 
 
@@ -133,7 +134,7 @@ doMath: function(latD, lonD) {
         });
         graphicsWidget.addPointToMap(lonD, latD, "gcs");
         map.enableKeyboardNavigation();
-        return
+        return [latD, lonD];
 }
 
 })//end of declare

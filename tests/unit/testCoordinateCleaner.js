@@ -8,13 +8,13 @@ define([
         name: 'Coordinate Cleaner test',
 
         'Test coordinate function for array': function() {
-            assert.typeOf(coordinateCleaner.cleanCoordinates("39,108"),
+            assert.typeOf(coordinateCleaner.cleanCoordinates("39,108", callback, errorback),
             "array",
             'The return value of two coordinates should be an array');
         },
 
         'Test coordinate function for appropriate return value': function() {
-            assert.deepEqual(coordinateCleaner.cleanCoordinates("39, 108"),
+            assert.deepEqual(coordinateCleaner.cleanCoordinates("39, 108", callback, errorback),
             ["39", "108"],
             'with input of 39, 108, receive output as array of ["39", "108"]');
         },
@@ -80,6 +80,11 @@ define([
 
     });
     function callback(x, y){
-        console.log("the callback function received: ", x, y)
+        return [x, y];
     }
+
+    function errorback(x, y){
+        return "There was an error";
+    }
+
 });
