@@ -26,8 +26,6 @@ define([
 
             evt = document.getElementById("li");
 
-            console.log('evt this 0', evt)
-
             map = Map("map", {
                 basemap: "topo",
                 center: [-122.45, 37.75],

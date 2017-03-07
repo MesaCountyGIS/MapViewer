@@ -60,7 +60,7 @@ define([
         },
 
         'Test create an ESRI JSON polygon string': function() {
-            assert.strictEqual(JSON.stringify(graphictools.createJSONPolygon(polyRings)), '{"geometry":{"rings":[[[704880.5784,4329354.058800001],[704859.1242000004,4329353.884],[704858.0027000001,4329391.800100001],[704885.7401,4329392.335200001],[704880.5784,4329354.058800001]]],"spatialReference":{"wkid":102206}},"symbol":{"color":[0,0,0,64],"outline":{"color":[82,246,248,255],"width":2,"type":"esriSLS","style":"esriSLSSolid"},"type":"esriSFS","style":"esriSFSNull"}}',
+            assert.strictEqual(JSON.stringify(graphictools.createJSONPolygon(polyRings)), '{"geometry":{"rings":[[[704880.5784,4329354.058800001],[704859.1242000004,4329353.884],[704858.0027000001,4329391.800100001],[704885.7401,4329392.335200001],[704880.5784,4329354.058800001]]],"spatialReference":{"wkid":102206}},"symbol":{"color":[255,255,224],"outline":{"color":[82,246,248],"width":2,"type":"esriSLS","style":"esriSLSSolid"},"type":"esriSFS","style":"esriSFSNull"}}',
             'The return value of input rings should be a JSON string containing rings');
             console.log(polyRings)
         },

@@ -107,11 +107,11 @@ define({
 
 	// Non-functional test suite(s) to run in each browser
 	suites: [
-		// 'tests/unit/testPrintWidget'
+		'tests/unit/testPrintWidget',
 		'tests/unit/testCoordinateCleaner',
-		// 'tests/unit/testCheckForMobile'
-		// 'tests/unit/testGraphicTools'
-		'tests/unit/testBasemapWidget',
+		// 'tests/unit/testCheckForMobile',
+		'tests/unit/testGraphicTools',
+		// 'tests/unit/testBasemapWidget',
 		'tests/unit/testMeasureWidget'
 	],
 
