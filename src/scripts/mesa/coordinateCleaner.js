@@ -26,7 +26,7 @@ define("", function () {
                 dialogSwitch = 1;
             }
         }
-        for (i=0;i<2;i+=1){
+        for (i = 0; i < 2; i += 1){
             if(lons[i] > 60 || lons[i] < 0){
                 i < 1? String(lonM = " <u style='color:red;'>" + lons[i] + "</u> "):
                 String(lonS = " <u style='color:red;'>" + lons[i] + "</u> ");
@@ -101,6 +101,8 @@ define("", function () {
                     return error(cors[1]);
                 }
             }
-        }
+        },
+        _compareMS: compareMS,
+        _processCoordinates: processCoordinates
     };
 });

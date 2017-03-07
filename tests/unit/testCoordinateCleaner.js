@@ -20,7 +20,7 @@ define([
         },
 
         'Test coordinate function with a callback function': function() {
-            assert.deepEqual(coordinateCleaner.cleanCoordinates("39,108", callback),
+            assert.deepEqual(coordinateCleaner.cleanCoordinates("39,108", callback, errorback),
             callback("39","108"),
             'The return value is an array');
         },
@@ -43,7 +43,7 @@ define([
 
         'Test _processCoordinates function with valid degree values': function() {
             assert.deepEqual(coordinateCleaner._processCoordinates("39", "108"),
-            ["39", "108"],
+            ["coords", "39", "108"],
             'Valid coordinates passed to _processCoordinates should return an array with those same coordinates.');
         },
 
