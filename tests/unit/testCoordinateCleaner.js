@@ -47,11 +47,27 @@ define([
             'Valid coordinates passed to _processCoordinates should return an array with those same coordinates.');
         },
 
+        'Test _processCoordinates function with invalid degree values': function() {
+            assert.deepEqual(coordinateCleaner._processCoordinates("91", "108"),
+            ["error", "<div class='alertmessageIP alertmessage'>" +
+                "Latitude entries must be -90 and 90 and longitude entries must be between -180 and 180."],
+            'Invalid coordinates passed to _processCoordinates should return an array with an error flag and an error.');
+        },
+
         'Test _processCoordinates function with valid degree/minute values': function() {
             assert.deepEqual(coordinateCleaner._processCoordinates("39 25", "108 55"),
             ['coords', '39.4166667', '108.9166667'],
             'Valid degree/minute coordinates passed to _processCoordinates should return an array ' +
             'with appropriate decimal degree coordinates and 7 decimal places.');
+        },
+
+        'Test _processCoordinates function with invalid minute values': function() {
+            assert.deepEqual(coordinateCleaner._processCoordinates("39 61", "108 62"),
+            ["error", "<div class='alertmessageIP alertmessage'>Minute and Second entries must be 0-60. " +
+                "Please correct the following indicated entries.</div><br><b>Lat: 39</b> <u style='color:red;'>61</u> " +
+                "<br><br><b>Lon: 108</b> <u style='color:red;'>62</u> "],
+            'Invalid degree/minute coordinates passed to _processCoordinates should return an array ' +
+            'with an error flag and an error message');
         },
 
         'Test _processCoordinates function with valid degree/decimal minute values': function() {
@@ -61,6 +77,15 @@ define([
             'with appropriate decimal degree coordinates and 7 decimal places.');
         },
 
+        'Test _processCoordinates function with invalid decimal minute values': function() {
+            assert.deepEqual(coordinateCleaner._processCoordinates("39 61.25", "108 62.35"),
+            ["error", "<div class='alertmessageIP alertmessage'>Minute and Second entries must be 0-60. " +
+                "Please correct the following indicated entries.</div><br><b>Lat: 39</b> <u style='color:red;'>61.25</u> "+
+                "<br><br><b>Lon: 108</b> <u style='color:red;'>62.35</u> "],
+            'Invalid degree/decimal minute coordinates passed to _processCoordinates should return an array ' +
+            'with an error flag and an error message');
+        },
+
         'Test _processCoordinates function with valid degree/minute/second values': function() {
             assert.deepEqual(coordinateCleaner._processCoordinates("39 25 10", "108 55 10"),
             ['coords', '39.4194444', '108.9194444'],
@@ -68,11 +93,29 @@ define([
             'with appropriate decimal degree coordinates and 7 decimal places.');
         },
 
+        'Test _processCoordinates function with invalid second values': function() {
+            assert.deepEqual(coordinateCleaner._processCoordinates("39 25 61", "108 55 62"),
+            ['error', "<div class='alertmessageIP alertmessage'>Minute and Second entries must be 0-60. " +
+                "Please correct the following indicated entries.</div><br><b>Lat: 39</b> <b>25</b>  <u style='color:red;'>61</u> " +
+                "<br><br><b>Lon: 108</b> <b>55</b>  <u style='color:red;'>62</u> "],
+            'Valid degree/minute/second coordinates passed to _processCoordinates should return an array ' +
+            'with an error flag and an error message.');
+        },
+
         'Test _processCoordinates function with valid degree/minute/decimal second values': function() {
             assert.deepEqual(coordinateCleaner._processCoordinates("39 25 10.555", "108 55 10.333"),
             ['coords', '39.4195986', '108.9195369'],
             'Valid degree/minute/decimal second coordinates passed to _processCoordinates should return an array ' +
             'with appropriate decimal degree coordinates and 7 decimal places.');
+        },
+
+        'Test _processCoordinates function with invalid decimal second values': function() {
+            assert.deepEqual(coordinateCleaner._processCoordinates("39 25 61.555", "108 55 62.333"),
+            ['error', "<div class='alertmessageIP alertmessage'>Minute and Second entries must be 0-60. " +
+                "Please correct the following indicated entries.</div><br><b>Lat: 39</b> <b>25</b>  <u style='color:red;'>61.555</u> " +
+                "<br><br><b>Lon: 108</b> <b>55</b>  <u style='color:red;'>62.333</u> "],
+            'Valid degree/minute/decimal second coordinates passed to _processCoordinates should return an array ' +
+            'with an error flag and an error message.');
         }
 
 

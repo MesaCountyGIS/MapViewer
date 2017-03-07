@@ -36,6 +36,7 @@ define("", function () {
         message = message + "</div><br><b>Lat: " + lat[0] + "</b>" +
             latM + latS + "<br><br><b>Lon: " + lon[0] + "</b>" + lonM + lonS;
         var ret = dialogSwitch > 0? ['error', message]: 0;
+        console.log(ret)
         return ret;
     }
     function processCoordinates(latD, lonD) {
