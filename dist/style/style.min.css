@@ -1415,11 +1415,11 @@ input {
 }
 
 #pdfLinks {
-  min-width: 20em;
+  width: 100%;
+  text-align: center;
   font-size: .75em;
   position: absolute;
   bottom: 1em;
-  left: 40%;
   z-index: 1;
 }
 

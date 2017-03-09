@@ -214,10 +214,10 @@ function setPopup(type, popupNode) {
             pop = PopupMobile(null, dom.byId(popupNode));
         }); //end require
     } else {
-        require(["esri/dijit/Popup"], function(Popup) {
+        require(["dojo/dom", "esri/dijit/Popup"], function(dom, Popup) {
             pop = Popup({
                 titleInBody: false
-            }, document.getElementById(popupNode));
+            }, dom.byId(popupNode));
         }); //end else require
     }
     return pop;

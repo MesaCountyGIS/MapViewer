@@ -744,168 +744,84 @@ define([
             aG.map.infoWindow.show(evt.mapPoint, aG.map.getInfoWindowAnchor(evt.screenPoint));
         },
 
-        subList: function (evt, deferred, len, map) {
+
+        subList: function (evt, deferred,len, map) {
             map.graphics.clear();
             deferred.addCallback(function (response) {
-                return array.map(response, function (result) {
-                    var template;
-                    var feature = result.feature;
-                    feature.attributes.layerName = result.layerName;
-                    if (result.layerName === 'Subdivisions') {
-                        template = new PopupTemplate({
-                            title: "Subdivisions",
-                            description: "<span title='Subdivision - Click to highlight' class='nored sub' id='i{OBJECTID}' onclick='getit({OBJECTID},13);'></span>" +
-                            "<a target='_blank' href='https://recording.mesacounty.us/Landmarkweb//search/DocumentBy?ClerkFileNumber={Reception Number}'>" +
-                            "{Reception Number}</a> {Subdivision Name} - {Recorded Date}<br>"
-                        });
-                        feature.setInfoTemplate(template);
-                    }else if (result.layerName === 'Deposit Surveys') {
-                        template = new PopupTemplate({
-                            title: "Deposit Surveys",
-                            description: "<span title='Deposit Survey - Click to highlight' class='nored dep' id='{iOBJECTID}' onclick='getit({OBJECTID},15);'></span> " +
-                                " <a target='_blank' href='https://www.mesacounty.us/gisweb/gisweb.aspx?wci=viewpages&wce=GD{Deposit Number}'> " +
-                                " {Deposit Number}</a> {Title} - {Date}<br>"
-                        });
-                        feature.setInfoTemplate(template);
-                    }else if (result.layerName === 'Historical Surveys') {
-                        template = new PopupTemplate({
-                            title: "Historical Surveys",
-                            description: "<span title='Historic Survey - Click to highlight' class='nored hist' id='i{OBJECTID}" +
-                                "' onclick='getit({OBJECTID},14);'></span> " +
-                                "<a target='_blank' href='https://www.mesacounty.us/gisweb/gisweb.aspx?wci=viewpages&wce=GH{HISTORICAL S. WEBLINK}'>" +
-                                "{HISTORICAL S. WEBLINK}</a> {NAME} - {DATE}<br>"
-                        });
-                        feature.setInfoTemplate(template);
-                    }else if (result.layerName === 'GLO Plats') {
-                        template = new PopupTemplate({
-                            title: "Historical Surveys",
-                            description: "<span title='GLO Survey - Click to highlight' class='nored glo' id='i{OBJECTID}'" +
-                                " onclick='getit({OBJECTID},16);'></span> " +
-                                "<a target='_blank' href='https://www.mesacounty.us/gisweb/gisweb.aspx?wci=viewpages&wce=GL{GLO WEBLINK}'>" +
-                                "<b>{NAME}</b> (GLO Plat)</a><br>"
-                        });
-                        feature.setInfoTemplate(template);
-                    }else if (result.layerName === 'Deeded ROW') {
-                        template = new PopupTemplate({
-                            title: "Deeded ROW",
-                            description: "<span title='Deeded ROW - Click to highlight' class='nored deed' id='i{OBJECTID}'" +
-                                " onclick='getit({OBJECTID},17);'></span> " +
-                                "<a target='_blank' href='https://recording.mesacounty.us/Landmarkweb//search/DocumentBy?ClerkFileNumber={RECEPTION}'>" +
-                                "<b>{ROAD}</b> (Deeded ROW)</a>"
-                        });
-                        feature.setInfoTemplate(template);
-                    }else if (result.layerName === 'Dedicated/Platted ROW') {
-                        template = new PopupTemplate({
-                            title: "Dedicated/Platted ROW",
-                            description: "<span title='Dedicated/Platted ROW - Click to highlight' class='nored ded' id='i{OBJECTID}'" +
-                            " onclick='getit({OBJECTID},18);'></span> " +
-                            "<a target='_blank' href='https://recording.mesacounty.us/Landmarkweb//search/DocumentBy?ClerkFileNumber={Reception}'>" +
-                            "<b>{Road Name}</b> (Dedicated/Platted ROW)</a>"
-                        });
-                        feature.setInfoTemplate(template);
-                    }else if (result.layerName === 'Vacated ROW') {
-                        template = new PopupTemplate({
-                            title: "Vacated ROW",
-                            description: "<span title='Vacated ROW - Click to highlight' class='nored vac' id='i{OBJECTID}'" +
-                            " onclick='getit({OBJECTID},19);'></span> " +
-                            "<a target='_blank' href='https://recording.mesacounty.us/Landmarkweb//search/DocumentBy?ClerkFileNumber={Reception}'>" +
-                            "<b>{Road}</b> (Vacated ROW)</a>"
-                        });
-                        feature.setInfoTemplate(template);
-                    }else if (result.layerName === 'Permanant Easement - ROW') {
-                        template = new PopupTemplate({
-                            title: "Permanant Easement - ROW",
-                            description: "<span title='Permanent Easement ROW - Click to highlight' class='nored perm' id='i{OBJECTID}'" +
-                            " onclick='getit({OBJECTID},22);'></span> " +
-                            "<a target='_blank' href='https://recording.mesacounty.us/Landmarkweb//search/DocumentBy?ClerkFileNumber={Reception}'>" +
-                            "<b>{Road}</b> (Permanent Easement ROW)</a>"
-                        });
-                        feature.setInfoTemplate(template);
-                    }else if (result.layerName === 'Road Book/Petitioned ROW') {
-                        template = new PopupTemplate({
-                            title: "Road Book/Petitioned ROW",
-                            description: "<span title='Road Book/Petitioned ROW - Click to highlight and expand' class='nored book' id='i{OBJECTID}'" +
-                            " onclick='getit({OBJECTID}, 20, (pet{OBJECTID}.toString());'></span> " +
-                            "<a target='_blank' href='https://recording.mesacounty.us/Landmarkweb//search/DocumentBy?ClerkFileNumber={MAP}'>" +
-                            "<b>{MAP}</b> (Road Book/Petitioned ROW)</a><br>" +
-                            "<div class='nored' id='(pet{OBJECTID}.toString())' style='display:none;'>{RBPG}<br>{COMMREC}" +
-                            "<br>Reception Number: <a target='_blank' href='https://recording.mesacounty.us/Landmarkweb//search/DocumentBy?ClerkFileNumber={REC_NO}'>{REC_NO}</a>" +
-                            "<br>Road Plat 1: {RDPLAT1}<br>Survey: {Survey}</div>"
-                        });
-                        feature.setInfoTemplate(template);
-                    }else if (result.layerName === 'Road Proclamation 1890 and 1892') {
-                        template = new PopupTemplate({
-                            title: "Road Proclamation 1890 and 1892",
-                            description: "<span title='Road Proclamation 1890 and 1892 - Click to highlight' class='nored proc' id='i{OBJECTID}'" +
-                            " onclick='getit({OBJECTID}, 21);'></span><br>  (Comm. Record {COMM_REC__})<br>{GEN_REC_1}" +
-                            "<br>  (Gen. Record 1 {DATE_1})<br>{GEN_REC_2}<br>  (Gen. Record 2 {DATE_2})<br><br>"
-                        });
-                        feature.setInfoTemplate(template);
-                    }else if (result.layerName === 'Mesa County Survey Monuments') {
-                        template = new PopupTemplate({
-                            title: "Mesa County Survey Monuments",
-                            description: "<span title='Mesa County Survey Monuments' class='nored mon' id='i{OBJECTID}'" +
-                            " onclick='pointit({OBJECTID},2);'></span>Monument Surveyor: {Surveyor}<br>Date: {Date}" +
-                            "<br>Corner: {Corner}<br>Monument Record: " +
-                            "<a target='_blank' href='https://www.mesacounty.us/gisweb/gisweb.aspx?wci=viewpages&wce=gm{Monument Weblink}'>" +
-                            "{Monument Weblink}</a><br><span title='Mesa County Survey Monument'>MCSM</span>: {Mesa County Survey Monument}"
-                        });
-                        feature.setInfoTemplate(template);
-                    }else if (result.layerName === 'Delta County GPS Monuments/SIMS') {
-                        template = new PopupTemplate({
-                            title: "Delta County GPS Monuments/SIMS",
-                            description: "<span title='Delta County GPS Monuments/SIMS - Click to expand' class='nored delta' id='i{OBJECTID}'" +
-                            " onclick='pointit({OBJECTID},1);'></span><b>GPS ID: </b>" +
-                            "<a target='_blank' href='https://emap.mesacounty.us/DeltaCountyMapping/default.aspx?value={GPS_ID_Delta}'>{GPS_ID_Delta}</a>" +
-                            "<br><div class='nored collapse' id='{GPS_ID}' style='display:none;'><b>BLM ID: </b>{BLM_ID_NO}<br>" +
-                            "<b>GPS Precision: </b>{GPS_PRECIS}<br><b>UTM Northing: </b>{UTM_NORTHI}<br><b>UTM Easting: </b>{UTM_EASTIN}<br>" +
-                            "<b>NAVD88 Elevation: </b>{NAVD88_ELE}<br><b>Latitude (DMS): </b>{LATITUDE_D}<br><b>Longitude (DMS): </b>" +
-                            "{LONGITUDE_}<br><b>Latitude (DD): </b>{LATITUDE_1}<br><b>Longitude (DD): </b>{LONGITUDE1}<br><b>HAE: </b>" +
-                            "{HAE}<br><b>Description: </b>{DESCRIPTIO}</div>"
-                        });
-                        feature.setInfoTemplate(template);
-                    }else if (result.layerName === 'Mesa County GPS Monuments/SIMS') {
-                        template = new PopupTemplate({
-                            title: "Mesa County GPS Monuments/SIMS",
-                            description: "<span title='Mesa County GPS Monuments/SIMS - Click to expand' class='nored mesa' id='i{OBJECTID}'" +
-                            " onclick='pointit({OBJECTID},0,{GPS_ID});'></span> " + "<b>GPS ID: </b>" +
-                            "<a target='_blank' href='https://emap.mesacounty.us/SIMS/Default.aspx?value={GPS_ID}'>{GPS_ID}</a><br>" +
-                            "<div class='nored collapse' id='{GPS_ID}' style='display:none;'><b>Monument placed: </b>{DATE_}<br>   <b>Revised Date: </b>" +
-                            "{REVISE_DAT}<br><b>State Number: </b>{STATE_NO}<br><b>Former ID: </b>{FORMER_ID}<br><b>Township: </b>{TNSHP}<br>" +
-                            "<b>Range: </b>{RANGE}<br><b>Prime Meridian: </b>{PM}<br><b>Code: </b>{CODE}<br><b>Monument Box: </b>{MON_BOX}<br>" +
-                            "<b>MCSM Number: </b>{MCSM_NO}<br><b>Book: </b>{BOOK}<br><b>Page: </b>{PAGE}<br><b>Road Number: </b>{ROAD_NO}<br>" +
-                            "<b>Traverse: </b>{TRAVERSE}<br><b>Trilateration: </b>{TRILATERAT}<br><b>GPS: </b>{GPS}<br><b>GPS Method: </b>" +
-                            "{GPS_METHOD}<br><b>Precision: </b>{PRESICION}<br><b>Lat: </b>{LATITUDE}<br><b>Lon: </b>{LONGITUDE}<br><b>Scale: </b>" +
-                            "{SCALE}<br><b>Convergence: </b>{CONVERGENCE}<br><b>SPC Scale: </b>{SPC_SCALE}<br><b>SPC CONV: </b>{SPC_CONV}<br>" +
-                            "<b>LCS1 Zone: </b>{LCS1_ZONE}<br><b>Level Method: </b>{METH_LEVEL}<br><b>Trig Method: </b>{METH_TRIG}<br><b>GPS Method: </b>" +
-                            "{METH_GPS}<br><b>Ortho Height: </b>{ORTHO_HT}<br><b>HAE: </b>{HAE} ft<br><b>NAV 88: </b>{NAVD88_ft_} ft<br><b>HT Method: </b>" +
-                            "{HT_METHOD}<br><b>LCS Height: </b>{LCS_HEIGHT}<br><b>Phot Avail: </b>{PHOTO_AVAI}<br><b>Poor: </b>{POOR}<br><b>Fair: </b>" +
-                            "{FAIR}<br><b>Good: </b>{GOOD}<br><b>Excellent: </b>{EXCELLENT}<br><b>Comments: </b>{COMMENTS}<br><b>Point Status: </b>" +
-                            "{POINT_STATUS}<br><b>BLM GCDB ID: </b>{BLM_GCDB_ID}<br><b>Description: </b>{DESCRIBE_}<br><b>Section: </b>{SECTION_}<br>" +
-                            "<b>Type: </b>{TYPE_}<br><b>UTM Northing: </b>{UTM_NORTHING}<br><b>UTM Easting: </b>{UTM_EASTING}<br><b>SPC Northing: </b>" +
-                            "{SPC_NORTHING}<br><b>SPC Easting: </b>{SPC_EASTING}<br><b>Zone: </b>{_ZONE}<br><b>LCS Northing: </b>{LCS_NORTHING}<br>" +
-                            "<b>LCS Easting: </b>{LCS_EASTING}<br><b>LCS1 Northing: </b>{LCS1_NORTHING}<br><b>LCS1 Easting: </b>{LCS1_EASTING}<br>" +
-                            "<b>Ellipsoid Height: </b>{ELLIPSOID_HT}</div>"
-                        });
-                        feature.setInfoTemplate(template);
-                    }else if (result.layerName === 'Vertical Datum Differences') {
-                        template = new PopupTemplate({
-                            title: "Vertical Datum Differences",
-                            description: "Vertical Datum Difference <br>between NAVD 29 and NAVD 88: + {DIFFERENCE} meters"
-                        });
-                        feature.setInfoTemplate(template);
-                    }else if (result.layerName === 'Sections') {
-                        template = new PopupTemplate({
-                            title: "Sections",
-                            description: "<br><b>{TRSM}<b>"
-                        });
-                        feature.setInfoTemplate(template);
-                    }
-                    return feature;
+                var content = '';
+                var contentArray, att;
+                var GLOurl = "http://www.mesacounty.us/gisweb/gisweb.aspx?wci=viewpages&wce=GL{DOCUMENT_ID}";
+                contentArray = array.map(response, function (item) {
+                    return item;
                 });
+                var len = contentArray.length;
+                for (i = 0; i < len; i++) {
+                    if (contentArray[i].layerName === "Subdivisions") {
+                        att = contentArray[i].feature.attributes;
+                        content += "<span title='Subdivision - Click to highlight' class='nored sub' id='i" + att.OBJECTID + "' onclick='getit(" + att.OBJECTID + ",13);' " +
+                            "></span> " + "<a target='_blank' href='https://recording.mesacounty.us/Landmarkweb//search/DocumentBy?ClerkFileNumber=" + att['Reception Number'] + "'>" + att['Reception Number'] + "</a> " + att['Subdivision Name'] + " - " + att['Recorded Date'] + "<br>";
+                    } else if (contentArray[i].layerName === "Deposit Surveys") {
+                        att = contentArray[i].feature.attributes;
+                        content += "<span title='Deposit Survey - Click to highlight' class='nored dep' id='i" + att.OBJECTID + "' onclick='getit(" + att.OBJECTID + ",15);' " + "></span> " + "<a target='_blank' href='http://www.mesacounty.us/gisweb/gisweb.aspx?wci=viewpages&wce=GD" + att['Deposit Number'] + "'> " + att['Deposit Number'] + "</a> " + att.Title + " - " + att.Date + "<br>";
+                    } else if (contentArray[i].layerName === "Historical Surveys") {
+                        att = contentArray[i].feature.attributes;
+                        content += "<span title='Historic Survey - Click to highlight' class='nored hist' id='i" + att.OBJECTID + "' onclick='getit(" + att.OBJECTID + ",14);' " + "></span> " + "<a target='_blank' href='http://www.mesacounty.us/gisweb/gisweb.aspx?wci=viewpages&wce=GH" + att['HISTORICAL S. WEBLINK'] + "'>" + att['HISTORICAL S. WEBLINK'] + "</a> " + att.NAME + " - " + att.DATE + "<br>";
+                    } else if (contentArray[i].layerName === "GLO Plats") {
+                        att = contentArray[i].feature.attributes;
+                        content += "<span title='GLO Survey - Click to highlight' class='nored glo' id='i" + att.OBJECTID + "' onclick='getit(" + att.OBJECTID + ",16);' " + "></span> " + "<a target='_blank' href='http://www.mesacounty.us/gisweb/gisweb.aspx?wci=viewpages&wce=GL" + att['GLO WEBLINK'] + "'><b>" + att.NAME + "</b> (GLO Plat)</a><br>";
+                    } else if (contentArray[i].layerName === "Deeded ROW") {
+                        att = contentArray[i].feature.attributes;
+                        content += "<span title='Deeded ROW - Click to highlight' class='nored deed' id='i" + att.OBJECTID + "' onclick='getit(" + att.OBJECTID + ",17);' " + "></span> " + "<a target='_blank' href='https://recording.mesacounty.us/Landmarkweb//search/DocumentBy?ClerkFileNumber=" + att.RECEPTION + "'><b>" + att.ROAD + "</b> (Deeded ROW)</a>";
+                    } else if (contentArray[i].layerName === "Dedicated/Platted ROW") {
+                        att = contentArray[i].feature.attributes;
+                        content += "<span title='Dedicated/Platted ROW - Click to highlight' class='nored ded' id='i" + att.OBJECTID + "' onclick='getit(" + att.OBJECTID + ",18);'></span> " + "<a target='_blank' href='https://recording.mesacounty.us/Landmarkweb//search/DocumentBy?ClerkFileNumber=" + att.Reception + "'><b>" + att['Road Name'] + "</b> (Dedicated/Platted ROW)</a>";
+                    } else if (contentArray[i].layerName === "Vacated ROW") {
+                        att = contentArray[i].feature.attributes;
+                        content += "<span title='Vacated ROW - Click to highlight' class='nored vac' id='i" + att.OBJECTID + "' onclick='getit(" + att.OBJECTID + ",19);' " + "></span> " + "<a target='_blank' href='https://recording.mesacounty.us/Landmarkweb//search/DocumentBy?ClerkFileNumber=" + att.RECEPTION + "'><b>" + att.ROAD + "</b> (Vacated ROW)</a>";
+                    } else if (contentArray[i].layerName === "Permanant Easement - ROW") {
+                        att = contentArray[i].feature.attributes;
+                        content += "<span title='Permanent Easement ROW - Click to highlight' class='nored ease' id='i" + att.OBJECTID + "' onclick='getit(" + att.OBJECTID + ",22);'></span> " + "<a target='_blank' href='https://recording.mesacounty.us/Landmarkweb//search/DocumentBy?ClerkFileNumber=" + att.RECEPTION + "'><b>" + att.ROAD + "</b> (Permanent Easement ROW)</a>";
+                    } else if (contentArray[i].layerName === "Road Book/Petitioned ROW") {
+                        var bookid = contentArray[i].feature.attributes.OBJECTID;
+                        att = contentArray[i].feature.attributes;
+                        content += "<span title='Road Book/Petitioned ROW - Click to highlight and expand' class='nored book' id='i" + att.OBJECTID + "' onclick='getit(" + att.OBJECTID + ",20,pet" + (att.OBJECTID).toString() + ");'></span> " + "<a target='_blank' href='https://recording.mesacounty.us/Landmarkweb//search/DocumentBy?ClerkFileNumber=" + att.MAP + "'><b>" + att.MAP + "</b> (Road Book/Petitioned ROW)</a><br>" + "<div class='nored' id='pet" + (att.OBJECTID.toString()) + "' style='display:none;'>" + att.RBPG + "<br>" + att.COMMREC + "<br>Reception Number: <a target='_blank' href='https://recording.mesacounty.us/Landmarkweb//search/DocumentBy?ClerkFileNumber=" + att.REC_NO + "'>" + att.REC_NO + "</a>" + "<br>Road Plat 1: " + att.RDPLAT1 + "<br>Survey: " + att.Survey + "</div>";
+                    } else if (contentArray[i].layerName === "Road Proclamation 1890 and 1892") {
+                        att = contentArray[i].feature.attributes;
+                        content += "<span title='Road Proclamation 1890 and 1892 - Click to highlight' class='nored road' id='i" + att.OBJECTID + "' onclick='getit(" + att.OBJECTID + ",21);'></span> " + "<br>  (Comm. Record " + att.COMM_REC__ + ")<br>" + att.GEN_REC_1 + "<br>  (Gen. Record 1 " + att.DATE_1 + ")<br>" + att.GEN_REC_2 + "<br>  (Gen. Record 2 " + att.DATE_2 + ")<br><br>";
+                    } else if (contentArray[i].layerName === "Mesa County Survey Monuments") {
+                        att = contentArray[i].feature.attributes;
+                        content += "<span title='Mesa County Survey Monuments' class='nored mon' id='i" + att.OBJECTID + "' onclick='pointit(" + att.OBJECTID + ",2);'></span> " + "Monument Surveyor: " + att.Surveyor + "<br>Date: " + att.Date + "<br>Corner: " + att.Corner + "<br>Monument Record: <a target='_blank' href='http://www.mesacounty.us/gisweb/gisweb.aspx?wci=viewpages&wce=gm" + att['Monument Weblink'] + "'>" + att['Monument Weblink'] + "</a><br><span title='Mesa County Survey Monument'>MCSM</span>: " + att['Mesa County Survey Monument'];
+                    } else if (contentArray[i].layerName === "Delta County GPS Monuments/SIMS") {
+                        att = contentArray[i].feature.attributes;
+                        content += "<span title='Delta County GPS Monuments/SIMS - Click to expand' class='nored delta' id='i" + att.OBJECTID + "' onclick='pointit(" + att.OBJECTID + ",1);'></span> " + "<b>GPS ID: </b><a target='_blank' href='http://emap.mesacounty.us/DeltaCountyMapping/default.aspx?value=" + att.GPS_ID_Delta + "'>" + att.GPS_ID_Delta + "</a><br><div class='nored collapse' id='" + att.GPS_ID + "' style='display:none;'><b>BLM ID: </b>" + att.BLM_ID_NO + "<br>" + "<b>GPS Precision: </b>" + att.GPS_PRECIS + "<br><b>UTM Northing: </b>" + att.UTM_NORTHI + "<br><b>UTM Easting: </b>" + att.UTM_EASTIN + "<br><b>NAVD88 Elevation: </b>" + att.NAVD88_ELE + "<br><b>Latitude (DMS): </b>" + att.LATITUDE_D + "<br><b>Longitude (DMS): </b>" + att.LONGITUDE_ + "<br><b>Latitude (DD): </b>" + att.LATITUDE_1 + "<br><b>Longitude (DD): </b>" + att.LONGITUDE1 + "<br>" + "<b>HAE: </b>" + att.HAE + "<br><b>Description: </b>" + att.DESCRIPTIO + "</div>";
+                    } else if (contentArray[i].layerName === "Mesa County GPS Monuments/SIMS") {
+                        att = contentArray[i].feature.attributes;
+                        content += "<span title='Mesa County GPS Monuments/SIMS - Click to expand' class='nored mesa' id='i" + att.OBJECTID + "' onclick='pointit(" + att.OBJECTID + ",0," + att.GPS_ID + ");'></span> " + "<b>GPS ID: </b><a target='_blank' href='http://emap.mesacounty.us/SIMS/Default.aspx?value=" + att.GPS_ID + "'>" + att.GPS_ID + "</a><br><div class='nored collapse' id='" + att.GPS_ID + "' style='display:none;'><b>Monument placed: </b>" + att.DATE_ + "<br>   <b>Revised Date: </b>" + att.REVISE_DAT + "<br><b>State Number: </b>" + att.STATE_NO + "<br><b>Former ID: </b>" + att.FORMER_ID + "<br><b>Township: </b>" + att.TNSHP + "<br><b>Range: </b>" + att.RANGE + "<br><b>Prime Meridian: </b>" + att.PM + "<br><b>Code: </b>" + att.CODE + "<br><b>Monument Box: </b>" + att.MON_BOX + "<br><b>MCSM Number: </b>" + att.MCSM_NO + "<br><b>Book: </b>" + att.BOOK + "<br><b>Page: </b>" + att.PAGE + "<br><b>Road Number: </b>" + att.ROAD_NO + "<br><b>Traverse: </b>" + att.TRAVERSE + "<br><b>Trilateration: </b>" + att.TRILATERAT + "<br><b>GPS: </b>" + att.GPS + "<br><b>GPS Method: </b>" + att.GPS_METHOD + "<br><b>Precision: </b>" + att.PRESICION + "<br><b>Lat: </b>" + att.LATITUDE + "<br><b>Lon: </b>" + att.LONGITUDE + "<br><b>Scale: </b>" + att.SCALE + "<br><b>Convergence: </b>" + att.CONVERGENCE + "<br><b>SPC Scale: </b>" + att.SPC_SCALE + "<br><b>SPC CONV: </b>" + att.SPC_CONV + "<br><b>LCS1 Zone: </b>" + att.LCS1_ZONE + "<br><b>Level Method: </b>" + att.METH_LEVEL + "<br><b>Trig Method: </b>" + att.METH_TRIG + "<br><b>GPS Method: </b>" + att.METH_GPS + "<br><b>Ortho Height: </b>" + att.ORTHO_HT + "<br><b>HAE: </b>" + att.HAE + " ft<br><b>NAV 88: </b>" + att.NAVD88_ft_ + " ft<br><b>HT Method: </b>" + att.HT_METHOD + "<br><b>LCS Height: </b>" + att.LCS_HEIGHT + "<br><b>Phot Avail: </b>" + att.PHOTO_AVAI + "<br><b>Poor: </b>" + att.POOR + "<br><b>Fair: </b>" + att.FAIR + "<br><b>Good: </b>" + att.GOOD + "<br><b>Excellent: </b>" + att.EXCELLENT + "<br><b>Comments: </b>" + att.COMMENTS + "<br><b>Point Status: </b>" + att.POINT_STATUS + "<br><b>BLM GCDB ID: </b>" + att.BLM_GCDB_ID + "<br><b>Description: </b>" + att.DESCRIBE_ + "<br><b>Section: </b>" + att.SECTION_ + "<br><b>Type: </b>" + att.TYPE_ + "<br><b>UTM Northing: </b>" + att.UTM_NORTHING + "<br><b>UTM Easting: </b>" + att.UTM_EASTING + "<br><b>SPC Northing: </b>" + att.SPC_NORTHING + "<br><b>SPC Easting: </b>" + att.SPC_EASTING + "<br><b>Zone: </b>" + att._ZONE + "<br><b>LCS Northing: </b>" + att.LCS_NORTHING + "<br><b>LCS Easting: </b>" + att.LCS_EASTING + "<br><b>LCS1 Northing: </b>" + att.LCS1_NORTHING + "<br><b>LCS1 Easting: </b>" + att.LCS1_EASTING + "<br><b>Ellipsoid Height: </b>" + att.ELLIPSOID_HT + "</div>";
+                    } else if (contentArray[i].layerName === "Vertical Datum Differences") {
+                        att = contentArray[i].feature.attributes;
+                        content += "Vertical Datum Difference <br>between NAVD 29 and NAVD 88: +" + att.DIFFERENCE + " meters";
+                    } else if (contentArray[i].layerName === "Sections") {
+                        att = contentArray[i].feature.attributes;
+                        content += "<br><b>" + att.TRSM + "<b>";
+                    }
+                }
+
+
+                if (len === 0) {
+                    content = "<b style='font-size:1.1em;'>Please turn on a survey layer!</b>";
+                }
+
+                if (content !== '') {
+                    map.infoWindow.resize(400, 300);
+                    map.infoWindow.setTitle("Survey Documents");
+                    map.infoWindow.setContent(content);
+                } else {
+                    map.infoWindow.resize(400, 300);
+                    map.infoWindow.setTitle("Survey Documents");
+                    map.infoWindow.setContent("No information available");
+                }
+                map.infoWindow.show(evt.screenPoint, map.getInfoWindowAnchor(evt.screenPoint));
             });
-            map.infoWindow.setFeatures([deferred]);
-            map.infoWindow.show(evt.screenPoint, map.getInfoWindowAnchor(evt.screenPoint));
         },
 
 

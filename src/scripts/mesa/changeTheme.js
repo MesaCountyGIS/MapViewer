@@ -1262,9 +1262,10 @@ define([
                         IP.width = map.width;
                         IP.height = map.height;
                         IP.mapExtent = map.extent;
+                        //Set how far away you can click and still select the item
                         IP.tolerance = (name === "towers" ? 8 : 3);
                         deferred = IT.execute(IP, function() {
-                            name !== null ? IdentifyTemplates[name](evt, deferred, len, map) : null;
+                            name !== null ? IdentifyTemplates[name](evt, deferred, len, map, opt) : null;
                         });
                     }) //end click or tap
             },
