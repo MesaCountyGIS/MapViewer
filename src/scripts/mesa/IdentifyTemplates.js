@@ -729,7 +729,6 @@ define([
                             description: "<b>Cell Name: </b>{CELL}"
                         });
                         feature.setInfoTemplate(template);
-//                    } else if (result.layerName === 'School District 51 Director Districts') {
                         } else if (result.layerName === 'School District 51 Board Boundaries') {
                         template = new PopupTemplate({
                             title: "School District 51 Director Districts",
