@@ -848,12 +848,8 @@ define([
                 });
             });
 
-            // if (!(lmG.pLay.visibleAtMapScale === true)) {
                 aG.map.infoWindow.setFeatures([deferred]);
                 aG.map.infoWindow.show(evt.mapPoint, aG.map.getInfoWindowAnchor(evt.screenPoint));
-            // } else {
-            //     lmG.pLay.infoTemplate = aG.pTemp;
-            // }
         },
 
     };//end of return object
