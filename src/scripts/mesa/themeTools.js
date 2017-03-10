@@ -23,7 +23,6 @@ define([
                         basemapRef: initialBasemap,
                         infoWindowRef: popupObject,
                         infoTemplateRef: popupTemplateObject,
-                        // checkboxid: null,
                         mapLegend: legend,
                         components: components
                     })

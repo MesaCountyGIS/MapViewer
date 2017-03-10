@@ -95,9 +95,6 @@ function setEventHandlers(JSONconfig, map, parcelLayerObject, initialBasemap,
         on(dom.byId("menuSelect"), "click", function(legendObject) {
             runToolsView();
         });
-        on(query('#layerSelect ul li'), touch.release, function(e){
-            themeTools.themeClick(this, map, popupObject, popupTemplateObject, legendObject, initialBasemap);
-        });
         on(dom.byId("locate"), touch.release, function(){
             showLocator(JSONconfig.geometryService, map)
         });

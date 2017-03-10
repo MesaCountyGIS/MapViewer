@@ -71,11 +71,10 @@ define([
             //Set up event handlers for slide out menu
             on(query(".mainSideMenu li"), "click", dispatchMainMenuClick);
             on(query("#DTtoolstrip button, #panelTab, #sharebutton, .submen li, #headerMessage span"), "click", togglePanel);
-            on(query('.themeMenu li'), "click", function(e){
+            on(query('.themeMenu li, #layerSelect ul li'), "click", function(e){
                 setHeader(getLayer(this));
                 toolsWidget.dispatchThemeMenuClick(getLayerValue(this));
             });
-
             on(query('.measureClick'), "click", dispatchMeasureTool);
             on(query('.queryClick'), "click", dispatchQueryTool);
             on(query('.bookmarkClick'), "click", dispatchBookmarks);
