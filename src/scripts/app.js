@@ -73,6 +73,7 @@ function init() {
 
             JSONconfig.parcelTemplate = aG.pTemp;
             JSONconfig.popupTemplate = aG.popup;
+
             if ((location.href).indexOf("?") > -1) {
                 urlMapType(location.href, aG.map, legend, initialBasemap, JSONconfig, device, lmG.pLay);
             } else {
@@ -342,109 +343,74 @@ function urlMapType(url, map, legend, initialBasemap, config, device, parcels) {
         "dojo/NodeList-traverse",
         "dojo/dom-attr",
         "dojo/_base/array",
-        "dojo/NodeList-manipulate",
-        "mesa/searchTools"
-    ], function(urlUtils, query, domAttr, array, searchTools) {
+        "dojo/NodeList-manipulate"
+    ], function(urlUtils, query, domAttr, array) {
         var urlParams = parseParameters(url);
         function parseParameters(url) {
             var queryObject = urlUtils.urlToObject(url).query;
             if (queryObject) {
-                //Check if maptype is passed. If it is, load the theme template
-                //and open the theme's layer panel.
-                var maptype = queryObject.maptype
-                    ? maptypeFound(queryObject.maptype.toLowerCase())
-                    : undefined;
-
+                var params = {};
+                for(var key in queryObject){
+                    if(queryObject.hasOwnProperty(key)){
+                        if(key === 'cbxid'){
+                            params[key] = queryObject[key].ToLowerCase().split(",");
+                        } else if (key === 'PARCEL_NUM'){
+                            params[key] = queryObject[key].replace(/-/g, "")
+                        } else if (key in ['field', 'ACCOUNTNO']){
+                            params[key] = queryObject[key].ToUpperCase();
+                        }else{
+                            params[key] = queryObject[key];
+                        }
+                    }
+                }
                 var title = queryObject.maptype
-                    ? createTitle(maptype)
+                    ? createTitle(queryObject.maptype)
                     : 'Select Map';
                 function createTitle(map_type) {
                     return query("#layerSelect ul li[data-value='" + map_type + "']").children('a').innerHTML()
                 }
-                var layerid = queryObject.layerid
-                    ? queryObject.layerid
-                    : undefined;
-                var checkboxid = queryObject.cbxid
-                    ? (queryObject.cbxid).toLowerCase().split(",")
-                    : undefined;
-                var field = queryObject.field
-                    ? String(queryObject.field).toUpperCase()
-                    : undefined;
-                var value = queryObject.value
-                    ? queryObject.value
-                    : undefined;
-                var service = queryObject.service
-                    ? queryObject.service
-                    : undefined;
-                var coordinates = queryObject.latlon
-                    ? queryObject.latlon
-                    : undefined;
-                var accountNumber = queryObject.ACCOUNTNO
-                    ? queryObject.ACCOUNTNO.toUpperCase()
-                    : undefined;
-                var parcelNumber = queryObject.PARCEL_NUM
-                    ? queryObject.PARCEL_NUM.replace(/-/g, "")
-                    : undefined;
-                var extent = queryObject.EXTENT
-                    ? queryObject.EXTENT.toUpperCase()
-                    : undefined;
-                var params = [maptype, title, layerid, value, checkboxid];
-
-                if(coordinates !== undefined){
-                    searchTools.searchBy("Latitude/Longitude", coordinates);
-                }
-                if(field !== undefined){
-                    runQuery(layerid, field, value);
-                }
-                if(accountNumber !== undefined){
-                    searchTools.searchBy("account", accountNumber);
-                }
-                if(parcelNumber !== undefined){
-                    searchTools.searchBy("parcelNo", parcelNumber);
-                }
-                if(extent !== undefined){
-                    map.setExtent(extentZoom(extent));
-                }
-            }
-
-            function maptypeFound(type) {
-                require(["mesa/themeTools"], function(themeTools){
-                    themeTools.getTemplate(type);
-                });
-                return type;
-            }
-
-            function runQuery(layerid, field, value) {
-                require([
-                    "esri/tasks/QueryTask", "esri/tasks/query", "esri/graphic", "mesa/graphicsTools"
-                ], function(QueryTask, Query, Graphic, graphicsTools) {
-                    var graphicTool = new graphicsTools({geometryServiceURL: esriConfig.defaults.geometryService, mapRef: map});
-                    dQueryTask = new QueryTask("https://mcmap2.mesacounty.us/arcgis/rest/services/maps/" + service + "/MapServer/" + layerid);
-                    dQuery = new Query();
-                    dQuery.returnGeometry = true;
-                    dQuery.outFields = [""];
-                    dQuery.where = field + " = '" + value + "'";
-                    dQueryTask.execute(dQuery, function(result) {
-                        map.setExtent((map.graphics.add(new Graphic(graphicTool.createJSONPolygon(result.features[0].geometry.rings)))).geometry.getExtent().expand(1.5));
-                    });
-                });
+                params['title'] = title;
             }
             return params;
         }
 
-        if (urlParams[1] !== 'Select Map') {
+
+
+        function maptypeFound(type) {
+            require(["mesa/themeTools"], function(themeTools){
+                themeTools.getTemplate(type);
+            });
+            return type;
+        }
+
+        function runQuery(layerid, field, value) {
             require([
-                "dijit/registry", "mesa/toolsWidget2"
-            ], function(registry, toolsWidget) {
+                "esri/tasks/QueryTask", "esri/tasks/query", "esri/graphic", "mesa/graphicsTools"
+            ], function(QueryTask, Query, Graphic, graphicsTools) {
+                var graphicTool = new graphicsTools({geometryServiceURL: esriConfig.defaults.geometryService, mapRef: map});
+                dQueryTask = new QueryTask("https://mcmap2.mesacounty.us/arcgis/rest/services/maps/" + service + "/MapServer/" + layerid);
+                dQuery = new Query();
+                dQuery.returnGeometry = true;
+                dQuery.outFields = [""];
+                dQuery.where = field + " = '" + value + "'";
+                dQueryTask.execute(dQuery, function(result) {
+                    map.setExtent((map.graphics.add(new Graphic(graphicTool.createJSONPolygon(result.features[0].geometry.rings)))).geometry.getExtent().expand(1.5));
+                });
+            });
+        }
+
+        if (urlParams.title !== 'Select Map') {
+            require([
+                "dijit/registry", "mesa/toolsWidget2", "mesa/searchTools"
+            ], function(registry, toolsWidget, searchTools) {
 
                 var components = {
-                    pVal: urlParams[3],
-                    checkboxid: urlParams[4]
+                    pVal: urlParams.title,
+                    checkboxid: urlParams.cbxid
                 }
                 if (registry.byId("toolsView2")) {
                     (registry.byId("toolsView2").destroyRecursive());
                 }
-
                     var tools = new toolsWidget({
                         geometryServiceURL: config.geometryService,
                         printURL: config.printURL,
@@ -457,8 +423,26 @@ function urlMapType(url, map, legend, initialBasemap, config, device, parcels) {
                         legendRef: legend,
                         parcelLayer: parcels
                     }, "toolsView2");
+                    tools.dispatchThemeMenuClick(urlParams.maptype, components);
+                    if(urlParams.ACCOUNTNO !== undefined){
+                        searchTools.searchBy("account", urlParams.ACCOUNTNO);
+                    }
+                    if(urlParams.PARCEL_NUM !== undefined){
+                        searchTools.searchBy("parcelNo", urlParams.PARCEL_NUM);
+                    }
+                    if(urlParams.EXTENT !== undefined){
+                        map.setExtent(extentZoom(urlParams.EXTENT));
+                    }
+                    if(urlParams.latlon !== undefined){
+                        searchTools.searchBy("Latitude/Longitude", urlParams.latlon);
+                    }
+                    if(urlParams.field !== undefined){
+                        runQuery(urlParams.layerid, urlParams.field, urlParams.value);
+                    }
 
-                    tools.dispatchThemeMenuClick(urlParams[0], components);
+                    if(urlParams.maptype !== undefined){
+                        maptypeFound(urlParams.maptype);
+                    }
 
             }); //end require
         } else {

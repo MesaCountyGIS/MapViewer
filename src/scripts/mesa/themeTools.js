@@ -33,9 +33,7 @@ define([
 
         function _getTemplate(newLayerName) {
             var templateName = "dojo/text!./scripts/esri/mesa/templates/" + newLayerName + "Select.html";
-            document.getElementById(newLayerName + "Select") || require([
-                templateName
-            ], function(template) {
+            document.getElementById(newLayerName + "Select") || require([templateName], function(template) {
                 domConstruct.place(template, "noControl", "before");
             });
         }
