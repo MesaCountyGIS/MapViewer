@@ -43,7 +43,7 @@
     <header id="toolbar">
         <nav id="headerButtonGroup">
             <div id="DTtoolstrip">
-              <button data-to="layersMenu" class="DTlayers" id="DTlayers" title="Turn on Imagery"></button>
+              <button data-to="layersMenu" class="DTlayers" id="DTlayers" title="Turn on Theme Layers"></button>
                 <button data-to="imageYears" data-value="A2015" class="DTimagery" id="DTbasemap" title="Turn on Imagery"></button>
                 <button data-to="legendMenu" id="DTLegend" title="Display Legend"></button>
                 <button class='measureClick' data-to="measureTool" id="DTmeasure" title="Draw and Measure"></button>
@@ -67,30 +67,30 @@
                 <ul id="mainfish" class="sf-menu">
                     <li id="layerSelect" data-value="select">Select Map<span></span>
                         <ul class="submenu">
-                          <li class="click" id="eassessor" data-value="eassessor" data-name="Parcels"><span></span><a>eAssessor (Parcel Info)</a></li>
-                          <li title="Zip codes and Census blocks" class="click" data-value="demograph" data-name="Demographics"><span></span><a>Demographics</a></li>
-                          <li class="click" data-value="districts" data-name="City Limits"><span></span><a>Districts and City Limits</a></li>
-                          <li class="click" data-value="engdocs" data-name="Engineering Docs"><span></span><a>Engineering Tech Docs</a></li>
-                          <li class="click" data-value="enterprise" data-name="Enterprize Zones"><span></span><a>Enterprize Zones</a></li>
-                          <li class="click" data-value="flood" data-name="Flood (FEMA)"><span></span><a>Flood (FEMA)</a></li>
-                          <li class="click" data-value="futureland" data-name="Land Use"><span></span><a>Future Land Use</a></li>
-                          <li title="Historical and in-progress land development projects" class="click" data-value="landdev" data-name="Land Development"><span></span><a>Land Development Projects</a></li>
-                          <li class="click" data-value="law" data-name="Law Enforcement"><span></span><a>Law Enforcement Boundaries</a></li>
-                          <li class="click" data-value="mosquito" data-name="Mosquito"><span></span><a>Mosquito</a></li>
-                          <li class="click" data-value="persigo" data-name="Persigo Agreement"><span></span><a>Persigo Agreement</a></li>
-                          <li class="click" data-value="political" data-name="Political Boundaries"><span></span><a>Political Boundaries</a></li>
-                          <li class="click" data-opt="0" data-value="propsales" data-name="Property Sales"><span></span><a>Property Sales</a></li>
-                          <li class="click" data-value="schools" data-name="Schools"><span></span><a>Schools</a></li>
-                          <li class="click" data-value="septic" data-name="Septic"><span></span><a>Septic Systems</a></li>
-                          <li class="click" data-value="stormwater" data-name="Stormwater"><span></span><a>Stormwater Urbanized Area</a></li>
-                          <li class="click" data-value="survey" data-name="Survey"><span></span><a>Survey Plats, ROW and GPS</a></li>
-                          <li class="click" data-value="topo" data-name="Topography"><span></span><a>Topography</a></li>
-                          <li class="click" data-value="towers" data-name="Towers"><span></span><a>Towers</a></li>
-                          <li class="click" data-value="camera" data-name="Traffic Cameras"><span></span><a>Traffic Cameras</a></li>
-                          <li class="click" data-value="trails" data-name="Trails"><span></span><a>Trails</a></li>
-                          <li class="click" data-value="trans" data-name="Transportation"><span></span><a>Transportation</a></li>
-                          <li class="click" data-value="vacant" data-name="Vacant Parcels"><span></span><a>Vacant Parcel Inventory</a></li>
-                          <li class="click" data-value="zoning" data-name="Zoning"><span></span><a>Zoning</a></li>
+                          <li data-to="layersMenu" class="click" id="eassessor" data-value="eassessor" data-name="Parcels"><span></span><a>eAssessor (Parcel Info)</a></li>
+                          <li data-to="layersMenu" title="Zip codes and Census blocks" class="click" data-value="demograph" data-name="Demographics"><span></span><a>Demographics</a></li>
+                          <li data-to="layersMenu" class="click" data-value="districts" data-name="City Limits"><span></span><a>Districts and City Limits</a></li>
+                          <li data-to="layersMenu" class="click" data-value="engdocs" data-name="Engineering Docs"><span></span><a>Engineering Tech Docs</a></li>
+                          <li data-to="layersMenu" class="click" data-value="enterprise" data-name="Enterprize Zones"><span></span><a>Enterprize Zones</a></li>
+                          <li data-to="layersMenu" class="click" data-value="flood" data-name="Flood (FEMA)"><span></span><a>Flood (FEMA)</a></li>
+                          <li data-to="layersMenu" class="click" data-value="futureland" data-name="Land Use"><span></span><a>Future Land Use</a></li>
+                          <li data-to="layersMenu" title="Historical and in-progress land development projects" class="click" data-value="landdev" data-name="Land Development"><span></span><a>Land Development Projects</a></li>
+                          <li data-to="layersMenu" class="click" data-value="law" data-name="Law Enforcement"><span></span><a>Law Enforcement Boundaries</a></li>
+                          <li data-to="layersMenu" class="click" data-value="mosquito" data-name="Mosquito"><span></span><a>Mosquito</a></li>
+                          <li data-to="layersMenu" class="click" data-value="persigo" data-name="Persigo Agreement"><span></span><a>Persigo Agreement</a></li>
+                          <li data-to="layersMenu" class="click" data-value="political" data-name="Political Boundaries"><span></span><a>Political Boundaries</a></li>
+                          <li data-to="layersMenu" class="click" data-opt="0" data-value="propsales" data-name="Property Sales"><span></span><a>Property Sales</a></li>
+                          <li data-to="layersMenu" class="click" data-value="schools" data-name="Schools"><span></span><a>Schools</a></li>
+                          <li data-to="layersMenu" class="click" data-value="septic" data-name="Septic"><span></span><a>Septic Systems</a></li>
+                          <li data-to="layersMenu" class="click" data-value="stormwater" data-name="Stormwater"><span></span><a>Stormwater Urbanized Area</a></li>
+                          <li data-to="layersMenu" class="click" data-value="survey" data-name="Survey"><span></span><a>Survey Plats, ROW and GPS</a></li>
+                          <li data-to="layersMenu" class="click" data-value="topo" data-name="Topography"><span></span><a>Topography</a></li>
+                          <li data-to="layersMenu" class="click" data-value="towers" data-name="Towers"><span></span><a>Towers</a></li>
+                          <li data-to="layersMenu" class="click" data-value="camera" data-name="Traffic Cameras"><span></span><a>Traffic Cameras</a></li>
+                          <li data-to="layersMenu" class="click" data-value="trails" data-name="Trails"><span></span><a>Trails</a></li>
+                          <li data-to="layersMenu" class="click" data-value="trans" data-name="Transportation"><span></span><a>Transportation</a></li>
+                          <li data-to="layersMenu" class="click" data-value="vacant" data-name="Vacant Parcels"><span></span><a>Vacant Parcel Inventory</a></li>
+                          <li data-to="layersMenu" class="click" data-value="zoning" data-name="Zoning"><span></span><a>Zoning</a></li>
                         </ul>
                     </li>
                 </ul>

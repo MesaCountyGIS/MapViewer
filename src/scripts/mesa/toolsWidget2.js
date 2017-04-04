@@ -74,6 +74,8 @@ define([
             on(query('.themeMenu li, #layerSelect ul li'), "click", function(e){
                 setHeader(getLayer(this));
                 toolsWidget.dispatchThemeMenuClick(getLayerValue(this));
+                console.log('is is', domStyle.get(dom.byId("toolsView2"), 'display'))
+                if(domStyle.get(dom.byId("toolsView2"), 'display') === 'none'){togglePanel.call(this, e);}
             });
             on(query('.measureClick'), "click", dispatchMeasureTool);
             on(query('.queryClick'), "click", dispatchQueryTool);
@@ -131,6 +133,7 @@ define([
                     }
                     backButtonEvent();
                 }
+
                 if(this.id !== "panelTab"){
                     dispatchMainMenuClick.call(this, e);
                 }
@@ -363,7 +366,7 @@ define([
                 themeTools.themeClick(thisSpan.parentNode, map, popupObject, popupTemplateObject, legendObject, initialBasemap, components);
             }, 10);
             //remove the side panel to show the map only.
-            registry.byId("toolsView2").domNode.style.display = "none";
+            // registry.byId("toolsView2").domNode.style.display = "none";
         }
     }); //end of declare
 }); //end of define
