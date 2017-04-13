@@ -398,8 +398,7 @@ function urlMapType(url, map, legend, initialBasemap, config, device, parcels) {
                 });
             });
         }
-
-        if (urlParams.title !== 'Select Map') {
+        // if (urlParams.title !== 'Select Map') {
             require([
                 "dijit/registry", "mesa/toolsWidget2", "mesa/searchTools"
             ], function(registry, toolsWidget, searchTools) {
@@ -411,6 +410,10 @@ function urlMapType(url, map, legend, initialBasemap, config, device, parcels) {
                 if (registry.byId("toolsView2")) {
                     (registry.byId("toolsView2").destroyRecursive());
                 }
+        //         console.log(config.geometryService, "\n", config.printURL, "\n", config.imagesList, "\n", map, "\n", initialBasemap, "\n", device
+        //     , "\n", config.popupTemplate, "\n", config.parcelTemplate, "\n", legend, "\n", parcels, "\n", urlParams, "\n", urlParams.maptype
+        // , "\n", urlParams.latlon )
+        urlParams.maptype = eassessor
                     var tools = new toolsWidget({
                         geometryServiceURL: config.geometryService,
                         printURL: config.printURL,
@@ -423,7 +426,9 @@ function urlMapType(url, map, legend, initialBasemap, config, device, parcels) {
                         legendRef: legend,
                         parcelLayer: parcels
                     }, "toolsView2");
+
                     tools.dispatchThemeMenuClick(urlParams.maptype, components);
+
                     if(urlParams.ACCOUNTNO !== undefined){
                         searchTools.searchBy("account", urlParams.ACCOUNTNO);
                     }
@@ -445,8 +450,8 @@ function urlMapType(url, map, legend, initialBasemap, config, device, parcels) {
                     }
 
             }); //end require
-        } else {
-            return
-        }
+        // } else {
+        //     return
+        // }
 }); //end require
 }
