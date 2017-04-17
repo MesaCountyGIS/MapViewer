@@ -127,12 +127,13 @@ doMath: function(latD, lonD) {
         document.getElementById("coords") !== null? document.getElementById("coords").value = latD.toFixed(7) + "," + lonD.toFixed(7): void(0)
         latD = latD; //.toFixed(5);
         lonD = lonD; //.toFixed(5);
+        graphicsWidget.addPointToMap(lonD, latD, "gcs");
         var zoomToPoint = new Point(lonD, latD);
         var utmZoomToPoint = gsvc.project([zoomToPoint], utm12, function (result) {
             utmZoomToPoint = result[0];
             map.centerAndZoom(utmZoomToPoint, 8);
         });
-        graphicsWidget.addPointToMap(lonD, latD, "gcs");
+        // graphicsWidget.addPointToMap(lonD, latD, "gcs");
         map.enableKeyboardNavigation();
         return [latD, lonD];
 }

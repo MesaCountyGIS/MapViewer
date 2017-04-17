@@ -2,7 +2,6 @@ define([
     "mesa/searchCompleteWidget", "dijit/registry"
 ], function (searchCompleteWidget, registry) {
     function _searchBy(type, option, device, turnOff, afterClickFunction) {
-        console.log('here and there')
         var thisFunctionParam = "noPoint";
         var thisTargetGeometry = "polygon";
         var thisOutFields = "LOCATION";

@@ -353,9 +353,10 @@ function urlMapType(url, map, legend, initialBasemap, config, device, parcels) {
                 for(var key in queryObject){
                     if(queryObject.hasOwnProperty(key)){
                         if(key === 'cbxid'){
-                            params[key] = queryObject[key].ToLowerCase().split(",");
+                            // console.log(typeof(queryObject[key])
+                            params[key] = queryObject[key].split(",");
                         } else if (key === 'PARCEL_NUM'){
-                            params[key] = queryObject[key].replace(/-/g, "")
+                            params[key] = queryObject[key].replace(/-/g, "");
                         } else if (key in ['field', 'ACCOUNTNO']){
                             params[key] = queryObject[key].ToUpperCase();
                         }else{
@@ -373,7 +374,6 @@ function urlMapType(url, map, legend, initialBasemap, config, device, parcels) {
             }
             return params;
         }
-
 
 
         function maptypeFound(type) {
