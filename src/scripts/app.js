@@ -353,7 +353,6 @@ function urlMapType(url, map, legend, initialBasemap, config, device, parcels) {
                 for(var key in queryObject){
                     if(queryObject.hasOwnProperty(key)){
                         if(key === 'cbxid'){
-                            // console.log(typeof(queryObject[key])
                             params[key] = queryObject[key].split(",");
                         } else if (key === 'PARCEL_NUM'){
                             params[key] = queryObject[key].replace(/-/g, "");
@@ -375,7 +374,6 @@ function urlMapType(url, map, legend, initialBasemap, config, device, parcels) {
             return params;
         }
 
-
         function maptypeFound(type) {
             require(["mesa/themeTools"], function(themeTools){
                 themeTools.getTemplate(type);
@@ -383,13 +381,13 @@ function urlMapType(url, map, legend, initialBasemap, config, device, parcels) {
             return type;
         }
 
-        function runQuery(layerid, field, value) {
+        function runQuery(layerid, field, value, service) {
             require([
                 "esri/tasks/QueryTask", "esri/tasks/query", "esri/graphic", "mesa/graphicsTools"
             ], function(QueryTask, Query, Graphic, graphicsTools) {
                 var graphicTool = new graphicsTools({geometryServiceURL: esriConfig.defaults.geometryService, mapRef: map});
-                dQueryTask = new QueryTask("https://mcmap2.mesacounty.us/arcgis/rest/services/maps/" + service + "/MapServer/" + layerid);
-                dQuery = new Query();
+                var dQueryTask = new QueryTask("https://mcmap2.mesacounty.us/arcgis/rest/services/maps/" + service + "/MapServer/" + layerid);
+                var dQuery = new Query();
                 dQuery.returnGeometry = true;
                 dQuery.outFields = [""];
                 dQuery.where = field + " = '" + value + "'";
@@ -402,7 +400,6 @@ function urlMapType(url, map, legend, initialBasemap, config, device, parcels) {
             require([
                 "dijit/registry", "mesa/toolsWidget2", "mesa/searchTools"
             ], function(registry, toolsWidget, searchTools) {
-
                 var components = {
                     pVal: urlParams.title,
                     checkboxid: urlParams.cbxid
@@ -443,7 +440,7 @@ function urlMapType(url, map, legend, initialBasemap, config, device, parcels) {
                         searchTools.searchBy("Latitude/Longitude", urlParams.latlon);
                     }
                     if(urlParams.field !== undefined){
-                        runQuery(urlParams.layerid, urlParams.field, urlParams.value);
+                        runQuery(urlParams.layerid, urlParams.field, urlParams.value, urlParams.service);
                     }
 
                     if(urlParams.maptype !== undefined){
