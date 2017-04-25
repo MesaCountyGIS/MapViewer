@@ -71,22 +71,6 @@ define([
             // editToolbar = new Edit(map);
             tb = new Draw(map);
             map.addLayers([meas.point, meas.line, meas.poly, meas.text, meas.anno]);
-            if(device === "desktop"){
-                // domStyle.set(measureWidget.measureCloser, 'display', "none");
-                // domStyle.set(dom.byId("measureToMap"), 'display', "block");
-                // domStyle.set(dom.byId("measureToTools"), 'display', "block");
-            // new move.parentConstrainedMoveable(this.domNode, {
-            //     handle: this.dialogHeader,
-            //     area: "margin",
-            //     within: true
-            // });
-            }else{
-                // domStyle.set(measureWidget.measureCloser, 'display', "none");
-                // domStyle.set(dom.byId("measureToMap"), 'display', "block");
-                // domStyle.set(dom.byId("measureToTools"), 'display', "block");
-            }
-            measureWidget.enableCheck(dom.byId("measureYes").checked);
-
 
             //dojo.keys.copyKey maps to CTRL on windows and Cmd on Mac.
             var snapper = map.enableSnapping({
@@ -97,6 +81,11 @@ define([
             }];
             snapper.setLayerInfos(lyrinfo);
 
+            //Run enableCheck when the module is loaded to handle default
+            //checkbox states.
+            measureWidget.enableCheck(dom.byId("measureYes").checked);
+
+            //Run enableCheck on change of #measureYes
             on(dom.byId("measureYes"), "change", function(){
                 measureWidget.enableCheck(dom.byId("measureYes").checked);
             });
