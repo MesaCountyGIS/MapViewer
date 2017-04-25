@@ -227,14 +227,6 @@ define([
             });
         },
 
-        // closeClick: function () {
-        //     measureWidget._disconnect();
-        //     map.infoWindow = aG.popup;
-        //     this.domNode.style.display = "none";
-        //     dom.byId("toolPanel").style.display = "none";
-        //     query("#map_zoom_slider, #hidePanel, .collapsedPanel").style("display", "block");
-        // },
-
         setPoly: function (x) {
             measureWidget._resetButtonBlock(x.target, ['polySeg', x.target.getAttribute("data-set")], "#polyResult, #uomPolyBox, #uomText");
             tb.activate(Draw[(x.target.id).slice(4).toUpperCase()]);
@@ -243,11 +235,6 @@ define([
             }
             toolType = (x.target.id).slice(4);
             meas.del = on(tb, "draw-end", measureWidget._addAreaPoly);
-            // dom.byId("toolsView2").style.display = "none";
-            // if(device === "mobile"){
-            //     this.domNode.style.display = "none";
-            //     query("#map_zoom_slider, #toolPanel, #hidePanel, .collapsedPanel").style("display", "block");
-            // }
         },
 
         setLine: function (x) {
@@ -258,7 +245,6 @@ define([
             }
             toolType = (x.target.id).slice(4);
             meas.del = on(tb, "draw-end", measureWidget._addlinegraphic);
-            // device === "mobile"? (this.domNode.style.display = "none", query("#map_zoom_slider, #toolPanel, #hidePanel, .collapsedPanel").style("display", "block")): void(0);
         },
 
 
@@ -273,7 +259,6 @@ define([
                     measureWidget._getPointLocation(geometry.geometry);
                 }
             });
-            // device === "mobile"? (this.domNode.style.display = "none", query("#map_zoom_slider, #toolPanel, #hidePanel, .collapsedPanel").style("display", "block")): void(0);
         },
 
         _resetButtonBlock: function (target, segmentText, inlines) {
@@ -540,40 +525,5 @@ define([
              return undefined
             }
         }
-
-
     }); //end of declare
-    //    // Helper Methods
-    //    function getMapPointFromMenuPosition(box) {
-    //        var x = box.x,
-    //            y = box.y;
-    //        switch (box.corner) {
-    //        case "TR":
-    //            x += box.w;
-    //            break;
-    //        case "BL":
-    //            y += box.h;
-    //            break;
-    //        case "BR":
-    //            x += box.w;
-    //            y += box.h;
-    //            break;
-    //        }
-    //
-    //        var screenPoint = new Point(x - map.position.x, y - map.position.y);
-    //        return map.toMap(screenPoint);
-    //    }
-
-    //    function changeGraphic(e) {
-    //        if (enabled === false) {
-    //            enabled = true;
-    //            editToolbar.activate(Edit.EDIT_TEXT | Edit.MOVE, e.graphic);
-    //
-    //        } else {
-    //            editToolbar.deactivate();
-    //            enabled = false;
-    //        }
-    //    }
-
-
 }); //end of define
