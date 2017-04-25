@@ -443,10 +443,8 @@ define([
             require([
                     "esri/SpatialReference", "dojo/query", "dojo/dom-construct"
                 ], function (SpatialReference, query, domConstruct) {
-                var wgs84 = new SpatialReference({
-                        wkid: 4326
-                    }),
-                    text;
+                var wgs84 = new SpatialReference({wkid: 4326});
+                var text;
                 var uompb = dom.byId("uomPointBox").value;
                 if (uompb === "latlon") {
                     dom.byId("gcsPointResult").style.display = "inline";
@@ -506,21 +504,26 @@ define([
                     uom = "Meters";
                 }
                 initpoint = evt.mapPoint //new Point(evt.mapPoint.x, evt.mapPoint.y)
+
                 function curCoords(evt) {
                     cur = evt.mapPoint;
                     dom.byId(segment).innerHTML = ((mathUtils.getLength(initpoint, cur)) * factor).toFixed(3) + " " + uom;
                 }
-                var tom = on(map, "mouse-move", curCoords)
+
+                var tom = on(map, "mouse-move", curCoords);
+
                 on(map, 'dbl-click', function () {
                     tom.remove();
                 });
+
                 var speedy = on(query("#drawPoint,#drawPolygon,#drawRectangle,#drawFreehand_polygon,#drawCircle"), 'click', function () {
                     if (jerry) {
                         jerry.remove();
                         speedy.remove();
                     }
-                })
-            })
+                });
+
+            });//End of jerry
             }else{
              return undefined
             }
