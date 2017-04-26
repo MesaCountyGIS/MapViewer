@@ -211,11 +211,9 @@ define([
         },
 
         clearClick: function () {
-            meas.point.clear();
-            meas.line.clear();
-            meas.poly.clear();
-            meas.text.clear();
-            meas.anno.clear();
+            [meas.point,meas.line,meas.poly,meas.text,meas.anno].forEach(function(item){
+                item.clear();
+            });
             map.infoWindow = aG.popup;
             query(this.gcsPointResult, this.utmPointResult).style("display", "none");
             query("#gcsPointResult, #utmPointResult, #polyResult, #lineResult").children("span.remove").forEach(function (x) {
@@ -512,8 +510,7 @@ define([
 
                 var speedy = on(query("#drawPoint,#drawPolygon,#drawRectangle,#drawFreehand_polygon,#drawCircle"), 'click', function () {
                     if (jerry) {
-                        jerry.remove();
-                        speedy.remove();
+                        [jerry,speedy].forEach(function(item){item.remove();});
                     }
                 });
 
