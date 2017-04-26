@@ -4,11 +4,11 @@ define([
     "esri/symbols/SimpleMarkerSymbol", "esri/symbols/SimpleFillSymbol", "esri/graphic", "esri/tasks/LengthsParameters", "dojo/touch", "esri/tasks/AreasAndLengthsParameters",
     "esri/tasks/BufferParameters", "esri/tasks/DistanceParameters", "esri/symbols/TextSymbol", "esri/symbols/Font", "dojo/_base/Color", "esri/geometry/Point",
     "esri/tasks/query", "esri/toolbars/edit", "esri/geometry/Extent", "dijit/Menu", "dijit/MenuItem", "dijit/MenuSeparator", "dojo/query", "dojo/dom", "dojo/dom-style",
-    "dojo/dom-construct", "dojo/dom-class", "dojo/on", "dojo/NodeList-traverse", "dojo/NodeList-manipulate"
+    "dojo/dom-construct", "dojo/dom-class", "dojo/on", "esri/SpatialReference", "dojo/NodeList-traverse", "dojo/NodeList-manipulate"
  ], function (declare, lang, move, _WidgetBase, _TemplatedMixin, template, GeometryService, mathUtils, GraphicsLayer, keys, Connect, Draw, SnappingManager,
      SimpleLineSymbol, SimpleMarkerSymbol, SimpleFillSymbol, Graphic, LengthsParameters, touch,
     AreasAndLengthsParameters, BufferParameters, DistanceParameters, TextSymbol, Font, Color, Point, Query, Edit, Extent, Menu, MenuItem, MenuSeparator, query,
-    dom, domStyle, domConstruct, domClass, on) {
+    dom, domStyle, domConstruct, domClass, on, SpatialReference) {
 
     var fillColor = new Color([255, 255, 0, 0.25]);
     var fillOpacity = 0.5;
@@ -440,12 +440,13 @@ define([
         },
 
         _getPointLocation: function (UTMPoint) {
-            require([
-                    "esri/SpatialReference", "dojo/query", "dojo/dom-construct"
-                ], function (SpatialReference, query, domConstruct) {
                 var wgs84 = new SpatialReference({wkid: 4326});
                 var text;
                 var uompb = dom.byId("uomPointBox").value;
+
+
+
+
                 if (uompb === "latlon") {
                     dom.byId("gcsPointResult").style.display = "inline";
                     query("#utmPointResult span.remove").forEach(function (i) {
@@ -471,7 +472,6 @@ define([
                     query("#yResult").text(UTMPoint.y.toFixed(3) + " meters");
                     query("#xResult").text(UTMPoint.x.toFixed(3) + " meters");
                 }
-            });
         },
 
         _measurementPointText: function (point, text) {
