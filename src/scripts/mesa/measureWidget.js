@@ -140,8 +140,7 @@ define([
                         for (i = 0; i < 2; i++) {
                             meas.text.graphics.forEach(function (graphic) {
                                 if (clickedExtent.contains(graphic.geometry)) {
-                                    meas.text.remove(graphic);
-                                    meas.anno.remove(graphic);
+                                    remove([meas.text, meas.anno], graphic);
                                 }
                             })
                         }
@@ -149,15 +148,21 @@ define([
                         var clickedPointExtent = measureWidget._pointToExtent(map, selected.geometry, 10);
                         meas.text.graphics.forEach(function (graphic) {
                             if (clickedPointExtent.contains(graphic.geometry)) {
-                                meas.text.remove(graphic);
-                                meas.anno.remove(graphic);
+                                remove([meas.text, meas.anno], graphic);
                             }
                         })
                     }
 
-                    meas.point.remove(selected);
-                    meas.poly.remove(selected);
-                    meas.line.remove(selected);
+                    function remove(items, graphic){
+                        [meas.text, meas.anno].forEach(function(item){
+                            item.remove(graphic);
+                        });
+                    }
+
+                    [meas.point, meas.poly, meas.line].forEach(function(item){
+                        item.remove(selected);
+                    });
+
                 }
             }));
 
