@@ -1,14 +1,14 @@
 define([
-    "dojo/_base/declare", "dojo/_base/lang", "dojo/dnd/move", "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dojo/text!./templates/measureDialog.html",
-    "esri/tasks/GeometryService", "esri/geometry/mathUtils", "esri/layers/GraphicsLayer", "dojo/keys", "dojo/_base/connect", "esri/toolbars/draw", "esri/SnappingManager", "esri/symbols/SimpleLineSymbol",
-    "esri/symbols/SimpleMarkerSymbol", "esri/symbols/SimpleFillSymbol", "esri/graphic", "esri/tasks/LengthsParameters", "dojo/touch", "esri/tasks/AreasAndLengthsParameters",
-    "esri/tasks/BufferParameters", "esri/tasks/DistanceParameters", "esri/symbols/TextSymbol", "esri/symbols/Font", "dojo/_base/Color", "esri/geometry/Point",
+    "dojo/_base/declare", "dojo/dnd/move", "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dojo/text!./templates/measureDialog.html",
+    "esri/tasks/GeometryService", "esri/geometry/mathUtils", "esri/layers/GraphicsLayer", "dojo/keys", "dojo/_base/connect", "esri/toolbars/draw", "esri/symbols/SimpleLineSymbol",
+    "esri/symbols/SimpleMarkerSymbol", "esri/symbols/SimpleFillSymbol", "esri/graphic", "esri/tasks/LengthsParameters", "esri/tasks/AreasAndLengthsParameters",
+    "esri/tasks/BufferParameters", "esri/symbols/TextSymbol", "esri/symbols/Font", "dojo/_base/Color", "esri/geometry/Point",
     "esri/tasks/query", "esri/toolbars/edit", "esri/geometry/Extent", "dijit/Menu", "dijit/MenuItem", "dijit/MenuSeparator", "dojo/query", "dojo/dom", "dojo/dom-style",
-    "dojo/dom-construct", "dojo/dom-class", "dojo/on", "esri/SpatialReference", "dojo/NodeList-traverse", "dojo/NodeList-manipulate"
- ], function (declare, lang, move, _WidgetBase, _TemplatedMixin, template, GeometryService, mathUtils, GraphicsLayer, keys, Connect, Draw, SnappingManager,
-     SimpleLineSymbol, SimpleMarkerSymbol, SimpleFillSymbol, Graphic, LengthsParameters, touch,
-    AreasAndLengthsParameters, BufferParameters, DistanceParameters, TextSymbol, Font, Color, Point, Query, Edit, Extent, Menu, MenuItem, MenuSeparator, query,
-    dom, domStyle, domConstruct, domClass, on, SpatialReference) {
+    "dojo/dom-construct", "dojo/on", "esri/SpatialReference", "dojo/NodeList-traverse", "dojo/NodeList-manipulate"
+ ], function (declare, move, _WidgetBase, _TemplatedMixin, template, GeometryService, mathUtils, GraphicsLayer, keys, Connect, Draw,
+     SimpleLineSymbol, SimpleMarkerSymbol, SimpleFillSymbol, Graphic, LengthsParameters,
+    AreasAndLengthsParameters, BufferParameters, TextSymbol, Font, Color, Point, Query, Edit, Extent, Menu, MenuItem, MenuSeparator, query,
+    dom, domStyle, domConstruct, on, SpatialReference) {
 
     var fillColor = new Color([255, 255, 0, 0.25]);
     var fillOpacity = 0.5;
@@ -29,7 +29,6 @@ define([
     var toolType;
     var fillOpacity;
     var meas = {};
-    // var editToolbar;
     var enabled = false;
     var newText = [];
     var shape;
