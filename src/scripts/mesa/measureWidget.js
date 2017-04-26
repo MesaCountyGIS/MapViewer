@@ -11,26 +11,19 @@ define([
     dom, domStyle, domConstruct, on, SpatialReference) {
 
     var fillColor = new Color([255, 255, 0, 0.25]);
-    var fillOpacity = 0.5;
     var outlineColor = new Color([255, 255, 0, 1]); //new Color([0, 0, 0, 1]);
     var outlineWidth = 5;
-    var outlineOpacity = 1;
     var lineColor = new Color([255, 255, 0, 1]);
     var lineStyle = SimpleLineSymbol.STYLE_SOLID;
     var lineWidth = 5;
-    var lineOpacity = 1;
     var textColor = new Color([207, 2, 38]);
-    var textOpacity = 1;
     var textSize = "1em";
     var textStyle = Font.STYLE_ITALIC;
     var textWeight = Font.WEIGHT_BOLDER;
     var textVariant = Font.VARIANT_NORMAL;
     var textFamily = "Courier New";
     var toolType;
-    var fillOpacity;
     var meas = {};
-    var enabled = false;
-    var newText = [];
     var shape;
     var selected;
     jerry = null;
