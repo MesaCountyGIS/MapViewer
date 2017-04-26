@@ -3,11 +3,11 @@ define([
     "esri/tasks/GeometryService", "esri/geometry/mathUtils", "esri/layers/GraphicsLayer", "dojo/keys", "dojo/_base/connect", "esri/toolbars/draw", "esri/symbols/SimpleLineSymbol",
     "esri/symbols/SimpleMarkerSymbol", "esri/symbols/SimpleFillSymbol", "esri/graphic", "esri/tasks/LengthsParameters", "esri/tasks/AreasAndLengthsParameters",
     "esri/tasks/BufferParameters", "esri/symbols/TextSymbol", "esri/symbols/Font", "dojo/_base/Color", "esri/geometry/Point",
-    "esri/tasks/query", "esri/toolbars/edit", "esri/geometry/Extent", "dijit/Menu", "dijit/MenuItem", "dijit/MenuSeparator", "dojo/query", "dojo/dom", "dojo/dom-style",
+    "esri/tasks/query", "esri/geometry/Extent", "dijit/Menu", "dijit/MenuItem", "dijit/MenuSeparator", "dojo/query", "dojo/dom", "dojo/dom-style",
     "dojo/dom-construct", "dojo/on", "esri/SpatialReference", "dojo/NodeList-traverse", "dojo/NodeList-manipulate"
  ], function (declare, move, _WidgetBase, _TemplatedMixin, template, GeometryService, mathUtils, GraphicsLayer, keys, Connect, Draw,
      SimpleLineSymbol, SimpleMarkerSymbol, SimpleFillSymbol, Graphic, LengthsParameters,
-    AreasAndLengthsParameters, BufferParameters, TextSymbol, Font, Color, Point, Query, Edit, Extent, Menu, MenuItem, MenuSeparator, query,
+    AreasAndLengthsParameters, BufferParameters, TextSymbol, Font, Color, Point, Query, Extent, Menu, MenuItem, MenuSeparator, query,
     dom, domStyle, domConstruct, on, SpatialReference) {
 
     var fillColor = new Color([255, 255, 0, 0.25]);
@@ -60,7 +60,6 @@ define([
             meas.poly = new GraphicsLayer();
             meas.text = new GraphicsLayer();
             meas.anno = new GraphicsLayer();
-            // editToolbar = new Edit(map);
             tb = new Draw(map);
             map.addLayers([meas.point, meas.line, meas.poly, meas.text, meas.anno]);
 
