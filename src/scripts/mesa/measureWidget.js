@@ -444,24 +444,22 @@ define([
                 var text;
                 var uompb = dom.byId("uomPointBox").value;
 
-
-
-
                 if (uompb === "latlon") {
                     dom.byId("gcsPointResult").style.display = "inline";
                     query("#utmPointResult span.remove").forEach(function (i) {
                         domConstruct.empty(i);
-                    })
-                    var point84 = geometryServer.project([UTMPoint], wgs84, function (result) {
-                        point84 = result[0];
-                        var lon = point84.x;
-                        var lat = point84.y;
-                        var firstPoint = new Point(lon, lat);
-                        text = firstPoint.y.toFixed(3) + " " + firstPoint.x.toFixed(3);
-                        measureWidget._measurementPointText(UTMPoint, text);
-                        query("#latResult").text(firstPoint.y.toFixed(3) + " deg");
-                        query("#lonResult").text(firstPoint.x.toFixed(3) + " deg");
-                    })
+                    });
+                    geometryServer.project([UTMPoint], wgs84)
+                        .then(function (result) {
+                            var point84 = result[0];
+                            var lon = point84.x;
+                            var lat = point84.y;
+                            var firstPoint = new Point(lon, lat);
+                            text = firstPoint.y.toFixed(3) + " " + firstPoint.x.toFixed(3);
+                            measureWidget._measurementPointText(UTMPoint, text);
+                            query("#latResult").text(firstPoint.y.toFixed(3) + " deg");
+                            query("#lonResult").text(firstPoint.x.toFixed(3) + " deg");
+                        });
                 } else if (uompb === "utm") {
                     dom.byId("utmPointResult").style.display = "inline";
                     query("#gcsPointResult span.remove").forEach(function (i) {
