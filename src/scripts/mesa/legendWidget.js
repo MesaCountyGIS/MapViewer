@@ -71,14 +71,6 @@ define([
             }
         },
 
-        // Legend: function(){
-        //     return new Legend({
-        //         map: map,
-        //         layerInfos: legendLayers
-        //     }, dom.byId("legendDiv"))
-        //         .startup();
-        // },
-
         toggleDialog: function() { //fires on click of #DTLegend and #IPLegend - toggles the legend
             if (domClass.contains(dom.byId(legendWidget.domNode), "displayNo")) {
                 dom.byId(legendWidget.domNode).style.display = "block";
@@ -88,32 +80,6 @@ define([
                 (domClass.add(dom.byId(legendWidget.domNode), "displayNo"));
             }
         },
-
-
-        // pushLayers: function(layertitle, layerlist, x) {
-        //     legendLayers.length = 0;
-        //     push('Basemap Layers', defaultBasemap, [
-        //         7,12,17,22,23,24,25,26,27,28,32,35,36,37,38,39,50,51
-        //     ]);
-        //
-        //     if (x === 0 && !(layerlist === 0)) {
-        //         for (i = 0; i < layerlist.length; i++) {
-        //             push(layertitle, Layers[(layerlist[i])].layerName, Layers[(layerlist[i])].lyrs
-        //                 ? Layers[(layerlist[i])].lyrs
-        //                 : []);
-        //         }
-        //
-        //     } else if (layerlist === 0 && !(x === 0)) {
-        //         push(layertitle, Layers[x].layerName, Layers[x].lyrs
-        //             ? Layers[x].lyrs: []);
-        //     }
-        //
-        //     function push(title, layerName, hidelayers) {
-        //         legendLayers.push({layer: layerName, title: title, hideLayers: hidelayers});
-        //         legend.refresh(legendLayers);
-        //     }
-        //     legend.refresh(legendLayers);
-        // }
 
     }) //end declare
 }); // end define
