@@ -74,7 +74,6 @@ define([
             on(query('.themeMenu li, #layerSelect ul li'), "click", function(e){
                 setHeader(getLayer(this));
                 toolsWidget.dispatchThemeMenuClick(getLayerValue(this));
-                console.log('is is', domStyle.get(dom.byId("toolsView2"), 'display'))
                 if(domStyle.get(dom.byId("toolsView2"), 'display') === 'none'){togglePanel.call(this, e);}
             });
             on(query('.measureClick'), "click", dispatchMeasureTool);

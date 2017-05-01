@@ -473,6 +473,7 @@ define([
                         "opacity": 0.5
                     }]
                 };
+                //layer visibiliity in the legend is controlled by the lyrs value
                 themeLayers = {
                     "towers": {
                         layerName: lmG.towers,
@@ -533,7 +534,7 @@ define([
                         layerName: lmG.propsales,
                         popupFunc: 'sales',
                         service: 'Sales',
-                        lyrs: [0]
+                        // lyrs: [0]
                     },
                     "sewer": {
                         layerName: lmG.sewer,
@@ -1175,6 +1176,7 @@ define([
                     }
 
                     function push(title, layerName, hidelayers) {
+                        console.log('Hi ', title, layerName, hidelayers)
                         mapLegendLayers.push({
                             layer: layerName,
                             title: title,
