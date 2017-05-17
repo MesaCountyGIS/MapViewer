@@ -427,6 +427,10 @@ function urlMapType(url, map, legend, initialBasemap, config, device, parcels) {
 
                     tools.dispatchThemeMenuClick(urlParams.maptype, components);
 
+                    if(urlParams.maptype !== undefined){
+                        maptypeFound(urlParams.maptype);
+                    }
+
                     if(urlParams.ACCOUNTNO !== undefined){
                         searchTools.searchBy("account", urlParams.ACCOUNTNO);
                     }
@@ -441,10 +445,6 @@ function urlMapType(url, map, legend, initialBasemap, config, device, parcels) {
                     }
                     if(urlParams.field !== undefined){
                         runQuery(urlParams.layerid, urlParams.field, urlParams.value, urlParams.service);
-                    }
-
-                    if(urlParams.maptype !== undefined){
-                        maptypeFound(urlParams.maptype);
                     }
 
             }); //end require

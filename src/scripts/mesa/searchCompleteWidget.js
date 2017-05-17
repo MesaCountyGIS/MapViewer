@@ -30,7 +30,7 @@ define([
             domConstruct.place(this.domNode, this.srcNodeRef.id, "before");
             dom.byId("resultUL")? domConstruct.destroy("resultUL"): void(0);
             this.searchValue.innerHTML = ("Search " + this.type);
-            this.option === undefined? this.domNode.style.display = "block":void(0);
+            this.option !== undefined? this.domNode.style.display = "none":void(0);
             thisWidget = this;
             map = thisWidget.mapRef;
             option = thisWidget.option;

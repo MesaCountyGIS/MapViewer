@@ -1176,7 +1176,6 @@ define([
                     }
 
                     function push(title, layerName, hidelayers) {
-                        console.log('Hi ', title, layerName, hidelayers)
                         mapLegendLayers.push({
                             layer: layerName,
                             title: title,
