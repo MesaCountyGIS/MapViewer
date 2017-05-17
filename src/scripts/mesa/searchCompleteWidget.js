@@ -52,7 +52,7 @@ define([
 
         option !== undefined? (thisWidget._runScript()
         .then(function(data){
-            thisWidget.setExtent(data.features[0].geometry.rings)
+            thisWidget.setExtent(data.features[0].geometry.rings);
         })
     ): void(0);
     }else{

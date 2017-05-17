@@ -365,7 +365,7 @@ define([
                 themeTools.themeClick(thisSpan.parentNode, map, popupObject, popupTemplateObject, legendObject, initialBasemap, components);
             }, 10);
             //remove the side panel to show the map only.
-            // registry.byId("toolsView2").domNode.style.display = "none";
+            registry.byId("toolsView2").domNode.style.display = "none";
         }
     }); //end of declare
 }); //end of define
