@@ -66,7 +66,7 @@ gulp.task('minmods', function(){
  return gulp.src(['./src/scripts/mesa/autocomplete.js'])
          .pipe(addsrc.append([
              './src/scripts/mesa/base.js',
-                './src/scripts/mesa/basemapWidget.js',
+                // './src/scripts/mesa/basemapWidget.js',
                 './src/scripts/mesa/basemapWidget2.js',
                 './src/scripts/mesa/bookmarkWidget.js',
                 './src/scripts/mesa/changeTheme.js',
@@ -86,7 +86,7 @@ gulp.task('minmods', function(){
                 './src/scripts/mesa/searchCompleteWidget.js',
                 './src/scripts/mesa/shareFormWidget.js',
                 './src/scripts/mesa/legendWidget.js',
-                './src/scripts/mesa/toolsWidget.js',
+                // './src/scripts/mesa/toolsWidget.js',
                 './src/scripts/mesa/toolsWidget2.js'
             ]))
         .pipe(plumber())

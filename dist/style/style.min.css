@@ -1295,21 +1295,14 @@ input {
   cursor: pointer;
 }
 
-.toolsButton {
-  margin: 0 0 2em 1.5em;
-}
-
-#backMenu {
-  margin: 0 4.5em 0 .5em;
-}
-
 .mesaTools {
   position: absolute;
   top: 3.5em;
   left: 0;
   background: #fff;
   border-right: 1px solid #d3d3d3;
-  min-width: 320px;
+  width: 20%;
+  min-width: 200px;
   height: 100%;
   padding: 1em 0 0;
   z-index: 50;
@@ -1370,6 +1363,8 @@ input {
 }
 
 #sideMenuHeader span {
+  text-align: center;
+  padding-left: 2em;
   cursor: pointer;
 }
 
