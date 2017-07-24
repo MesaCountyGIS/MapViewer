@@ -213,6 +213,7 @@ div .titleButton .arrow:hover {
 }
 
 #frm1 ul li {
+  float: left;
   margin-bottom: 1em;
   width: 17em;
   background-color: #fff;
@@ -264,9 +265,7 @@ div .titleButton .arrow:hover {
 
 #message {
   resize: none;
-  width: 100%;
-  min-height: 100px;
-  margin-bottom: -1em;
+  float: left;
 }
 
 #problemName {
