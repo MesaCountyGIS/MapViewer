@@ -1998,7 +1998,6 @@ form.qForm label {
 
 #measureTool {
   height: 60%;
-  overflow: auto;
 }
 
 #drawToolInstruction {
@@ -2006,8 +2005,7 @@ form.qForm label {
 }
 
 #drawButtonBlock {
-  width: 18em;
-  margin-left: 1em;
+  margin-bottom: 6em;
 }
 
 #drawButtonBlock img:hover,
@@ -2279,11 +2277,6 @@ input#mapTitle {
   margin-top: .25em;
 }
 
-#searchFieldDialog {
-  position: absolute;
-  left: 1.5em;
-}
-
 #searchFieldDialog #resultUL {
   background-color: #fff!important;
   margin-left: 1.1em;
@@ -2311,17 +2304,7 @@ input#mapTitle {
   width: 13em;
 }
 
-.searchBox {
-  position: absolute;
-  left: 33%;
-  width: 17em;
-  height: 5em;
-}
-
 .searchBox .searchheader {
-  width: 16.5em;
-  height: 1.5em;
-  margin: .25em auto;
   text-align: center;
 }
 
