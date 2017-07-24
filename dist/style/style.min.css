@@ -229,8 +229,6 @@ div .titleButton .arrow:hover {
 }
 
 #frm2 ul li {
-  margin-bottom: 1em;
-  width: 17em;
   background-color: #fff;
 }
 
@@ -288,18 +286,10 @@ div .titleButton .arrow:hover {
   background: transparent url("../images/sprite.png") 0 -1338px;
   width: 25px;
   height: 25px;
+  float: right;
   margin-right: 1em;
   margin-top: .1em;
   border-style: none;
-}
-
-#fromE,
-#locate,
-#shareE,
-#shareEmail,
-#shareN,
-#shareName {
-  float: right;
 }
 
 .validateTips {
