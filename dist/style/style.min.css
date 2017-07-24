@@ -1320,7 +1320,7 @@ input {
   margin: 0 auto .5em;
   background-color: #efddb9;
   padding: .2em;
-  width: 10em;
+  width: 10em!important;
   border-radius: 3px;
 }
 
