@@ -15,7 +15,19 @@ gulp.task('less', function(){
     /* less converts style.less (the application's main style sheet) to plain
     css, minifies it, concatenates it with ESRIs nihilo stylesheet, renames
     it and copies it to the dist style directory*/
-    return gulp.src('./src/style/style.less')
+    return gulp
+    .src('./src/style/style.less')
+    // .pipe(addsrc.append([
+    //     './src/style/bookmarkTool.less',
+    //     './src/style/helpTool.less',
+    //     './src/style/loadLimits.less',
+    //     './src/style/measureTool.less',
+    //     './src/style/printTool.less',
+    //     './src/style/queryTool.less',
+    //     './src/style/searchTool.less',
+    //     './src/style/shareTool.less',
+    //     './src/style/slidersAndSpinners.less'
+    // ]))
     .pipe(plumber())
     .pipe(less())
     .pipe(cssnano())

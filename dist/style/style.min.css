@@ -1802,7 +1802,7 @@ form.qForm label {
 }
 
 #qLayer {
-  width: 20em;
+  width: 16em;
 }
 
 .extent {
@@ -2277,7 +2277,7 @@ input#mapTitle {
   background-color: #fff!important;
   margin-left: 1.1em;
   margin-top: .5em;
-  width: 14.7em;
+  width: 80%;
   z-index: 20;
 }
 
@@ -2307,7 +2307,7 @@ input#mapTitle {
 #loc {
   position: relative;
   height: 1em;
-  width: 16em;
+  width: 80%;
   font-size: .9em;
   margin-left: 1.5em;
   top: .6em;
@@ -2325,17 +2325,15 @@ input#mapTitle {
 
 #coords {
   margin-top: -.1em;
-  float: left;
   font-size: .8em;
   height: 1.05em;
-  width: 13em;
+  width: 60%;
   border-radius: 4px;
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
 }
 
 #coordzoom {
-  position: absolute;
   margin: -.2em 0 0 .5em;
 }
 
