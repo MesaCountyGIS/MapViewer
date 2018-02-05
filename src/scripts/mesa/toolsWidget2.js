@@ -128,7 +128,7 @@ define([
                     domStyle.set('toolsView2', "display", "block");
                 }else{
                     if(domAttr.get(this, 'data-to') === domAttr.get(dom.byId("backMenu"), 'data-from')){
-                        domStyle.set('toolsView2', "display", "none");
+                        // domStyle.set('toolsView2', "display", "none");
                     }
                     backButtonEvent();
                 }

@@ -65,7 +65,7 @@ gulp.task('js', function(){
         .pipe(uglify({
             mangle: false,
         }))
-        .pipe(concat("all.js"))
+        // .pipe(concat("all.js"))
         .pipe(rename("app.min.js"))
         .pipe(gulp.dest('./dist/scripts/'));
 });

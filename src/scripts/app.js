@@ -7,7 +7,7 @@ function init() {
     require([
         "esri/config", "dojo/on", "dojo/dom-construct", "dojo/text!./scripts/_config/config.json", "esri/dijit/Legend", "mesa/toolsWidget2" //fix bug requiring toolsWidget to be loaded
     ], function(esriConfig, on, domConstruct, JSONconfig, Legend) {
-
+sideMenuHeader
         /* The JSON configuration file is located in the scripts/_config directory.
         It contains urls for geometryService, print service and proxy. It also
         contains the imageServer url and a list of image service names and ids used
@@ -427,10 +427,6 @@ function urlMapType(url, map, legend, initialBasemap, config, device, parcels) {
 
                     tools.dispatchThemeMenuClick(urlParams.maptype, components);
 
-                    if(urlParams.maptype !== undefined){
-                        maptypeFound(urlParams.maptype);
-                    }
-
                     if(urlParams.ACCOUNTNO !== undefined){
                         searchTools.searchBy("account", urlParams.ACCOUNTNO);
                     }
@@ -445,6 +441,10 @@ function urlMapType(url, map, legend, initialBasemap, config, device, parcels) {
                     }
                     if(urlParams.field !== undefined){
                         runQuery(urlParams.layerid, urlParams.field, urlParams.value, urlParams.service);
+                    }
+
+                    if(urlParams.maptype !== undefined){
+                        maptypeFound(urlParams.maptype);
                     }
 
             }); //end require
