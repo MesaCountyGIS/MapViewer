@@ -1285,12 +1285,25 @@ input {
   cursor: pointer;
 }
 
+#sideMenuHeader {
+  position: relative;
+  margin-bottom: 3em;
+}
+
+#sideMenuHeader span {
+  text-align: center;
+  font-size: 1.5em;
+  padding-left: 2em;
+  cursor: pointer;
+}
+
+#backMap,
 #backMenu {
-  margin-left: -1.4em;
+  position: absolute;
 }
 
 #backMap {
-  display: inherit;
+  right: 2em;
 }
 
 .mesaTools {

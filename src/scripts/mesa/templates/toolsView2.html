@@ -1,7 +1,7 @@
 <div class="${baseClass}" data-dojo-attach-point="domNode">
-    <div id="sideMenuHeader" style='margin-bottom:1em' data-dojo-type="dojox/mobile/Heading">
-      <span data-to='' style='visibility: hidden;float:left;font-size: 1.5em;' id='backMenu' data-dojo-attach-point="backMenuButton" data-dojo-type="dojox.mobile.ToolBarButton">&#10094; Back</span>
-      <span style='font-size: 1.5em' id='backMap' data-dojo-attach-point="backButton" data-dojo-type="dojox.mobile.ToolBarButton" class="toolsButton">
+    <div id="sideMenuHeader" data-dojo-type="dojox/mobile/Heading">
+      <span data-to='' id='backMenu' data-dojo-attach-point="backMenuButton" data-dojo-type="dojox.mobile.ToolBarButton">&#10094; Back</span>
+      <span id='backMap' data-dojo-attach-event="onclick:backToMap" data-dojo-attach-point="backButton" data-dojo-type="dojox.mobile.ToolBarButton" class="toolsButton">
         Map &#10095;</span>
     </div>
     <ul class='mainSideMenu'>
