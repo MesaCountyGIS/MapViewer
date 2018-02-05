@@ -1297,12 +1297,13 @@ input {
   cursor: pointer;
 }
 
-#backMap,
 #backMenu {
   position: absolute;
+  visibility: hidden;
 }
 
 #backMap {
+  position: absolute;
   right: 2em;
 }
 
