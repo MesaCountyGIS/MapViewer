@@ -121,6 +121,7 @@ define([
             }
 
             function togglePanel(e){
+                alert('togglePanel just ran')
                 if(domStyle.get('toolsView2', 'display') === "none"){
                     if(domAttr.get(dom.byId("backMenu"), 'data-from') !== null){
                         backButtonEvent();
@@ -128,7 +129,7 @@ define([
                     domStyle.set('toolsView2', "display", "block");
                 }else{
                     if(domAttr.get(this, 'data-to') === domAttr.get(dom.byId("backMenu"), 'data-from')){
-                        // domStyle.set('toolsView2', "display", "none");
+                        domStyle.set('toolsView2', "display", "none");
                     }
                     backButtonEvent();
                 }
@@ -163,6 +164,7 @@ define([
                 }
             }
 
+
             function backButtonEvent(){
                 var backToPage = domAttr.get(dom.byId("backMenu"), 'data-to');
                 var fromPage = domAttr.get(dom.byId("backMenu"), 'data-from');
@@ -174,7 +176,6 @@ define([
                     backToPage = "mainSideMenu";
                     fromPage = "helpTool";
                 }
-
                 domClass.add(query("." + fromPage)[0], "displayNo");
                 domClass.remove(query("." + backToPage)[0], "displayNo");
 
