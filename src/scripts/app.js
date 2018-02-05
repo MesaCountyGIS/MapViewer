@@ -7,7 +7,7 @@ function init() {
     require([
         "esri/config", "dojo/on", "dojo/dom-construct", "dojo/text!./scripts/_config/config.json", "esri/dijit/Legend", "mesa/toolsWidget2" //fix bug requiring toolsWidget to be loaded
     ], function(esriConfig, on, domConstruct, JSONconfig, Legend) {
-sideMenuHeader
+
         /* The JSON configuration file is located in the scripts/_config directory.
         It contains urls for geometryService, print service and proxy. It also
         contains the imageServer url and a list of image service names and ids used
