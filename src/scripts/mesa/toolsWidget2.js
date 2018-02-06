@@ -121,7 +121,6 @@ define([
             }
 
             function togglePanel(e){
-                alert('togglePanel just ran')
                 if(domStyle.get('toolsView2', 'display') === "none"){
                     if(domAttr.get(dom.byId("backMenu"), 'data-from') !== null){
                         backButtonEvent();
