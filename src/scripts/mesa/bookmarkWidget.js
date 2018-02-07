@@ -21,11 +21,6 @@ define([
             mapReference = bookmarkWidget.mapRef;
             useLocalStorage = supports_local_storage();
             storageName = 'MCGIS_Bookmarks';
-            new move.parentConstrainedMoveable(this.domNode, {
-                handle: this.printHeader,
-                area: "margin",
-                within: true
-            });
 
             mesabookmark = new Bookmarks({
                 map: mapReference,
