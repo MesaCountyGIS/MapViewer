@@ -299,9 +299,8 @@ define([
                 var layer = domAttr.get(this, 'data-value');
 
                 lmG.imageTool.basemapChanger(this);
-
                 //Place check mark next to currently active image year
-                new checkmarks().set(spanList, thisSpan);
+                checkmarks().set(spanList, thisSpan);
             }
 
             function dispatchImageryToggle(e) {
@@ -314,11 +313,20 @@ define([
                     }, "imagelist");
                 }
 
+                // function createImageList(imageConfig) {
+                //     //Add the selected imagery and theme layer to the map
+                //     require(["esri/layers/ArcGISTiledMapServiceLayer"], function(ArcGISTiledMapServiceLayer) {
+                //         for (var x in imageConfig.images) {
+                //             lmG[imageConfig.images[x].imageId] = new ArcGISTiledMapServiceLayer(imageConfig.mapFolder + imageConfig.images[x].serviceName + imageConfig.serverType, {id: imageConfig.images[x].imageId});
+                //         }
+                //     }); // end require
+                // }
+
                 function createImageList(imageConfig) {
                     //Add the selected imagery and theme layer to the map
-                    require(["esri/layers/ArcGISTiledMapServiceLayer"], function(ArcGISTiledMapServiceLayer) {
+                    require(["esri/layers/ArcGISImageServiceLayer"], function(ArcGISImageServiceLayer) {
                         for (var x in imageConfig.images) {
-                            lmG[imageConfig.images[x].imageId] = new ArcGISTiledMapServiceLayer(imageConfig.mapFolder + imageConfig.images[x].serviceName + imageConfig.serverType, {id: imageConfig.images[x].imageId});
+                            lmG[imageConfig.images[x].imageId] = new ArcGISImageServiceLayer(imageConfig.mapFolder + imageConfig.images[x].serviceName + imageConfig.serverType, {id: imageConfig.images[x].imageId});
                         }
                     }); // end require
                 }
