@@ -29,6 +29,7 @@ define([
             }, this.mcbookmarks);
 
             // Look for stored bookmarks
+
             if (useLocalStorage) {
                 var bmJSON = window.localStorage.getItem(storageName);
             } else {
@@ -107,6 +108,7 @@ define([
         })
         for (var key in bmList) {
             if (bmList.hasOwnProperty(key)) {
+                alert(key)
                 mesabookmark.addBookmark({
                     "extent": {
                         "spatialReference": {
@@ -136,7 +138,7 @@ define([
                     });
                 }
                 // Remove all user defined bookmarks
-                // First get all mesabookmark nam
+                // First get all mesabookmark names
                 var bmNames = array.map(mesabookmark.bookmarks, function (bm) {
                     return bm.name;
                 });
