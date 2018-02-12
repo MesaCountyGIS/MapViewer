@@ -67,6 +67,7 @@ define([
             var historicalImagery = ({
                 "vector": thisWidget.initialBasemap,
                 "usgs": lmG.usgs,
+                "A2017": lmG.A2017,
                 "A2016": lmG.A2016,
                 "A2015": lmG.A2015,
                 "A2014": lmG.A2014,
