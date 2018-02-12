@@ -3,12 +3,16 @@
     "printURL": "https://mcmap2.mesacounty.us/arcgis/rest/services/Printing/MCExportWebMap/GPServer/Export%20Web%20Map",
     "proxyURL": "https://emap.mesacounty.us/proxypage/proxy.ashx",
     "imagesList": {
-        "mapFolder": "https://mcmap2.mesacounty.us/arcgis/rest/services/Mosaic_Datasets/",
+        "mapFolder": "https://mcgis.mesacounty.us/image/rest/services/Mosaic_Datasets/",
         "serverType": "/ImageServer",
         "images": [
           {
               "imageId": "usgs",
-              "serviceName": "USGS_Topo"
+              "serviceName": "Hillshade"
+          },
+          {
+              "imageId": "A2017",
+              "serviceName": "NAIP_2017"
           },
             {
                 "imageId": "A2016",
@@ -20,75 +24,75 @@
             },
             {
                 "imageId": "A2014",
-                "serviceName": "2014_City"
+                "serviceName": "City_Color_2014"
             },
             {
                 "imageId": "A2012",
-                "serviceName": "imagery_2012_MC"
+                "serviceName": "Mesa_County_2012"
             },
             {
                 "imageId": "A2011",
-                "serviceName": "2011_NAIP"
+                "serviceName": "NAIP_2011_Color"
             },
             {
                 "imageId": "A2010",
-                "serviceName": "2010_City"
+                "serviceName": "City_Color_2010"
             },
             {
                 "imageId": "A2009",
-                "serviceName": "2009_NAIP_WS"
+                "serviceName": "NAIP_WS_Color_2009"
             },
             {
                 "imageId": "A2008",
-                "serviceName": "2008_County"
+                "serviceName": "County_Color_2008"
             },
             {
                 "imageId": "A2007",
-                "serviceName": "2007_County"
+                "serviceName": "Mesa_County_Color_2007"
             },
             {
                 "imageId": "A2006",
-                "serviceName": "2006_City"
+                "serviceName": "City_Color_2006"
             },
             {
                 "imageId": "A2005",
-                "serviceName": "2005_NAIP_WS"
+                "serviceName": "County_BW_2005"
             },
             {
                 "imageId": "A2003",
-                "serviceName": "2003_County_CIR"
+                "serviceName": "CIR_2003"
             },
             {
                 "imageId": "A2001",
-                "serviceName": "2001_County_BW"
+                "serviceName": "County_BW_2001"
             },
             {
                 "imageId": "A1997",
-                "serviceName": "1997_USFS_Color"
+                "serviceName": "USFS_Color_1997"
             },
             {
                 "imageId": "A1994",
-                "serviceName": "1994_City_BW"
+                "serviceName": "City_BW_1994"
             },
             {
                 "imageId": "A1986",
-                "serviceName": "1986_GJDD_BW"
+                "serviceName": "GJDD_BW_1986"
             },
             {
                 "imageId": "A1977",
-                "serviceName": "1977_County_BW"
+                "serviceName": "County_1977"
             },
             {
                 "imageId": "A1966",
-                "serviceName": "1966_County_BW"
+                "serviceName": "County_1966"
             },
             {
                 "imageId": "A1954",
-                "serviceName": "1954_County_BW"
+                "serviceName": "County_1954"
             },
             {
                 "imageId": "A1937",
-                "serviceName": "1937_County"
+                "serviceName": "County_1937"
             }]
     }
 }
