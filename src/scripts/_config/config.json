@@ -8,7 +8,7 @@
         "images": [
           {
               "imageId": "usgs",
-              "serviceName": "Hillshade"
+              "serviceName": "USGS_Topo"
           },
           {
               "imageId": "A2017",
