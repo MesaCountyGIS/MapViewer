@@ -108,7 +108,6 @@ define([
         })
         for (var key in bmList) {
             if (bmList.hasOwnProperty(key)) {
-                alert(key)
                 mesabookmark.addBookmark({
                     "extent": {
                         "spatialReference": {
