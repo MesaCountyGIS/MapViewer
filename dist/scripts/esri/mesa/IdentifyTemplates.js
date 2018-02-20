@@ -857,7 +857,6 @@ define([
 });//end define
 
 function getit(objID, layerID, opt) {
-    console.log(opt)
     aG.map.graphics.clear();
     var cssID = "#i" + objID.toString();
     require(["dojo/query"], function(query){
@@ -871,7 +870,7 @@ function getit(objID, layerID, opt) {
             geometryServiceURL: esriConfig.defaults.geometryService,
             mapRef: aG.map,
         });
-        var borderQueryTask = new QueryTask("https://mcmap2.mesacounty.us/arcgis/rest/services/maps/eSurveyor/MapServer/" + layerID);
+        var borderQueryTask = new QueryTask("https://mcgis.mesacounty.us/arcgis/rest/services/maps/eSurveyor/MapServer/" + layerID);
         var borderQuery = new Query();
         borderQuery.returnGeometry = !0, borderQuery.outFields = ["OBJECTID"], borderQuery.where = "OBJECTID = " + objID, borderQueryTask.execute(borderQuery, function (border) {
             aG.map.graphics.add(new Graphic(graphicTool.createJSONPolygon(border.features[0].geometry.rings)));
