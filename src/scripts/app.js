@@ -35,7 +35,7 @@ function init() {
         aG.pTemp = createPopupTemplate();
         // Create 3 layers to be initially added to the map
         lmG.pLay = createFeatureLayer(
-            "https://mcmap2.mesacounty.us/arcgis/rest/services/maps/ParcelOnly4Query/MapServer/0",
+            "https://mcgis.mesacounty.us/arcgis/rest/services/maps/ParcelOnly4Query/MapServer/0",
             aG.pTemp,
             ["LOCATION","ACCOUNTNO","OWNER","JTOWNER","SDATE","PARCEL_NUM","ZONING","Acres","JURISDICTION"]
             );
