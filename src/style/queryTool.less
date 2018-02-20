@@ -64,7 +64,6 @@
 #qButtons {
     font-size: 0.8em;
     margin:1em 0 1em -1em;
-    text-align: center;
     & > span {
         display: none;
     }
@@ -241,7 +240,8 @@
 }
 
 #qFields {
-    max-width: 19.7em;
+    // max-width: 19.7em;
+    width:90%;
     max-height: 100px;
     min-width: 19.7em;
     min-height: 100px;
@@ -249,6 +249,9 @@
     background-color: white;
     margin-left: 1em;
     border: 1px solid Gainsboro;
+    ul{
+      text-align:left;
+    }
     li {
         padding-left: 1em;
         padding-bottom: 0;
@@ -279,11 +282,10 @@
     }
 }
 
-
-// #fieldLabel {
-    // width: 2.5em;
-    // float: left;
-// }
+#fieldLabel {
+    text-align:left;
+    margin-left:1em;
+}
 
 .queryButtons {
     padding-left: 0 !important;
@@ -310,6 +312,7 @@ li {
 
 form.qForm {
     font-size: 0.75em;
+    text-align:center;
     label {
         font-size: 1em;
     }
@@ -335,6 +338,8 @@ form.qForm {
 
 .qWhereLabel{
   display:inherit;
+  text-align:left;
+  margin-left:2em;
 }
 
 .simpleSymbol {

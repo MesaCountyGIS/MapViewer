@@ -1324,6 +1324,7 @@ input {
   margin: 0 auto .5em;
   background-color: #efddb9;
   padding: .2em;
+  width: 90%!important;
   border-radius: 3px;
 }
 
@@ -1748,6 +1749,10 @@ input {
   background-color: #fff;
   margin-left: 1em;
   border: 1px solid #dcdcdc;
+}
+
+#qFields ul {
+  text-align: left;
 }
 
 #qFields li {
@@ -2573,7 +2578,6 @@ input#mapTitle {
     margin: 0 auto .5em;
     background-color: #efddb9;
     padding: .2em;
-    width: 90%!important;
     border-radius: 3px;
   }
 
