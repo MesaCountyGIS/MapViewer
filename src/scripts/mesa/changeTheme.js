@@ -1254,7 +1254,7 @@ define([
                     checkboxClick.remove()
                 }
                 checkboxClick = on(map, "click", function(evt) {
-                        var IT = new IdentifyTask("https://mcmap2.mesacounty.us/arcgis/rest/services/maps/" + opt + "/MapServer/");
+                        var IT = new IdentifyTask("https://mcgis.mesacounty.us/arcgis/rest/services/maps/" + opt + "/MapServer/");
                         var IP = new IdentifyParameters();
                         IP.geometry = evt.mapPoint;
                         IP.layerOption = IdentifyParameters.LAYER_OPTION_VISIBLE;
