@@ -287,7 +287,8 @@ function createHomeButton(map) {
 
 function createContextMenu(map, geometryServiceConfig) {
     require(["mesa/contextMenuWidget"], function(contextMenuWidget) {
-        contextMenuWidget({mapRef: map, geometryServiceURL: geometryServiceConfig, trsURL: "https://mcmap2.mesacounty.us/arcgis/rest/services/maps/eSurveyor/MapServer/26"});
+      //layer 26 of eSurveyor is the trs sections layer
+        contextMenuWidget({mapRef: map, geometryServiceURL: geometryServiceConfig, trsURL: "https://mcgis.mesacounty.us/arcgis/rest/services/maps/eSurveyor/MapServer/26"});
     });
 }
 
