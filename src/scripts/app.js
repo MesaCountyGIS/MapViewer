@@ -387,7 +387,7 @@ function urlMapType(url, map, legend, initialBasemap, config, device, parcels) {
                 "esri/tasks/QueryTask", "esri/tasks/query", "esri/graphic", "mesa/graphicsTools"
             ], function(QueryTask, Query, Graphic, graphicsTools) {
                 var graphicTool = new graphicsTools({geometryServiceURL: esriConfig.defaults.geometryService, mapRef: map});
-                var dQueryTask = new QueryTask("https://mcmap2.mesacounty.us/arcgis/rest/services/maps/" + service + "/MapServer/" + layerid);
+                var dQueryTask = new QueryTask("https://mcgis.mesacounty.us/arcgis/rest/services/maps/" + service + "/MapServer/" + layerid);
                 var dQuery = new Query();
                 dQuery.returnGeometry = true;
                 dQuery.outFields = [""];
