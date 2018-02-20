@@ -35,7 +35,7 @@ define([
                 checkboxids = changeThemeWidget.components === undefined? null: changeThemeWidget.components.checkboxid;
                 control = dom.byId(layer + "Select") ? (layer + "Select") : "noControl";
                 layerConstructor = {
-                    "mapFolder": 'https://mcmap2.mesacounty.us/arcgis/rest/services/maps/',
+                    "mapFolder": 'https://mcgis.mesacounty.us/arcgis/rest/services/maps/',
                     "serverType": '/MapServer',
                     "layers": [{
                         "layerId": "asbuilt",
