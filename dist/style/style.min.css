@@ -1314,7 +1314,7 @@ input {
   background: #fff;
   border-right: 1px solid #d3d3d3;
   width: 20%;
-  min-width: 200px;
+  min-width: 290px;
   height: 100%;
   padding: 1em 0 0;
   z-index: 50;
@@ -1324,7 +1324,6 @@ input {
   margin: 0 auto .5em;
   background-color: #efddb9;
   padding: .2em;
-  width: 90%!important;
   border-radius: 3px;
 }
 
@@ -1560,7 +1559,6 @@ input {
 #qButtons {
   font-size: .8em;
   margin: 1em 0 1em -1em;
-  text-align: center;
 }
 
 #qButtons>span {
@@ -1742,7 +1740,7 @@ input {
 }
 
 #qFields {
-  max-width: 19.7em;
+  width: 90%;
   max-height: 100px;
   min-width: 19.7em;
   min-height: 100px;
@@ -1785,6 +1783,11 @@ input {
   cursor: default;
 }
 
+#fieldLabel {
+  text-align: left;
+  margin-left: 1em;
+}
+
 .queryButtons {
   padding-left: 0!important;
   margin: 1em 0;
@@ -1808,6 +1811,7 @@ ul {
 
 form.qForm {
   font-size: .75em;
+  text-align: center;
 }
 
 form.qForm label {
@@ -1834,6 +1838,8 @@ form.qForm label {
 
 .qWhereLabel {
   display: inherit;
+  text-align: left;
+  margin-left: 2em;
 }
 
 .simpleSymbol {
@@ -2526,7 +2532,7 @@ input#mapTitle {
   }
 
   #qFields {
-    max-width: 19.7em;
+    width: 90%;
     max-height: 50px;
     min-width: 19.7em;
     min-height: 50px;
