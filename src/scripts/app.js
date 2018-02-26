@@ -5,7 +5,8 @@ function init() {
     aG = {}; //Global application object
     lmG = {}; //Global Layer Management object
     require([
-        "esri/config", "dojo/on", "dojo/dom-construct", "dojo/text!./scripts/_config/config.json", "esri/dijit/Legend", "mesa/toolsWidget2" //fix bug requiring toolsWidget to be loaded
+        "esri/config", "dojo/on", "dojo/dom-construct", "dojo/text!./scripts/_config/config.json", "esri/dijit/Legend",
+        "mesa/toolsWidget2" //fix bug requiring toolsWidget to be loaded
     ], function(esriConfig, on, domConstruct, JSONconfig, Legend) {
 
         /* The JSON configuration file is located in the scripts/_config directory.
@@ -39,10 +40,10 @@ function init() {
             aG.pTemp,
             ["LOCATION","ACCOUNTNO","OWNER","JTOWNER","SDATE","PARCEL_NUM","ZONING","Acres","JURISDICTION"]
             );
-        lmG.roadLabels = createTiledMapServiceLayer("https://mcmap2.mesacounty.us/arcgis/rest/services/maps/parcel_road_labels/MapServer", "roadLabels");
+        lmG.roadLabels = createTiledMapServiceLayer("https://mcgis.mesacounty.us/image/rest/services/Mosaic_Datasets/Basemap_Labels/MapServer", "roadLabels");
         // Set a reference to the initial basemap. This is passed to the
         // basemapWidget module where it can be changed.
-        var initialBasemap = createTiledMapServiceLayer("https://mcmap2.mesacounty.us/arcgis/rest/services/maps/vector_basemap/MapServer", "vectorBasemap");
+        var initialBasemap = createTiledMapServiceLayer("https://mcgis.mesacounty.us/image/rest/services/Mosaic_Datasets/Basemap_Background/MapServer", "vectorBasemap");
 
         // Add the initial basemap, labels and parcel layer to the map
         aG.map.addLayers([initialBasemap, lmG.pLay, lmG.roadLabels]);
