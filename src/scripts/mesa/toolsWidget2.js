@@ -324,10 +324,21 @@ define([
 
                 function createImageList(imageConfig) {
                     //Add the selected imagery and theme layer to the map
-                    require(["esri/layers/ArcGISImageServiceLayer"], function(ArcGISImageServiceLayer) {
+                    require(["esri/layers/ArcGISImageServiceLayer","esri/layers/ArcGISTiledMapServiceLayer"], function(ArcGISImageServiceLayer, ArcGISTiledMapServiceLayer) {
                         for (var x in imageConfig.images) {
                             lmG[imageConfig.images[x].imageId] = new ArcGISImageServiceLayer(imageConfig.mapFolder + imageConfig.images[x].serviceName + imageConfig.serverType, {id: imageConfig.images[x].imageId});
                         }
+                        //remove the following code and change the loop above to match tiles map services after all caching is complete 2/15/2018
+                        lmG.A2017 = new ArcGISTiledMapServiceLayer("https://mcgis.mesacounty.us/image/rest/services/Mosaic_Datasets/NAIP_2017/ImageServer", {id:"A2017"});
+                        lmG.A2016 = new ArcGISTiledMapServiceLayer("https://mcgis.mesacounty.us/image/rest/services/Mosaic_Datasets/City_Color_2016/ImageServer", {id:"A2016"});
+                        lmG.A2015 = new ArcGISTiledMapServiceLayer("https://mcgis.mesacounty.us/image/rest/services/Mosaic_Datasets/MesaCounty_2015/ImageServer", {id:"A2015"});
+                        // lmG.A2014 = new ArcGISTiledMapServiceLayer("https://mcgis.mesacounty.us/image/rest/services/Mosaic_Datasets/City_Color_2014/ImageServer", {id:"A2014"});
+                        lmG.A1977 = new ArcGISTiledMapServiceLayer("https://mcgis.mesacounty.us/image/rest/services/Mosaic_Datasets/County_1977/ImageServer", {id:"A1977"});
+                        lmG.A1966 = new ArcGISTiledMapServiceLayer("https://mcgis.mesacounty.us/image/rest/services/Mosaic_Datasets/County_1966/ImageServer", {id:"A1966"});
+                        lmG.A1954 = new ArcGISTiledMapServiceLayer("https://mcgis.mesacounty.us/image/rest/services/Mosaic_Datasets/County_1954/ImageServer", {id:"A1954"});
+                        lmG.A1937 = new ArcGISTiledMapServiceLayer("https://mcgis.mesacounty.us/image/rest/services/Mosaic_Datasets/County_1937/ImageServer", {id:"A1937"});
+                        lmG.hillshade = new ArcGISTiledMapServiceLayer("https://mcgis.mesacounty.us/image/rest/services/Hillshades/Hillshade/ImageServer", {id:"hillshade"});
+                        //------------------------------
                     }); // end require
                 }
             }

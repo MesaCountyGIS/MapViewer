@@ -66,6 +66,7 @@ define([
             currentBasemap.length = 0;
             var historicalImagery = ({
                 "vector": thisWidget.initialBasemap,
+                "hillshade": lmG.hillshade,
                 "usgs": lmG.usgs,
                 "A2017": lmG.A2017,
                 "A2016": lmG.A2016,
