@@ -180,6 +180,10 @@ div .titleButton .arrow:hover {
   margin-left: 3em;
 }
 
+#legendDiv td {
+  padding-bottom: .25em;
+}
+
 #shareForm,
 #shareForm2 {
   font-size: .75em;
