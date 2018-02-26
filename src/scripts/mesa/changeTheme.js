@@ -185,7 +185,7 @@ define([
                     }, {
                         "layerId": "floodbase",
                         "serviceName": "Floodmap",
-                        "opacity": 0.7,
+                        "opacity": 1,
                         "visible": [2]
                     },
                     {
@@ -215,7 +215,7 @@ define([
                     {
                         "layerId": "floodsections",
                         "serviceName": "Floodmap",
-                        "opacity": 0.7,
+                        "opacity": 1,
                         "visible": [1]
                     },
                     {
