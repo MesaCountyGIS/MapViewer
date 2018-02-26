@@ -186,53 +186,45 @@ define([
                         "layerId": "floodbase",
                         "serviceName": "Floodmap",
                         "opacity": 0.7,
-                        "visible": [1]
-                    }, {
-                        "layerId": "floodbasins",
-                        "serviceName": "Floodmap",
-                        "opacity": 0.7,
-                        "visible": [12]
-                    }, {
+                        "visible": [2]
+                    },
+                    {
                         "layerId": "floodcontours",
                         "serviceName": "Floodmap",
                         "opacity": 0.7,
                         "visible": [3]
-                    }, {
-                        "layerId": "floodlewis",
-                        "serviceName": "Floodmap",
-                        "opacity": 0.7,
-                        "visible": [6]
-                    }, {
+                    },
+                    {
                         "layerId": "floodnonreg",
                         "serviceName": "Floodmap",
                         "opacity": 0.7,
-                        "visible": [11]
-                    }, {
+                        "visible": [5]
+                    },
+                    {
                         "layerId": "floodpanelindex",
                         "serviceName": "Floodmap",
                         "opacity": 0.7,
-                        "visible": [4]
-                    }, {
+                        "visible": [0]
+                    },
+                    {
                         "layerId": "floodreg",
                         "serviceName": "Floodmap",
                         "opacity": 0.7,
-                        "visible": [5]
-                    }, {
+                        "visible": [4]
+                    },
+                    {
                         "layerId": "floodsections",
                         "serviceName": "Floodmap",
                         "opacity": 0.7,
-                        "visible": [0]
-                    }, {
+                        "visible": [1]
+                    },
+                    {
                         "layerId": "floodstud",
                         "serviceName": "EngineeringTechDocs",
                         "opacity": 0.5,
                         "visible": [5]
-                    }, {
-                        "layerId": "floodswtrln",
-                        "serviceName": "Floodmap",
-                        "opacity": 0.7,
-                        "visible": [2]
-                    }, {
+                    },
+                    {
                         "layerId": "fruita",
                         "serviceName": "Schools",
                         "opacity": 0.5,
@@ -932,11 +924,6 @@ define([
                         popupFunc: 'flood',
                         service: 'Floodmap'
                     },
-                    "floodswtrln": {
-                        layerName: lmG.floodswtrln,
-                        popupFunc: 'flood',
-                        service: 'Floodmap'
-                    },
                     "floodcontours": {
                         layerName: lmG.floodcontours,
                         popupFunc: 'flood',
@@ -952,18 +939,8 @@ define([
                         popupFunc: 'flood',
                         service: 'Floodmap'
                     },
-                    "floodlewis": {
-                        layerName: lmG.floodlewis,
-                        popupFunc: 'flood',
-                        service: 'Floodmap'
-                    },
                     "floodnonreg": {
                         layerName: lmG.floodnonreg,
-                        popupFunc: 'flood',
-                        service: 'Floodmap'
-                    },
-                    "floodbasins": {
-                        layerName: lmG.floodbasins,
                         popupFunc: 'flood',
                         service: 'Floodmap'
                     },
