@@ -170,7 +170,7 @@ define([
                     }, {
                         "layerId": "elem",
                         "serviceName": "Schools",
-                        "opacity": 0.5,
+                        "opacity": 0.8,
                         "visible": [5]
                     }, {
                         "layerId": "enterprise",
@@ -227,7 +227,7 @@ define([
                     {
                         "layerId": "fruita",
                         "serviceName": "Schools",
-                        "opacity": 0.5,
+                        "opacity": 0.8,
                         "visible": [7]
                     }, {
                         "layerId": "futureland",
@@ -246,7 +246,7 @@ define([
                     }, {
                         "layerId": "high",
                         "serviceName": "Schools",
-                        "opacity": 0.5,
+                        "opacity": 0.8,
                         "visible": [8]
                     }, {
                         "layerId": "hist",
@@ -296,7 +296,7 @@ define([
                     }, {
                         "layerId": "middle",
                         "serviceName": "Schools",
-                        "opacity": 0.5,
+                        "opacity": 0.8,
                         "visible": [6]
                     }, {
                         "layerId": "monuments",
@@ -1223,6 +1223,7 @@ define([
             },
 
             runIT: function(opt, name, lyrs) {
+              console.log(checkboxClick)
                 map.graphics.clear();
                 var len = lyrs.length;
                 lmG.pLay.infoTemplate = '';
