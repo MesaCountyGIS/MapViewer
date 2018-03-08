@@ -303,11 +303,13 @@ define([
                         "serviceName": "eSurveyor",
                         "opacity": 1,
                         "visible": [2]
-                    }, {
-                        "layerId": "mosquito",
-                        "serviceName": "Mosquito",
-                        "opacity": 0.5
-                    }, {
+                    },
+                    //  {
+                    //     "layerId": "mosquito",
+                    //     "serviceName": "Mosquito",
+                    //     "opacity": 0.5
+                    // },
+                    {
                         "layerId": "ohv",
                         "serviceName": "transportation",
                         "opacity": 1,
@@ -504,12 +506,12 @@ define([
                         popupFunc: 'landDev',
                         service: 'Land_Development_Projects'
                     },
-                    "mosquito": {
-                        layerName: lmG.mosquito,
-                        popupFunc: 'mos',
-                        service: 'Mosquito',
-                        // lyrs: [0, 3, 6, 18]
-                    },
+                    // "mosquito": {
+                    //     layerName: lmG.mosquito,
+                    //     popupFunc: 'mos',
+                    //     service: 'Mosquito',
+                    //     // lyrs: [0, 3, 6, 18]
+                    // },
                     "weeds": {
                         layerName: lmG.weeds,
                         popupFunc: 'wds',
