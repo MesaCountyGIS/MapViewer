@@ -63,10 +63,10 @@ define([
                         "opacity": 1,
                         "visible": [3]
                     }, {
-                        "layerId": "camera",
-                        "serviceName": "PublicSafety",
+                        "layerId": "cameras",
+                        "serviceName": "transportation",
                         "opacity": 1,
-                        "visible": [0]
+                        "visible": [18]
                     }, {
                         "layerId": "cells",
                         "serviceName": "Schools",
@@ -317,8 +317,8 @@ define([
                     }, {
                         "layerId": "patrol",
                         "serviceName": "SO_Areas",
-                        "opacity": 0.3,
-                        "visible": [0]
+                        "opacity": 0.7,
+                        "visible": [0,2]
                     }, {
                         "layerId": "perm",
                         "serviceName": "eSurveyor",
@@ -374,7 +374,7 @@ define([
                         "layerId": "shoot",
                         "serviceName": "SO_Areas",
                         "opacity": 0.8,
-                        "visible": [1, 2]
+                        "visible": [1]
                     }, {
                         "layerId": "soilcon",
                         "serviceName": "Districts",
@@ -384,12 +384,20 @@ define([
                         "layerId": "soils",
                         "serviceName": "Soils",
                         "opacity": 0.5
-                    }, {
+                    },
+                    {
+                        "layerId": "counts",
+                        "serviceName": "transportation",
+                        "opacity": 1,
+                        "visible": [17]
+                    },
+                    {
                         "layerId": "speed",
                         "serviceName": "transportation",
                         "opacity": 1,
                         "visible": [16]
-                    }, {
+                    },
+                    {
                         "layerId": "sthouse",
                         "serviceName": "eElections",
                         "opacity": 0.5,
@@ -574,10 +582,10 @@ define([
                         popupFunc: 'subList',
                         service: 'eSurveyor'
                     },
-                    "camera": {
-                        layerName: lmG.camera,
-                        popupFunc: 'camera',
-                        service: 'PublicSafety'
+                    "cameras": {
+                        layerName: lmG.cameras,
+                        popupFunc: 'trans',
+                        service: 'transportation'
                     },
                     "trails": {
                         layerName: lmG.trails,
@@ -887,6 +895,11 @@ define([
                         service: 'transportation'
                     },
                     "speed": {
+                        layerName: lmG.trans,
+                        popupFunc: 'trans',
+                        service: 'transportation'
+                    },
+                    "counts": {
                         layerName: lmG.trans,
                         popupFunc: 'trans',
                         service: 'transportation'
