@@ -104,22 +104,22 @@ define([
             aG.map.infoWindow.show(evt.mapPoint, aG.map.getInfoWindowAnchor(evt.screenPoint));
         },
 
-        soilTyp: function (evt, deferred, len) {
-            deferred.addCallback(function (response) {
-                return array.map(response, function (result) {
-                    var feature = result.feature;
-                    feature.attributes.layerName = result.layerName;
-                    var template = new PopupTemplate({
-                        title: "Mesa County Soils",
-                        description: "<b>Soil Unit Name: </b><a target='_blank' href='https://emap.mesacounty.us/Soils/osd/{WEBLINK}.htm'>{MUNAME}</a><br><b>Farmland Capability: </b>{FARMLNDCL}<br><b>Flooding Frequency: </b>{FLODFREQDC}<br><b>Ponding Frequency: </b>{PONDFREQPR}"
-                    });
-                    feature.setInfoTemplate(template);
-                    return feature;
-                });
-            });
-            aG.map.infoWindow.setFeatures([deferred]);
-            aG.map.infoWindow.show(evt.mapPoint, aG.map.getInfoWindowAnchor(evt.screenPoint));
-        },
+        // soilTyp: function (evt, deferred, len) {
+        //     deferred.addCallback(function (response) {
+        //         return array.map(response, function (result) {
+        //             var feature = result.feature;
+        //             feature.attributes.layerName = result.layerName;
+        //             var template = new PopupTemplate({
+        //                 title: "Mesa County Soils",
+        //                 description: "<b>Soil Unit Name: </b><a target='_blank' href='https://emap.mesacounty.us/Soils/osd/{WEBLINK}.htm'>{MUNAME}</a><br><b>Farmland Capability: </b>{FARMLNDCL}<br><b>Flooding Frequency: </b>{FLODFREQDC}<br><b>Ponding Frequency: </b>{PONDFREQPR}"
+        //             });
+        //             feature.setInfoTemplate(template);
+        //             return feature;
+        //         });
+        //     });
+        //     aG.map.infoWindow.setFeatures([deferred]);
+        //     aG.map.infoWindow.show(evt.mapPoint, aG.map.getInfoWindowAnchor(evt.screenPoint));
+        // },
 
         sep: function (evt, deferred, len) {
             deferred.addCallback(function (response) {
@@ -219,6 +219,18 @@ define([
                             title: "Regulatory Speed Limits",
                             description: "<b>Sign ID: </b>{SignID}<br><b>Description: </b>{Description}"
                         });
+                        feature.setInfoTemplate(template);
+                    }else if (n === 'Cameras') {
+                      template = new PopupTemplate({
+                          title: "Traffic Camera Information:",
+                          description: "<div id='cameraDiv'><b>Location Name: {Name}</b><br><br>" +
+                          "<b>Camera 1: </b><a href='{URL1}' target='_blank'><img height='150' width='190' src='{URL1}' alt='There is currently no view for this camera' /></a><br>" +
+                          "<b>Camera 2: </b><a href='{URL2}' target='_blank'><img height='150' width='190' src='{URL2}' alt='There is currently no view for this camera' /></a><br>" +
+                          "<b>Camera 3: </b><a href='{URL3}' target='_blank'><img height='150' width='190' src='{URL3}' alt='There is currently no view for this camera' /></a><br>" +
+                          "<b>Camera 4: </b><a href='{URL4}' target='_blank'><img height='150' width='190' src='{URL4}' alt='There is currently no view for this camera' /></a><br><br>" +
+                          "<b>Update frequency: </b>{Update_Freq}<br><br>" +
+                          "<b>Camera Source: </b>{Source}</div>"
+                      });
                         feature.setInfoTemplate(template);
                     }
                     return feature;
