@@ -611,7 +611,7 @@ define([
                     feature.attributes.layerName = result.layerName;
                     template = new PopupTemplate({
                         title: result.layerName,
-                        description: "<b>Project Number: </b><a target='_blank' href='https://www.mesacounty.us/Planning/ProjectDetail.aspx?pn={Land Project Number}'>{Land Project " +
+                        description: "<b>Project Number: </b><a target='_blank' href='https://apps.mesacounty.us/PlanningProjects/ProjectDetail?pn={Land Project Number}'>{Land Project " +
                             "Number}<br><b>Project Name: </b> {Project Name}<br><b>Year: </b> {Year}<br><b>Status: </b> {STATUS}"
                     });
                     feature.setInfoTemplate(template);
