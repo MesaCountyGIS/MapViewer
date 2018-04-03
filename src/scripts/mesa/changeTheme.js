@@ -47,12 +47,14 @@ define([
                         "serviceName": "eElections",
                         "opacity": 0.5,
                         "visible": [6]
-                    }, {
+                    },
+                    {
                         "layerId": "boardbound",
                         "serviceName": "Schools",
                         "opacity": 0.5,
                         "visible": [2]
-                    }, {
+                    },
+                    {
                         "layerId": "book",
                         "serviceName": "eSurveyor",
                         "opacity": 0.5,
@@ -171,7 +173,7 @@ define([
                         "layerId": "elem",
                         "serviceName": "Schools",
                         "opacity": 0.8,
-                        "visible": [5]
+                        "visible": [5, 9]
                     }, {
                         "layerId": "enterprise",
                         "serviceName": "Enterprise_Zones",
@@ -195,10 +197,16 @@ define([
                         "visible": [3]
                     },
                     {
+                        "layerId": "floodbasins",
+                        "serviceName": "Floodmap",
+                        "opacity": 0.7,
+                        "visible": [8]
+                    },
+                    {
                         "layerId": "floodnonreg",
                         "serviceName": "Floodmap",
                         "opacity": 0.7,
-                        "visible": [5]
+                        "visible": [10]
                     },
                     {
                         "layerId": "floodpanelindex",
@@ -210,7 +218,7 @@ define([
                         "layerId": "floodreg",
                         "serviceName": "Floodmap",
                         "opacity": 0.7,
-                        "visible": [4]
+                        "visible": [9]
                     },
                     {
                         "layerId": "floodsections",
@@ -228,7 +236,7 @@ define([
                         "layerId": "fruita",
                         "serviceName": "Schools",
                         "opacity": 0.8,
-                        "visible": [7]
+                        "visible": [7, 11]
                     }, {
                         "layerId": "futureland",
                         "serviceName": "Future_Land_Use",
@@ -247,7 +255,7 @@ define([
                         "layerId": "high",
                         "serviceName": "Schools",
                         "opacity": 0.8,
-                        "visible": [8]
+                        "visible": [8, 12]
                     }, {
                         "layerId": "hist",
                         "serviceName": "eSurveyor",
@@ -297,7 +305,7 @@ define([
                         "layerId": "middle",
                         "serviceName": "Schools",
                         "opacity": 0.8,
-                        "visible": [6]
+                        "visible": [6, 10]
                     }, {
                         "layerId": "monuments",
                         "serviceName": "eSurveyor",
@@ -438,9 +446,9 @@ define([
                         "visible": [3]
                     }, {
                         "layerId": "trails",
-                        "serviceName": "eTrailsRecreation",
+                        "serviceName": "Trails",
                         "opacity": 1,
-                        "visible": [0, 1, 2, 3, 4]
+                        "visible": [0, 1, 2, 3]
                     }, {
                         "layerId": "trs",
                         "serviceName": "eSurveyor",
@@ -451,11 +459,42 @@ define([
                         "serviceName": "eSurveyor",
                         "opacity": 0.5,
                         "visible": [19]
-                    }, {
+                    },
+                    {
                         "layerId": "vacant",
                         "serviceName": "Vacant_Lands",
-                        "opacity": 0.5
-                    }, {
+                        "opacity": 0.5,
+                        "visible": [1,2,4,5]
+                    },
+                    {
+                        "layerId": "platag",
+                        "serviceName": "Vacant_Lands",
+                        "opacity": 0.5,
+                        "visible": [4]
+                    },
+
+                    {
+                        "layerId": "platnoag",
+                        "serviceName": "Vacant_Lands",
+                        "opacity": 0.5,
+                        "visible": [1]
+                    },
+
+                    {
+                        "layerId": "unplatag",
+                        "serviceName": "Vacant_Lands",
+                        "opacity": 0.5,
+                        "visible": [5]
+                    },
+
+                    {
+                        "layerId": "unplatnoag",
+                        "serviceName": "Vacant_Lands",
+                        "opacity": 0.5,
+                        "visible": [2]
+                    },
+
+                    {
                         "layerId": "water",
                         "serviceName": "Districts",
                         "opacity": 0.5,
@@ -595,6 +634,26 @@ define([
                     },
                     "vacant": {
                         layerName: lmG.vacant,
+                        popupFunc: 'vac',
+                        service: 'Vacant_Lands'
+                    },
+                    "platag": {
+                        layerName: lmG.platag,
+                        popupFunc: 'vac',
+                        service: 'Vacant_Lands'
+                    },
+                    "platnoag": {
+                        layerName: lmG.platnoag,
+                        popupFunc: 'vac',
+                        service: 'Vacant_Lands'
+                    },
+                    "unplatag": {
+                        layerName: lmG.unplatag,
+                        popupFunc: 'vac',
+                        service: 'Vacant_Lands'
+                    },
+                    "unplatnoag": {
+                        layerName: lmG.unplatnoag,
                         popupFunc: 'vac',
                         service: 'Vacant_Lands'
                     },
@@ -939,6 +998,11 @@ define([
                         popupFunc: 'flood',
                         service: 'Floodmap'
                     },
+                    "floodbasins": {
+                        layerName: lmG.floodbasins,
+                        popupFunc: 'flood',
+                        service: 'Floodmap'
+                    },
                     "floodcontours": {
                         layerName: lmG.floodcontours,
                         popupFunc: 'flood',
@@ -1043,7 +1107,7 @@ define([
                 lmG.maptype = layer;
                  //Set theme dropdown text node
                 dom.byId("layerSelect").childNodes[0].nodeValue = layerTitle;
-                query('#enterpriseSelect, #surveySelect, #demographSelect, #districtsSelect, #engdocsSelect, #landdevSelect, #politicalSelect, #schoolsSelect, #topoSelect, #floodSelect, .noLoad, #transSelect, #lawSelect').style("display", "none");
+                query('#enterpriseSelect, #surveySelect, #demographSelect, #districtsSelect, #engdocsSelect, #landdevSelect, #politicalSelect, #schoolsSelect, #topoSelect, #floodSelect, .noLoad, #transSelect, #lawSelect, #vacantSelect').style("display", "none");
                 dom.byId(control).style.display = "block";
             },
 
@@ -1161,6 +1225,7 @@ define([
                     if (x === 0 && !(layerlist === 0)) {
                         for (i = 0; i < layerlist.length; i++) {
                             push(layertitle, Layers[(layerlist[i])].layerName, Layers[(layerlist[i])].lyrs ? Layers[(layerlist[i])].lyrs : []);
+                            map.reorderLayer(Layers[(layerlist[i])].layerName, 1)
                         }
 
                     } else if (layerlist === 0 && !(x === 0)) {
