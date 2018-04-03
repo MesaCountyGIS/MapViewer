@@ -427,7 +427,8 @@ function urlMapType(url, map, legend, initialBasemap, config, device, parcels) {
                         parcelLayer: parcels
                     }, "toolsView2");
 
-                    tools.dispatchThemeMenuClick(urlParams.maptype, components);
+                    tools.dispatchThemeMenuClick(urlParams.maptype, components, true);
+
 
                     if(urlParams.ACCOUNTNO !== undefined){
                         searchTools.searchBy("account", urlParams.ACCOUNTNO);
