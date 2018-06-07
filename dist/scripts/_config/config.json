@@ -1,5 +1,5 @@
 {
-    "geometryService": "https://mcgis.mesacounty.us/image/rest/services/Utilities/Geometry/GeometryServer",
+    "geometryService": "https://utility.arcgisonline.com/arcgis/rest/services/Geometry/GeometryServer",
     "printURL": "https://mcgis.mesacounty.us/image/rest/services/MCUtilities/MCExportWebMap/GPServer/Export%20Web%20Map",
     "proxyURL": "https://emap.mesacounty.us/proxypage/proxy.ashx",
     "imagesList": {
@@ -10,33 +10,9 @@
               "imageId": "usgs",
               "serviceName": "USGS_Topo"
           },
-          {
-              "imageId": "A2017",
-              "serviceName": "2017_NAIP"
-          },
-            {
-                "imageId": "A2016",
-                "serviceName": "City_Color_2016"
-            },
-            {
-                "imageId": "A2015",
-                "serviceName": "MesaCounty_2015"
-            },
-            {
-                "imageId": "A2014",
-                "serviceName": "City_Color_2014"
-            },
-            {
-                "imageId": "A2012",
-                "serviceName": "Mesa_County_2012"
-            },
             {
                 "imageId": "A2011",
                 "serviceName": "NAIP_2011_Color"
-            },
-            {
-                "imageId": "A2010",
-                "serviceName": "City_Color_2010"
             },
             {
                 "imageId": "A2009",
@@ -46,53 +22,15 @@
                 "imageId": "A2008",
                 "serviceName": "County_Color_2008"
             },
-            {
-                "imageId": "A2007",
-                "serviceName": "Mesa_County_Color_2007"
-            },
-            {
-                "imageId": "A2006",
-                "serviceName": "City_Color_2006"
-            },
+
             {
                 "imageId": "A2005",
                 "serviceName": "County_BW_2005"
             },
             {
-                "imageId": "A2003",
-                "serviceName": "CIR_2003"
-            },
-            {
                 "imageId": "A2001",
                 "serviceName": "County_BW_2001"
-            },
-            {
-                "imageId": "A1997",
-                "serviceName": "USFS_Color_1997"
-            },
-            {
-                "imageId": "A1994",
-                "serviceName": "City_BW_1994"
-            },
-            {
-                "imageId": "A1986",
-                "serviceName": "GJDD_BW_1986"
-            },
-            {
-                "imageId": "A1977",
-                "serviceName": "County_1977"
-            },
-            {
-                "imageId": "A1966",
-                "serviceName": "County_1966"
-            },
-            {
-                "imageId": "A1954",
-                "serviceName": "County_1954"
-            },
-            {
-                "imageId": "A1937",
-                "serviceName": "County_1937"
-            }]
+            }
+          ]
     }
 }
