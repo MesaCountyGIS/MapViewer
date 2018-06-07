@@ -68,7 +68,7 @@ define([
                         "layerId": "cameras",
                         "serviceName": "transportation",
                         "opacity": 1,
-                        "visible": [18]
+                        "visible": [11]
                     }, {
                         "layerId": "cells",
                         "serviceName": "Schools",
@@ -174,12 +174,20 @@ define([
                         "serviceName": "Schools",
                         "opacity": 0.8,
                         "visible": [5, 9]
-                    }, {
+                    },
+                    {
                         "layerId": "enterprise",
                         "serviceName": "Enterprise_Zones",
                         "opacity": 0.5,
+                        "visible": [1]
+                    },
+                    {
+                        "layerId": "opportunity",
+                        "serviceName": "Enterprise_Zones",
+                        "opacity": 0.5,
                         "visible": [0]
-                    }, {
+                    },
+                    {
                         "layerId": "firedist",
                         "serviceName": "Districts",
                         "opacity": 0.5,
@@ -289,14 +297,16 @@ define([
                     }, {
                         "layerId": "load",
                         "serviceName": "transportation",
-                        "opacity": 0.5,
-                        "visible": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
-                    }, {
-                        "layerId": "loadLabels",
-                        "serviceName": "transportation",
                         "opacity": 1,
-                        "visible": [9, 10, 11, 12, 13, 14, 15]
-                    }, {
+                        "visible": [1, 2, 3, 4, 5, 6, 7, 8]
+                    },
+                    // {
+                    //     "layerId": "loadLabels",
+                    //     "serviceName": "transportation",
+                    //     "opacity": 1,
+                    //     "visible": [9, 10, 11, 12, 13, 14, 15]
+                    // },
+                    {
                         "layerId": "mesasims",
                         "serviceName": "eSurveyor",
                         "opacity": 1,
@@ -351,12 +361,8 @@ define([
                         "serviceName": "eSurveyor",
                         "opacity": 0.5,
                         "visible": [21]
-                    }, {
-                        "layerId": "proposedenterprise",
-                        "serviceName": "Enterprise_Zones",
-                        "opacity": 0.5,
-                        "visible": [1]
-                    }, {
+                    },
+                    {
                         "layerId": "propsales",
                         "serviceName": "Sales",
                         "opacity": 0.5
@@ -397,13 +403,13 @@ define([
                         "layerId": "counts",
                         "serviceName": "transportation",
                         "opacity": 1,
-                        "visible": [17]
+                        "visible": [10]
                     },
                     {
                         "layerId": "speed",
                         "serviceName": "transportation",
                         "opacity": 1,
-                        "visible": [16]
+                        "visible": [9]
                     },
                     {
                         "layerId": "sthouse",
@@ -511,7 +517,8 @@ define([
                     }, {
                         "layerId": "zoning",
                         "serviceName": "Zoning",
-                        "opacity": 0.5
+                        "opacity": 0.65,
+                        "visible": [0,1,2,4,5,7,8,9,10,11,12,13,14,15,16]
                     }]
                 };
                 //layer visibiliity in the legend is controlled by the lyrs value
@@ -523,6 +530,11 @@ define([
                     },
                     "eassessor": 0,
                     "enterprise": {
+                        layerName: lmG.enterprise,
+                        popupFunc: 'enterprise',
+                        service: 'Enterprise_Zones'
+                    },
+                    "opportunity": {
                         layerName: lmG.enterprise,
                         popupFunc: 'enterprise',
                         service: 'Enterprise_Zones'
@@ -630,7 +642,7 @@ define([
                         layerName: lmG.trails,
                         popupFunc: 'trl',
                         service: 'Trails',
-                        lyrs: [0, 1, 2]
+                        // lyrs: [0, 1, 2]
                     },
                     "vacant": {
                         layerName: lmG.vacant,
@@ -1059,6 +1071,7 @@ define([
                     dom.byId(box.replace("-", "")).checked = box.indexOf("-") > -1 ? false : true;
                 }
                 checkboxids = "";
+                layer === "trans" ? (changeThemeWidget.checkOHVDisclaimer(themeLayers)) : "";
             },
 
             manualCheckBoxes: function(box) {
