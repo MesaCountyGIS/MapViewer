@@ -394,6 +394,7 @@ function urlMapType(url, map, legend, initialBasemap, config, device, parcels) {
                 dQuery.outFields = [""];
                 dQuery.where = field + " = '" + value + "'";
                 dQueryTask.execute(dQuery, function(result) {
+
                     map.setExtent((map.graphics.add(new Graphic(graphicTool.createJSONPolygon(result.features[0].geometry.rings)))).geometry.getExtent().expand(1.5));
                 });
             });
@@ -429,26 +430,30 @@ function urlMapType(url, map, legend, initialBasemap, config, device, parcels) {
 
                     tools.dispatchThemeMenuClick(urlParams.maptype, components, true);
 
+//This timeout function is needed because there is a timeout in themeTools (fired
+//above) that is causing parcels to lose their blue selected outline. Fix needing
+//the timeout in dispatchThemeMenuClick and you can get rid of this one
+setTimeout(function() {
+  if (urlParams.ACCOUNTNO !== undefined) {
+    searchTools.searchBy("account", urlParams.ACCOUNTNO);
+  }
+  if (urlParams.PARCEL_NUM !== undefined) {
+    searchTools.searchBy("parcelNo", urlParams.PARCEL_NUM);
+  }
+  if (urlParams.EXTENT !== undefined) {
+    map.setExtent(extentZoom(urlParams.EXTENT));
+  }
+  if (urlParams.latlon !== undefined) {
+    searchTools.searchBy("Latitude/Longitude", urlParams.latlon);
+  }
+  if (urlParams.field !== undefined) {
+    runQuery(urlParams.layerid, urlParams.field, urlParams.value, urlParams.service);
+  }
 
-                    if(urlParams.ACCOUNTNO !== undefined){
-                        searchTools.searchBy("account", urlParams.ACCOUNTNO);
-                    }
-                    if(urlParams.PARCEL_NUM !== undefined){
-                        searchTools.searchBy("parcelNo", urlParams.PARCEL_NUM);
-                    }
-                    if(urlParams.EXTENT !== undefined){
-                        map.setExtent(extentZoom(urlParams.EXTENT));
-                    }
-                    if(urlParams.latlon !== undefined){
-                        searchTools.searchBy("Latitude/Longitude", urlParams.latlon);
-                    }
-                    if(urlParams.field !== undefined){
-                        runQuery(urlParams.layerid, urlParams.field, urlParams.value, urlParams.service);
-                    }
-
-                    if(urlParams.maptype !== undefined){
-                        maptypeFound(urlParams.maptype);
-                    }
+  if (urlParams.maptype !== undefined) {
+    maptypeFound(urlParams.maptype);
+  }
+}, 201);
 
             }); //end require
 }); //end require
