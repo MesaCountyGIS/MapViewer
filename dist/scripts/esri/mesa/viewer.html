@@ -119,13 +119,16 @@
     </header>
     <div id='toolsView2'></div>
 
-    <div id="coordinateBlock">
+<div id='pushmap' style='height:100%'>
+
+
+    <!-- <div id="coordinateBlock">
         <figure id="logoAnchor">
             <a title="Click for Mesa County GIS Home Page" class="countylogo" href="https://gis.mesacounty.us"></a>
         </figure>
         <br>
         <span title="NAD83, UTM Zone 12, Unit Meter" class="coordinateStyle" id="screenCoordinatesUTM"></span>
-    </div>
+    </div> -->
 
     <span class="noLoad" id="pdfLinks"><a title="Opens PDF in a new window" target="_blank" id="loadTrigger" href='https://emap.mesacounty.us/viewerdocs/loadlimits/loadlegend.pdf'>Click for Load Limit information</a> <a title="Opens PDF in a new window" target="_blank" href='https://emap.mesacounty.us/viewerdocs/loadlimits/escortlegend.pdf'>Click for Road Escort information</a></span>
     <span title="Example Weight Limit Sign For 8T/12T/16T Loads" class="noLoad" id="limitSign"></span>
@@ -157,13 +160,21 @@
             </div>
         </noscript>
 
+        <div id="coordinateBlock">
+            <figure id="logoAnchor">
+                <a title="Click for Mesa County GIS Home Page" class="countylogo" href="https://gis.mesacounty.us"></a>
+            </figure>
+            <br>
+            <span title="NAD83, UTM Zone 12, Unit Meter" class="coordinateStyle" id="screenCoordinatesUTM"></span>
+        </div>
+
         <figure id="loading">
             Loading Map...
         </figure>
         <div id="popup"></div>
     </div>
     <!-- end #map -->
-
+</div> <!-- End pushmap -->
 <script>
     var dojoConfig = {
         packages: [
