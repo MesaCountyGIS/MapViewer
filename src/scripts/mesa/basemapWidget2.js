@@ -68,6 +68,7 @@ define([
                 "vector": thisWidget.initialBasemap,
                 "hillshade": lmG.hillshade,
                 "usgs": lmG.usgs,
+                "A2018": lmG.A2018,
                 "A2017": lmG.A2017,
                 "A2016": lmG.A2016,
                 "A2015": lmG.A2015,
