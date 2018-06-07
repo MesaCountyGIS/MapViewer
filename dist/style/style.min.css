@@ -63,7 +63,6 @@ div .titleButton .arrow:hover {
   width: 100%;
   height: 100%;
   padding: 0;
-  text-align: center;
 }
 
 #toolbar {
@@ -365,7 +364,7 @@ input:-moz-placeholder {
   padding: .1em;
   position: absolute;
   left: 15px;
-  bottom: 5px;
+  bottom: 60px;
   width: 20%;
   color: #000;
   z-index: 1;
@@ -373,7 +372,8 @@ input:-moz-placeholder {
 
 #screenCoordinatesUTM {
   display: inline-block;
-  margin-left: .6em;
+  text-align: center;
+  margin-top: .5em;
   font-size: 1.05em;
 }
 
@@ -1168,7 +1168,6 @@ input {
   cursor: pointer;
   padding: .5em 1em 0 1.6em;
   font-size: .7em;
-  -webkit-transform: rotate(90deg);
   transform: rotate(90deg);
 }
 
@@ -1229,7 +1228,6 @@ input {
   border-radius: 4px;
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
-  -webkit-transform: rotate(90deg);
   transform: rotate(90deg);
 }
 
@@ -1292,10 +1290,7 @@ input {
 }
 
 #sideMenuHeader span {
-  text-align: center;
   font-size: 1.5em;
-  padding-left: 2em;
-  cursor: pointer;
 }
 
 #backMenu {
@@ -1369,7 +1364,6 @@ input {
   border-bottom: 1px solid #d3d3d3;
   font-size: .8em;
   background-color: #fff;
-  -webkit-transform: rotate(270deg);
   transform: rotate(270deg);
 }
 
@@ -1542,7 +1536,7 @@ input {
 }
 
 .left-button:after {
-  content: '';
+  content: "";
   display: block;
   position: absolute;
   right: 100%;
@@ -2112,12 +2106,12 @@ form.qForm label {
 }
 
 #addTextDialog,
-#addTextToScreen,
-#annoText {
+#addTextToScreen {
   display: none;
 }
 
 #annoText {
+  display: inline-block;
   position: relative;
   height: 1em;
   width: 16em;
@@ -2216,12 +2210,6 @@ form.qForm label {
   }
 }
 
-@-webkit-keyframes a {
-  to {
-    -webkit-transform: rotate(1turn);
-  }
-}
-
 .spinner {
   bottom: 3em;
   min-width: 24px;
@@ -2241,7 +2229,7 @@ form.qForm label {
 }
 
 .spinner:not(:required):before {
-  content: '';
+  content: "";
   border-radius: 50%;
   border-top: 2px solid #03ade0;
   border-right: 2px solid transparent;
@@ -2601,7 +2589,6 @@ input#mapTitle {
     cursor: pointer;
     padding: .5em 1em 0 1.6em;
     font-size: .7em;
-    -webkit-transform: rotate(90deg);
     transform: rotate(90deg);
   }
 
