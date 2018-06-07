@@ -8,12 +8,13 @@ define([
             deferred.addCallback(function (response) {
                 return array.map(response, function (result) {
                     var feature = result.feature, fieldName = feature.attributes, html='';
-                    if (fieldName.MAP_ID !== "Null") html += "<b>Site Inventory No: </b><a href='https://www.mesacounty.us/WorkArea/linkit.aspx?LinkIdentifier=id&ItemID=26132&libID=26277'>{MAP_ID}</a><br>";
+                    if (fieldName.MAP_ID !== "Null") html += "<b>Site Inventory No: </b><a href='https://www.mesacounty.us/globalassets/planning/codes-plans--policies/wireless-master-plan/wireless-facility-inventory.pdf'>{MAP_ID}</a><br>";
                     if (fieldName.FCC_NO !== "Null") html += "<b>FCC #: </b>{FCC_NO}<br>";
                     if (fieldName.HEIGHT !== "Null") html += "<b>Height: </b>{HEIGHT}<br>";
                     if (fieldName.STRCTR_TYPE !== "Null") html += "<b>Structure Type: </b>{STRCTR_TYPE}<br>";
                     if (fieldName.TWR_OWNER_ID !== "Null") html += "<b>Tower Owner ID: </b>{TWR_OWNER_ID}<br>";
                     if (fieldName.TWR_OWNER != "Null") html += "<b>Tower Owner: </b>{TOWER_OWNER}<br>";
+                    if (fieldName.URL.indexOf('http') != -1) html += "<b><a href='{URL}'>Click For Image</a></b><br>";
                         template = new PopupTemplate({
                             title: "Tower Information:",
                             description: html
@@ -170,7 +171,7 @@ define([
                     } else if (result.layerName === 'Consolidated Zoning Districts') {
                         template = new PopupTemplate({
                             title: "Zoning Districts",
-                            description: "<b>Zone Class: </b>{Zoning Classification}<br><b>Previous Zoning: </b>{PREV_CLASS}<br><b>Date of Rezone: </b>{Date_Rezone}<br><b>Year Rezoned: </b>{Year_Rezone}<br><b>Reception Number: </b>{Recept_Num}" + "<br><br><a target=_blank href='https://www.mesacounty.us/planning/land-development-code.aspx'>Mesa County Land Development Code</a>"
+                            description: "<b>Zone Class: </b>{Zoning Classification}<br><b>Previous Zoning: </b>{PREV_CLASS}<br><b>Date of Rezone: </b>{Date_Rezone}<br><b>Year Rezoned: </b>{Year_Rezone}<br><b>Reception Number: </b>{Recept_Num}" + "<br><br><a target=_blank href='https://www.mesacounty.us/planning/codes-plans--policies/codes/land-development-code/'>Mesa County Land Development Code</a>"
                         });
                         feature.setInfoTemplate(template);
                     }
