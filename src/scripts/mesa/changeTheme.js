@@ -673,7 +673,7 @@ define([
                         layerName: lmG.zoning,
                         popupFunc: 'zon',
                         service: 'Zoning',
-                        lyrs: [16, 15]
+                        // lyrs: [16, 15]
                     },
                     "mesasims": {
                         layerName: lmG.mesasims,
