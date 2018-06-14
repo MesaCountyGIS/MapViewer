@@ -20,6 +20,8 @@ define([
             infoTemplateRef: null,
             mapLegend: null,
             components: null,
+            // layerConstructor: null,
+            // themeLayers: null,
 
             postCreate: function() {
                 changeThemeWidget = this;
@@ -32,6 +34,10 @@ define([
                 pVal = changeThemeWidget.components === undefined? null: changeThemeWidget.components.pVal;
                 basemap = changeThemeWidget.basemapRef;
                 Legend = changeThemeWidget.mapLegend;
+                layerConstructor = changeThemeWidget.layerConstructor;
+                themelayers= changeThemeWidget.themeLayers;
+                // JSONConfig = JSON.parse(JSONConfig);
+                // layerConstructor = JSONConfig.layerConstructor;
                 checkboxids = changeThemeWidget.components === undefined? null: changeThemeWidget.components.checkboxid;
                 control = dom.byId(layer + "Select") ? (layer + "Select") : "noControl";
                 layerConstructor = {
@@ -58,12 +64,12 @@ define([
                         "layerId": "book",
                         "serviceName": "eSurveyor",
                         "opacity": 0.5,
-                        "visible": [20]
+                        "visible": [17]
                     }, {
                         "layerId": "calib",
                         "serviceName": "eSurveyor",
                         "opacity": 1,
-                        "visible": [3]
+                        "visible": [8]
                     }, {
                         "layerId": "cameras",
                         "serviceName": "transportation",
@@ -123,17 +129,17 @@ define([
                         "layerId": "datumdif",
                         "serviceName": "eSurveyor",
                         "opacity": 0.5,
-                        "visible": [25]
+                        "visible": [23]
                     }, {
                         "layerId": "ded",
                         "serviceName": "eSurveyor",
                         "opacity": 0.5,
-                        "visible": [18]
+                        "visible": [15]
                     }, {
                         "layerId": "deed",
                         "serviceName": "eSurveyor",
                         "opacity": 0.5,
-                        "visible": [17]
+                        "visible": [13]
                     }, {
                         "layerId": "deltasims",
                         "serviceName": "eSurveyor",
@@ -148,7 +154,7 @@ define([
                         "layerId": "dep",
                         "serviceName": "eSurveyor",
                         "opacity": 0.5,
-                        "visible": [15]
+                        "visible": [20]
                     }, {
                         "layerId": "distbound",
                         "serviceName": "Schools",
@@ -258,7 +264,7 @@ define([
                         "layerId": "glo",
                         "serviceName": "eSurveyor",
                         "opacity": 0.5,
-                        "visible": [16]
+                        "visible": [22]
                     }, {
                         "layerId": "high",
                         "serviceName": "Schools",
@@ -268,7 +274,7 @@ define([
                         "layerId": "hist",
                         "serviceName": "eSurveyor",
                         "opacity": 0.5,
-                        "visible": [14]
+                        "visible": [21]
                     }, {
                         "layerId": "histdev",
                         "serviceName": "Land_Development_Projects",
@@ -341,7 +347,7 @@ define([
                         "layerId": "perm",
                         "serviceName": "eSurveyor",
                         "opacity": 0.5,
-                        "visible": [22]
+                        "visible": [18]
                     }, {
                         "layerId": "persigo",
                         "serviceName": "Persigo",
@@ -360,7 +366,7 @@ define([
                         "layerId": "proc",
                         "serviceName": "eSurveyor",
                         "opacity": 0.5,
-                        "visible": [21]
+                        "visible": [16]
                     },
                     {
                         "layerId": "propsales",
@@ -434,8 +440,18 @@ define([
                         "layerId": "sub",
                         "serviceName": "eSurveyor",
                         "opacity": 0.5,
-                        "visible": [13]
+                        "visible": [19]
                     }, {
+                        "layerId": "surveycontours",
+                        "serviceName": "eSurveyor",
+                        "opacity": 1,
+                        "visible": [4,5,6,7]
+                    },{
+                        "layerId": "surveydem",
+                        "serviceName": "eSurveyor",
+                        "opacity": 0.5,
+                        "visible": [27]
+                    },{
                         "layerId": "tac",
                         "serviceName": "Districts",
                         "opacity": 0.5,
@@ -459,12 +475,12 @@ define([
                         "layerId": "trs",
                         "serviceName": "eSurveyor",
                         "opacity": 0.5,
-                        "visible": [26]
+                        "visible": [12]
                     }, {
                         "layerId": "vac",
                         "serviceName": "eSurveyor",
                         "opacity": 0.5,
-                        "visible": [19]
+                        "visible": [14]
                     },
                     {
                         "layerId": "vacant",
@@ -521,7 +537,7 @@ define([
                         "visible": [0,1,2,4,5,7,8,9,10,11,12,13,14,15,16]
                     }]
                 };
-                //layer visibiliity in the legend is controlled by the lyrs value
+                // layer visibiliity in the legend is controlled by the lyrs value
                 themeLayers = {
                     "towers": {
                         layerName: lmG.towers,
@@ -752,6 +768,17 @@ define([
                     },
                     "calib": {
                         layerName: lmG.calib,
+                        popupFunc: 'subList',
+                        service: 'eSurveyor'
+                    },
+
+                    "surveycontours": {
+                        layerName: lmG.surveycontours,
+                        popupFunc: 'subList',
+                        service: 'eSurveyor'
+                    },
+                    "surveydem": {
+                        layerName: lmG.surveydem,
                         popupFunc: 'subList',
                         service: 'eSurveyor'
                     },
@@ -1041,7 +1068,6 @@ define([
                         service: 'Schools'
                     }
                 };
-
 
                 if (checkboxids) {
                     // if boxes are checked through url parameters
