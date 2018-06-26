@@ -450,7 +450,7 @@ define([
                         "layerId": "surveydem",
                         "serviceName": "eSurveyor",
                         "opacity": 0.5,
-                        "visible": [27]
+                        "visible": [0]
                     },{
                         "layerId": "tac",
                         "serviceName": "Districts",
@@ -475,7 +475,7 @@ define([
                         "layerId": "trs",
                         "serviceName": "eSurveyor",
                         "opacity": 0.5,
-                        "visible": [12]
+                        "visible": [11, 12]
                     }, {
                         "layerId": "vac",
                         "serviceName": "eSurveyor",
@@ -1123,15 +1123,27 @@ define([
             },
 
             createLayer: function(Layers, id) {
-                if (lmG[id] === undefined) {
+                if (lmG[id] === undefined) { //if it's undefined it hasn't been created yet.
                     for (var x in layerConstructor["layers"]) {
                         if (layerConstructor["layers"][x].layerId === id) {
+                          // if(id !== 'surveydem'){
                             lmG[id] = new ArcGISDynamicMapServiceLayer(layerConstructor["mapFolder"] + layerConstructor["layers"][x].serviceName + layerConstructor["serverType"], {
                                 id: id,
                                 opacity: layerConstructor["layers"][x].opacity
                             });
                             layerConstructor["layers"][x].visible ? (lmG[id].setVisibleLayers(layerConstructor["layers"][x].visible)) : void(0);
-                            Layers[id].layerName = lmG[id]; //add to themeLayers
+                          // } else {
+                          //   require(["esri/layers/ArcGISTiledMapServiceLayer", "esri/layers/ArcGISImageServiceLayer"], function(ArcGISTiledMapServiceLayer,ArcGISImageServiceLayer) {
+                          //       // lmG[id] = new ArcGISTiledMapServiceLayer('https://mcgis.mesacounty.us/image/rest/services/DEM/DEM_Lidar/ImageServer', {
+                          //       //     id: id,
+                          //       //     opacity: layerConstructor["layers"][x].opacity
+                          //       // });
+                          //         lmG[id] = new ArcGISImageServiceLayer('https://mcgis.mesacounty.us/image/rest/services/DEM/DEM_Lidar/ImageServer',
+                          //         {id: id});
+                          //   });
+                          // }
+
+                          Layers[id].layerName = lmG[id]; //add to themeLayers
                         }
                     }
                 } //end main if
@@ -1342,7 +1354,6 @@ define([
             },
 
             runIT: function(opt, name, lyrs) {
-              console.log(checkboxClick)
                 map.graphics.clear();
                 var len = lyrs.length;
                 lmG.pLay.infoTemplate = '';
