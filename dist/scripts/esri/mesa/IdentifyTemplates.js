@@ -884,8 +884,7 @@ function getit(objID, layerID, opt) {
     var cssID = "#i" + objID.toString();
     require(["dojo/query"], function(query){
     if (query(".nored").style("border", "none"), query(cssID).query({"border-width": "0.1px","border-style": "solid","border-color": "#ff0000"}), opt) {
-        var optionID = opt.id;
-        document.getElementById(optionID).style.display = document.getElementById(optionID).style.display === "none"? "block": "none";
+        document.getElementById(opt.id).style.display = document.getElementById(opt.id).style.display === "none"? "block": "none";
     }
 });
     require(["esri/tasks/query", "esri/tasks/QueryTask", "esri/graphic", "mesa/graphicsTools"], function (Query, QueryTask, Graphic, graphicsTools) {
