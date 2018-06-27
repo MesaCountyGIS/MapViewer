@@ -132,6 +132,12 @@ gulp.task('copy_config', function() {
     .pipe(gulp.dest('./dist/scripts/_config'));
 });
 
+gulp.task('copy_layerConfig', function() {
+    /* Copy files from themesa/ _config directory to the dist/esri/mesa/ _config directory. */
+  return gulp.src('./src/scripts/mesa/_config/*')
+    .pipe(gulp.dest('./dist/scripts/esri/mesa/_config'));
+});
+
 gulp.task('copyScripts', function() {
     /* copyScripts copies over files that can't be minified by minmods or
     otherwise just need moved without modification or renaming. There is
@@ -144,7 +150,7 @@ gulp.task('copyScripts', function() {
     .pipe(gulp.dest('./dist/scripts/esri/mesa'));
 });
 
-gulp.task('default', ['less', 'mobileLess', 'js', 'minmods', 'minify', 'copyRoot', 'copyScripts', 'copy_config'] , function() {
+gulp.task('default', ['less', 'mobileLess', 'js', 'minmods', 'minify', 'copyRoot', 'copyScripts', 'copy_config', 'copy_layerConfig'] , function() {
     gulp.watch(['./src/style/style.less'], ['less']);
     gulp.watch(['./src/style/mstyle.less', './src/style/*ie*css'], ['mobileLess']);
     gulp.watch(['./src/scripts/app.js'], ['js']);
@@ -152,4 +158,5 @@ gulp.task('default', ['less', 'mobileLess', 'js', 'minmods', 'minify', 'copyRoot
     gulp.watch(['./src/scripts/mesa/templates/*.html'], ['minify']);
     gulp.watch(['./src/viewer.html'], ['copyRoot']);
     gulp.watch(['./src/scripts/_config/*'], ['copy_config']);
+    gulp.watch(['./src/scripts/mesa/_config/*'], ['copy_layerConfig']);
 });
