@@ -1,41 +1,7 @@
 {
-    "geometryService": "https://utility.arcgisonline.com/arcgis/rest/services/Geometry/GeometryServer",
-    "printURL": "https://mcgis.mesacounty.us/image/rest/services/MCUtilities/MCExportWebMap/GPServer/Export%20Web%20Map",
-    "proxyURL": "https://emap.mesacounty.us/proxypage/proxy.ashx",
-    "imagesList": {
-        "mapFolder": "https://mcgis.mesacounty.us/image/rest/services/Mosaic_Datasets/",
-        "serverType": "/ImageServer",
-        "images": [
-          {
-              "imageId": "usgs",
-              "serviceName": "USGS_Topo"
-          },
-            {
-                "imageId": "A2011",
-                "serviceName": "NAIP_2011_Color"
-            },
-            {
-                "imageId": "A2009",
-                "serviceName": "NAIP_WS_Color_2009"
-            },
-            {
-                "imageId": "A2008",
-                "serviceName": "County_Color_2008"
-            },
-
-            {
-                "imageId": "A2005",
-                "serviceName": "County_BW_2005"
-            },
-            {
-                "imageId": "A2001",
-                "serviceName": "County_BW_2001"
-            }
-          ]
-    },
-    layerConstructor = {
-        "mapFolder": 'https://mcgis.mesacounty.us/arcgis/rest/services/maps/',
-        "serverType": '/MapServer',
+    "layerConstructor": {
+        "mapFolder": "https://mcgis.mesacounty.us/arcgis/rest/services/maps/",
+        "serverType": "/MapServer",
         "layers": [{
             "layerId": "asbuilt",
             "serviceName": "EngineeringTechDocs",
@@ -299,12 +265,6 @@
             "opacity": 1,
             "visible": [1, 2, 3, 4, 5, 6, 7, 8]
         },
-        // {
-        //     "layerId": "loadLabels",
-        //     "serviceName": "transportation",
-        //     "opacity": 1,
-        //     "visible": [9, 10, 11, 12, 13, 14, 15]
-        // },
         {
             "layerId": "mesasims",
             "serviceName": "eSurveyor",
@@ -321,11 +281,6 @@
             "opacity": 1,
             "visible": [2]
         },
-        //  {
-        //     "layerId": "mosquito",
-        //     "serviceName": "Mosquito",
-        //     "opacity": 0.5
-        // },
         {
             "layerId": "ohv",
             "serviceName": "transportation",
@@ -529,7 +484,7 @@
             "opacity": 0.65,
             "visible": [0,1,2,4,5,7,8,9,10,11,12,13,14,15,16]
         }]
-    };
+    },
     "themeLayers": {
         "towers": {
             "layerName": "lmG.towers",
@@ -748,6 +703,16 @@
         },
         "calib": {
             "layerName": "lmG.calib",
+            "popupFunc": "subList",
+            "service": "eSurveyor"
+        },
+        "surveycontours": {
+            "layerName": "lmG.surveycontours",
+            "popupFunc": "subList",
+            "service": "eSurveyor"
+        },
+        "surveydem": {
+            "layerName": "lmG.surveydem",
             "popupFunc": "subList",
             "service": "eSurveyor"
         },
