@@ -21,7 +21,7 @@ define([
             mapLegend: null,
             components: null,
             layerConstructor: null,
-            // themeLayers: null,
+            themeLayers: null,
 
             postCreate: function() {
                 changeThemeWidget = this;
@@ -34,11 +34,11 @@ define([
                 pVal = changeThemeWidget.components === undefined? null: changeThemeWidget.components.pVal;
                 basemap = changeThemeWidget.basemapRef;
                 Legend = changeThemeWidget.mapLegend;
-                // layerConstructor = changeThemeWidget.layerConstructor;
-                // themelayers= changeThemeWidget.themeLayers;
-                JSONConfig = JSON.parse(JSONConfig);
-                layerConstructor = JSONConfig.layerConstructor;
-                themeLayers = JSONConfig.themeLayers;
+                layerConstructor = changeThemeWidget.layerConstructor;
+                themeLayers= changeThemeWidget.themeLayers;
+                // JSONConfig = JSON.parse(JSONConfig);
+                // layerConstructor = JSONConfig.layerConstructor;
+                // themeLayers = JSONConfig.themeLayers;
                 checkboxids = changeThemeWidget.components === undefined? null: changeThemeWidget.components.checkboxid;
                 control = dom.byId(layer + "Select") ? (layer + "Select") : "noControl";
 
