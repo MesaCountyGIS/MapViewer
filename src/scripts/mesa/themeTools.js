@@ -3,15 +3,16 @@ define([
     "dojo/dom-construct", "dojo/dom-attr", "dojo/dom",
     "dojo/query", "dojo/dom-class", "dojo/dom-style",
     "mesa/changeTheme",
-    // "dojo/text!../_config/config.json"
+    "dojo/text!./_config/config.json"
 ], function (array, domConstruct, domAttr, dom, query, domClass, domStyle, changeTheme
-  // ,JSONConfig
+  ,JSONConfig
 ) {
 
 
         function _themeClick(self, map, popupObject, popupTemplateObject, legend, initialBasemap, components) {
             var newLayer = self.attributes['data-value'].nodeValue;
-            // JSONConfig = JSON.parse(JSONConfig);
+            //Avoid parsing JSONConfig twice.
+            if(typeof(JSONConfig) !== 'object'){JSONConfig = JSON.parse(JSONConfig);}
             _getTemplate(newLayer);
             if (newLayer !== 'epom' && newLayer.length > 0) {
                 var layerTitle = self.getElementsByTagName('a')[0].innerHTML;
@@ -29,8 +30,8 @@ define([
                         infoTemplateRef: popupTemplateObject,
                         mapLegend: legend,
                         components: components,
-                        // layerConstructor: JSONConfig.layerConstructor,
-                        // themeLayers: JSONConfig.themeLayers,
+                        layerConstructor: JSONConfig.layerConstructor,
+                        themeLayers: JSONConfig.themeLayers,
                     })
 
                 }, 200);
