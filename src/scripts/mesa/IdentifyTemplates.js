@@ -129,7 +129,7 @@ define([
                     feature.attributes.layerName = result.layerName;
                     var template = new PopupTemplate({
                         title: "Septic Systems",
-                        description: "<b>Date: </b>{Date}<br><b>Tax Number: </b>{Tax Number}<br><b>Permit Number: </b>{Permit Number}<br><b>Street Address: </b>{Street Address}<br><b>Septic Records: </b><a target='_blank' href='https://www.mesacounty.us/gisweb/gisweb.aspx?wci=viewpages&wce=h{Septic Records}'>{Septic Records}</a>"
+                        description: "<b>Date: </b>{Date}<br><b>Tax Number: </b>{Tax Number}<br><b>Permit Number: </b>{Permit Number}<br><b>Street Address: </b>{Street Address}<br><b>Septic Records: </b><a target='_blank' href='https://onbase.mesacounty.us/AppNet/docpop/docpop.aspx?KT337_0_0_0={Septic Records}&clienttype=html&doctypeid=438'>{Septic Records}</a></br><a target='_blank' href='https://www.mesacounty.us/septic-systems/'>Additional Information<a>"
                     });
                     feature.setInfoTemplate(template);
                     return feature;
@@ -170,11 +170,96 @@ define([
                         feature.setInfoTemplate(template);
                     } else if (result.layerName === 'Consolidated Zoning Districts') {
                         template = new PopupTemplate({
-                            title: "Zoning Districts",
+                            title: "Consolidated Zoning Districts",
                             description: "<b>Zone Class: </b>{Zoning Classification}<br><b>Previous Zoning: </b>{PREV_CLASS}<br><b>Date of Rezone: </b>{Date_Rezone}<br><b>Year Rezoned: </b>{Year_Rezone}<br><b>Reception Number: </b>{Recept_Num}" + "<br><br><a target=_blank href='https://www.mesacounty.us/planning/codes-plans--policies/codes/land-development-code/'>Mesa County Land Development Code</a>"
                         });
                         feature.setInfoTemplate(template);
+                    } else if (result.layerName === "Persigo 201 Boundary") {
+                        template = new PopupTemplate({
+                            // title: "Persigo 201 Boundary",
+                            description: "Persigo 201 Boundary"
+                        });
+                        feature.setInfoTemplate(template);
                     }
+                    else if (result.layerName === "Urban Development Boundary") {
+                       template = new PopupTemplate({
+                           title: "Urban Development Boundary",
+                           description: "<a href='https://www.mesacounty.us/globalassets/planning/codes-plans--policies/policies/interim-development-policies/policies/urban-development-boundary-development-guidelines.pdf'>Urban Development Boundary Guidelines</a>"
+                       });
+                       feature.setInfoTemplate(template);
+                   }else if (result.layerName === "Airport Critical & Clear Zones") {
+                      template = new PopupTemplate({
+                          title: "Airport Zones",
+                          description: "{NAME}</br><a href='https://www.mesacounty.us/planning/codes-plans--policies/codes/land-development-code/'>Mesa County Land Development Code</a>"
+                      });
+                      feature.setInfoTemplate(template);
+                  }else if (result.layerName === "Grand Junction - Fruita Buffer") {
+                     template = new PopupTemplate({
+                         // title: "Urban Development Boundary",
+                         description: "Grand Junction - Fruita Buffer"
+                     });
+                     feature.setInfoTemplate(template);
+                 }else if (result.layerName === "Grand Junction - Palisade Buffer") {
+                    template = new PopupTemplate({
+                        // title: "Urban Development Boundary",
+                        description: "Grand Junction - Palisade Buffer"
+                    });
+                    feature.setInfoTemplate(template);
+                }else if (result.layerName === "Airport Noise Contours") {
+                   template = new PopupTemplate({
+                       // title: "Urban Development Boundary",
+                       description: "Airport Noise Contours"
+                   });
+                   feature.setInfoTemplate(template);
+               }else if (result.layerName === "Interim Development Policies") {
+                  template = new PopupTemplate({
+                      title: "Interim Development Policies",
+                      description: "{Name}</br><a href='{Policy}'>Development Policy</a>"
+                  });
+                  feature.setInfoTemplate(template);
+              }else if (result.layerName === "Subdistrict A (Area of Influence)") {
+                 template = new PopupTemplate({
+                     // title: "Interim Development Policies",
+                     description: "Subdistrict A (Area of Influence)"
+                 });
+                 feature.setInfoTemplate(template);
+             }else if (result.layerName === "Gateway Area A Overlay District") {
+                template = new PopupTemplate({
+                    // title: "Interim Development Policies",
+                    description: "Gateway Area A Overlay District"
+                });
+                feature.setInfoTemplate(template);
+            }else if (result.layerName === "Gateway Area B Overlay District") {
+               template = new PopupTemplate({
+                   // title: "Interim Development Policies",
+                   description: "Gateway Area B Overlay District"
+               });
+               feature.setInfoTemplate(template);
+           }else if (result.layerName === "Mack Overlay District Tier 1") {
+              template = new PopupTemplate({
+                  // title: "Interim Development Policies",
+                  description: "Mack Overlay District Tier 1"
+              });
+              feature.setInfoTemplate(template);
+          }else if (result.layerName === "Mack Overlay District Tier 2") {
+             template = new PopupTemplate({
+                 // title: "Interim Development Policies",
+                 description: "Mack Overlay District Tier 2"
+             });
+             feature.setInfoTemplate(template);
+         }else if (result.layerName === "Orchard Mesa Open Land Overlay District") {
+            template = new PopupTemplate({
+                // title: "Interim Development Policies",
+                description: "Orchard Mesa Open Land Overlay District"
+            });
+            feature.setInfoTemplate(template);
+        }else if (result.layerName === "Village of Mesa Overlay District") {
+           template = new PopupTemplate({
+               // title: "Interim Development Policies",
+               description: "Village of Mesa Overlay District"
+           });
+           feature.setInfoTemplate(template);
+       }
                     return feature;
                 });
             });
@@ -665,7 +750,7 @@ define([
                     if (result.layerName === 'FEMA Map Panel Index') {
                         template = new PopupTemplate({
                             title: "FEMA Map Panel Index",
-                            description: "<b>Layer Name: </b>FEMA Map Panel Index<br><b>FIRM Panel Number: </b><a title='Click to view FIRM panel map' href='https://www.mesacounty.us/gisweb/gisweb.aspx?wci=viewpages&wce=F{FIRM_PAN}'>{FIRM_PAN}</a><br><br>" + "<a title='The FEMA Map Service Center provides access to LOMC documents (if available)' href='https://msc.fema.gov/webapp/wcs/stores/servlet/MapSearchResult?storeId=10001&catalogId=10001&langId=-1&panelIDs={FIRM_PAN}$&Type=pbp&nonprinted=&unmapped='>(Additional FEMA Data)</a>"
+                            description: "<b>Layer Name: </b>FEMA Map Panel Index<br><b>FIRM Panel Number: </b><a title='Click to view FIRM panel map' href='https://onbase.mesacounty.us/AppNet/docpop/docpop.aspx?KT279_0_0_0={FIRM_PAN}&clienttype=html&doctypeid=372'>{FIRM_PAN}</a><br><br>" + "<a title='The FEMA Map Service Center provides access to LOMC documents (if available)' href='https://msc.fema.gov/webapp/wcs/stores/servlet/MapSearchResult?storeId=10001&catalogId=10001&langId=-1&panelIDs={FIRM_PAN}$&Type=pbp&nonprinted=&unmapped='>(Additional FEMA Data)</a>"
                         });
                         feature.setInfoTemplate(template);
                     } else if (result.layerName === 'FEMA Regulatory Floodplain') {
@@ -699,13 +784,54 @@ define([
         engdocs: function (evt, deferred) {
             deferred.addCallback(function (response) {
                 return array.map(response, function (result) {
-                    var url = "https://www.mesacounty.us/gisweb/gisweb.aspx?wci=viewpages&wce=e";
-                    var template;
+                    var template, doctypegroup, doctypeid;
                     var feature = result.feature;
                     feature.attributes.layerName = result.layerName;
+                    switch(result.layerName){
+                      case "Planning Structural Reports":
+                        doctypeid = "415";
+                      break;
+                      case "Engineering Structural Reports":
+                        doctypeid = "672";
+                      break;
+                      case "Planning Drainage Reports":
+                        doctypeid = "419";
+                      break;
+                      case "Engineering Drainage Reports":
+                        doctypeid = "669";
+                      break;
+                      case "Planning Geotechnical Reports":
+                        doctypeid = "417";
+                      break;
+                      case "Engineering Geotechnical Reports":
+                        doctypeid = "670";
+                      break;
+                      case "Planning Traffic Studies":
+                        doctypeid = "414";
+                      break;
+                      case "Engineering Traffic Studies":
+                        doctypeid = "673";
+                      break;
+                      case "Planning As-Built Drawings":
+                        doctypeid = "421";
+                      break;
+                      case "Engineering As-Built Drawings":
+                        doctypeid = "668";
+                      break;
+                      case "Planning Floodplain Studies":
+                        doctypeid = "418";
+                      break;
+                      case "Engineering Floodplain Studies":
+                        doctypeid = "675";
+                      break;
+                      case "Planning Drainage Master Plans":
+                        doctypeid = "419";
+                      break;
+                    }
+
                     template = new PopupTemplate({
                         title: result.layerName,
-                        description: "<b>Name:</b> {Name}<br><b>Prepared By:</b> {Prepared By}<br><b>Date:</b> {Date}<br><b>Type:</b> {Type}<br><b>Project Number:</b> {Project No}" + "<br><b>Document Type:</b> {Document Type}<br><b>Weblink:</b> <a target='_blank' href='https://www.mesacounty.us/gisweb/gisweb.aspx?wci=viewpages&wce=e{Dev Weblink}'>{Dev Weblink}</a>"
+                        description: "<b>Name:</b> {Name}<br><b>Prepared By:</b> {Prepared By}<br><b>Date:</b> {Date}<br><b>Type:</b> {Type}<br><b>Project Number:</b> {Project No}" + "<br><b>Document Type:</b> {Document Type}<br><b>Weblink:</b> <a target='_blank' href='https://onbase.mesacounty.us/AppNet/docpop/docpop.aspx?KT310_0_0_0={Dev Weblink}&clienttype=html&doctypeid=" + doctypeid + "'>{Dev Weblink}</a>"
                     });
                     feature.setInfoTemplate(template);
                     return feature;
@@ -762,7 +888,6 @@ define([
             deferred.addCallback(function (response) {
                 var content = '';
                 var contentArray, att;
-                var GLOurl = "http://www.mesacounty.us/gisweb/gisweb.aspx?wci=viewpages&wce=GL{DOCUMENT_ID}";
                 contentArray = array.map(response, function (item) {
                     return item;
                 });
@@ -775,13 +900,13 @@ define([
                             "></span> " + "<a target='_blank' href='https://recording.mesacounty.us/Landmarkweb//search/DocumentBy?ClerkFileNumber=" + att['Reception Number'] + "'>" + att['Reception Number'] + "</a> " + att['Subdivision Name'] + " - " + att['Recorded Date'] + "<br>";
                     } else if (contentArray[i].layerName === "Deposit Surveys") {
                         att = contentArray[i].feature.attributes;
-                        content += "<span title='Deposit Survey - Click to highlight' class='nored dep' id='i" + att.OBJECTID + "' onclick='getit(" + att.OBJECTID + ",20);' " + "></span> " + "<a target='_blank' href='http://www.mesacounty.us/gisweb/gisweb.aspx?wci=viewpages&wce=GD" + att['Deposit Number'] + "'> " + att['Deposit Number'] + "</a> " + att.Title + " - " + att.Date + "<br>";
+                        content += "<span title='Deposit Survey - Click to highlight' class='nored dep' id='i" + att.OBJECTID + "' onclick='getit(" + att.OBJECTID + ",20);' " + "></span> " + "<a target='_blank' href='https://onbase.mesacounty.us/AppNet/docpop/docpop.aspx?KT278_0_0_0=" + att['Deposit Number'] + "&clienttype=html&doctypeid=370'> " + att['Deposit Number'] + "</a> " + att.Title + " - " + att.Date + "<br>";
                     } else if (contentArray[i].layerName === "Historical Surveys") {
                         att = contentArray[i].feature.attributes;
-                        content += "<span title='Historic Survey - Click to highlight' class='nored hist' id='i" + att.OBJECTID + "' onclick='getit(" + att.OBJECTID + ",21);' " + "></span> " + "<a target='_blank' href='http://www.mesacounty.us/gisweb/gisweb.aspx?wci=viewpages&wce=GH" + att['HISTORICAL S. WEBLINK'] + "'>" + att['HISTORICAL S. WEBLINK'] + "</a> " + att.NAME + " - " + att.DATE + "<br>";
+                        content += "<span title='Historic Survey - Click to highlight' class='nored hist' id='i" + att.OBJECTID + "' onclick='getit(" + att.OBJECTID + ",21);' " + "></span> " + "<a target='_blank' href='https://onbase.mesacounty.us/AppNet/docpop/docpop.aspx?KT279_0_0_0=" + att['HISTORICAL S. WEBLINK'] + "&clienttype=html&doctypeid=367'>" + att['HISTORICAL S. WEBLINK'] + "</a> " + att.NAME + " - " + att.DATE + "<br>";
                     } else if (contentArray[i].layerName === "GLO Plats") {
                         att = contentArray[i].feature.attributes;
-                        content += "<span title='GLO Survey - Click to highlight' class='nored glo' id='i" + att.OBJECTID + "' onclick='getit(" + att.OBJECTID + ",22);' " + "></span> " + "<a target='_blank' href='http://www.mesacounty.us/gisweb/gisweb.aspx?wci=viewpages&wce=GL" + att['GLO WEBLINK'] + "'><b>" + att.NAME + "</b> (GLO Plat)</a><br>";
+                        content += "<span title='GLO Survey - Click to highlight' class='nored glo' id='i" + att.OBJECTID + "' onclick='getit(" + att.OBJECTID + ",22);' " + "></span> " + "<a target='_blank' href='https://onbase.mesacounty.us/AppNet/docpop/docpop.aspx?KT279_0_0_0=" + att['GLO WEBLINK'] + "&clienttype=html&doctypeid=369'><b>" + att.NAME + "</b> (GLO Plat)</a><br>";
                     } else if (contentArray[i].layerName === "Deeded ROW") {
                         att = contentArray[i].feature.attributes;
                         content += "<span title='Deeded ROW - Click to highlight' class='nored deed' id='i" + att.OBJECTID + "' onclick='getit(" + att.OBJECTID + ",13);' " + "></span> " + "<a target='_blank' href='https://recording.mesacounty.us/Landmarkweb//search/DocumentBy?ClerkFileNumber=" + att.RECEPTION + "'><b>" + att.ROAD + "</b> (Deeded ROW)</a>";
@@ -803,7 +928,7 @@ define([
                         content += "<span title='Road Proclamation 1890 and 1892 - Click to highlight' class='nored road' id='i" + att.OBJECTID + "' onclick='getit(" + att.OBJECTID + ",16);'></span> " + "<br>  (Comm. Record " + att.COMM_REC__ + ")<br>" + att.GEN_REC_1 + "<br>  (Gen. Record 1 " + att.DATE_1 + ")<br>" + att.GEN_REC_2 + "<br>  (Gen. Record 2 " + att.DATE_2 + ")<br><br>";
                     } else if (contentArray[i].layerName === "Mesa County Survey Monuments") {
                         att = contentArray[i].feature.attributes;
-                        content += "<span title='Mesa County Survey Monuments' class='nored mon' id='i" + att.OBJECTID + "' onclick='pointit(" + att.OBJECTID + ",2);'></span> " + "Monument Surveyor: " + att.Surveyor + "<br>Date: " + att.Date + "<br>Corner: " + att.Corner + "<br>Monument Record: <a target='_blank' href='http://www.mesacounty.us/gisweb/gisweb.aspx?wci=viewpages&wce=gm" + att['Monument Weblink'] + "'>" + att['Monument Weblink'] + "</a><br><span title='Mesa County Survey Monument'>MCSM</span>: " + att['Mesa County Survey Monument'];
+                        content += "<span title='Mesa County Survey Monuments' class='nored mon' id='i" + att.OBJECTID + "' onclick='pointit(" + att.OBJECTID + ",2);'></span> " + "Monument Surveyor: " + att.Surveyor + "<br>Date: " + att.Date + "<br>Corner: " + att.Corner + "<br>Monument Record: <a target='_blank' href='https://onbase.mesacounty.us/AppNet/docpop/docpop.aspx?KT275_0_0_0=" + att['Monument Weblink'] + "&clienttype=html&doctypeid=365'>" + att['Monument Weblink'] + "</a><br><span title='Mesa County Survey Monument'>MCSM</span>: " + att['Mesa County Survey Monument'];
                     } else if (contentArray[i].layerName === "Delta County GPS Monuments/SIMS") {
                         att = contentArray[i].feature.attributes;
                         content += "<span title='Delta County GPS Monuments/SIMS - Click to expand' class='nored delta' id='i" + att.OBJECTID + "' onclick='pointit(" + att.OBJECTID + ",1);'></span> " + "<b>GPS ID: </b><a target='_blank' href='http://emap.mesacounty.us/DeltaCountyMapping/default.aspx?value=" + att.GPS_ID_Delta + "'>" + att.GPS_ID_Delta + "</a><br><div class='nored collapse' id='" + att.GPS_ID + "' style='display:none;'><b>BLM ID: </b>" + att.BLM_ID_NO + "<br>" + "<b>GPS Precision: </b>" + att.GPS_PRECIS + "<br><b>UTM Northing: </b>" + att.UTM_NORTHI + "<br><b>UTM Easting: </b>" + att.UTM_EASTIN + "<br><b>NAVD88 Elevation: </b>" + att.NAVD88_ELE + "<br><b>Latitude (DMS): </b>" + att.LATITUDE_D + "<br><b>Longitude (DMS): </b>" + att.LONGITUDE_ + "<br><b>Latitude (DD): </b>" + att.LATITUDE_1 + "<br><b>Longitude (DD): </b>" + att.LONGITUDE1 + "<br>" + "<b>HAE: </b>" + att.HAE + "<br><b>Description: </b>" + att.DESCRIPTIO + "</div>";

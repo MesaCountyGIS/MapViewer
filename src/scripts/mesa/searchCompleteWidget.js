@@ -23,7 +23,7 @@ define([
         turnOff: undefined,
         callback: undefined,
         resultsShown:10,
-        minInputLength: 2,
+        minInputLength: 4,
 
         postCreate: function () {
             this.inherited(arguments);
@@ -32,9 +32,11 @@ define([
             this.searchValue.innerHTML = ("Search " + this.type);
             this.option !== undefined? this.domNode.style.display = "none":void(0);
             thisWidget = this;
+            minInputLength = thisWidget.minInputLength;
             map = thisWidget.mapRef;
             option = thisWidget.option;
             this.loc.value = "";
+            timeout = null;
             graphicTool = new graphicsTools({
                 geometryServiceURL: thisWidget.geometryServiceURL,
                 mapRef: map,
@@ -66,8 +68,14 @@ define([
               }else if(dom.byId("resultUL") && e.keyCode === keys.UP_ARROW){
                   query("#resultUL > li")[((query("#resultUL li").length) - 1)].focus();
               }else{
-            thisWidget._runScript().then(function(data){
+                if(thisWidget.loc.value.length > minInputLength){
+                  clearTimeout(timeout);
+
+    timeout = setTimeout(function () {
+            thisWidget._runScript()
+            .then(function(data){
                 var html = "<ul data-dojo-attach-point='resultUL' id='resultUL'>";
+
                 for(i=0; i < thisWidget.resultsShown; i++){
                     if(data.features && data.features[i]){
                     var dataAttr = data.features[i].geometry.rings? ("data-rings='" + data.features[i].geometry.rings[0] + "'>"):
@@ -80,10 +88,10 @@ define([
                 html += "</ul>";
                 return html
 
-        })//end of first then
-        .then(function(html){
+        })
+        .then(function(snippet){
             dom.byId("resultUL")? domConstruct.destroy("resultUL"): void(0);
-            domConstruct.place(html, thisWidget.loc, "after");
+            domConstruct.place(snippet, thisWidget.loc, "after");
 
             on(query("#resultUL > li"), "keyup", function(e){
                 if(e.keyCode === keys.DOWN_ARROW || e.keyCode === keys.UP_ARROW){
@@ -107,6 +115,8 @@ define([
 
             });//end of on click event
         });//end of second then
+      }, 400)
+      }//end if
     }//end of if statement
           });//end of keyup event
 
@@ -133,6 +143,7 @@ define([
                        where: thisWidget.where  + " '%" + value + "%'",
                        outFields: thisWidget.outFields,
                        returnGeometry: true,
+                       orderByFields: [thisWidget.outFields],
                        f: "pjson"
                    }
            }))

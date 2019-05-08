@@ -15,7 +15,7 @@ define([
             case "intersection":
                 thisFunctionParam = "Intersection";
                 thisTargetGeometry = "point";
-                thisOutFields = "Intersection";
+                thisOutFields = "NAMES";
                 thisService = "roads_and_intersections/MapServer/0/query";
                 thisType = "Intersection";
                 break;
@@ -29,7 +29,7 @@ define([
                 break;
             case "subdivision":
                 thisOutFields = "SUBNAME";
-                thisService = "eSurveyor/MapServer/13/query";
+                thisService = "eSurveyor/MapServer/19/query";
                 thisType = "Subdivision";
                 break;
             case "place":
@@ -41,7 +41,7 @@ define([
                 break;
             case "PLSS":
                 thisOutFields = "TRSM";
-                thisService = "eSurveyor/MapServer/26/query";
+                thisService = "eSurveyor/MapServer/12/query";
                 thisType = "Township/Range";
                 break;
             case "Latitude/Longitude":

@@ -73,6 +73,7 @@ define([
                                 attQuery.returnGeometry = true;
                                 attQuery.outFields = ["*"];
                                 attQuery.where = "OBJECTID > 0";
+                                attQuery.num = 1;
                                 attQueryTask.execute(attQuery, queryWidget._showResult);
                             }
                         });

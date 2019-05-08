@@ -10,6 +10,7 @@ define([
 
 
         function _themeClick(self, map, popupObject, popupTemplateObject, legend, initialBasemap, components) {
+          
             var newLayer = self.attributes['data-value'].nodeValue;
             //Avoid parsing JSONConfig twice.
             if(typeof(JSONConfig) !== 'object'){JSONConfig = JSON.parse(JSONConfig);}

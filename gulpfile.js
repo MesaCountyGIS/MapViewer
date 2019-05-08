@@ -10,6 +10,7 @@ var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var htmlmin = require('gulp-htmlmin');
 var watch = require('gulp-watch');
+var babel = require('gulp-babel');
 
 gulp.task('less', function(){
     /* less converts style.less (the application's main style sheet) to plain
@@ -17,17 +18,6 @@ gulp.task('less', function(){
     it and copies it to the dist style directory*/
     return gulp
     .src('./src/style/style.less')
-    // .pipe(addsrc.append([
-    //     './src/style/bookmarkTool.less',
-    //     './src/style/helpTool.less',
-    //     './src/style/loadLimits.less',
-    //     './src/style/measureTool.less',
-    //     './src/style/printTool.less',
-    //     './src/style/queryTool.less',
-    //     './src/style/searchTool.less',
-    //     './src/style/shareTool.less',
-    //     './src/style/slidersAndSpinners.less'
-    // ]))
     .pipe(plumber())
     .pipe(less())
     .pipe(cssnano())
@@ -61,11 +51,11 @@ gulp.task('mobileLess', function(){
 gulp.task('js', function(){
     /* js minifies, renames and copies app.js into the dist directory */
     return gulp.src(['./src/scripts/app.js'])
+        .pipe(babel())
         .pipe(plumber())
         .pipe(uglify({
             mangle: false,
         }))
-        // .pipe(concat("all.js"))
         .pipe(rename("app.min.js"))
         .pipe(gulp.dest('./dist/scripts/'));
 });
@@ -75,16 +65,14 @@ gulp.task('minmods', function(){
     they are copied to dist/esri/ to become part of the ESRI JS API custom
     build. There are two modules (as of 11/2/2016) that are not minified. These
     are handled by the copyScripts task below. */
- return gulp.src(['./src/scripts/mesa/autocomplete.js'])
+ return gulp.src(['./src/scripts/mesa/contextMenuWidget.js'])
          .pipe(addsrc.append([
              './src/scripts/mesa/base.js',
-                // './src/scripts/mesa/basemapWidget.js',
                 './src/scripts/mesa/basemapWidget2.js',
                 './src/scripts/mesa/bookmarkWidget.js',
                 './src/scripts/mesa/changeTheme.js',
                 './src/scripts/mesa/themeTools.js',
                 './src/scripts/mesa/searchTools.js',
-                './src/scripts/mesa/contextMenuWidget.js',
                 './src/scripts/mesa/coordinateCleaner.js',
                 './src/scripts/mesa/exportcsv.js',
                 './src/scripts/mesa/graphicsTools.js',
@@ -97,11 +85,10 @@ gulp.task('minmods', function(){
                 './src/scripts/mesa/queryWidget.js',
                 './src/scripts/mesa/searchCompleteWidget.js',
                 './src/scripts/mesa/shareFormWidget.js',
-                './src/scripts/mesa/legendWidget.js',
-                // './src/scripts/mesa/toolsWidget.js',
                 './src/scripts/mesa/toolsWidget2.js',
-                '.src/scripts/util/createTiledMapServiceLayer.js'
+                '.src/scripts/util/createTiledMapServiceLayer.js',
             ]))
+            .pipe(babel())
         .pipe(plumber())
         .pipe(uglify({
             mangle: false,
@@ -154,7 +141,7 @@ gulp.task('default', ['less', 'mobileLess', 'js', 'minmods', 'minify', 'copyRoot
     gulp.watch(['./src/style/style.less'], ['less']);
     gulp.watch(['./src/style/mstyle.less', './src/style/*ie*css'], ['mobileLess']);
     gulp.watch(['./src/scripts/app.js'], ['js']);
-    gulp.watch(['./src/scripts/mesa/*.js'], ['minmods', 'copyScripts']);
+    gulp.watch(['./src/scripts/mesa/*.js', './src/scripts/mesa/appfunctions/*.js'], ['minmods', 'copyScripts']);
     gulp.watch(['./src/scripts/mesa/templates/*.html'], ['minify']);
     gulp.watch(['./src/viewer.html'], ['copyRoot']);
     gulp.watch(['./src/scripts/_config/*'], ['copy_config']);

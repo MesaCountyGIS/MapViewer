@@ -6,14 +6,38 @@
             "layerId": "asbuilt",
             "serviceName": "EngineeringTechDocs",
             "opacity": 0.5,
-            "visible": [4]
+            "visible": [8,9,10]
+        }, {
+            "layerId": "drainplan",
+            "serviceName": "EngineeringTechDocs",
+            "opacity": 0.5,
+            "visible": [15,16]
+        }, {
+            "layerId": "drnrep",
+            "serviceName": "EngineeringTechDocs",
+            "opacity": 0.5,
+            "visible": [0,1,2]
+        }, {
+            "layerId": "floodstud",
+            "serviceName": "EngineeringTechDocs",
+            "opacity": 0.5,
+            "visible": [12,13,14]
+        },{
+            "layerId": "geotech",
+            "serviceName": "EngineeringTechDocs",
+            "opacity": 0.5,
+            "visible": [3,4,5]
+        },{
+            "layerId": "traffic",
+            "serviceName": "EngineeringTechDocs",
+            "opacity": 0.5,
+            "visible": [6,7,8]
         }, {
             "layerId": "board",
             "serviceName": "eElections",
             "opacity": 0.5,
             "visible": [6]
-        },
-        {
+        },{
             "layerId": "boardbound",
             "serviceName": "Schools",
             "opacity": 0.5,
@@ -125,16 +149,6 @@
             "opacity": 0.7,
             "visible": [4]
         }, {
-            "layerId": "drainplan",
-            "serviceName": "EngineeringTechDocs",
-            "opacity": 0.5,
-            "visible": [6]
-        }, {
-            "layerId": "drnrep",
-            "serviceName": "EngineeringTechDocs",
-            "opacity": 0.5,
-            "visible": [1]
-        }, {
             "layerId": "elem",
             "serviceName": "Schools",
             "opacity": 0.8,
@@ -200,12 +214,6 @@
             "visible": [1]
         },
         {
-            "layerId": "floodstud",
-            "serviceName": "EngineeringTechDocs",
-            "opacity": 0.5,
-            "visible": [5]
-        },
-        {
             "layerId": "fruita",
             "serviceName": "Schools",
             "opacity": 0.8,
@@ -214,11 +222,6 @@
             "layerId": "futureland",
             "serviceName": "Future_Land_Use",
             "opacity": 0.8
-        }, {
-            "layerId": "geotech",
-            "serviceName": "EngineeringTechDocs",
-            "opacity": 0.5,
-            "visible": [2]
         }, {
             "layerId": "glo",
             "serviceName": "eSurveyor",
@@ -374,12 +377,7 @@
             "layerId": "stormwater",
             "serviceName": "Stormwater",
             "opacity": 0.5
-        }, {
-            "layerId": "struc",
-            "serviceName": "EngineeringTechDocs",
-            "opacity": 0.5,
-            "visible": [0]
-        }, {
+        },{
             "layerId": "stsen",
             "serviceName": "eElections",
             "opacity": 0.5,
@@ -409,11 +407,6 @@
             "serviceName": "PublicSafety",
             "opacity": 1,
             "visible": [1]
-        }, {
-            "layerId": "traffic",
-            "serviceName": "EngineeringTechDocs",
-            "opacity": 0.5,
-            "visible": [3]
         }, {
             "layerId": "trails",
             "serviceName": "Trails",
@@ -481,8 +474,88 @@
         }, {
             "layerId": "zoning",
             "serviceName": "Zoning",
-            "opacity": 0.65,
-            "visible": [0,1,2,4,5,7,8,9,10,11,12,13,14,15,16]
+            "opacity": 0.75,
+            "visible": [0,1,2,3,4,5,7,8,9,10,11,12,13,14,15,16]
+        }, {
+            "layerId": "zoningnoise",
+            "serviceName": "Zoning",
+            "opacity": 0.75,
+            "visible": [0]
+        }, {
+            "layerId": "zoningairport",
+            "serviceName": "Zoning",
+            "opacity": 0.75,
+            "visible": [3]
+        }, {
+            "layerId": "zoningconsolidated",
+            "serviceName": "Zoning",
+            "opacity": 0.75,
+            "visible": [16]
+        }, {
+            "layerId": "zoningfruitabuffer",
+            "serviceName": "Zoning",
+            "opacity": 0.75,
+            "visible": [1]
+        }, {
+            "layerId": "zoningpalisadebuffer",
+            "serviceName": "Zoning",
+            "opacity": 0.75,
+            "visible": [2]
+        }, {
+            "layerId": "zoninggatewaya",
+            "serviceName": "Zoning",
+            "opacity": 0.75,
+            "visible": [8]
+        }, {
+            "layerId": "zoninggatewayb",
+            "serviceName": "Zoning",
+            "opacity": 0.75,
+            "visible": [9]
+        }, {
+            "layerId": "zoningincorporated",
+            "serviceName": "Zoning",
+            "opacity": 0.75,
+            "visible": [15]
+        }, {
+            "layerId": "zoninginterimdevpolicies",
+            "serviceName": "Zoning",
+            "opacity": 0.75,
+            "visible": [14]
+        }, {
+            "layerId": "zoningmack1",
+            "serviceName": "Zoning",
+            "opacity": 0.75,
+            "visible": [10]
+        }, {
+            "layerId": "zoningmack2",
+            "serviceName": "Zoning",
+            "opacity": 0.75,
+            "visible": [11]
+        }, {
+            "layerId": "zoningomoverlay",
+            "serviceName": "Zoning",
+            "opacity": 0.75,
+            "visible": [12]
+        }, {
+            "layerId": "zoningpersigobound",
+            "serviceName": "Zoning",
+            "opacity": 0.75,
+            "visible": [4]
+        }, {
+            "layerId": "zoninginfluence",
+            "serviceName": "Zoning",
+            "opacity": 0.75,
+            "visible": [7]
+        }, {
+            "layerId": "zoningurbandev",
+            "serviceName": "Zoning",
+            "opacity": 0.75,
+            "visible": [5]
+        }, {
+            "layerId": "zoningmesavillage",
+            "serviceName": "Zoning",
+            "opacity": 0.75,
+            "visible": [13]
         }]
     },
     "themeLayers": {
@@ -886,8 +959,27 @@
             "popupFunc": "engdocs",
             "service": "EngineeringTechDocs"
         },
+        "plandrnrep": {
+            "layerName": "lmG.plandrnrep",
+            "popupFunc": "engdocs",
+            "service": "EngineeringTechDocs"
+        },"engdrnrep": {
+            "layerName": "lmG.engdrnrep",
+            "popupFunc": "engdocs",
+            "service": "EngineeringTechDocs"
+        },
         "geotech": {
             "layerName": "lmG.geotech",
+            "popupFunc": "engdocs",
+            "service": "EngineeringTechDocs"
+        },
+        "plangeotech": {
+            "layerName": "lmG.plangeotech",
+            "popupFunc": "engdocs",
+            "service": "EngineeringTechDocs"
+        },
+        "enggeotech": {
+            "layerName": "lmG.enggeotech",
             "popupFunc": "engdocs",
             "service": "EngineeringTechDocs"
         },
@@ -896,8 +988,28 @@
             "popupFunc": "engdocs",
             "service": "EngineeringTechDocs"
         },
+        "plantraffic": {
+            "layerName": "lmG.plantraffic",
+            "popupFunc": "engdocs",
+            "service": "EngineeringTechDocs"
+        },
+        "engtraffic": {
+            "layerName": "lmG.engtraffic",
+            "popupFunc": "engdocs",
+            "service": "EngineeringTechDocs"
+        },
         "asbuilt": {
             "layerName": "lmG.asbuilt",
+            "popupFunc": "engdocs",
+            "service": "EngineeringTechDocs"
+        },
+        "planasbuilt": {
+            "layerName": "lmG.planasbuilt",
+            "popupFunc": "engdocs",
+            "service": "EngineeringTechDocs"
+        },
+        "engasbuilt": {
+            "layerName": "lmG.engasbuilt",
             "popupFunc": "engdocs",
             "service": "EngineeringTechDocs"
         },
@@ -906,8 +1018,28 @@
             "popupFunc": "engdocs",
             "service": "EngineeringTechDocs"
         },
+        "planfloodstud": {
+            "layerName": "lmG.planfloodstud",
+            "popupFunc": "engdocs",
+            "service": "EngineeringTechDocs"
+        },
+        "engfloodstud": {
+            "layerName": "lmG.engfloodstud",
+            "popupFunc": "engdocs",
+            "service": "EngineeringTechDocs"
+        },
         "drainplan": {
             "layerName": "lmG.drainplan",
+            "popupFunc": "engdocs",
+            "service": "EngineeringTechDocs"
+        },
+        "plandrainplan": {
+            "layerName": "lmG.plandrainplan",
+            "popupFunc": "engdocs",
+            "service": "EngineeringTechDocs"
+        },
+        "engdrainplan": {
+            "layerName": "lmG.engdrainplan",
             "popupFunc": "engdocs",
             "service": "EngineeringTechDocs"
         },
@@ -1000,6 +1132,86 @@
             "layerName": "lmG.boardbound",
             "popupFunc": "schools",
             "service": "Schools"
+        },
+        "zoningnoise": {
+            "layerName": "lmG.zoningnoise",
+            "popupFunc": "zon",
+            "service": "Zoning"
+        },
+        "zoningairport": {
+            "layerName": "lmG.zoningairport",
+            "popupFunc": "zon",
+            "service": "Zoning"
+        },
+        "zoningconsolidated": {
+            "layerName": "lmG.zoningconsolidated",
+            "popupFunc": "zon",
+            "service": "Zoning"
+        },
+        "zoningfruitabuffer": {
+            "layerName": "lmG.zoningfruitabuffer",
+            "popupFunc": "zon",
+            "service": "Zoning"
+        },
+        "zoningpalisadebuffer": {
+            "layerName": "lmG.zoningpalisadebuffer",
+            "popupFunc": "zon",
+            "service": "Zoning"
+        },
+        "zoninggatewaya": {
+            "layerName": "lmG.zoninggatewaya",
+            "popupFunc": "zon",
+            "service": "Zoning"
+        },
+        "zoninggatewayb": {
+            "layerName": "lmG.zoninggatewayb",
+            "popupFunc": "zon",
+            "service": "Zoning"
+        },
+        "zoningincorporated": {
+            "layerName": "lmG.zoningincorporated",
+            "popupFunc": "zon",
+            "service": "Zoning"
+        },
+        "zoninginterimdevpolicies": {
+            "layerName": "lmG.zoninginterimdevpolicies",
+            "popupFunc": "zon",
+            "service": "Zoning"
+        },
+        "zoningmack1": {
+            "layerName": "lmG.zoningmack1",
+            "popupFunc": "zon",
+            "service": "Zoning"
+        },
+        "zoningmack2": {
+            "layerName": "lmG.zoningmack2",
+            "popupFunc": "zon",
+            "service": "Zoning"
+        },
+        "zoningomoverlay": {
+            "layerName": "lmG.zoningomoverlay",
+            "popupFunc": "zon",
+            "service": "Zoning"
+        },
+        "zoningpersigobound": {
+            "layerName": "lmG.zoningpersigobound",
+            "popupFunc": "zon",
+            "service": "Zoning"
+        },
+        "zoninginfluence": {
+            "layerName": "lmG.zoninginfluence",
+            "popupFunc": "zon",
+            "service": "Zoning"
+        },
+        "zoningurbandev": {
+            "layerName": "lmG.zoningurbandev",
+            "popupFunc": "zon",
+            "service": "Zoning"
+        },
+        "zoningmesavillage": {
+            "layerName": "lmG.zoningmesavillage",
+            "popupFunc": "zon",
+            "service": "Zoning"
         }
     }
 }

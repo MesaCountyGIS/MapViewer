@@ -5,27 +5,18 @@ define([
  ], function (declare, domConstruct, dom, domClass, move, query, graphicsTools, esriRequest, Deferred, touch,
      script, JSON, keys, focusUtil, html, on, Graphic, Point, SpatialReference, GeometryService,
     SimpleMarkerSymbol, SimpleLineSymbol, Color,_WidgetBase) {
-        var map, gsvc, wgs84, utm12, thisWidget;
-
     return declare("locatorWidget", [_WidgetBase], {
 
         mapRef:null,
         device: "desktop",
         gsvc: null,
 
-
-
         postCreate: function () {
-            thisWidget = this;
-            map = thisWidget.mapRef;
-            gsvc = new GeometryService(thisWidget.gsvc);
-            wgs84 = new SpatialReference({wkid: 4326});
-            utm12 = new SpatialReference({wkid: 102206});
-            dom.byId("locate").getAttribute('data-state') == "off" ? startNav() : stopNav();
-        }
-
-        });//end declare
-
+            const map = this.mapRef;
+            const gsvc = new GeometryService(this.gsvc);
+            const wgs84 = new SpatialReference({wkid: 4326});
+            const utm12 = new SpatialReference({wkid: 102206});
+            dom.byId("locate").getAttribute('data-state') === "off" ? startNav() : stopNav();
 
 
         function startNav() {
@@ -78,33 +69,37 @@ define([
     function zoomToLocation(location) {
             point = new Point(location.coords.longitude, location.coords.latitude, wgs84);
             gsvc.project([point], utm12, function (result) {
-                var utmGraphicPoint = result[0];
+                const utmGraphicPoint = result[0];
                 addGraphic(utmGraphicPoint);
                 map.centerAndZoom(utmGraphicPoint, 500);
             });
     }
 
     function showLocation(location) {
-            point = new Point(location.coords.longitude, location.coords.latitude, wgs84);
+            const point = new Point(location.coords.longitude, location.coords.latitude, wgs84);
             gsvc.project([point], utm12, function (result) {
-                var utmGraphicPoint = result[0];
-                if (!graphic) {
-                    addGraphic(utmGraphicPoint);
-                } else { //move the graphic if it already exists
-                    graphic.setGeometry(utmGraphicPoint);
+                const utmGraphicPoint = result[0];
+                const graphicFound = map.graphics.graphics.some(function(x){return x.attributes.id === "locate"});
+                if (graphicFound) { //move the graphic if it already exists
+                  graphic.setGeometry(utmGraphicPoint);
+                } else {
+                  addGraphic(utmGraphicPoint);
                 }
                 map.centerAt(utmGraphicPoint);
             });
     }
 
     function addGraphic(pt) {
-            var symbol = new SimpleMarkerSymbol(SimpleMarkerSymbol.STYLE_CIRCLE, 12,
+            const symbol = new SimpleMarkerSymbol(SimpleMarkerSymbol.STYLE_CIRCLE, 12,
                 new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
                     new Color([210, 105, 30, 0.5]), 8),
                 new Color([210, 105, 30, 0.9])
             );
-            graphic = new Graphic(pt, symbol);
+            graphic = new Graphic(pt, symbol, {id:"locate"});
             map.graphics.add(graphic);
     };
 
+  }
+
+  });//end declare
 });//end define

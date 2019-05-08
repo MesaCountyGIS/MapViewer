@@ -20,7 +20,7 @@ define([
 ], function(query, on, touch, dom, domAttr, domConstruct, domStyle, domClass, Extent,
     SpatialReference, array, Legend, declare, template, _WidgetBase, _TemplatedMixin) {
 
-    var legend, legendWidget, defaultBasemap, map, popup, legendLayers = [];
+    // var legend, legendWidget, defaultBasemap, map, popup, legendLayers = [];
 
     return declare("legendWidget", [_WidgetBase, _TemplatedMixin], {
 
@@ -32,16 +32,18 @@ define([
         legendObject: null,
 
         postCreate: function() {
+          console.log("jimmg")
             //Place the widget if it hasn't been placed already
             if(!(dom.byId(this.domNode))){
                 domConstruct.place(this.domNode, this.srcNodeRef.id, "before");
             }
-            legendWidget = this;
-            defaultBasemap = legendWidget.defaultBasemap;
-            map = legendWidget.mapRef;
-            popup = legendWidget.popupRef;
-            legendToggleButtonId = legendWidget.attachControl.id;
-            legendObject = legendWidget.legendObject;
+            const legendWidget = this;
+            const defaultBasemap = legendWidget.defaultBasemap;
+            const map = legendWidget.mapRef;
+            const popup = legendWidget.popupRef;
+            const legendToggleButtonId = legendWidget.attachControl.id;
+            const legendObject = legendWidget.legendObject;
+            const legendLayers = [];
 
             on(dom.byId(legendToggleButtonId), touch.release, function() {
                 legendWidget.toggleDialog();
