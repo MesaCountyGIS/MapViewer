@@ -64,30 +64,15 @@
             "opacity": 0.5,
             "visible": [3]
         }, {
-            "layerId": "cemetery",
-            "serviceName": "Districts",
-            "opacity": 0.5,
-            "visible": [10]
-        }, {
             "layerId": "census2010",
             "serviceName": "Census_Zip",
             "opacity": 0.5,
             "visible": [0]
         }, {
-            "layerId": "citylimits",
-            "serviceName": "Districts",
-            "opacity": 0.5,
-            "visible": [19]
-        }, {
             "layerId": "commdist",
             "serviceName": "eElections",
             "opacity": 0.5,
             "visible": [2]
-        }, {
-            "layerId": "conserv",
-            "serviceName": "Districts",
-            "opacity": 0.5,
-            "visible": [11]
         }, {
             "layerId": "contours01",
             "serviceName": "Elevation",
@@ -144,11 +129,6 @@
             "opacity": 0.5,
             "visible": [1]
         }, {
-            "layerId": "drain",
-            "serviceName": "Districts",
-            "opacity": 0.7,
-            "visible": [4]
-        }, {
             "layerId": "elem",
             "serviceName": "Schools",
             "opacity": 0.8,
@@ -167,11 +147,6 @@
             "visible": [0]
         },
         {
-            "layerId": "firedist",
-            "serviceName": "Districts",
-            "opacity": 0.5,
-            "visible": [0]
-        }, {
             "layerId": "floodbase",
             "serviceName": "Floodmap",
             "opacity": 1,
@@ -243,6 +218,11 @@
             "opacity": 0.5,
             "visible": [1]
         }, {
+            "layerId": "water",
+            "serviceName": "Districts",
+            "opacity": 0.5,
+            "visible": [1]
+        }, {
             "layerId": "hospital",
             "serviceName": "Districts",
             "opacity": 0.5,
@@ -262,6 +242,60 @@
             "serviceName": "Districts",
             "opacity": 0.5,
             "visible": [5]
+        }, {
+            "layerId": "firedist",
+            "serviceName": "Districts",
+            "opacity": 0.5,
+            "visible": [0]
+        }, {
+            "layerId": "drain",
+            "serviceName": "Districts",
+            "opacity": 0.7,
+            "visible": [4]
+        }, {
+            "layerId": "citylimits",
+            "serviceName": "Districts",
+            "opacity": 0.5,
+            "visible": [19]
+        }, {
+            "layerId": "cemetery",
+            "serviceName": "Districts",
+            "opacity": 0.5,
+            "visible": [10]
+        }, {
+            "layerId": "conserv",
+            "serviceName": "Districts",
+            "opacity": 0.5,
+            "visible": [11]
+        }, {
+            "layerId": "sewer",
+            "serviceName": "Districts",
+            "opacity": 0.5
+        }, {
+            "layerId": "pest",
+            "serviceName": "Districts",
+            "opacity": 0.5,
+            "visible": [7]
+        }, {
+            "layerId": "san",
+            "serviceName": "Districts",
+            "opacity": 0.5,
+            "visible": [2]
+        }, {
+            "layerId": "soilcon",
+            "serviceName": "Districts",
+            "opacity": 0.5,
+            "visible": [12]
+        }, {
+            "layerId": "tac",
+            "serviceName": "Districts",
+            "opacity": 0.5,
+            "visible": [13]
+        }, {
+            "layerId": "metro",
+            "serviceName": "Districts",
+            "opacity": 0.5,
+            "visible": [21]
         }, {
             "layerId": "load",
             "serviceName": "transportation",
@@ -304,11 +338,6 @@
             "serviceName": "Persigo",
             "opacity": 0.5
         }, {
-            "layerId": "pest",
-            "serviceName": "Districts",
-            "opacity": 0.5,
-            "visible": [7]
-        }, {
             "layerId": "precincts",
             "serviceName": "eElections",
             "opacity": 1,
@@ -324,11 +353,6 @@
             "serviceName": "Sales",
             "opacity": 0.5
         }, {
-            "layerId": "san",
-            "serviceName": "Districts",
-            "opacity": 0.5,
-            "visible": [2]
-        }, {
             "layerId": "schools",
             "serviceName": "Schools",
             "opacity": 0.5,
@@ -338,19 +362,10 @@
             "serviceName": "Septic_Locations",
             "opacity": 0.7
         }, {
-            "layerId": "sewer",
-            "serviceName": "Districts",
-            "opacity": 0.5
-        }, {
             "layerId": "shoot",
             "serviceName": "SO_Areas",
             "opacity": 0.8,
             "visible": [1]
-        }, {
-            "layerId": "soilcon",
-            "serviceName": "Districts",
-            "opacity": 0.5,
-            "visible": [12]
         }, {
             "layerId": "soils",
             "serviceName": "Soils",
@@ -398,11 +413,6 @@
             "opacity": 0.5,
             "visible": [0]
         },{
-            "layerId": "tac",
-            "serviceName": "Districts",
-            "opacity": 0.5,
-            "visible": [13]
-        }, {
             "layerId": "towers",
             "serviceName": "PublicSafety",
             "opacity": 1,
@@ -458,11 +468,6 @@
         },
 
         {
-            "layerId": "water",
-            "serviceName": "Districts",
-            "opacity": 0.5,
-            "visible": [1]
-        }, {
             "layerId": "weeds",
             "serviceName": "Weeds",
             "opacity": 0.5
@@ -577,6 +582,11 @@
         },
         "firedist": {
             "layerName": "lmG.firedist",
+            "popupFunc": "subList",
+            "service": "Districts"
+        },
+        "metro": {
+            "layerName": "lmG.metro",
             "popupFunc": "subList",
             "service": "Districts"
         },
