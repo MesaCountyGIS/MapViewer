@@ -85,8 +85,7 @@ gulp.task('minmods', function(){
                 './src/scripts/mesa/queryWidget.js',
                 './src/scripts/mesa/searchCompleteWidget.js',
                 './src/scripts/mesa/shareFormWidget.js',
-                './src/scripts/mesa/toolsWidget2.js',
-                '.src/scripts/util/createTiledMapServiceLayer.js',
+                './src/scripts/mesa/toolsWidget2.js'
             ]))
             .pipe(babel())
         .pipe(plumber())
