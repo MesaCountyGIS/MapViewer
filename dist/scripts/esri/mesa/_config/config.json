@@ -275,7 +275,7 @@
             "layerId": "pest",
             "serviceName": "Districts",
             "opacity": 0.5,
-            "visible": [7]
+            "visible": [7, 8, 9]
         }, {
             "layerId": "san",
             "serviceName": "Districts",

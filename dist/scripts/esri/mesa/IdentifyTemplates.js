@@ -105,23 +105,6 @@ define([
             aG.map.infoWindow.show(evt.mapPoint, aG.map.getInfoWindowAnchor(evt.screenPoint));
         },
 
-        // soilTyp: function (evt, deferred, len) {
-        //     deferred.addCallback(function (response) {
-        //         return array.map(response, function (result) {
-        //             var feature = result.feature;
-        //             feature.attributes.layerName = result.layerName;
-        //             var template = new PopupTemplate({
-        //                 title: "Mesa County Soils",
-        //                 description: "<b>Soil Unit Name: </b><a target='_blank' href='https://emap.mesacounty.us/Soils/osd/{WEBLINK}.htm'>{MUNAME}</a><br><b>Farmland Capability: </b>{FARMLNDCL}<br><b>Flooding Frequency: </b>{FLODFREQDC}<br><b>Ponding Frequency: </b>{PONDFREQPR}"
-        //             });
-        //             feature.setInfoTemplate(template);
-        //             return feature;
-        //         });
-        //     });
-        //     aG.map.infoWindow.setFeatures([deferred]);
-        //     aG.map.infoWindow.show(evt.mapPoint, aG.map.getInfoWindowAnchor(evt.screenPoint));
-        // },
-
         sep: function (evt, deferred, len) {
             deferred.addCallback(function (response) {
                 return array.map(response, function (result) {
@@ -129,7 +112,7 @@ define([
                     feature.attributes.layerName = result.layerName;
                     var template = new PopupTemplate({
                         title: "Septic Systems",
-                        description: "<b>Date: </b>{Date}<br><b>Tax Number: </b>{Tax Number}<br><b>Permit Number: </b>{Permit Number}<br><b>Street Address: </b>{Street Address}<br><b>Septic Records: </b><a target='_blank' href='https://onbase.mesacounty.us/AppNet/docpop/docpop.aspx?KT337_0_0_0={Septic Records}&clienttype=html&doctypeid=438'>{Septic Records}</a></br><a target='_blank' href='https://www.mesacounty.us/septic-systems/'>Additional Information<a>"
+                        description: "<b>Active: </b>{Active}<br><b>Permit Number: </b>{PermitNo}<br><b>Street Address: </b>{LOCATION}<br><b>Septic Records: </b><a target='_blank' href='https://onbase.mesacounty.us/AppNet/docpop/docpop.aspx?KT337_0_0_0={ISDS_ID}&clienttype=html&doctypeid=438'>{ISDS_ID}</a></br><a target='_blank' href='https://www.mesacounty.us/septic-systems/'>Additional Information<a>"
                     });
                     feature.setInfoTemplate(template);
                     return feature;
