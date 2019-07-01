@@ -6,12 +6,12 @@
             "layerId": "asbuilt",
             "serviceName": "EngineeringTechDocs",
             "opacity": 0.5,
-            "visible": [8,9,10]
+            "visible": [9,10,11]
         }, {
             "layerId": "drainplan",
             "serviceName": "EngineeringTechDocs",
             "opacity": 0.5,
-            "visible": [15,16]
+            "visible": [15,16,17]
         }, {
             "layerId": "drnrep",
             "serviceName": "EngineeringTechDocs",
