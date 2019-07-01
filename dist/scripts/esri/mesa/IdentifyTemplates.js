@@ -807,9 +807,9 @@ define([
                       case "Engineering Floodplain Studies":
                         doctypeid = "675";
                       break;
-                      // case "Planning Drainage Master Plans":
-                      //   doctypeid = "419";
-                      // break;
+                      case "Planning Drainage Master Plans":
+                        doctypeid = "419";
+                      break;
                       // case "Engineering Drainage Master Plans":
                       //   doctypeid = "419";
                       // break;
