@@ -7,7 +7,7 @@ define([
                mapRef: null,
 
         postCreate: function () {
-            const map = this.mapRef;
+            var map = this.mapRef;
             query(".esriSimpleSliderIncrementButton").after("<div title='Zoom to map extent' class='esriSimpleSliderHomeButton'></div>");
             domAttr.set(query(".esriSimpleSliderHomeButton").next()[0], "title", "Zoom Out");
             domAttr.set(query(".esriSimpleSliderHomeButton").parent()[0], "title", "Zoom In");

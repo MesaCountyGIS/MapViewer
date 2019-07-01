@@ -10,7 +10,7 @@ var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var htmlmin = require('gulp-htmlmin');
 var watch = require('gulp-watch');
-var babel = require('gulp-babel');
+// var babel = require('gulp-babel');
 
 gulp.task('less', function(){
     /* less converts style.less (the application's main style sheet) to plain
@@ -51,7 +51,7 @@ gulp.task('mobileLess', function(){
 gulp.task('js', function(){
     /* js minifies, renames and copies app.js into the dist directory */
     return gulp.src(['./src/scripts/app.js'])
-        .pipe(babel())
+        // .pipe(babel())
         .pipe(plumber())
         .pipe(uglify({
             mangle: false,
@@ -87,7 +87,7 @@ gulp.task('minmods', function(){
                 './src/scripts/mesa/shareFormWidget.js',
                 './src/scripts/mesa/toolsWidget2.js'
             ]))
-            .pipe(babel())
+            // .pipe(babel())
         .pipe(plumber())
         .pipe(uglify({
             mangle: false,

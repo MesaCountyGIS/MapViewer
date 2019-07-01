@@ -1,41 +1,5 @@
-// import esriConfig from "esri/config";
-// import on from "dojo/on";
-// import domConstruct from "dojo/dom-construct";
-// import * as JSONconfig from "_config/config.json";
-// import Legend from "esri/dijit/Legend";
-// import query from "dojo/query";
-// import dom from "dojo/dom";
-// import touch from "dojo/touch";
-// import themeTools from "mesa/themeTools";
-// import registry from "dijit/registry";
-// import toolsWidget from "mesa/toolsWidget2";
-// import searchTools from "mesa/searchTools";
-// import QueryTask from "esri/tasks/QueryTask";
-// import Graphic from "esri/graphic";
-// import graphicsTools from "mesa/graphicsTools";
-// import urlUtils from "esri/urlUtils";
-// import domAttr from "dojo/dom-attr";
-// import array from "dojo/_base/array";
-// import Extent from "esri/geometry/Extent";
-// import SpatialReference from "esri/SpatialReference";
-// import locatorWidget from "mesa/locatorWidget";
-// import Scalebar from "esri/dijit/Scalebar";
-// import contextMenuWidget from "mesa/contextMenuWidget";
-// import homeButton from "mesa/homeButton";
-// import has from "dojo/has";
-// import sniff from "dojo/sniff";
-// import PopupMobile from "esri/dijit/PopupMobile";
-// import Popup from "esri/dijit/Popup";
-// import Map from "esri/map";
-// import PopupTemplate from "esri/dijit/PopupTemplate";
-// import GeometryService from "esri/tasks/GeometryService";
-// import FeatureLayer from "esri/layers/FeatureLayer";
-// import ArcGISTiledMapServiceLayer from "esri/layers/ArcGISTiledMapServiceLayer";
-// import "dojo/NodeList-traverse";
-// import "dojo/NodeList-manipulate";
-
-const aG = {}; //Global application object
-const lmG = {}; //Global Layer Management object
+var aG = {}; //Global application object
+var lmG = {}; //Global Layer Management object
 
 init(); // initialize the map view
 
@@ -68,7 +32,7 @@ function init() {
     // Check if the site is being requested from a mobile or desktop device. then
     // set the map's popup accordingly.
     aG.popup = checkForMobile() === 1 ? setPopup("mobile", "popup") : setPopup("static", "popup");
-    const device = aG.popup.domNode.className === 'esriPopupMobile' ? 'mobile' : 'desktop';
+    var device = aG.popup.domNode.className === 'esriPopupMobile' ? 'mobile' : 'desktop';
 
     // Set esriConfig variables
     esriConfig.defaults.io.proxyUrl = JSONconfig.proxyURL;
@@ -76,11 +40,11 @@ function init() {
     esriConfig.defaults.geometryService = new GeometryService(JSONconfig.geometryService);
     document.dojoClick = false;
     // Set the spatial reference to 102206 for UTM zone 12
-    const utm12 = new SpatialReference({
+    var utm12 = new SpatialReference({
       wkid: 102206
     });
     // See the setInitialExtent function for actual extent bounds
-    const initExtent = setInitialExtent(utm12, device);
+    var initExtent = setInitialExtent(utm12, device);
     // Create an ESRI map component
     aG.map = createMap(initExtent, aG.popup);
     // Initialize the popup for when parcels are clicked
@@ -93,7 +57,7 @@ function init() {
     lmG.roadLabels = createTiledMapServiceLayer("https://mcgis.mesacounty.us/image/rest/services/Mosaic_Datasets/Basemap_Labels/MapServer", "roadLabels");
     // Set a reference to the initial basemap. This is passed to the
     // basemapWidget module where it can be changed.
-    const initialBasemap = createTiledMapServiceLayer("https://mcgis.mesacounty.us/image/rest/services/Mosaic_Datasets/Basemap_Background/MapServer", "vectorBasemap");
+    var initialBasemap = createTiledMapServiceLayer("https://mcgis.mesacounty.us/image/rest/services/Mosaic_Datasets/Basemap_Background/MapServer", "vectorBasemap");
 
     // Add the initial basemap, labels and parcel layer to the map
     aG.map.addLayers([initialBasemap, lmG.pLay, lmG.roadLabels]);
@@ -111,33 +75,32 @@ function init() {
 
       /*Create a dom node to hold the legend. Create a new legend object,
       then call runToolsView which will configure the legend*/
-      const node = domConstruct.toDom("<div data-to='mainSideMenu' class='displayNo legendMenu' id='legendDiv'></div>");
+      var node = domConstruct.toDom("<div data-to='mainSideMenu' class='displayNo legendMenu' id='legendDiv'></div>");
       domConstruct.place(node, document.getElementById('map'), 'before');
 
-      const legend = new Legend({ map: aG.map }, node);
+      var legend = new Legend({ map: aG.map }, node);
 
       homeButton({mapRef: aG.map});
 
       window.addEventListener("orientationchange", orientationChanged, false);
-      aG.map.on("mouse-move", e => {
+      aG.map.on("mouse-move", function(e) {
           document.getElementById("screenCoordinatesUTM").innerHTML = ("X=" + e.mapPoint.x.toFixed(1) + "  " + "Y=" + e.mapPoint.y.toFixed(1));
       });
-      on(dom.byId("menuSelect"), "click", legend => {
-        runToolsView(JSONconfig, {mapRef:aG.map, deviceUsed:device,
-          popupRef: aG.popup, popupTemplateRef:aG.pTemp, legendRef:legend, basemap:initialBasemap, parcelLayer:lmG.pLay});
+      on(dom.byId("menuSelect"), "click", function(legend) {
+        runToolsView(JSONconfig, aG.map, device,aG.popup, aG.pTemp, legend, initialBasemap, lmG.pLay);
       });
       on(dom.byId("locate"), touch.release, function() {
-        const locate = new locatorWidget({
+        var locate = new locatorWidget({
           mapRef: aG.map,
           gsvc: JSONconfig.geometryService,
           device: "desktop"
         });
         locate.startup();
       });
-      on(query(".submen li, .submenu li"), touch.release, e => {
+      on(query(".submen li, .submenu li"), touch.release, function(e) {
         showDropdownMenu(e, "none");
       });
-      on(query("#combobox, #mainfish"), "mouseenter, mouseleave, touchstart", e => {
+      on(query("#combobox, #mainfish"), "mouseenter, mouseleave, touchstart", function(e) {
         showDropdownMenu(e);
       });
 
@@ -153,8 +116,7 @@ function init() {
       if ((location.href).indexOf("?") > -1) {
         urlMapType(location.href, aG.map, legend, initialBasemap, JSONconfig, device, lmG.pLay);
       } else {
-        runToolsView(JSONconfig, {mapRef:aG.map, deviceUsed:device,
-          popupRef: aG.popup, popupTemplateRef:aG.pTemp, legendRef:legend, basemap:initialBasemap, parcelLayer:lmG.pLay});;
+        runToolsView(JSONconfig, aG.map,device,aG.popup, aG.pTemp, legend, initialBasemap, lmG.pLay);
       }
     });
 
@@ -209,16 +171,16 @@ function init() {
     }
 
     function setInitialExtent(spatialReference, device) {
-      const xmin = device === 'mobile' ? 697373 : 685960;
-      const ymin = device === 'mobile' ? 4322305 : 4316261;
-      const xmax = device === 'mobile' ? 726312 : 738288;
-      const ymax = device === 'mobile' ? 4335072 : 4342506;
+      var xmin = device === 'mobile' ? 697373 : 685960;
+      var ymin = device === 'mobile' ? 4322305 : 4316261;
+      var xmax = device === 'mobile' ? 726312 : 738288;
+      var ymax = device === 'mobile' ? 4335072 : 4342506;
       return new Extent({
-        xmin,
-        ymin,
-        xmax,
-        ymax,
-        spatialReference
+        xmin:xmin,
+        ymin:ymin,
+        xmax:xmax,
+        ymax:ymax,
+        spatialReference:spatialReference
       });
     }
 
@@ -249,20 +211,20 @@ function init() {
       return has('mobile') ? 1 : 0;
     }
 
-    function runToolsView(config, appConfig) {
-        const {mapRef, deviceUsed, popupRef, popupTemplateRef, legendRef, basemap, parcelLayer} = appConfig;
+    function runToolsView(config, mapRef, deviceUsed, popupRef, popupTemplateRef, legendRef, basemap, parcelLayer) {
+        // const {mapRef, deviceUsed, popupRef, popupTemplateRef, legendRef, basemap, parcelLayer} = appConfig;
       if (!(registry.byId("toolsView2"))) {
         new toolsWidget({
           geometryServiceURL: config.geometryService,
           printURL: config.printURL,
           imageList: config.imagesList,
-          mapRef,
-          basemap,
-          deviceUsed,
-          popupRef,
-          popupTemplateRef,
-          legendRef,
-          parcelLayer
+          mapRef:mapRef,
+          basemap:basemap,
+          deviceUsed:deviceUsed,
+          popupRef:popupRef,
+          popupTemplateRef:popupTemplateRef,
+          legendRef:legendRef,
+          parcelLayer:parcelLayer
         }, "toolsView2");
         registry.byId("toolsView2").domNode.style.display = "none"
       } else {
@@ -282,18 +244,18 @@ function init() {
 
     function createContextMenu(mapRef, geometryServiceURL) {
       contextMenuWidget({
-        mapRef,
-        geometryServiceURL,
+        mapRef:mapRef,
+        geometryServiceURL:geometryServiceURL,
         trsURL: "https://mcgis.mesacounty.us/arcgis/rest/services/maps/eSurveyor/MapServer/12"
       });
     }
 
     function extentZoom(extentObject) {
-      const utm12 = new SpatialReference({
+      var utm12 = new SpatialReference({
         wkid: 102206
       });
-      const ext = extentObject.split(':');
-      const xmin = parseInt(ext[0]),
+      var ext = extentObject.split(':');
+      var xmin = parseInt(ext[0]),
         ymin = parseInt(ext[1]),
         xmax = parseInt(ext[2]),
         ymax = parseInt(ext[3]);
@@ -314,11 +276,11 @@ function init() {
       the requested REST service, passing the table field name used
       for querying the REST service, passing a query value to REST
       and passing in the name of the REST service to be queried.*/
-      const parseParameters = url => {
-        const queryObject = urlUtils.urlToObject(url).query;
-        const params = {};
+      var parseParameters = function(url) {
+        var queryObject = urlUtils.urlToObject(url).query;
+        var params = {};
         if (queryObject) {
-          Object.keys(queryObject).forEach(key => {
+          Object.keys(queryObject).forEach(function(key) {
             if (key === 'cbxid') {
               params[key] = queryObject[key].split(",");
             } else if (key === 'PARCEL_NUM') {
@@ -329,7 +291,7 @@ function init() {
               params[key] = queryObject[key];
             }
           });
-          const title = queryObject.maptype ?
+          var title = queryObject.maptype ?
             query("#layerSelect ul li[data-value='" + queryObject.maptype + "']").children('a').innerHTML() :
             'Select Map';
 
@@ -338,23 +300,23 @@ function init() {
         return params;
       }
 
-      const urlParams = parseParameters(url);
+      var urlParams = parseParameters(url);
 
-      const maptypeFound = type => {
+      var maptypeFound = function(type) {
         return themeTools.getTemplate(type);
       }
 
       function runQuery(layerid, field, value, service) {
-        const graphicTool = new graphicsTools({
+        var graphicTool = new graphicsTools({
           geometryServiceURL: esriConfig.defaults.geometryService,
           mapRef: map
         });
-        const dQueryTask = new QueryTask("https://mcgis.mesacounty.us/arcgis/rest/services/maps/" + service + "/MapServer/" + layerid);
-        const dQuery = new query();
+        var dQueryTask = new QueryTask("https://mcgis.mesacounty.us/arcgis/rest/services/maps/" + service + "/MapServer/" + layerid);
+        var dQuery = new query();
         dQuery.returnGeometry = true;
         dQuery.outFields = [""];
         dQuery.where = field + " = '" + value + "'";
-        dQueryTask.execute(dQuery, result => {
+        dQueryTask.execute(dQuery, function(result) {
           map.setExtent((map.graphics.add(new Graphic(graphicTool.createJSONPolygon(result.features[0].geometry.rings)))).geometry.getExtent().expand(1.5));
         });
       }
@@ -367,7 +329,7 @@ function init() {
       urlParams.maptype = urlParams.title === 'Select Map' ?
         'eassessor' : urlParams.maptype;
 
-      const tools = new toolsWidget({
+      var tools = new toolsWidget({
         geometryServiceURL: config.geometryService,
         printURL: config.printURL,
         imageList: config.imagesList,
@@ -380,7 +342,7 @@ function init() {
         parcelLayer: parcels
       }, "toolsView2");
 
-      const components = {
+      var components = {
         pVal: urlParams.title,
         checkboxid: urlParams.cbxid
       }

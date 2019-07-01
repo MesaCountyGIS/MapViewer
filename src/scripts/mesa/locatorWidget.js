@@ -12,10 +12,10 @@ define([
         gsvc: null,
 
         postCreate: function () {
-            const map = this.mapRef;
-            const gsvc = new GeometryService(this.gsvc);
-            const wgs84 = new SpatialReference({wkid: 4326});
-            const utm12 = new SpatialReference({wkid: 102206});
+            var map = this.mapRef;
+            var gsvc = new GeometryService(this.gsvc);
+            var wgs84 = new SpatialReference({wkid: 4326});
+            var utm12 = new SpatialReference({wkid: 102206});
             dom.byId("locate").getAttribute('data-state') === "off" ? startNav() : stopNav();
 
 
@@ -69,17 +69,17 @@ define([
     function zoomToLocation(location) {
             point = new Point(location.coords.longitude, location.coords.latitude, wgs84);
             gsvc.project([point], utm12, function (result) {
-                const utmGraphicPoint = result[0];
+                var utmGraphicPoint = result[0];
                 addGraphic(utmGraphicPoint);
                 map.centerAndZoom(utmGraphicPoint, 500);
             });
     }
 
     function showLocation(location) {
-            const point = new Point(location.coords.longitude, location.coords.latitude, wgs84);
+            var point = new Point(location.coords.longitude, location.coords.latitude, wgs84);
             gsvc.project([point], utm12, function (result) {
-                const utmGraphicPoint = result[0];
-                const graphicFound = map.graphics.graphics.some(function(x){return x.attributes.id === "locate"});
+                var utmGraphicPoint = result[0];
+                var graphicFound = map.graphics.graphics.some(function(x){return x.attributes.id === "locate"});
                 if (graphicFound) { //move the graphic if it already exists
                   graphic.setGeometry(utmGraphicPoint);
                 } else {
@@ -90,7 +90,7 @@ define([
     }
 
     function addGraphic(pt) {
-            const symbol = new SimpleMarkerSymbol(SimpleMarkerSymbol.STYLE_CIRCLE, 12,
+            var symbol = new SimpleMarkerSymbol(SimpleMarkerSymbol.STYLE_CIRCLE, 12,
                 new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
                     new Color([210, 105, 30, 0.5]), 8),
                 new Color([210, 105, 30, 0.9])

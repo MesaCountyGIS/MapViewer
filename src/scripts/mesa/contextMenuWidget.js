@@ -1,13 +1,3 @@
-// import declare from "dojo/_base/declare";
-// import * as _WidgetBase from "dijit/_WidgetBase";
-// import * as Menu from "dijit/Menu";
-// import * as MenuItem from "dijit/MenuItem";
-// import * as MenuSeparator from "dijit/MenuSeparator";
-// import * as Point from "esri/geometry/Point";
-// import * as domConstruct from "dojo/dom-construct";
-// import * as GeometryService from "esri/tasks/GeometryService";
-// import * as SpatialReference from "esri/SpatialReference";
-
     define([
         "dojo/_base/declare", "dijit/_WidgetBase", "dijit/Menu", "dijit/MenuItem", "dijit/MenuSeparator", "esri/geometry/Point",
         "dojo/dom-construct", "esri/tasks/GeometryService", "esri/SpatialReference"
@@ -22,10 +12,10 @@
 
                 postCreate: function () {
                     this.inherited(arguments);
-                    const map = this.mapRef;
-                    const trsURL = this.trsURL;
-                    const gsvc = new GeometryService(this.geometryServiceURL);
-                    const wgs84 = new SpatialReference({
+                    var map = this.mapRef;
+                    var trsURL = this.trsURL;
+                    var gsvc = new GeometryService(this.geometryServiceURL);
+                    var wgs84 = new SpatialReference({
                         wkid: 4326
                     });
 
@@ -45,10 +35,10 @@
             onClick: function (evt) {
                 ga('send', 'event', 'ContextMenu', 'Google Street View');
                 gsvc.project([rightClickGCSCoordinates], wgs84, function (result) {
-                    const googCoords = result[0]
-                    const prefix = "https://maps.google.com/maps?output=svembed&layer=c&cbp=12,132.595,,0,4.429&cbll=";
-                    const coords = googCoords.y + "," + googCoords.x;
-                    const url = prefix + coords;
+                    var googCoords = result[0]
+                    var prefix = "https://maps.google.com/maps?output=svembed&layer=c&cbp=12,132.595,,0,4.429&cbll=";
+                    var coords = googCoords.y + "," + googCoords.x;
+                    var url = prefix + coords;
                     window.open(url);
                 });
             }
@@ -65,7 +55,7 @@
                 ga('send', 'event', 'ContextMenu', 'Geographic Coordinates');
                 gsvc.project([rightClickGCSCoordinates], wgs84, function (result) {
                     geogCoords = result[0]
-                    const coordString = "Latitude =  " + geogCoords.y.toFixed(7) + "  " + "Longitude =  " + geogCoords.x.toFixed(7);
+                    var coordString = "Latitude =  " + geogCoords.y.toFixed(7) + "  " + "Longitude =  " + geogCoords.x.toFixed(7);
                     window.prompt("Press Crtl+C to copy coordinates\n\nThen press Enter or click OK to close this window", coordString);
                 });
             }
@@ -80,7 +70,7 @@
             iconClass: "utmCubeGlobeIcon",
             onClick: function (evt) {
                 ga('send', 'event', 'ContextMenu', 'UTM Coordinates');
-                const coordString = "X coordinate =  " + rightClickGCSCoordinates.x.toFixed(7) + "  " + "Y coordinate =  " + rightClickGCSCoordinates.y.toFixed(7);
+                var coordString = "X coordinate =  " + rightClickGCSCoordinates.x.toFixed(7) + "  " + "Y coordinate =  " + rightClickGCSCoordinates.y.toFixed(7);
                 window.prompt("Press Crtl+C to copy coordinates\n\nThen press Enter or click OK to close this window", coordString);
             }
         }));
@@ -106,7 +96,7 @@
                     trsQuery.geometry = rightClickGCSCoordinates;
 
                     trsQueryTask.execute(trsQuery, function (result) {
-                        const trsString = result.features[0].attributes['TRSM'] + " meridian";
+                        var trsString = result.features[0].attributes['TRSM'] + " meridian";
                         window.prompt("Press Crtl+C to copy Township Range and Section\nThen press Enter or click OK to close this window\n", trsString);
                     });
                 });
@@ -122,10 +112,10 @@
         //            onClick: function (evt) {
         //                ga('send', 'event', 'ContextMenu', 'What 3 Words');
         //                gsvc.project([rightClickGCSCoordinates], wgs84, function (result) {
-        //                    const w3wCoords = result[0]
-        //                    const prefix = "http://api.what3words.com/position?key=JNX6U9YX&lang=en&position=";
-        //                    const coords = w3wCoords.y + "," + w3wCoords.x;
-        //                    const url = prefix + coords;
+        //                    var w3wCoords = result[0]
+        //                    var prefix = "http://api.what3words.com/position?key=JNX6U9YX&lang=en&position=";
+        //                    var coords = w3wCoords.y + "," + w3wCoords.x;
+        //                    var url = prefix + coords;
         //                    require(["dojo/request/xhr"], function(xhr){
         //                        xhr(url, {
         //                        handleAs: "json",
@@ -145,8 +135,8 @@
         // Method for getting screen coordinates from context menu corner and converting it to GCS coordinates
         function getMapPointFromMenuPosition(box) {
 
-            const x = box.x;
-            const y = box.y
+            var x = box.x;
+            var y = box.y
             switch (box.corner) {
             case "TR":
                 x += box.w;
@@ -159,8 +149,8 @@
                 y += box.h;
                 break;
             }
-            const screenPoint = new Point(x - map.position.x, y - map.position.y);
-            const mapPoint = map.toMap(screenPoint);
+            var screenPoint = new Point(x - map.position.x, y - map.position.y);
+            var mapPoint = map.toMap(screenPoint);
             return mapPoint;
         }
 

@@ -32,18 +32,17 @@ define([
         legendObject: null,
 
         postCreate: function() {
-          console.log("jimmg")
             //Place the widget if it hasn't been placed already
             if(!(dom.byId(this.domNode))){
                 domConstruct.place(this.domNode, this.srcNodeRef.id, "before");
             }
-            const legendWidget = this;
-            const defaultBasemap = legendWidget.defaultBasemap;
-            const map = legendWidget.mapRef;
-            const popup = legendWidget.popupRef;
-            const legendToggleButtonId = legendWidget.attachControl.id;
-            const legendObject = legendWidget.legendObject;
-            const legendLayers = [];
+            var legendWidget = this;
+            var defaultBasemap = legendWidget.defaultBasemap;
+            var map = legendWidget.mapRef;
+            var popup = legendWidget.popupRef;
+            var legendToggleButtonId = legendWidget.attachControl.id;
+            var legendObject = legendWidget.legendObject;
+            var legendLayers = [];
 
             on(dom.byId(legendToggleButtonId), touch.release, function() {
                 legendWidget.toggleDialog();
