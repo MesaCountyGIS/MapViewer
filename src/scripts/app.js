@@ -251,20 +251,15 @@ function init() {
     }
 
     function extentZoom(extentObject, wkid) {
-      var spatRef = new SpatialReference({
-        wkid: wkid
-      });
       var ext = extentObject.split(':');
-      var xmin = parseInt(ext[0]),
-        ymin = parseInt(ext[1]),
-        xmax = parseInt(ext[2]),
-        ymax = parseInt(ext[3]);
       return new Extent(
-        xmin,
-        ymin,
-        xmax,
-        ymax,
-        spatRef
+        parseInt(ext[0]),
+        parseInt(ext[1]),
+        parseInt(ext[2]),
+        parseInt(ext[3]),
+        new SpatialReference({
+          wkid: wkid
+        });
       );
     }
 
