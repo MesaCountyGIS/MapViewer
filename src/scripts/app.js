@@ -29,25 +29,32 @@ function init() {
     to build the imagery layers for the app. */
     JSONconfig = JSON.parse(JSONconfig);
 
-    // Check if the site is being requested from a mobile or desktop device. then
-    // set the map's popup accordingly.
-    aG.popup = checkForMobile() === 1 ? setPopup("mobile", "popup") : setPopup("static", "popup");
-    var device = aG.popup.domNode.className === 'esriPopupMobile' ? 'mobile' : 'desktop';
-
     // Set esriConfig variables
     esriConfig.defaults.io.proxyUrl = JSONconfig.proxyURL;
     esriConfig.defaults.io.alwaysUseProxy = false;
     esriConfig.defaults.geometryService = new GeometryService(JSONconfig.geometryService);
     document.dojoClick = false;
-    // Set the spatial reference to 102206 for UTM zone 12
-    var utm12 = new SpatialReference({
-      wkid: 102206
-    });
-    var mobileExtent = [697373,4322305,726312,4335072];
-    var desktopExtent = [685960,4316261,738288,4342506];
-    var initExtent = setInitialExtent(utm12, device, mobileExtent, desktopExtent);
+
+    // Check if the site is being requested from a mobile or desktop device. then
+    // set the map's popup accordingly.
+    aG.popup = checkForMobile() === 1 ? setPopup("mobile", "popup") : setPopup("static", "popup");
+    var device = aG.popup.domNode.className === 'esriPopupMobile' ? 'mobile' : 'desktop';
+
     // Create an ESRI map component
-    aG.map = createMap(initExtent, aG.popup);
+    aG.map = new Map("map", {
+      extent: new Extent(
+        device === 'mobile' ? 697373 : 685960,
+        device === 'mobile' ? 4322305 : 4316261,
+        device === 'mobile' ? 726312 : 738288,
+        device === 'mobile' ? 4335072 : 4342506,
+        new SpatialReference({
+          wkid: 102206 //UTM12
+        })
+      ),
+      logo: false,
+      infoWindow: aG.popup
+    });
+
     // Initialize the popup for when parcels are clicked
     aG.pTemp = createPopupTemplate();
     // Create 3 layers to be initially added to the map
