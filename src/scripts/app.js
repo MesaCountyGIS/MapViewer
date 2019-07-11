@@ -43,8 +43,9 @@ function init() {
     var utm12 = new SpatialReference({
       wkid: 102206
     });
-    // See the setInitialExtent function for actual extent bounds
-    var initExtent = setInitialExtent(utm12, device);
+    var mobileExtent = [697373,4322305,726312,4335072];
+    var desktopExtent = [685960,4316261,738288,4342506];
+    var initExtent = setInitialExtent(utm12, device, mobileExtent, desktopExtent);
     // Create an ESRI map component
     aG.map = createMap(initExtent, aG.popup);
     // Initialize the popup for when parcels are clicked
@@ -170,18 +171,14 @@ function init() {
       });
     }
 
-    function setInitialExtent(spatialReference, device) {
-      var xmin = device === 'mobile' ? 697373 : 685960;
-      var ymin = device === 'mobile' ? 4322305 : 4316261;
-      var xmax = device === 'mobile' ? 726312 : 738288;
-      var ymax = device === 'mobile' ? 4335072 : 4342506;
-      return new Extent({
-        xmin:xmin,
-        ymin:ymin,
-        xmax:xmax,
-        ymax:ymax,
-        spatialReference:spatialReference
-      });
+    function setInitialExtent(spatialReference, device, mobileExtent, desktopExtent) {
+      return new Extent(
+        device === 'mobile' ? parseInt(mobileExtent[0]) : parseInt(desktopExtent[0]),
+        device === 'mobile' ? parseInt(mobileExtent[1]) : parseInt(desktopExtent[1]),
+        device === 'mobile' ? parseInt(mobileExtent[2]) : parseInt(desktopExtent[2]),
+        device === 'mobile' ? parseInt(mobileExtent[3]) : parseInt(desktopExtent[3]),
+        spatialReference
+      );
     }
 
     function setPopup(type, popupNode) {
@@ -212,7 +209,6 @@ function init() {
     }
 
     function runToolsView(config, mapRef, deviceUsed, popupRef, popupTemplateRef, legendRef, basemap, parcelLayer) {
-        // const {mapRef, deviceUsed, popupRef, popupTemplateRef, legendRef, basemap, parcelLayer} = appConfig;
       if (!(registry.byId("toolsView2"))) {
         new toolsWidget({
           geometryServiceURL: config.geometryService,
@@ -259,7 +255,7 @@ function init() {
         parseInt(ext[3]),
         new SpatialReference({
           wkid: wkid
-        });
+        })
       );
     }
 
