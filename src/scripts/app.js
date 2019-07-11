@@ -71,7 +71,7 @@ function init() {
         attachTo: "bottom-right"
       });
       scalebar.show();
-      createContextMenu(aG.map, JSONconfig.geometryService);
+      createContextMenu(aG.map, JSONconfig.geometryService, "https://mcgis.mesacounty.us/arcgis/rest/services/maps/eSurveyor/MapServer/12");
 
       /*Create a dom node to hold the legend. Create a new legend object,
       then call runToolsView which will configure the legend*/
@@ -242,11 +242,11 @@ function init() {
       }
     }
 
-    function createContextMenu(mapRef, geometryServiceURL) {
+    function createContextMenu(mapRef, geometryServiceURL, trsURL) {
       contextMenuWidget({
         mapRef:mapRef,
         geometryServiceURL:geometryServiceURL,
-        trsURL: "https://mcgis.mesacounty.us/arcgis/rest/services/maps/eSurveyor/MapServer/12"
+        trsURL: trsURL
       });
     }
 
