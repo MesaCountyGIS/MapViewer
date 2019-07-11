@@ -250,9 +250,9 @@ function init() {
       });
     }
 
-    function extentZoom(extentObject) {
-      var utm12 = new SpatialReference({
-        wkid: 102206
+    function extentZoom(extentObject, wkid) {
+      var spatRef = new SpatialReference({
+        wkid: wkid
       });
       var ext = extentObject.split(':');
       var xmin = parseInt(ext[0]),
@@ -264,7 +264,7 @@ function init() {
         ymin,
         xmax,
         ymax,
-        utm12
+        spatRef
       );
     }
 
@@ -360,7 +360,7 @@ function init() {
           searchTools.searchBy("parcelNo", urlParams.PARCEL_NUM);
         }
         if (urlParams.EXTENT !== undefined) {
-          map.setExtent(extentZoom(urlParams.EXTENT));
+          map.setExtent(extentZoom(urlParams.EXTENT, 102206)); //send extent parameters and wkid
         }
         if (urlParams.latlon !== undefined) {
           searchTools.searchBy("Latitude/Longitude", urlParams.latlon);
